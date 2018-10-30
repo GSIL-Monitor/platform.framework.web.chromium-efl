@@ -1,0 +1,323 @@
+collections { base_scale: 2.6;
+    group {
+        name: "ShippingAddress_layout";
+            styles {
+            style {
+                name: "shipping_address_style";
+                base: "font=Sans font_size=25 color=#d3d3d3 wrap=word align=0.0";
+            }
+        }
+        parts {
+            part {
+                name:"bg";
+                type:RECT;
+                scale: 1;
+                mouse_events: 1;
+                description {
+                    state:"default" 0.0;
+                    visible:1;
+                    align: 0.0 0.0;
+                    min:720 1500;
+                    max: 720 1500;
+                    color: 240 240 240 255;
+                    rel1  { relative: 0 0;}
+                    rel2  { relative: 1.0 1.0;}
+                }
+            }
+            part {
+                name: "top";
+                type: SPACER;
+                description {
+                    state: "default" 0.0;
+                    align: 0.0 0.0;
+                    fixed: 1 1;
+                    min: 720 10;
+                    max: 720 10;
+                    rel1 { relative: 0.0 0.0; to: "bg"; }
+                    rel2 { relative: 1.0 1.0; to: "bg"; }
+                }
+            }
+            part {
+                name: "top_left";
+                type: SPACER;
+                description {
+                    state: "default" 0.0;
+                    align: 0.0 0.0;
+                    fixed: 1 1;
+                    min: 60 100;
+                    max: 60 100;
+                    rel1 { relative: 0.0 1.0; to: "top"; }
+                    rel2 { relative: 1.0 1.0; to: "top"; }
+                }
+            }
+            part {
+                name:"cancel_shipping_address_button_bg";
+                type:RECT;
+                description {
+                    state:"default" 0.0;
+                    color: 240 240 240 255;
+                    visible:1;
+                    align: 0.0 0.0;
+                    fixed: 1 1;
+                    min: 300 100;
+                    max: 300 100;
+                    rel1 { relative: 1.0 0.0;to: "top_left";}
+                    rel2 { relative: 1.0 1.0;to: "top_left";}
+                }
+            }
+            part {
+                name:"cancel_shipping_address_button";
+                type:SWALLOW;
+                mouse_events: 1;
+                description {
+                    state:"default" 0.0;
+                    visible:1;
+                    align: 0.0 0.0;
+                    fixed: 1 1;
+                    min: 220 36;
+                    max: 220 36;
+                    rel1 { relative: 0.0 0.0;to: "cancel_shipping_address_button_bg";}
+                    rel2 { relative: 1.0 1.0;to: "cancel_shipping_address_button_bg";}
+                }
+            }
+            part {
+                name: "top_middle";
+                type: SPACER;
+                description {
+                    state: "default" 0.0;
+                    align: 0.0 0.0;
+                    fixed: 1 1;
+                    min: 60 100;
+                    max: 60 100;
+                    rel1 { relative: 1.0 0.0; to: "cancel_shipping_address_button_bg"; }
+                    rel2 { relative: 1.0 1.0; to: "cancel_shipping_address_button_bg"; }
+                }
+            }
+            part {
+                name:"finished_shipping_address_button_bg";
+                type:RECT;
+                description {
+                    state:"default" 0.0;
+                    color: 240 240 240 255;
+                    visible:1;
+                    align: 0.0 0.0;
+                    min: 300 100;
+                    max: 300 100;
+                    rel1 { relative: 1.0 0.0;to: "top_middle";}
+                    rel2 { relative: 1.0 1.0;to: "top_middle";}
+                }
+            }
+            part {
+                name:"finished_shipping_address_button";
+                type:SWALLOW;
+                mouse_events: 1;
+                description {
+                    state:"default" 0.0;
+                    visible:1;
+                    align: 0.0 0.0;
+                    fixed: 1 1;
+                    min: 220 36;
+                    max: 220 36;
+                    rel1 { relative: 0.0 0.0;to: "finished_shipping_address_button_bg";}
+                    rel2 { relative: 1.0 1.0;to: "finished_shipping_address_button_bg";}
+                }
+            }
+            part {
+                name:"line";
+                type:RECT;
+                description {
+                    state:"default" 0.0;
+                    color: 105 105 105 255;
+                    visible:1;
+                    align: 0.0 0.0;
+                    fixed: 1 1;
+                    min: 680 1;
+                    max: 680 1;
+                    rel1 { relative: 0.03 0.1;to: "bg";}
+                }
+            }
+            part {
+                name:"genlist_part";
+                type:SWALLOW;
+                mouse_events: 1;
+                description {
+                    state:"default" 0.0;
+                    visible:1;
+                    align: 0.0 0.0;
+                    fixed: 1 1;
+                    min: 720 1280;
+                    max: -1 -1;
+                    rel1 { relative: 0.0 1.0;to: "line";}
+                    rel2 { relative: 1.0 1.0;to: "line";}
+                }
+            }
+        }
+    }
+    group {
+        name: "elm/genlist/item/shipping_fields/default";
+        data.item: "texts" "item_label required_text";
+        data.item: "contents" "entry_part";
+        parts {
+            part {
+                name: "bg";
+                type: RECT;
+                scale: 1;
+                mouse_events: 0;
+                description {
+                    state: "default" 0.0;
+                    visible: 1;
+                    color: 240 240 240 255;
+                    align: 0.0 0.0;
+                    min: 720 160;
+                    max: 720 160;
+                    rel1 { relative: 0.0 0.0;}
+                    rel2 { relative: 1.0 1.0;}
+                }
+            }
+            part {
+                name: "bg_label";
+                type: RECT;
+                scale: 1;
+                mouse_events: 0;
+                description {
+                    state: "default" 0.0;
+                    visible: 1;
+                    color: 240 240 240 255;
+                    align: 0.0 0.0;
+                    rel1 { relative: 0.0 0.0;to: "bg";}
+                    rel2 { relative: 1.0 1.0;to: "bg";}
+                    min: 720 40;
+                    max: 720 40;
+                }
+            }
+            part {
+                name: "item_label";
+                type: TEXT;
+                mouse_events: 0;
+                description {
+                    state: "default" 0;
+                    align: 0 0;
+                    color: 105 105 105 255;
+                    rel1 { relative: 0.0 0.0;to: "bg_label";}
+                    rel2 { relative: 1.0 1.0;to: "bg_label";}
+                    text {
+                        text: "default_text";
+                        font: "Sans";
+                        size: 30;
+                        fit: 0 0;
+                        min: 0 0;
+                        align: 0.0 1.0;
+                        elipsis: 0.0;
+                    }
+                }
+            }
+            part {
+                name: "entry_part";
+                type: SWALLOW;
+                mouse_events: 1;
+                scale: 1;
+                description {
+                    state: "default" 0;
+                    visible: 1;
+                    align: 0.0 0.0;
+                    min: 720 80;
+                    max: 720 80;
+                    rel1 { relative: 0.0 1.0; to: "bg_label"; }
+                    rel2 { relative: 1.0 1.0; to: "bg_label"; }
+                }
+            }
+            part {
+                name: "baseline";
+                type: RECT;
+                description {
+                    state: "default" 0.0;
+                    color: 105 105 105 255;
+                    visible: 1;
+                    align: 0.0 0.0;
+                    fixed: 1 1;
+                    min: 720 2;
+                    max: 720 2;
+                    rel1 { relative: 0.0 1.0; to: "entry_part"; }
+                    rel2 { relative: 1.0 1.0; to: "entry_part"; }
+                }
+                description { "do_not_show_baseline";
+                    inherit: "default" 0;
+                    visible: 0;
+                }
+            }
+            part {
+                name: "padding_bottom";
+                type: SPACER;
+                description {
+                    state: "default" 0.0;
+                    align: 0.0 0.0;
+                    fixed: 1 1;
+                    min: 720 1;
+                    max: 720 1;
+                    rel1 { relative: 0.0 1.0; to: "baseline"; }
+                    rel2 { relative: 1.0 1.0; to: "baseline"; }
+                }
+            }
+            part {
+                name: "required_bg";
+                type: RECT;
+                description {
+                    state: "default" 0.0;
+                    color: 240 240 240 255;
+                    visible: 1;
+                    align: 0.0 0.0;
+                    fixed: 1 1;
+                    min: 720 80;
+                    max: 720 80;
+                    rel1 { relative: 0.0 1.0; to: "padding_bottom"; }
+                    rel2 { relative: 1.0 1.0; to: "padding_bottom"; }
+                }
+            }
+            part {
+                name: "required_text";
+                type: TEXT;
+                mouse_events: 0;
+                description {
+                    state: "default" 0;
+                    align: 0.0 0.0;
+                    color: 255 0 0 255;
+                    rel1 { relative: 0.0 0.0; to: "required_bg"; }
+                    rel2 { relative: 1.0 1.0; to: "required_bg"; }
+                    visible: 1;
+                    text {
+                        text: "Required field*";
+                        font: "Sans";
+                        size: 20;
+                        fit: 0 0;
+                        min: 0 0;
+                        max: 0 0;
+                        align: 0.0 0.0;
+                        elipsis: 0.0;
+                    }
+                }
+                description { "do_not_show_required_field_error";
+                    inherit: "default" 0;
+                    visible: 0;
+                }
+            }
+        }
+        programs {
+            program {
+                "do_not_show_required_field_error";
+                signal: "elm,action,not,show,requiredFieldError,name";
+                source: "";
+                action: STATE_SET "do_not_show_required_field_error";
+                target: "required_text";
+            }
+            program {
+                "do_not_show_baseline";
+                signal: "elm,action,not,show,baseline";
+                source: "";
+                action: STATE_SET "do_not_show_baseline";
+                target: "baseline";
+            }
+        }
+    }
+}
+
+

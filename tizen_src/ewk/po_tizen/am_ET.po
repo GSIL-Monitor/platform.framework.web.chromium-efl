@@ -1,0 +1,9 @@
+msgid "IDS_WEBVIEW_OPT_OPEN_LINK_IN_NEW_TAB_ABB"
+msgstr "አገናኝ በአዲስ ትር ውስጥ ክፈት"
+
+msgid "IDS_WEBVIEW_OPT_OPEN_LINK_ABB"
+msgstr "በድር አሳሽ ውስጥ ክፈት"
+
+msgid "IDS_WEBVIEW_OPEN"
+msgstr "ክፈት"
+

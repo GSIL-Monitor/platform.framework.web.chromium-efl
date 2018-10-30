@@ -1,0 +1,9 @@
+msgid "IDS_WEBVIEW_OPT_OPEN_LINK_IN_NEW_TAB_ABB"
+msgstr "Maak Skakel in Nuwe Oortjie oop"
+
+msgid "IDS_WEBVIEW_OPT_OPEN_LINK_ABB"
+msgstr "Maak in Webblaaier oop"
+
+msgid "IDS_WEBVIEW_OPEN"
+msgstr "Maak oop"
+

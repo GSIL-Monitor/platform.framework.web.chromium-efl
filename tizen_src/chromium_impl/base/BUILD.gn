@@ -1,0 +1,13 @@
+# copyright (c) 2017 samsung electronics. all rights reserved.
+# use of this source code is governed by a bsd-style license that can be
+# found in the license file.
+
+static_library("trace_event_ttrace") {
+  configs += [
+    "//tizen_src/build:libttrace",
+  ]
+  sources = [
+    "//tizen_src/chromium_impl/base/trace_event/trace_event_ttrace.cc",
+    "//tizen_src/chromium_impl/base/trace_event/ttrace.h",
+  ]
+}

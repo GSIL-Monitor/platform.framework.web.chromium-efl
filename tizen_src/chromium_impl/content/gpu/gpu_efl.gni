@@ -1,0 +1,15 @@
+# Copyright (c) 2015 Samsung Electronics. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+external_content_gpu_efl_configs = [
+  "//tizen_src/build:evas",
+  "//tizen_src/build:libevas",
+]
+
+external_content_gpu_efl_sources = [
+  "//tizen_src/chromium_impl/content/gpu/gpu_thread_override_efl.cc",
+  "//tizen_src/chromium_impl/content/gpu/in_process_gpu_thread_efl.cc",
+]
+
+external_exclude_content_gpu_efl_sources = [ "in_process_gpu_thread.cc" ]

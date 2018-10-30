@@ -1,0 +1,49 @@
+/* Copyright (c) 2017 Samsung Electronics. All rights reserved.
+ */
+
+/**
+ * This file defines the PPB_AudioConfig_Samsung interface for choosing
+ * audio modes for <code>PPB_AudioConfig</code> resource.
+ */
+
+label Chrome {
+  M56 = 1.0
+};
+
+/**
+ * PP_AudioMode is an enumeration of the different audio modes.
+ */
+[assert_size(4)]
+enum PP_AudioMode {
+  /*
+   * Platform will try to detect the most suitable mode for a plugin.
+   */
+  PP_AUDIOMODE_AUTO = 0,
+  PP_AUDIOMODE_GAME = 1,
+  PP_AUDIOMODE_MUSIC = 2,
+  PP_AUDIOMODE_LAST = PP_AUDIOMODE_MUSIC
+} ;
+
+/**
+ * Extension for <code>PPB_AudioConfig</code> interface, which allows choosing
+ * audio mode.
+ */
+[macro="PPB_AUDIO_CONFIG_SAMSUNG_INTERFACE"]
+interface PPB_AudioConfig_Samsung {
+  /**
+   * Sets specified audio mode. This method needs to be called before
+   * creating <code>PPB_Audio</code> resource.
+   *
+   * @param[in] resource A <code>PP_Resource</code> corresponding to a
+   * <code>PP_AudioConfig</code> resource.
+   *
+   * @param[in] audio_mode A <code>PP_AudioMode</code> which
+   * will be used for <code>PP_Audio</code> resource.
+   *
+   * @return An int32_t containing a result code from <code>pp_errors.h</code>.
+   */
+  int32_t SetAudioMode(
+      [in] PP_Resource resource,
+      [in] PP_AudioMode audio_mode);
+};
+

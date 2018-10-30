@@ -1,0 +1,220 @@
+# Copyright (c) 2013 The Chromium Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+import("//tizen_src/build/config/tizen_features.gni")
+
+config("tizen_feature_flags") {
+  defines = [
+    # TODO: Check if those defines are still necessary. If they are add an explanation why.
+    "SKIA_DLL",
+    "BUILDING_V8_SHARED",
+    "V8_SHARED",
+    "_DEFAULT_SOURCE",
+  ]
+  if (use_efl) {
+    defines += [ "USE_EFL" ]
+    if (tizen_version >= 50) {
+      defines += [ "EFL_BETA_API_SUPPORT" ]
+    }
+  }
+  if (tizen_tbm_support) {
+    defines += [ "TIZEN_TBM_SUPPORT" ]
+  }
+  if (ewk_bringup) {
+    defines += [ "EWK_BRINGUP" ]
+  }
+
+  if (prebuilt_ld_gold_dir != "" && !is_nacl) {
+    ldflags = [ "-B${prebuilt_ld_gold_dir}" ]
+
+    if (gcc_version >= 49) {
+      # In GCC 4.9, the linker (either bfd or gold) is called with the -plugin argument
+      # which our current bundled gold linker (in build/prebuild) does not accept.
+      # Since our gold a x64 64bit statically linked binary, even if we rebuild it
+      # with plugin support enabled, the plugin being loaded would be a 32bit ARM binary.
+      # and load would fail. So we disable linker's plugin loadeir (specifically
+      # gcc's liblto_plugin).
+      cflags = [ "-fPIC" ]
+      ldflags += [ "-shared" ]
+      ldflags += [ "-fno-use-linker-plugin" ]
+    }
+  }
+
+  if (use_system_libevent) {
+    defines += [ "USE_SYSTEM_LIBEVENT" ]
+  }
+
+  if (is_tizen) {
+    defines += [
+      "OS_TIZEN",
+      "TIZEN_VERSION_MAJOR=${tizen_version_major}",
+      "TIZEN_VERSION_MINOR=${tizen_version_minor}",
+      "TIZEN_VERSION_PATCH=${tizen_version_patch}",
+    ]
+    # Tizen build system has a global option '-Wformat-security'.
+    # So, a cflag '-Wno-format' from chromium-efl needs to be ignored.
+    # Otherwise, following error will happen.
+    # error: -Wformat-security ignored without -Wformat [-Werror=format-security]
+    if (prebuilt_ld_gold_dir == "") {
+      cflags = [ "-Wno-format" ]
+    }
+    if (direct_canvas) {
+      defines += [ "DIRECT_CANVAS" ]
+    }
+    if (use_wayland) {
+      defines += [ "USE_WAYLAND" ]
+    }
+    if (tizen_multimedia_support) {
+      defines += [
+        "TIZEN_MULTIMEDIA_SUPPORT",
+        "TIZEN_MULTIMEDIA_USE_CAPI_AUDIO_IO",
+      ]
+      if (tizen_multimedia_tbm_zerocopy_support) {
+       defines += [ "TIZEN_MULTIMEDIA_TBM_ZEROCOPY_SUPPORT" ]
+     }
+    }
+    if (tizen_webrtc) {
+      defines += [ "TIZEN_WEBRTC" ]
+    }
+    if (use_gstreamer_fft) {
+      defines += [ "WEBAUDIO_GSTREAMER=1" ]
+    }
+    if (tizen_web_speech_recognition) {
+      defines += [ "TIZEN_WEB_SPEECH_RECOGNITION" ]
+    }
+    if (use_ttrace) {
+      defines += [ "USE_TTRACE" ]
+    }
+
+    if (tizen_sound_focus) {
+      defines += [ "TIZEN_SOUND_FOCUS" ]
+    }
+
+    # TODO: There are X11 dependencies in following condition.
+    #       The files need to be implemented based on Wayland.
+    if (wayland_bringup) {
+      defines += [ "WAYLAND_BRINGUP" ]
+    }
+
+    if (tizen_atk_support) {
+      defines += [ "TIZEN_ATK_SUPPORT=true" ]
+      if (tizen_atk_feature_vd) {
+        defines += [ "TIZEN_ATK_FEATURE_VD=true" ]
+      }
+    }
+
+    if (tizen_product_da) {
+      defines += [
+        "OS_TIZEN_DA_PRODUCT",
+      ]
+    } else if (tizen_product_tv) {
+      defines += [
+        "OS_TIZEN_TV_PRODUCT",
+        "TIZEN_MULTIMEDIA_WEBM_SUPPORT",
+      ]
+    } else if (tizen_public_target) {
+      defines += [
+        "OS_TIZEN_PUBLIC",
+      ]
+    }
+
+    if (tizen_vd_disable_gpu) {
+      defines += [
+        "TIZEN_VD_DISABLE_GPU",
+      ]
+    }
+
+    if (use_plugin_placeholder_hole) {
+      defines += [
+        "USE_PLUGIN_PLACEHOLDER_HOLE",
+      ]
+    }
+
+    if (tizen_vd_native_scrollbars) {
+      defines += [
+        "TIZEN_VD_NATIVE_SCROLLBARS"
+      ]
+    }
+
+    if (tizen_video_hole) {
+      defines += [
+        "TIZEN_VIDEO_HOLE"
+      ]
+    }
+
+    if (tizen_dlp) {
+      defines += [
+        "TIZEN_DLP",
+      ]
+    }
+  }
+
+  if (tizen_pepper_extensions) {
+    defines += [
+      "TIZEN_PEPPER_EXTENSIONS"
+    ]
+  }
+
+  if (tizen_pepper_player) {
+    defines += [
+      "TIZEN_PEPPER_PLAYER"
+    ]
+  }
+
+  if (tizen_pepper_player_d2tv) {
+    defines += [
+      "TIZEN_PEPPER_PLAYER_D2TV"
+    ]
+  }
+
+  if (tizen_pepper_player_h264_uhd_only_30fps) {
+    defines += [
+      "TIZEN_PEPPER_PLAYER_H264_UHD_ONLY_30FPS"
+    ]
+  }
+
+  if (tizen_vd_accessory) {
+    defines += [
+      "USE_TIZEN_TV_ACCESSORY",
+      "_LINUX",
+    ]
+  }
+
+  if (tizen_vd_lfd) {
+    defines += [
+      "TIZEN_VD_MULTIPLE_MIXERDECODER",
+      "TIZEN_VD_LFD_ROTATE"
+      ]
+  }
+
+  if (tizen_mfc_texture_video_decoder) {
+    defines += [
+      "TIZEN_MFC_TEXTURE_VIDEO_DECODER"
+    ]
+  }
+
+  if (tizen_omx_video_decoder) {
+    defines += [
+      "TIZEN_OMX_VIDEO_DECODER"
+    ]
+  }
+
+  if (tizen_pepper_teec) {
+    defines += [
+      "TIZEN_PEPPER_TEEC"
+    ]
+  }
+
+  if (tizen_resource_manager) {
+    defines += [
+      "TIZEN_RESOURCE_MANAGER",
+    ]
+  }
+
+  if (tizen_libav) {
+    defines += [
+      "TIZEN_LIBAV"
+    ]
+  }
+}

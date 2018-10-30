@@ -1,0 +1,28 @@
+# Copyright (c) 2015 Samsung Electronics. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+import("//build/config/features.gni")
+
+external_webkit_platform_files = []
+external_webkit_platform_configs = []
+
+if (tizen_product_tv) {
+  external_webkit_platform_files += [ "//tizen_src/chromium_impl/third_party/WebKit/Source/platform/WebApplicationType.cpp" ]
+}
+
+if (use_gstreamer_fft) {
+  external_webkit_platform_files += [ "//tizen_src/chromium_impl/third_party/WebKit/Source/platform/audio/gstreamer/FFTFrameGStreamer.cpp" ]
+
+  external_webkit_platform_configs += [
+    "//tizen_src/build:gstreamer-fft",
+    "//tizen_src/build:libgstreamer-fft",
+  ]
+}
+
+if (tizen_vd_native_scrollbars) {
+  external_webkit_platform_files += [
+    "//tizen_src/chromium_impl/third_party/WebKit/Source/platform/scroll/ScrollbarThemeTizen.cpp",
+    "//tizen_src/chromium_impl/third_party/WebKit/Source/platform/scroll/ScrollbarThemeTizen.h",
+  ]
+}

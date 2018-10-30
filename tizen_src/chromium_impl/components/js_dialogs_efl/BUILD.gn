@@ -1,0 +1,23 @@
+# Copyright (c) 2015 Samsung Electronics. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+static_library("js_dialogs_efl") {
+  configs += [
+    "//tizen_src/build:elementary",
+    "//tizen_src/build:libelementary",
+    "//tizen_src/build:efl-extension",
+    "//tizen_src/build:libefl-extension",
+  ]
+  deps = [
+    "//base",
+    "//content/public/common",
+  ]
+  include_dirs = [ ".." ]
+  sources = [
+    "javascript_dialog_manager_efl.cc",
+    "javascript_dialog_manager_efl.h",
+    "javascript_modal_dialog_efl.cc",
+    "javascript_modal_dialog_efl.h",
+  ]
+}

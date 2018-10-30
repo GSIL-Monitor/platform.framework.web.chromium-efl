@@ -1,0 +1,27 @@
+# Copyright (c) 2015 Samsung Electronics. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+import("//build/config/ui.gni")
+import("//tizen_src/build/config/tizen_features.gni")
+
+external_base_public_deps = [
+  "//tizen_src/chromium_impl/tizen:system-info",
+]
+
+if (use_ttrace) {
+  external_base_public_deps +=
+      [ "//tizen_src/chromium_impl/base:trace_event_ttrace" ]
+}
+
+external_base_configs = [
+  "//tizen_src/build:ecore",
+  "//tizen_src/build:libecore",
+]
+external_base_sources = [
+  "//tizen_src/chromium_impl/base/message_loop/message_pump_ecore.cc",
+  "//tizen_src/chromium_impl/base/message_loop/message_pump_ecore.h",
+  "//tizen_src/chromium_impl/base/static_map.h",
+  "//tizen_src/chromium_impl/base/tizen/flags.h",
+  "//tizen_src/chromium_impl/base/trace_event/ttrace.h",
+]

@@ -1,0 +1,9 @@
+msgid "IDS_WEBVIEW_OPT_OPEN_LINK_IN_NEW_TAB_ABB"
+msgstr "کردنەوەی لینک لە خشتەبەندێکی نوێدا"
+
+msgid "IDS_WEBVIEW_OPT_OPEN_LINK_ABB"
+msgstr "لە گەڕاڵی وێبدا بیکەرەوە"
+
+msgid "IDS_WEBVIEW_OPEN"
+msgstr "کﺭﺪﻧەﻭە"
+

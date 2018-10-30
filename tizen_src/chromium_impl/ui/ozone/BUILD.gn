@@ -1,0 +1,29 @@
+# Copyright (c) 2015 Samsung Electronics. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+import("//tizen_src/build/config/tizen_features.gni")
+
+static_library("ozone_efl") {
+  deps = [
+    "//ui/ozone/common",
+  ]
+
+  if (!use_wayland) {
+    configs += [ "//tizen_src/build:ecore-x" ]
+    configs += [ "//tizen_src/build:libecore-x" ]
+  } else {
+    configs += [ "//tizen_src/build:ecore-wayland" ]
+    configs += [ "//tizen_src/build:libecore-wayland" ]
+  }
+
+  sources = [
+    "client_native_pixmap_factory_efl.cc",
+    "client_native_pixmap_factory_efl.h",
+    "ozone_platform_efl.cc",
+    "ozone_platform_efl.h",
+    "surface_factory_efl.cc",
+    "surface_factory_efl.h",
+  ]
+  include_dirs = [ "//ui/ozone/public" ]
+}

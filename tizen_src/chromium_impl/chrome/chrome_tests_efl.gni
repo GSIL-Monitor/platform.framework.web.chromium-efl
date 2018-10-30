@@ -1,0 +1,12 @@
+# Copyright (c) 2015 Samsung Electronics. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+import("//tizen_src/build/config/tizen_features.gni")
+
+# For //chrome/test/chromedriver:lib target
+# It seems that keycode_text_conversion_win.cc is not used in gn files so no need to exclude it.
+external_exclude_chrome_test_driver_sources = [] #[ "test/chromedriver/keycode_text_conversion_win.cc" ]
+if (use_wayland) {
+  #external_exclude_chrome_test_driver_sources += [ "test/chromedriver/keycode_text_conversion_x.cc" ]
+}

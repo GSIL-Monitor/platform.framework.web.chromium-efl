@@ -1,0 +1,7 @@
+# API OWNERS for Samsung internal trunk
+# You should ask the following members when you change web-facing behavior.
+per-file (*.idl|*.in)=set noparent
+per-file (*.idl|*.in)=l.gombos@samsung.com
+per-file (*.idl|*.in)=ancilgeorge@samsung.com
+per-file (*.idl|*.in)=kihong.kwon@samsung.com
+per-file (*.idl|*.in)=seojin.kim@samsung.com INACTIVE

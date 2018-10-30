@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns="http://tizen.org/ns/packages" api-version="@TIZEN_VERSION@" package="org.tizen.chromium-efl" version="@CHROMIUM_VERSION@">
+    <label> mini browser application for chromium-efl package </label>
+    <author href="www.samsung.com" email="sns.park@samsung.com">SamsungResearch</author>
+    <description> mini browser application based on chromium-efl </description>
+    <ui-application appid="org.tizen.chromium-efl.ubrowser" exec="@TZ_SYS_RO_APP@/org.tizen.chromium-efl/bin/ubrowser" nodisplay="true" multiple="false" type="capp" taskmanage="true">
+        <icon>@ICON_DIR@/ubrowser.png</icon>
+        <label>Chromium-efl ubrowser</label>
+        <label xml:lang="en-us">Chromium-efl ubrowser</label>
+    </ui-application>
+    <ui-application appid="org.tizen.chromium-efl.mini_browser" exec="@TZ_SYS_RO_APP@/org.tizen.chromium-efl/bin/mini_browser" nodisplay="true" multiple="false" type="capp" taskmanage="true">
+        <icon>@ICON_DIR@/mini_browser.png</icon>
+        <label>Chromium-efl mini_browser</label>
+        <label xml:lang="en-us">Chromium-efl MiniBrowser</label>
+    </ui-application>
+    <ui-application appid="org.tizen.chromium-efl.efl_webview_app" exec="@TZ_SYS_RO_APP@/org.tizen.chromium-efl/bin/efl_webview_app" nodisplay="true" multiple="false" type="capp" taskmanage="true">
+        <icon>@ICON_DIR@/efl_webview_app.png</icon>
+        <label>Chromium-efl efl_webview_app</label>
+        <label xml:lang="en-us">Chromium-efl efl_webview_app</label>
+    </ui-application>
+    <privileges>
+        <privilege>http://tizen.org/privilege/location</privilege>
+        <privilege>http://tizen.org/privilege/internet</privilege>
+        <privilege>http://tizen.org/privilege/network.get</privilege>
+        <privilege>http://tizen.org/privilege/notification</privilege>
+        <privilege>http://tizen.org/privilege/push</privilege>
+    </privileges>
+</manifest>

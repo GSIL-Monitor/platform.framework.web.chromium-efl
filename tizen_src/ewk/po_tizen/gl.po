@@ -1,0 +1,335 @@
+msgid "IDS_BR_OPT_CALL"
+msgstr "Chamar"
+
+msgid "IDS_BR_HEADER_UNABLE_TO_OPEN_FILE"
+msgstr "Non se pode abrir o arquivo"
+
+msgid "IDS_BR_BODY_UNABLE_TO_OPEN_THE_FILE_AT_PS_IT_MAY_HAVE_BEEN_REMOVED_OR_RENAMED_OR_FILE_PERMISSIONS_MAY_BE_PREVENTING_ACCESS"
+msgstr "Non se pode abrir o arquivo en %s. É posible que fora eliminado ou se cambiase o seu nome, ou que os permisos do arquivo estean impedindo o acceso."
+
+msgid "IDS_BR_BODY_SAVE_LINK"
+msgstr "Gardar ligazón"
+
+msgid "IDS_BR_BODY_ADD_TO_CONTACT"
+msgstr "Engadir a contacto"
+
+msgid "IDS_WEBVIEW_TPOP_UNABLE_TO_PLAY_VIDEOS_DURING_CALLS"
+msgstr "Non se poden reproducir vídeos durante as chamadas."
+
+msgid "IDS_WEBVIEW_POP_SIGN_IN_TO_THIS_WEBSITE_AGAIN_BY_SWIPING_ANY_OF_YOUR_REGISTERED_FINGERS_OVER_THE_HOME_KEY_MSG"
+msgstr "Inicia sesión neste sitio web de novo pasando calquera dos dedos rexistrados sobre a pantalla de inicio. O teu nome de usuario e contrasinal para este sitio web gardaranse no teu dispositivo."
+
+msgid "IDS_WEBVIEW_POP_SAVE_THIS_PASSWORD_ON_THIS_DEVICE_Q"
+msgstr "Desexas gardar este contrasinal neste dispositivo?"
+
+msgid "IDS_WEBVIEW_POP_P1SS_HP2SS_IS_REQUESTING_PERMISSION_TO_USE_YOUR_CAMERA"
+msgstr "%1$s (%2$s) está solicitando permiso para usar a túa cámara"
+
+msgid "IDS_WEBVIEW_POP_P1SS_HP2SS_IS_REQUESTING_PERMISSION_TO_STORE_DATA_ON_YOUR_DEVICE_FOR_OFFLINE_USE"
+msgstr "%1$s (%2$s) está solicitando permiso para almacenar datos no teu dispositivo para utilizalos fóra de liña"
+
+msgid "IDS_WEBVIEW_POP_P1SS_HP2SS_IS_REQUESTING_PERMISSION_TO_STORE_A_LARGE_AMOUNT_OF_DATA_ON_YOUR_DEVICE_FOR_OFFLINE_USE"
+msgstr "%1$s (%2$s) está solicitando permiso para almacenar unha grande cantidade de datos no teu dispositivo para utilizalos fóra de liña."
+
+msgid "IDS_WEBVIEW_POP_P1SS_HP2SS_IS_REQUESTING_PERMISSION_TO_SHOW_NOTIFICATIONS"
+msgstr "%1$s (%2$s) está solicitando permiso para amosar notificacións"
+
+msgid "IDS_WEBVIEW_POP_P1SS_HP2SS_IS_REQUESTING_PERMISSION_TO_ACCESS_YOUR_LOCATION"
+msgstr "%1$s (%2$s) está solicitando permiso para ter acceso á túa situación"
+
+msgid "IDS_WEBVIEW_POP_LEAVE_THIS_PAGE_Q"
+msgstr "Desexas abandonar esta páxina?"
+
+msgid "IDS_WEBVIEW_POP_DO_YOU_WANT_THE_DEVICE_TO_REMEMBER_YOUR_PASSWORD_Q"
+msgstr "Desexas que o dispositivo lembre o teu contrasinal?"
+
+msgid "IDS_WEBVIEW_POP_A_TEMPORARY_ERROR_HAS_OCCURRED"
+msgstr "Produciuse un erro temporal."
+
+msgid "IDS_WEBVIEW_OPT_WEB_SEARCH"
+msgstr "Busca na web"
+
+msgid "IDS_WEBVIEW_OPT_UNMUTE"
+msgstr "Activar son"
+
+msgid "IDS_WEBVIEW_OPT_TRANSLATE_ABB"
+msgstr "Traducir"
+
+msgid "IDS_WEBVIEW_OPT_SIGN_IN_USING_FINGERPRINTS"
+msgstr "Inicia sesión mediante as impresións dixitais"
+
+msgid "IDS_WEBVIEW_OPT_SHOW_HIDE_MEDIA_CONTROLS_ABB"
+msgstr "Amosar/ocultar controis multi."
+
+msgid "IDS_WEBVIEW_OPT_SELECT_TEXT_ABB"
+msgstr "Selec.texto"
+
+msgid "IDS_WEBVIEW_OPT_SELECTION_MODE_ABB"
+msgstr "Modo de selección"
+
+msgid "IDS_WEBVIEW_OPT_SAVE_IMAGE_ABB"
+msgstr "Gardar imaxe"
+
+msgid "IDS_WEBVIEW_OPT_PLAY_AUDIO_IN_NEW_TAB_ABB"
+msgstr "Reproducir son en pestana nova"
+
+msgid "IDS_WEBVIEW_OPT_PLAY"
+msgstr "Xogar"
+
+msgid "IDS_WEBVIEW_OPT_OPEN_VIDEO_IN_NEW_WINDOW_ABB"
+msgstr "Abrir vídeo nunha ventá nova"
+
+msgid "IDS_WEBVIEW_OPT_OPEN_LINK_IN_NEW_TAB_ABB"
+msgstr "Abrir ligazón en pestana nova"
+
+msgid "IDS_WEBVIEW_OPT_OPEN_IMAGE_IN_NEW_TAB_ABB"
+msgstr "Abrir imaxe nunha pestana nova"
+
+msgid "IDS_WEBVIEW_OPT_FULL_VIEW_ABB"
+msgstr "Vista completa"
+
+msgid "IDS_WEBVIEW_OPT_ENABLE_DISABLE_REPEAT_MEDIA_ABB"
+msgstr "Activ./desact. repetir multim."
+
+msgid "IDS_WEBVIEW_OPT_DRAG_AND_DROP_ABB"
+msgstr "Arrastrar e soltar"
+
+msgid "IDS_WEBVIEW_OPT_DO_NOT_SHOW_AGAIN"
+msgstr "Non amosar outra vez"
+
+msgid "IDS_WEBVIEW_OPT_CUT_ABB"
+msgstr "Cortar"
+
+msgid "IDS_WEBVIEW_OPT_COPY_VIDEO_URL_ABB"
+msgstr "Copiar URL de vídeo"
+
+msgid "IDS_WEBVIEW_OPT_COPY_TO_CLIPBOARD"
+msgstr "Copiar no portapapeis"
+
+msgid "IDS_WEBVIEW_OPT_COPY_LINK_URL_ABB"
+msgstr "Copiar URL ligazón"
+
+msgid "IDS_WEBVIEW_OPT_COPY_IMAGE"
+msgstr "Copiar imaxe"
+
+msgid "IDS_WEBVIEW_OPT_COPY_AUDIO_URL_ABB"
+msgstr "Copiar URL de son"
+
+msgid "IDS_WEBVIEW_OPT_CLIPBOARD"
+msgstr "Portapapeis"
+
+msgid "IDS_WEBVIEW_HEADER_THIS_WEBPAGE_IS_NOT_AVAILABLE"
+msgstr "Esta páxina web non está dispoñible"
+
+msgid "IDS_WEBVIEW_HEADER_SET_WEEK"
+msgstr "Definir semana"
+
+msgid "IDS_WEBVIEW_HEADER_SET_TIME"
+msgstr "Definir hora"
+
+msgid "IDS_WEBVIEW_HEADER_SET_MONTH"
+msgstr "Definir mes"
+
+msgid "IDS_WEBVIEW_HEADER_SET_DATE"
+msgstr "Definir data"
+
+msgid "IDS_WEBVIEW_HEADER_SELECT_COLOUR"
+msgstr "Seleccionar cor"
+
+msgid "IDS_WEBVIEW_HEADER_REMEMBER_PASSWORD"
+msgstr "Lembrar contrasinal"
+
+msgid "IDS_WEBVIEW_HEADER_MESSAGE_FROM_PS_M_WEBSITE"
+msgstr "Mensaxe de %s"
+
+msgid "IDS_WEBVIEW_BUTTON_UPLOAD_MULTIPLE_FILES"
+msgstr "Cargar varios arquivos"
+
+msgid "IDS_WEBVIEW_BUTTON_UPLOAD_FILE"
+msgstr "Cargar arquivo"
+
+msgid "IDS_WEBVIEW_BUTTON_SUBMIT"
+msgstr "Enviar"
+
+msgid "IDS_WEBVIEW_BUTTON_STAY"
+msgstr "Permanecer"
+
+msgid "IDS_WEBVIEW_BUTTON_PREV_ABB"
+msgstr "Ante."
+
+msgid "IDS_WEBVIEW_BUTTON_OK_ABB4"
+msgstr "OK"
+
+msgid "IDS_WEBVIEW_BUTTON_NOT_NOW_ABB"
+msgstr "Ago. non"
+
+msgid "IDS_WEBVIEW_BUTTON_LEAVE"
+msgstr "Abandonar"
+
+msgid "IDS_WEBVIEW_BUTTON_CANCEL_ABB4"
+msgstr "Cancel"
+
+msgid "IDS_WEBVIEW_BUTTON2_NEVER"
+msgstr "Nunca"
+
+msgid "IDS_WEBVIEW_BODY_YOU_CAN_SEARCH_THIS_INDEX_ENTER_KEYWORDS_C"
+msgstr "Podes buscar neste índice. Insire palabras clave:"
+
+msgid "IDS_WEBVIEW_BODY_VALUE_MUST_BE_NO_HIGHER_THAN_PD"
+msgstr "O valor non debe ser superior a %d"
+
+msgid "IDS_WEBVIEW_BODY_VALUE_MUST_BE_AT_LEAST_PD"
+msgstr "O valor debe ser polo menos de %d"
+
+msgid "IDS_WEBVIEW_BODY_UNABLE_TO_LOAD_THE_PAGE_PS_TOOK_TOO_LONG_TO_RESPOND_THE_WEBSITE_MAY_BE_DOWN_OR_THERE_MAY_HAVE_BEEN_A_NETWORK_CONNECTION_ERROR"
+msgstr "Non se pode cargar a páxina. %s tardou demasiado en responder. É posible que o sitio web non estea dispoñible ou que se producise un erro de conexión de rede"
+
+msgid "IDS_WEBVIEW_BODY_UNABLE_TO_LOAD_THE_PAGE_PS_MAY_BE_TEMPORARILY_DOWN_OR_HAVE_MOVED_TO_A_NEW_URL"
+msgstr "Non se pode cargar a páxina. É posible que %s non estea dispoñible temporalmente ou que se movera a un novo URL"
+
+msgid "IDS_WEBVIEW_BODY_UNABLE_TO_LOAD_THE_PAGE_A_SECURE_CONNECTION_COULD_NOT_BE_MADE_TO_PS_THE_MOST_LIKELY_CAUSE_IS_THE_DEVICES_CLOCK_CHECK_THAT_THE_TIME_ON_YOUR_DEVICE_IS_CORRECT_AND_REFRESH_THE_PAGE"
+msgstr "Non se pode cargar a páxina. Non se puido establecer unha conexión segura con %s. A causa máis probable é o reloxo do dispositivo. Comproba que a hora do dispositivo sexa correcta e actualiza a páxina"
+
+msgid "IDS_WEBVIEW_BODY_THE_SERVER_AT_PS_CANT_BE_FOUND_BECAUSE_THE_DNS_LOOK_UP_FAILED_MSG"
+msgstr "Non se pode atopar o servidor de %s debido a que produciuse un erro na busca de DNS. DNS é o servizo de rede que traduce o nome dun sitio web no seu enderezo da Internet. Este erro está provocado na maior parte das veces por non dispoñer de conexión á Internet ou debido a que unha rede está mal configurada. Tamén pode deberse a un servidor DNS que non responde ou a unha devasa que impide a Internet acceder á rede"
+
+msgid "IDS_WEBVIEW_BODY_SHOWING_PD_ITEMS_TTS"
+msgstr "Amosando %d elementos"
+
+msgid "IDS_WEBVIEW_BODY_PLUG_IN_MISSING"
+msgstr "Complemento non atopado"
+
+msgid "IDS_WEBVIEW_BODY_PD_CHARACTERS_TTS"
+msgstr "%d carácteres."
+
+msgid "IDS_WEBVIEW_BODY_NO_FILES_HAVE_BEEN_SELECTED"
+msgstr "Non se seleccionou ningún arquivo"
+
+msgid "IDS_WEBVIEW_BODY_INVALID_VALUE_ENTERED"
+msgstr "Introduciuse un valor non válido"
+
+msgid "IDS_WEBVIEW_BODY_INVALID_FORMAT_ENTERED"
+msgstr "Introduciuse un formato non válido"
+
+msgid "IDS_WEBVIEW_BODY_FIELD_CANNOT_BE_BLANK"
+msgstr "O campo non pode estar baleiro"
+
+msgid "IDS_WEBVIEW_BODY_ENTER_A_URL"
+msgstr "Introduce un URL"
+
+msgid "IDS_WEBVIEW_BODY_ENTER_A_LIST_OF_EMAIL_ADDRESSES_SEPARATED_BY_COMMAS"
+msgstr "Insire unha lista de enderezos de correo electrónico separados por comas"
+
+msgid "IDS_WEBVIEW_BODY_ENTER_AN_EMAIL_ADDRESS"
+msgstr "Insire un enderezo de correo electrónico"
+
+msgid "IDS_WEBVIEW_BODY_EDIT_FIELD__M_NOUN_TTS"
+msgstr "Editar campo"
+
+msgid "IDS_WEBVIEW_BODY_EDITING_TTS"
+msgstr "Editando."
+
+msgid "IDS_BR_POP_SAVED"
+msgstr "Gardado"
+
+msgid "IDS_BR_POP_FAIL"
+msgstr "Erro"
+
+msgid "IDS_BR_OPT_SEND_EMAIL"
+msgstr "Enviar correo electrónico"
+
+msgid "IDS_WEBVIEW_OPT_SELECT_ALL_ABB"
+msgstr "Selec todo"
+
+msgid "IDS_WEBVIEW_OPT_SELECT_ABB"
+msgstr "Seleccionar"
+
+msgid "IDS_WEBVIEW_OPT_PAUSE"
+msgstr "Pausa"
+
+msgid "IDS_WEBVIEW_OPT_PASTE"
+msgstr "Pegar"
+
+msgid "IDS_WEBVIEW_OPT_MUTE"
+msgstr "Silenciar"
+
+msgid "IDS_WEBVIEW_OPT_COPY"
+msgstr "Copiar"
+
+msgid "IDS_WEBVIEW_HEADER_SET_DATE_AND_TIME"
+msgstr "Definir data e hora"
+
+msgid "IDS_WEBVIEW_BUTTON_SET_ABB2"
+msgstr "Axu"
+
+msgid "IDS_WEBVIEW_BUTTON_SAVE"
+msgstr "Gardar"
+
+msgid "IDS_WEBVIEW_BUTTON_RESET"
+msgstr "Restab."
+
+msgid "IDS_WEBVIEW_BUTTON_NEXT_ABB3"
+msgstr "Seguinte"
+
+msgid "IDS_WEBVIEW_BUTTON_LATER_ABB"
+msgstr "Despois"
+
+msgid "IDS_WEBVIEW_BUTTON_DONE"
+msgstr "Feito"
+
+msgid "IDS_WEBVIEW_BODY_USERNAME"
+msgstr "Nome de usuario"
+
+msgid "IDS_WEBVIEW_BODY_SELECTED_TTS"
+msgstr "Seleccionado"
+
+msgid "IDS_WEBVIEW_BODY_PASSWORD"
+msgstr "Contrasinal"
+
+msgid "IDS_WEBVIEW_BODY_NOT_SELECTED_TTS"
+msgstr "Non seleccionado"
+
+msgid "IDS_WEBVIEW_BODY_DOUBLE_TAB_TO_EDIT_TTS"
+msgstr "Toca dúas veces para editar."
+
+msgid "IDS_WEBVIEW_BODY_DETAILS"
+msgstr "Detalles"
+
+msgid "IDS_WEBVIEW_OPT_SHARE"
+msgstr "Compartir"
+
+msgid "IDS_WEBVIEW_POP_SAVE_YOUR_USERNAME_AND_PASSWORD_FOR_THIS_WEBSITE_Q"
+msgstr "Queres gardar o teu nome de usuario e contrasinal para este sitio web?"
+
+msgid "IDS_WEBVIEW_HEADER_SAVE_SIGN_IN_INFO"
+msgstr "Gardar información de inicio de sesión"
+
+msgid "IDS_WEBVIEW_POP_P1SS_HP2SS_IS_REQUESTING_PERMISSION_TO_USE_YOUR_MICROPHONE"
+msgstr "%1$s (%2$s) está solicitando permiso para usar o teu micrófono."
+
+msgid "IDS_WEBVIEW_POP_P1SS_HP2SS_IS_REQUESTING_PERMISSION_TO_USE_YOUR_CAMERA_AND_MICROPHONE"
+msgstr "%1$s (%2$s) está solicitando permiso para usar a túa cámara e micrófono."
+
+msgid "IDS_WEBVIEW_BODY_YOUR_DEVICE_IS_NOT_CONNECTED_TO_A_WI_FI_OR_MOBILE_NETWORK_CONNECT_TO_A_NETWORK_AND_TRY_AGAIN"
+msgstr "O dispositivo non está conectado a unha Wi-Fi ou rede móbil. Conéctate a unha rede e téntao outra vez."
+
+msgid "IDS_WEBVIEW_POP_YOU_ARE_OFFLINE"
+msgstr "Estás fóra de liña."
+
+msgid "IDS_BR_BODY_LOG_IN"
+msgstr "Iniciar sesión"
+
+msgid "IDS_COM_BODY_SEND_MESSAGE"
+msgstr "Enviar mensaxe"
+
+msgid "IDS_TPLATFORM_OPT_COPY_LINK_TEXT"
+msgstr "Copiar texto da ligazón"
+
+msgid "IDS_WEBVIEW_OPT_OPEN_LINK_IN_CURRENT_TAB"
+msgstr "Abrir ligazón na pestana actual"
+
+msgid "IDS_WEBVIEW_OPT_OPEN_IMAGE_IN_CURRENT_TAB"
+msgstr "Abrir imaxe na pestana actual"
+
+msgid "IDS_WEBVIEW_HEADER_QUICK_MEMO"
+msgstr "Nota rápida"

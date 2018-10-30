@@ -1,0 +1,33 @@
+# Copyright (c) 2015 Samsung Electronics. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+import("//build/config/linux/pkg_config.gni")
+
+template("tizen_pkg_config") {
+  assert(defined(invoker.packages),
+         "Variable |packages| must be defined to be a list in pkg_config.")
+
+  if (invoker.packages == []) {
+    config(target_name) {
+    }
+  } else {
+    pkg_config(target_name) {
+      packages = invoker.packages
+
+      if (defined(invoker.extra_args)) {
+        extra_args = invoker.extra_args
+      }
+
+      if (defined(invoker.ignore_libs)) {
+        ignore_libs = invoker.ignore_libs
+      }
+
+      forward_variables_from(invoker,
+                             [
+                               "defines",
+                               "visibility",
+                             ])
+    }
+  }
+}

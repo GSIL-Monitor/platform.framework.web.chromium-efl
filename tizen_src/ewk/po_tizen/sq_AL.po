@@ -1,0 +1,9 @@
+msgid "IDS_WEBVIEW_OPT_OPEN_LINK_IN_NEW_TAB_ABB"
+msgstr "Hape lidhjen në skedë të re"
+
+msgid "IDS_WEBVIEW_OPT_OPEN_LINK_ABB"
+msgstr "Hap"
+
+msgid "IDS_WEBVIEW_OPEN"
+msgstr "Hap"
+

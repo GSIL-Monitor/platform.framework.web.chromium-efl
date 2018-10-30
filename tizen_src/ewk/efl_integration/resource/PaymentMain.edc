@@ -1,0 +1,2530 @@
+#define BUTTON_ICON_DEFAULT_HEIGHT_INC 40
+#define BUTTON_ICON_DEFAULT_WIDTH_INC 40
+#define IMAGE_BUTTON(NAME, W, H, IMG)                               \
+    group {                                                         \
+        name: NAME;                                                 \
+        images.image: IMG COMP;                                     \
+        parts {                                                     \
+            image {                                                 \
+                name: "image";                                      \
+                mouse_events: 1;                                    \
+                repeat_events: 0;                                   \
+                description {                                       \
+                    state: "default" 0.0;                           \
+                    min: W H;                                       \
+                    max: W H;                                       \
+                    image.normal: IMG;                              \
+                }                                                   \
+            }                                                       \
+        }                                                           \
+    }
+
+collections { base_scale: 2.6;
+   IMAGE_BUTTON("expand_button_icon.png", BUTTON_ICON_DEFAULT_HEIGHT_INC, BUTTON_ICON_DEFAULT_WIDTH_INC, "expand_button_icon.png")
+   IMAGE_BUTTON("shrink_button_icon.png", BUTTON_ICON_DEFAULT_HEIGHT_INC, BUTTON_ICON_DEFAULT_WIDTH_INC, "shrink_button_icon.png")
+   IMAGE_BUTTON("visa.png", BUTTON_ICON_DEFAULT_HEIGHT_INC, BUTTON_ICON_DEFAULT_WIDTH_INC, "visa.png")
+   IMAGE_BUTTON("americanexpress.png", BUTTON_ICON_DEFAULT_HEIGHT_INC, BUTTON_ICON_DEFAULT_WIDTH_INC, "americanexpress.png")
+   IMAGE_BUTTON("mastercard.png", BUTTON_ICON_DEFAULT_HEIGHT_INC, BUTTON_ICON_DEFAULT_WIDTH_INC, "mastercard.png")
+   IMAGE_BUTTON("success.png", BUTTON_ICON_DEFAULT_HEIGHT_INC, BUTTON_ICON_DEFAULT_WIDTH_INC, "success.png")
+   IMAGE_BUTTON("fail.png", BUTTON_ICON_DEFAULT_HEIGHT_INC, BUTTON_ICON_DEFAULT_WIDTH_INC, "fail.png")
+
+    group {
+        name: "background";
+        parts {
+             part {
+                name:"bg";
+                type:RECT;
+                description {
+                    state:"default" 0.0;
+                    visible:1;
+                    align: 0.0 1.0;
+                    color: 0 0 0 0;
+                    min: 720 900;
+                    max: 720 900;
+                    rel1  { relative: 0.0 0.0;}
+                    rel2  { relative: 1.0 1.0;}
+                }
+            }
+        }
+    }
+
+    group {
+        name: "payment_layout_container";
+        parts {
+             part {
+                name:"bg";
+                type:RECT;
+                description {
+                    state:"default" 0.0;
+                    visible:1;
+                    align: 0.0 0.0;
+                    color: 0 0 0 0;
+                    min: 720 1240;
+                    max: 720 1240;
+                    rel1  { relative: 0.0 0.0; offset: 0 40;}
+                    rel2  { relative: 1.0 1.0; }
+                }
+            }
+            part {
+                name:"bg_spacer";
+                type:SPACER;
+                description {
+                    state:"default" 0.0;
+                    align: 0.0 0.0;
+                    min: 720 340;
+                    max: 720 340;
+                    rel1  { relative: 0.0 0.0; to: "bg";}
+                    rel2  { relative: 1.0 1.0; to: "bg";}
+                }
+            }
+            part {
+                name:"layout_bg";
+                type:RECT;
+                description {
+                    state:"default" 0.0;
+                    visible:1;
+                    align: 0.0 0.0;
+                    color: 240 240 240 255;
+                    align: 0.0 1.0;
+                    min: 720 900;
+                    max: 720 900;
+                    rel1  { relative: 0.0 1.0; to: "bg_spacer";}
+                    rel2  { relative: 1.0 1.0; to: "bg";}
+                }
+                description { "expand_main_layout";
+                    inherit: "default" 0.0;
+                    min: 720 1240;
+                    max: 720 1240;
+                    rel1  { relative: 0.0 0.0; to: "bg";}
+                    rel2  { relative: 1.0 1.0; to: "bg";}
+                }
+            }
+            part {
+                name: "swallow_payment_layout";
+                type: SWALLOW;
+                mouse_events: 1;
+                scale: 1;
+                description {
+                    state: "default" 0.0;
+                    visible: 1;
+                    align: 0.0 0.0;
+                    min: 720 900;
+                    max: -1 -1;
+                    rel1 { relative: 0.0 0.0; to: "layout_bg"; }
+                    rel2 { relative: 1.0 0.0; to: "bottom_bar_bg"; }
+                }
+                description { "expand_main_layout";
+                    inherit: "default" 0.0;
+                    min: 720 1220;
+                }
+            }
+            part {
+                name:"bottom_bar_bg";
+                type:RECT;
+                description {
+                    state:"default" 0.0;
+                    visible:1;
+                    color: 240 240 240 255;
+                    align: 0.0 1.0;
+                    min: 720 120;
+                    max: 720 120;
+                    rel1  { relative: 0.0 0.0; to: "bg";}
+                    rel2  { relative: 1.0 1.0; to: "bg";}
+                }
+            }
+            part {
+                name:"cancel_button_bg";
+                type:RECT;
+                description {
+                    state:"default" 0.0;
+                    color: 240 240 240 255;
+                    visible:1;
+                    align: 0.5 0.5;
+                    fixed: 1 1;
+                    min: 200 100;
+                    max: 200 100;
+                    rel1 { relative: 0.0 0.0;to: "bottom_bar_bg";}
+                    rel2 { relative: 1.0 1.0;to: "bottom_bar_bg";}
+                }
+            }
+            part {
+                name:"cancel_button";
+                type:SWALLOW;
+                mouse_events: 1;
+                description {
+                    state:"default" 0.0;
+                    visible:1;
+                    align: 0.0 0.5;
+                    fixed: 1 1;
+                    min: 200 80;
+                    max: 200 80;
+                    rel1 { relative: 0.0 0.0;to: "cancel_button_bg";}
+                    rel2 { relative: 1.0 1.0;to: "cancel_button_bg";}
+                }
+            }
+            part {
+                name:"pay_button_bg";
+                type:RECT;
+                description {
+                    state:"default" 0.0;
+                    color: 240 240 240 255;
+                    visible:1;
+                    align: 0.92 0.5;
+                    fixed: 1 1;
+                    min: 200 100;
+                    max: 200 100;
+                    rel1 { relative: 0.0 0.0;to: "bottom_bar_bg";}
+                    rel2 { relative: 1.0 1.0;to: "bottom_bar_bg";}
+                }
+            }
+            part {
+                name:"pay_button";
+                type:SWALLOW;
+                mouse_events: 1;
+                description {
+                    state:"default" 0.0;
+                    visible:1;
+                    align: 0.0 0.5;
+                    fixed: 1 1;
+                    min: 200 80;
+                    max: 200 80;
+                    rel1 { relative: 0.0 0.0;to: "pay_button_bg";}
+                    rel2 { relative: 1.0 1.0;to: "pay_button_bg";}
+                }
+            }
+
+         }
+         programs {
+                program {
+                    "expand_main_layout";
+                    signal: "elm,action,expand,mainLayout";
+                    source: "";
+                    action: STATE_SET "expand_main_layout";
+                    target: "layout_bg";
+                    target: "swallow_payment_layout";
+                }
+                program {
+                    "shrink_main_layout";
+                    signal: "elm,action,shrink,mainLayout";
+                    source: "";
+                    action: STATE_SET "default" 0.0;
+                    target: "layout_bg";
+                    target: "swallow_payment_layout";
+                }
+         }
+       }
+
+       group {
+        name: "header_layout";
+        parts {
+             part {
+                name:"bg";
+                type:RECT;
+                description {
+                    state:"default" 0.0;
+                    visible:1;
+                    color: 240 240 240 255;
+                    align: 0.0 0.0;
+                    fixed: 1 1;
+                    min: 570 100;
+                    max: 570 100;
+                    rel1 { relative: 0.0 0.0;}
+                    rel2 { relative: 1.0 1.0;}
+                }
+            }
+             part {
+                name:"favicon_bg";
+                type:RECT;
+                description {
+                    state:"default" 0.0;
+                    visible:1;
+                    color: 240 240 240 255;
+                    align: 0.0 0.0;
+                    fixed: 1 1;
+                    min: 80 100;
+                    max: 80 100;
+                    rel1 { relative: 0.0 0.0;to: "bg";}
+                }
+            }
+            part {
+                name:"favicon";
+                type:SWALLOW;
+                description {
+                    state:"default" 0.0;
+                    visible:1;
+                    align: 0.5 0.5;
+                    fixed: 1 1;
+                    min: 60 60;
+                    max: 60 60;
+                    rel1 { relative: 0.0 0.0;to: "favicon_bg";}
+                    rel2 { relative: 1.0 1.0;to: "favicon_bg";}
+                }
+            }
+            part {
+                name:"title_bg";
+                type:RECT;
+                description {
+                    state:"default" 0.0;
+                    visible:1;
+                    color: 240 240 240 255;
+                    align: 0.0 0.0;
+                    fixed: 1 1;
+                    min: 490 50;
+                    max: 490 50;
+                    rel1 { relative: 1.0 0.0;to: "favicon_bg";}
+                    rel2 { relative: 1.0 1.0;}
+                }
+            }
+            part {
+                name: "title_text";
+                type: TEXT;
+                mouse_events: 0;
+                description {
+                    state: "default" 0;
+                    align: 0 0;
+                    color: 0 0 0 255;
+                    rel1 { relative: 0.0 0.1;to: "title_bg";}
+                    rel2 { relative: 1.0 1.0;}
+                    text {
+                        text: "YOUR TEXT HERE";
+                        font: "Sans:style=Bold";
+                        size: 31;
+                        text_class: "title_text_class";
+                        fit: 0 0;
+                        min: 0 0;
+                        max: 0 0;
+                        align: 0.0 0.0;
+                        elipsis: 0.0;
+                    }
+                }
+            }
+            part {
+                name:"url_bg";
+                type:RECT;
+                description {
+                    state:"default" 0.0;
+                    color: 240 240 240 255;
+                    visible:1;
+                    align: 0.0 0.0;
+                    fixed: 1 1;
+                    min: 490 50;
+                    max: 490 50;
+                    rel1 { relative: 0.0 1.0;to: "title_bg";}
+                    rel2 { relative: 1.0 1.0;}
+                }
+            }
+            part {
+                name: "url_text";
+                type: TEXT;
+                mouse_events: 0;
+                description {
+                    state: "default" 0;
+                    align: 0 0;
+                    color: 0 0 0 255;
+                    rel1 { relative: 0.0 0.1;to: "url_bg";}
+                    rel2 { relative: 1.0 1.0;}
+                    text {
+                        text: "YOUR TEXT HERE";
+                        font: "Sans";
+                        size: 30;
+                        text_class: "url_text_class";
+                        fit: 0 0;
+                        min: 0 0;
+                        max: 0 0;
+                        align: 0.0 0.0;
+                        elipsis: 0.0;
+                    }
+                }
+            }
+      }
+   }
+       group {
+        name: "payment_layout";
+        parts {
+            part {
+                name:"payment_bg";
+                type:RECT;
+                description {
+                    state:"default" 0.0;
+                    visible:1;
+                    align: 0.0 0.0;
+                    color: 240 240 240 255;
+                    rel1  { relative: 0.0 0.0; }
+                    rel2  { relative: 1.0 1.0; }
+                }
+            }
+            part {
+                name:"header_swallow";
+                type:SWALLOW;
+                description {
+                    state:"default" 0.0;
+                    visible:1;
+                    align: 0 0;
+                    fixed: 1 1;
+                    min: 570 100;
+                    max: 570 100;
+                    rel1 { relative: 0.0 0.0;to: "payment_bg";}
+                }
+            }
+            part {
+                name:"details_bg";
+                type:RECT;
+                description {
+                    state:"default" 0.0;
+                    color: 240 240 240 255;
+                    visible:1;
+                    align: 0.0 0.0;
+                    fixed: 1 1;
+                    min: 150 100;
+                    max: 150 100;
+                    rel1 { relative: 1.0 0.0;to: "header_swallow";}
+                    rel2 { relative: 1.0 1.0;}
+                }
+            }
+            part {
+                name:"details_button";
+                type:SWALLOW;
+                mouse_events: 1;
+                description {
+                    state:"default" 0.0;
+                    visible:1;
+                    align: 0.0 0.5;
+                    fixed: 1 1;
+                    min: 150 100;
+                    max: 150 100;
+                    rel1 { relative: 0.0 0.0;to: "details_bg";}
+                    rel2 { relative: 1.0 1.0;to: "details_bg";}
+                }
+            }
+            part {
+                name:"padding_header";
+                type: SPACER;
+                description {
+                    state:"default" 0.0;
+                    align: 0.0 0.0;
+                    fixed: 1 1;
+                    min: 720 20;
+                    max: 720 20;
+                    rel1 { relative: 0.0 1.0;to: "header_swallow";}
+                    rel2 { relative: 1.0 1.0;}
+                }
+            }
+             part {
+                name: "swallow_order_summary";
+                type: SWALLOW;
+                mouse_events: 1;
+                scale: 1;
+                description {
+                    state: "default" 0.0;
+                    visible: 1;
+                    align: 0.0 0.0;
+                    fixed: 1 1;
+                    min: 720 130;
+                    max: -1 -1;
+                    rel1 { relative: 0.0 1.0; to: "padding_header"; }
+                    rel2 { relative: 1.0 1.0; to: "padding_header"; }
+                }
+                description { "expand_order_summary";
+                    inherit: "default" 0.0;
+                    min: 720 240;
+                }
+            }
+            part {
+                name: "order_summary_overlay_button";
+                type: SWALLOW;
+                mouse_events: 1;
+                repeat_events: 1;
+                scale: 1;
+                description {
+                    state: "default" 0.0;
+                    visible: 1;
+                    align: 0.0 0.0;
+                    fixed: 1 1;
+                    rel1 { relative: 0.0 0.0; to: "swallow_order_summary"; }
+                    rel2 { relative: 1.0 1.0; to: "swallow_order_summary"; }
+                }
+            }
+            part {
+                name:"swallow_order_summary_line_bg";
+                type:RECT;
+                description {
+                    state:"default" 0.0;
+                    color: 169 169 169 255;
+                    visible:1;
+                    align: 0.0 0.0;
+                    fixed: 1 1;
+                    min: 720 2;
+                    max: 720 2;
+                    rel1 { relative: 0.0 1.0; to: "swallow_order_summary"; }
+                    rel2 { relative: 1.0 1.0; to: "swallow_order_summary"; }
+                }
+                description { "hide_order_summary";
+                    inherit: "default" 0.0;
+                    visible: 0;
+                }
+            }
+            part {
+                name: "swallow_shipping_address";
+                type: SWALLOW;
+                mouse_events: 1;
+                scale: 1;
+                description {
+                    state: "default" 0.0;
+                    visible: 1;
+                    align: 0.0 0.0;
+                    fixed: 1 1;
+                    min: 720 170;
+                    max: 720 -1;
+                    rel1 { relative: 0.0 1.0; to: "swallow_order_summary_line_bg"; }
+                    rel2 { relative: 1.0 1.0; to: "swallow_order_summary_line_bg"; }
+                }
+                description { "hide_shipping_address";
+                    inherit: "default" 0.0;
+                    min: 1 1;
+                }
+                description { "expand_shipping_address_1";
+                    inherit: "default" 0.0;
+                    min: 720 240;
+                }
+                description { "expand_shipping_address_2";
+                    inherit: "default" 0.0;
+                    min: 720 300;
+                }
+                description { "expand_shipping_address_3";
+                    inherit: "default" 0.0;
+                    min: 720 360;
+                }
+            }
+            part {
+                name: "shipping_address_overlay_button";
+                type: SWALLOW;
+                mouse_events: 1;
+                repeat_events: 1;
+                scale: 1;
+                description {
+                    state: "default" 0.0;
+                    visible: 1;
+                    align: 0.0 0.0;
+                    fixed: 1 1;
+                    rel1 { relative: 0.0 0.0; to: "swallow_shipping_address"; }
+                    rel2 { relative: 1.0 1.0; to: "swallow_shipping_address"; }
+                }
+                description { "expand_shipping_address";
+                    inherit: "default" 0.0;
+                    rel1 { relative: 0.0 0.0; to: "swallow_shipping_address"; }
+                    rel2 { relative: 1.0 0.2; to: "swallow_shipping_address"; }
+                }
+            }
+            part {
+                name:"swallow_shipping_address_line_bg";
+                type:RECT;
+                description {
+                    state:"default" 0.0;
+                    color: 169 169 169 255;
+                    visible:1;
+                    align: 0.0 0.0;
+                    fixed: 1 1;
+                    min: 720 2;
+                    max: 720 2;
+                    rel1 { relative: 0.0 1.0; to: "swallow_shipping_address"; }
+                    rel2 { relative: 1.0 1.0; to: "swallow_shipping_address"; }
+                }
+                description { "hide_shipping_address";
+                    inherit: "default" 0.0;
+                    visible: 0;
+                }
+            }
+            part {
+                name: "swallow_shipping_option";
+                type: SWALLOW;
+                mouse_events: 1;
+                scale: 1;
+                description {
+                    state: "default" 0.0;
+                    visible: 1;
+                    align: 0.0 0.0;
+                    fixed: 1 1;
+                    min: 720 170;
+                    max: -1 -1;
+                    rel1 { relative: 0.0 1.0; to: "swallow_shipping_address_line_bg"; }
+                    rel2 { relative: 1.0 1.0; to: "swallow_shipping_address_line_bg"; }
+                }
+                description { "hide_shipping_option";
+                    inherit: "default" 0.0;
+                    min: 1 1;
+                }
+                description { "expand_shipping_option";
+                    inherit: "default" 0.0;
+                    min: 720 240;
+                }
+            }
+            part {
+                name: "shipping_option_overlay_button";
+                type: SWALLOW;
+                mouse_events: 1;
+                repeat_events: 1;
+                scale: 1;
+                description {
+                    state: "default" 0.0;
+                    visible: 1;
+                    align: 0.0 0.0;
+                    fixed: 1 1;
+                    rel1 { relative: 0.0 0.0; to: "swallow_shipping_option"; }
+                    rel2 { relative: 1.0 1.0; to: "swallow_shipping_option"; }
+                }
+                description { "expand_shipping_option";
+                    inherit: "default" 0.0;
+                    rel1 { relative: 0.0 0.0; to: "swallow_shipping_option"; }
+                    rel2 { relative: 1.0 0.2; to: "swallow_shipping_option"; }
+                }
+            }
+            part {
+                name:"swallow_shipping_option_line_bg";
+                type:RECT;
+                description {
+                    state:"default" 0.0;
+                    color: 169 169 169 255;
+                    visible:1;
+                    align: 0.0 0.0;
+                    fixed: 1 1;
+                    min: 720 2;
+                    max: 720 2;
+                    rel1 { relative: 0.0 1.0; to: "swallow_shipping_option"; }
+                    rel2 { relative: 1.0 1.0; to: "swallow_shipping_option"; }
+                }
+                description { "hide_shipping_option";
+                    inherit: "default" 0.0;
+                    visible: 0;
+                }
+            }
+            part {
+                name: "swallow_payment_method";
+                type: SWALLOW;
+                mouse_events: 1;
+                scale: 1;
+                description {
+                    state: "default" 0.0;
+                    visible: 1;
+                    align: 0.0 0.0;
+                    fixed: 1 1;
+                    min: 720 170;
+                    max: -1 -1;
+                    rel1 { relative: 0.0 1.0; to: "swallow_shipping_option_line_bg"; }
+                    rel2 { relative: 1.0 1.0; to: "swallow_shipping_option_line_bg"; }
+                }
+                description { "expand_payment_method";
+                    inherit: "default" 0.0;
+                    min: 720 400;
+                }
+                description { "expand_payment_method_1";
+                    inherit: "default" 0.0;
+                    min: 720 240;
+                }
+                description { "expand_payment_method_2";
+                    inherit: "default" 0.0;
+                    min: 720 300;
+                }
+                description { "expand_payment_method_3";
+                    inherit: "default" 0.0;
+                    min: 720 360;
+                }
+            }
+            part {
+                name: "payment_method_overlay_button";
+                type: SWALLOW;
+                mouse_events: 1;
+                repeat_events: 1;
+                scale: 1;
+                description {
+                    state: "default" 0.0;
+                    visible: 1;
+                    align: 0.0 0.0;
+                    fixed: 1 1;
+                    rel1 { relative: 0.0 0.0; to: "swallow_payment_method"; }
+                    rel2 { relative: 1.0 1.0; to: "swallow_payment_method"; }
+                }
+                description { "expand_payment_method";
+                    inherit: "default" 0.0;
+                    rel1 { relative: 0.0 0.0; to: "swallow_payment_method"; }
+                    rel2 { relative: 1.0 0.2; to: "swallow_payment_method"; }
+                }
+            }
+            part {
+                name:"swallow_payment_method_line_bg";
+                type:RECT;
+                description {
+                    state:"default" 0.0;
+                    color: 169 169 169 255;
+                    visible:1;
+                    align: 0.0 0.0;
+                    fixed: 1 1;
+                    min: 720 2;
+                    max: 720 2;
+                    rel1 { relative: 0.0 1.0; to: "swallow_payment_method"; }
+                    rel2 { relative: 1.0 1.0; to: "swallow_payment_method"; }
+                }
+            }
+            part {
+                name: "swallow_phone_number";
+                type: SWALLOW;
+                mouse_events: 1;
+                scale: 1;
+                description {
+                    state: "default" 0.0;
+                    visible: 1;
+                    align: 0.0 0.0;
+                    fixed: 1 1;
+                    min: 720 170;
+                    max: -1 -1;
+                    rel1 { relative: 0.0 1.0; to: "swallow_payment_method_line_bg"; }
+                    rel2 { relative: 1.0 1.0; to: "swallow_payment_method_line_bg"; }
+                }
+                description { "hide_phone_number";
+                    inherit: "default" 0.0;
+                    min: 1 1;
+                }
+                description { "expand_phone_number_1";
+                    inherit: "default" 0.0;
+                    min: 720 240;
+                }
+                description { "expand_phone_number_2";
+                    inherit: "default" 0.0;
+                    min: 720 300;
+                }
+                description { "expand_phone_number_3";
+                    inherit: "default" 0.0;
+                    min: 720 360;
+                }
+            }
+            part {
+                name: "phone_number_overlay_button";
+                type: SWALLOW;
+                mouse_events: 1;
+                repeat_events: 1;
+                scale: 1;
+                description {
+                    state: "default" 0.0;
+                    visible: 1;
+                    align: 0.0 0.0;
+                    fixed: 1 1;
+                    rel1 { relative: 0.0 0.0; to: "swallow_phone_number"; }
+                    rel2 { relative: 1.0 1.0; to: "swallow_phone_number"; }
+                }
+                description { "expand_phone_number";
+                    inherit: "default" 0.0;
+                    rel1 { relative: 0.0 0.0; to: "swallow_phone_number"; }
+                    rel2 { relative: 1.0 0.2; to: "swallow_phone_number"; }
+                }
+            }
+            part {
+                name:"swallow_phone_number_line_bg";
+                type:RECT;
+                description {
+                    state:"default" 0.0;
+                    color: 169 169 169 255;
+                    visible:1;
+                    align: 0.0 0.0;
+                    fixed: 1 1;
+                    min: 720 2;
+                    max: 720 2;
+                    rel1 { relative: 0.0 1.0; to: "swallow_phone_number"; }
+                    rel2 { relative: 1.0 1.0; to: "swallow_phone_number"; }
+                }
+                description { "hide_phone_number";
+                    inherit: "default" 0.0;
+                    visible: 0;
+                }
+            }
+            part {
+                name: "swallow_email_address";
+                type: SWALLOW;
+                mouse_events: 1;
+                scale: 1;
+                description {
+                    state: "default" 0.0;
+                    visible: 1;
+                    align: 0.0 0.0;
+                    fixed: 1 1;
+                    min: 720 170;
+                    max: -1 -1;
+                    rel1 { relative: 0.0 1.0; to: "swallow_phone_number_line_bg"; }
+                    rel2 { relative: 1.0 1.0; to: "swallow_phone_number_line_bg"; }
+                }
+                description { "hide_email_address";
+                    inherit: "default" 0.0;
+                    min: 1 1;
+                }
+                description { "expand_email_address_1";
+                    inherit: "default" 0.0;
+                    min: 720 240;
+                }
+                description { "expand_email_address_2";
+                    inherit: "default" 0.0;
+                    min: 720 300;
+                }
+                description { "expand_email_address_3";
+                    inherit: "default" 0.0;
+                    min: 720 360;
+                }
+            }
+            part {
+                name: "email_address_overlay_button";
+                type: SWALLOW;
+                mouse_events: 1;
+                repeat_events: 1;
+                scale: 1;
+                description {
+                    state: "default" 0.0;
+                    visible: 1;
+                    align: 0.0 0.0;
+                    fixed: 1 1;
+                    rel1 { relative: 0.0 0.0; to: "swallow_email_address"; }
+                    rel2 { relative: 1.0 1.0; to: "swallow_email_address"; }
+                }
+                description { "expand_email_address";
+                    inherit: "default" 0.0;
+                    rel1 { relative: 0.0 0.0; to: "swallow_email_address"; }
+                    rel2 { relative: 1.0 0.2; to: "swallow_email_address"; }
+                }
+            }
+            part {
+                name:"swallow_email_address_line_bg";
+                type:RECT;
+                description {
+                    state:"default" 0.0;
+                    color: 169 169 169 255;
+                    visible:1;
+                    align: 0.0 0.0;
+                    fixed: 1 1;
+                    min: 720 2;
+                    max: 720 2;
+                    rel1 { relative: 0.0 1.0; to: "swallow_email_address"; }
+                    rel2 { relative: 1.0 1.0; to: "swallow_email_address"; }
+                }
+                description { "hide_email_address";
+                    inherit: "default" 0.0;
+                    visible: 0;
+                }
+            }
+        }
+            programs {
+                program {
+                    "show_shipping_address";
+                    signal: "elm,action,show,shippingAddress";
+                    source: "";
+                    action: STATE_SET "default" 0;
+                    target: "swallow_shipping_address";
+                    target: "swallow_shipping_address_line_bg";
+                }
+                program {
+                    "hide_shipping_address";
+                    signal: "elm,action,hide,shippingAddress";
+                    source: "";
+                    action: STATE_SET "hide_shipping_address";
+                    target: "swallow_shipping_address";
+                    target: "swallow_shipping_address_line_bg";
+                }
+                program {
+                    "expand_shipping";
+                    signal: "elm,action,expand,shippingAddress";
+                    source: "";
+                    action: STATE_SET "expand_shipping_address";
+                    target: "shipping_address_overlay_button";
+                }
+                program {
+                    "expand_shipping_1";
+                    signal: "elm,action,expand,shippingAddress1";
+                    source: "";
+                    action: STATE_SET "expand_shipping_address_1";
+                    target: "swallow_shipping_address";
+                }
+                program {
+                    "expand_shipping_2";
+                    signal: "elm,action,expand,shippingAddress2";
+                    source: "";
+                    action: STATE_SET "expand_shipping_address_2";
+                    target: "swallow_shipping_address";
+                }
+                program {
+                    "expand_shipping_3";
+                    signal: "elm,action,expand,shippingAddress3";
+                    source: "";
+                    action: STATE_SET "expand_shipping_address_3";
+                    target: "swallow_shipping_address";
+                }
+                program {
+                    "shrink_shipping";
+                    signal: "elm,action,shrink,shippingAddress";
+                    source: "";
+                    action: STATE_SET "default" 0.0;
+                    target: "swallow_shipping_address";
+                    target: "shipping_address_overlay_button";
+                }
+                program {
+                    "expand_shipping_option";
+                    signal: "elm,action,expand,shippingOption";
+                    source: "";
+                    action: STATE_SET "expand_shipping_option";
+                    target: "swallow_shipping_option";
+                    target: "shipping_option_overlay_button";
+                }
+                program {
+                    "shrink_shipping_option";
+                    signal: "elm,action,shrink,shippingOption";
+                    source: "";
+                    action: STATE_SET "default" 0.0;
+                    target: "swallow_shipping_option";
+                    target: "shipping_option_overlay_button";
+                }
+                program {
+                    "show_shipping_option";
+                    signal: "elm,action,show,shippingOption";
+                    source: "";
+                    action: STATE_SET "default" 0;
+                    target: "swallow_shipping_option";
+                    target: "swallow_shipping_option_line_bg";
+                }
+                program {
+                    "hide_shipping_option";
+                    signal: "elm,action,hide,shippingOption";
+                    source: "";
+                    action: STATE_SET "hide_shipping_option";
+                    target: "swallow_shipping_option";
+                    target: "swallow_shipping_option_line_bg";
+                }
+                program {
+                    "expand_order_summary";
+                    signal: "elm,action,expand,orderSummary";
+                    source: "";
+                    action: STATE_SET "expand_order_summary";
+                    target: "swallow_order_summary";
+                }
+                program {
+                    "shrink_order_summary";
+                    signal: "elm,action,shrink,orderSummary";
+                    source: "";
+                    action: STATE_SET "default" 0.0;
+                    target: "swallow_order_summary";
+                }
+               program {
+                    "expand_payment_method";
+                    signal: "elm,action,expand,paymentMethod";
+                    source: "";
+                    action: STATE_SET "expand_payment_method";
+                    target: "payment_method_overlay_button";
+                }
+                program {
+                    "expand_payment_method_1";
+                    signal: "elm,action,expand,paymentMethod1";
+                    source: "";
+                    action: STATE_SET "expand_payment_method_1";
+                    target: "swallow_payment_method";
+                }
+                program {
+                    "expand_payment_method_2";
+                    signal: "elm,action,expand,paymentMethod2";
+                    source: "";
+                    action: STATE_SET "expand_payment_method_2";
+                    target: "swallow_payment_method";
+                }
+                program {
+                    "expand_payment_method_3";
+                    signal: "elm,action,expand,paymentMethod3";
+                    source: "";
+                    action: STATE_SET "expand_payment_method_3";
+                    target: "swallow_payment_method";
+                }
+                program {
+                    "shrink_payment_method";
+                    signal: "elm,action,shrink,paymentMethod";
+                    source: "";
+                    action: STATE_SET "default" 0.0;
+                    target: "swallow_payment_method";
+                    target: "payment_method_overlay_button";
+                }
+                program {
+                    "expand_phone_number";
+                    signal: "elm,action,expand,phoneNumber";
+                    source: "";
+                    action: STATE_SET "expand_phone_number";
+                    target: "phone_number_overlay_button";
+                }
+                program {
+                    "expand_phone_number_1";
+                    signal: "elm,action,expand,phoneNumber1";
+                    source: "";
+                    action: STATE_SET "expand_phone_number_1";
+                    target: "swallow_phone_number";
+                }
+                program {
+                    "expand_phone_number_2";
+                    signal: "elm,action,expand,phoneNumber2";
+                    source: "";
+                    action: STATE_SET "expand_phone_number_2";
+                    target: "swallow_phone_number";
+                }
+                program {
+                    "expand_phone_number_3";
+                    signal: "elm,action,expand,phoneNumber3";
+                    source: "";
+                    action: STATE_SET "expand_phone_number_3";
+                    target: "swallow_phone_number";
+                }
+                program {
+                    "shrink_phone_number";
+                    signal: "elm,action,shrink,phoneNumber";
+                    source: "";
+                    action: STATE_SET "default" 0.0;
+                    target: "swallow_phone_number";
+                    target: "phone_number_overlay_button";
+                }
+                program {
+                    "show_phone_number";
+                    signal: "elm,action,show,phoneNumber";
+                    source: "";
+                    action: STATE_SET "default" 0;
+                    target: "swallow_phone_number";
+                    target: "swallow_phone_number_line_bg";
+                }
+                program {
+                    "hide_phone_number";
+                    signal: "elm,action,hide,phoneNumber";
+                    source: "";
+                    action: STATE_SET "hide_phone_number";
+                    target: "swallow_phone_number";
+                    target: "swallow_phone_number_line_bg";
+                }
+                program {
+                    "expand_email_address";
+                    signal: "elm,action,expand,emailAddress";
+                    source: "";
+                    action: STATE_SET "expand_email_address";
+                    target: "email_address_overlay_button";
+                }
+                program {
+                    "expand_email_address_1";
+                    signal: "elm,action,expand,emailAddress1";
+                    source: "";
+                    action: STATE_SET "expand_email_address_1";
+                    target: "swallow_email_address";
+                }
+                program {
+                    "expand_email_address_2";
+                    signal: "elm,action,expand,emailAddress2";
+                    source: "";
+                    action: STATE_SET "expand_email_address_2";
+                    target: "swallow_email_address";
+                }
+                program {
+                    "expand_email_address_3";
+                    signal: "elm,action,expand,emailAddress3";
+                    source: "";
+                    action: STATE_SET "expand_email_address_3";
+                    target: "swallow_email_address";
+                }
+                program {
+                    "shrink_email_address";
+                    signal: "elm,action,shrink,emailAddress";
+                    source: "";
+                    action: STATE_SET "default" 0.0;
+                    target: "swallow_email_address";
+                    target: "email_address_overlay_button";
+                }
+                program {
+                    "show_email_address";
+                    signal: "elm,action,show,emailAddress";
+                    source: "";
+                    action: STATE_SET "default" 0.0;
+                    target: "swallow_email_address";
+                    target: "swallow_email_address_line_bg";
+                }
+                program {
+                    "hide_email_address";
+                    signal: "elm,action,hide,emailAddress";
+                    source: "";
+                    action: STATE_SET "hide_email_address";
+                    target: "swallow_email_address";
+                    target: "swallow_email_address_line_bg";
+                }
+            }
+    }
+
+       group {
+        name: "order_summary";
+        parts {
+            part {
+                name:"bg";
+                type:RECT;
+                description {
+                    state:"default" 0.0;
+                    color: 240 240 240 255;
+                    visible:1;
+                    align: 0.0 0.0;
+                    fixed: 1 1;
+                    min: 720 120;
+                    max: 720 120;
+                    rel1 { relative: 0.0 0.0;}
+                    rel2 { relative: 1.0 1.0;}
+                }
+            }
+            part {
+                name:"summary_label_bg";
+                type:RECT;
+                description {
+                    state:"default" 0.0;
+                    color: 240 240 240 255;
+                    visible:1;
+                    align: 0.0 0.0;
+                    fixed: 1 1;
+                    min: 720 50;
+                    max: 720 50;
+                    rel1 { relative: 0.0 0.0;to: "bg";}
+                    rel2 { relative: 1.0 1.0;to: "bg";}
+                }
+            }
+            part {
+                name: "summary_label";
+                type: TEXT;
+                mouse_events: 0;
+                description {
+                    state: "default" 0;
+                    align: 0 0;
+                    color: 100 149 237 255;
+                    rel1 { relative: 0.05 0.05;to: "summary_label_bg";}
+                    rel2 { relative: 1.0 1.0;}
+                    text {
+                        text: "YOUR TEXT HERE";
+                        font: "Sans";
+                        size: 32;
+                        text_class: "summary_label_class";
+                        fit: 0 0;
+                        min: 0 0;
+                        max: 0 0;
+                        align: 0.0 0.0;
+                        elipsis: 0.0;
+                    }
+                }
+            }
+            part {
+                name:"total_label_bg";
+                type:RECT;
+                description {
+                    state:"default" 0.0;
+                    color: 240 240 240 255;
+                    visible:1;
+                    align: 0.0 0.0;
+                    fixed: 1 1;
+                    min: 450 40;
+                    max: 450 40;
+                    rel1 { relative: 0.0 1.0;to: "summary_label_bg";}
+                    rel2 { relative: 1.0 1.0;}
+                }
+            }
+            part {
+                name: "total_label";
+                type: TEXT;
+                mouse_events: 0;
+                description {
+                    state: "default" 0;
+                    align: 0 0;
+                    color: 32 32 32 255;
+                    rel1 { relative: 0.1 0.05;to: "total_label_bg";}
+                    rel2 { relative: 1.0 1.0;}
+                    text {
+                        text: "YOUR TEXT HERE";
+                        font: "Sans:style=Bold";
+                        size: 32;
+                        text_class: "total_label_text_class";
+                        fit: 0 0;
+                        min: 0 0;
+                        max: 0 0;
+                        align: 0 0;
+                        elipsis: 0.0;
+                    }
+                }
+            }
+            part {
+                name:"total_value_bg";
+                type:RECT;
+                description {
+                    state:"default" 0.0;
+                    color: 240 240 240 255;
+                    visible:1;
+                    align: 0.0 0.0;
+                    fixed: 1 1;
+                    min: 270 30;
+                    max: 270 30;
+                    rel1 { relative: 1.0 0.0;to: "total_label_bg";}
+                    rel2 { relative: 1.0 1.0;}
+                }
+            }
+            part {
+                name: "total_value";
+                type: TEXT;
+                mouse_events: 0;
+                description {
+                    state: "default" 0;
+                    align: 0.0 0;
+                    color: 32 32 32 255;
+                    rel1 { relative: 0.0 0.0;to: "total_value_bg";}
+                    rel2 { relative: 1.0 1.0;}
+                    text {
+                        text: "YOUR TEXT HERE";
+                        font: "Sans:style=Bold";
+                        size: 32;
+                        text_class: "total_value_class";
+                        fit: 0 0;
+                        min: 0 0;
+                        max: 0 0;
+                        align: 0.7 0.0;
+                        elipsis: 0.0;
+                    }
+                }
+            }
+            part {
+               name: "up_button_click";
+               scale:1;
+               type: SWALLOW;
+               description {
+                  state: "default" 0.0;
+                  visible: 0;
+                  fixed: 1 1;
+                  align: 0.0 0.0;
+                  min: 40 40;
+                  max: 40 40;
+                  rel1 { relative: 0.9 0.0; to: "summary_label_bg"; }
+                  rel2 { relative: 1.0 1.0; to: "summary_label_bg";
+                  }
+               }
+               description { "expand_order_summary";
+                   inherit: "default" 0.0;
+                   visible: 1;
+               }
+            }
+            part {
+               name: "down_button_click";
+               scale:1;
+               type: SWALLOW;
+               description {
+                  state: "default" 0.0;
+                  visible: 1;
+                  fixed: 1 1;
+                  align: 0.0 0.0;
+                  min: 40 40;
+                  max: 40 40;
+                  rel1 { relative: 0.9 0.0; to: "summary_label_bg"; }
+                  rel2 { relative: 1.0 1.0; to: "summary_label_bg";
+                  }
+               }
+               description { "expand_order_summary";
+                   inherit: "default" 0.0;
+                   visible: 0;
+               }
+            }
+            part {
+                name:"genlist_container";
+                type:SWALLOW;
+                description {
+                   state:"default" 0.0;
+                   visible: 0;
+                   align: 0.0 0.0;
+                   fixed: 1 1;
+                   min: 720 120;
+                   max: 720 120;
+                   rel1 { relative: 0.0 0.9; to: "bg"; }
+                   rel2 { relative: 1.0 1.0; to: "bg"; }
+                }
+                description { "expand_order_summary";
+                    inherit: "default" 0.0;
+                    visible: 1;
+                }
+            }
+        }
+        programs {
+            program {
+                "expand_order_summary";
+                signal: "elm,action,expand,layout";
+                source: "";
+                action: STATE_SET "expand_order_summary";
+                target: "up_button_click";
+                target: "down_button_click";
+                target: "genlist_container";
+            }
+            program {
+                "shrink_order_summary";
+                signal: "elm,action,shrink,layout";
+                source: "";
+                action: STATE_SET "default" 0.0;
+                target: "up_button_click";
+                target: "down_button_click";
+                target: "genlist_container";
+            }
+        }
+    }
+
+
+
+    group {
+        name: "shipping_address";
+        parts {
+            part {
+                name:"shipping_bg";
+                type:RECT;
+                description {
+                    state:"default" 0.0;
+                    color: 240 240 240 255;
+                    visible:1;
+                    align: 0.0 0.0;
+                    fixed: 1 1;
+                    rel1 { relative: 0.0 0.0; }
+                    rel2 { relative: 1.0 1.0; }
+                }
+            }
+            part {
+                name: "shipping_address_label";
+                type: TEXT;
+                mouse_events: 0;
+                description {
+                    state: "default" 0;
+                    align: 0 0;
+                    color: 100 149 237 255;
+                    rel1 { relative: 0.0 0.0; to: "shipping_bg";}
+                    rel2 { relative: 1.0 1.0;}
+                    text {
+                        text: "Shipping Address";
+                        font: "Sans";
+                        size: 32;
+                        text_class: "title_text_class";
+                        fit: 0 0;
+                        min: 0 0;
+                        max: 0 0;
+                        align: 0.085 0.0;
+                        elipsis: 0.0;
+                    }
+                }
+            }
+            part {
+                name: "up_button_click";
+                scale:1;
+                type: SWALLOW;
+                description {
+                    state: "default" 0.0;
+                    visible: 0;
+                    fixed: 1 1;
+                    align: 0.0 0.0;
+                    min: 40 40;
+                    max: 40 40;
+                    rel1 { relative: 0.9 0.0; to: "shipping_bg"; }
+                    rel2 { relative: 1.0 1.0; to: "shipping_bg"; }
+                }
+                description { "expand_shipping";
+                    inherit: "default" 0.0;
+                    visible: 1;
+                }
+                description { "disable_button_click";
+                    inherit: "default" 0.0;
+                    visible: 0;
+                }
+                description { "enable_button_click";
+                    inherit: "default" 0.0;
+                    visible: 0;
+                }
+            }
+            part {
+                name: "down_button_click";
+                scale:1;
+                type: SWALLOW;
+                description {
+                    state: "default" 0.0;
+                    visible: 1;
+                    fixed: 1 1;
+                    align: 0.0 0.0;
+                    min: 40 40;
+                    max: 40 40;
+                    rel1 { relative: 0.9 0.0; to: "shipping_bg"; }
+                    rel2 { relative: 1.0 1.0; to: "shipping_bg"; }
+                }
+                description { "expand_shipping";
+                    inherit: "default" 0.0;
+                    visible: 0;
+                }
+                description { "disable_button_click";
+                    inherit: "default" 0.0;
+                    visible: 0;
+                }
+                description { "enable_button_click";
+                    inherit: "default" 0.0;
+                    visible: 1;
+                }
+            }
+            part {
+                name: "shipping_text";
+                type: TEXT;
+                mouse_events: 0;
+                description {
+                    state: "default" 0.0;
+                    align: 0 0;
+                    color: 0 0 0 255;
+                    visible: 1;
+                    rel1 { relative: 0.05 0.5; to: "shipping_bg"; }
+                    rel2 { relative: 1.0 1.0; to: "shipping_bg"; }
+                    text {
+                        text: "YOUR TEXT HERE";
+                        font: "Sans";
+                        size: 32;
+                        text_class: "title_text_class";
+                        fit: 0 0;
+                        min: 0 0;
+                        max: 0 0;
+                        align: 0.0 0.0;
+                        elipsis: 0.0;
+                    }
+                }
+                description { "expand_shipping";
+                    inherit: "default" 0.0;
+                    visible: 0;
+                }
+            }
+            part {
+                name:"add_shipping_button";
+                type:SWALLOW;
+                mouse_events: 1;
+                description {
+                    state:"default" 0.0;
+                    visible:1;
+                    align: 0.0 0.0;
+                    fixed: 1 1;
+                    min: 250 70;
+                    max: 250 70;
+                    rel1 { relative: 0.62 0.5; to: "shipping_bg"; }
+                    rel2 { relative: 1.0 1.0; to: "shipping_bg"; }
+                }
+                description { "expand_shipping";
+                    inherit: "default" 0.0;
+                    visible: 0;
+                }
+            }
+            part {
+                name:"genlist_container";
+                type:SWALLOW;
+                description {
+                   state:"default" 0.0;
+                   visible: 0;
+                   align: 0.0 0.0;
+                   fixed: 1 1;
+                   rel1 { relative: 0.0 0.0; to: "shipping_bg"; offset: 0 80;}
+                   rel2 { relative: 0.9 0.0; to: "add_new_button_bg"; }
+                }
+                description { "expand_shipping";
+                   inherit: "default" 0.0;
+                   visible: 1;
+                }
+            }
+            part {
+                name: "add_new_button_bg";
+                type: RECT;
+                description {
+                    state: "default" 0.0;
+                    color: 240 240 240 255;
+                    visible: 0;
+                    align: 0.0 1.0;
+                    fixed: 1 1;
+                    min: 580 100;
+                    max: 580 100;
+                    rel1 { relative: 0.1 0.0; to: "shipping_bg"; }
+                    rel2 { relative: 1.0 1.0; to: "shipping_bg"; }
+                }
+                description { "expand_shipping";
+                    inherit: "default" 0.0;
+                    visible: 1;
+                }
+            }
+            part {
+                name: "add_new_button";
+                type: SWALLOW;
+                mouse_events: 1;
+                description {
+                    state: "default" 0.0;
+                    visible: 0;
+                    align: 0.0 0.0;
+                    fixed: 1 1;
+                    min: 400 100;
+                    max: 400 100;
+                    rel1 { relative: 0.0 0.0; to: "add_new_button_bg"; }
+                    rel2 { relative: 1.0 1.0; to: "add_new_button_bg"; }
+                }
+                description { "expand_shipping";
+                    inherit: "default" 0.0;
+                    visible: 1;
+                }
+            }
+        }
+        programs {
+            program {
+                "expand_shipping";
+                signal: "elm,action,expand,layout";
+                source: "";
+                action: STATE_SET "expand_shipping";
+                target: "shipping_text";
+                target: "add_shipping_button";
+                target: "up_button_click";
+                target: "down_button_click";
+                target: "genlist_container";
+                target: "add_new_button_bg";
+                target: "add_new_button";
+            }
+            program {
+                "shrink_shipping";
+                signal: "elm,action,shrink,layout";
+                source: "";
+                action: STATE_SET "default" 0.0;
+                target: "shipping_text";
+                target: "up_button_click";
+                target: "down_button_click";
+                target: "genlist_container";
+                target: "add_new_button_bg";
+                target: "add_new_button";
+            }
+            program {
+                "hide_add_button";
+                signal: "elm,action,hide,add,button";
+                source: "";
+                action: STATE_SET "expand_shipping";
+                target: "add_shipping_button";
+            }
+            program {
+                "show_add_button";
+                signal: "elm,action,show,add,button";
+                source: "";
+                action: STATE_SET "default";
+                target: "add_shipping_button";
+            }
+            program {
+                "disable_button_click";
+                signal: "elm,action,disable,expand,shrink,button";
+                source: "";
+                action: STATE_SET "disable_button_click";
+                target: "up_button_click";
+                target: "down_button_click";
+            }
+            program {
+                "enable_button_click";
+                signal: "elm,action,enable,expand,shrink,button";
+                source: "";
+                action: STATE_SET "enable_button_click";
+                target: "up_button_click";
+                target: "down_button_click";
+            }
+        }
+    }
+    group {
+        name: "generic_child_layout";
+        parts {
+            part {
+                name:"label_bg";
+                type:RECT;
+                description {
+                    state:"default" 0.0;
+                    color: 240 240 240 255;
+                    visible:1;
+                    align: 0.0 0.0;
+                    fixed: 1 1;
+                    rel1 { relative: 0.0 0.0; }
+                    rel2 { relative: 1.0 1.0; }
+                }
+            }
+            part {
+                name:"label_text";
+                type: TEXT;
+                mouse_events: 0;
+                description {
+                    state: "default" 0;
+                    align: 0 0;
+                    color: 100 149 237 255;
+                    rel1 { relative: 0.05 0.05; to: "label_bg"; }
+                    rel2 { relative: 1.0 1.0; }
+                    text {
+                        text: "Contact Info";
+                        font: "Sans";
+                        size: 32;
+                        text_class: "total_value_class";
+                        fit: 0 0;
+                        min: 0 0;
+                        max: 0 0;
+                        align: 0.0 0.0;
+                        elipsis: 0.0;
+                    }
+                }
+            }
+            part {
+               name: "up_button_click";
+               scale:1;
+               type: SWALLOW;
+               description {
+                  state: "default" 0.0;
+                  visible: 0;
+                  fixed: 1 1;
+                  align: 0.0 0.0;
+                  min: 40 40;
+                  max: 40 40;
+                  rel1 { relative: 0.9 0.0; to: "label_bg"; }
+                  rel2 { relative: 1.0 1.0; to: "label_bg";
+                  }
+               }
+               description { "expand_sub_layout";
+                   inherit: "default" 0.0;
+                   visible: 1;
+               }
+               description { "disable_button_click";
+                   inherit: "default" 0.0;
+                   visible: 0;
+               }
+               description { "enable_button_click";
+                   inherit: "default" 0.0;
+                   visible: 0;
+               }
+            }
+            part {
+               name: "down_button_click";
+               scale:1;
+               type: SWALLOW;
+               description {
+                  state: "default" 0.0;
+                  visible: 1;
+                  fixed: 1 1;
+                  align: 0.0 0.0;
+                  min: 40 40;
+                  max: 40 40;
+                  rel1 { relative: 0.9 0.0; to: "label_bg"; }
+                  rel2 { relative: 1.0 1.0; to: "label_bg";
+                  }
+               }
+               description { "expand_sub_layout";
+                   inherit: "default" 0.0;
+                   visible: 0;
+               }
+               description { "disable_button_click";
+                   inherit: "default" 0.0;
+                   visible: 0;
+               }
+               description { "enable_button_click";
+                   inherit: "default" 0.0;
+                   visible: 1;
+               }
+            }
+            part {
+                name: "selected_item_text";
+                type: TEXT;
+                mouse_events: 0;
+                description {
+                    state: "default" 0.0;
+                    align: 0 0;
+                    color: 0 0 0 255;
+                    visible: 1;
+                    rel1 { relative: 0.05 0.5; to: "label_bg"; }
+                    rel2 { relative: 1.0 1.0; to: "label_bg"; }
+                    text {
+                        text: "YOUR TEXT HERE";
+                        font: "Sans";
+                        size: 32;
+                        text_class: "title_text_class";
+                        fit: 0 0;
+                        min: 0 0;
+                        max: 0 0;
+                        align: 0.0 0.0;
+                        elipsis: 0.0;
+                    }
+                }
+                description { "expand_sub_layout";
+                    inherit: "default" 0.0;
+                    visible: 0;
+                }
+            }
+            part {
+                name:"add_button";
+                type:SWALLOW;
+                mouse_events: 1;
+                description {
+                    state:"default" 0.0;
+                    visible:1;
+                    align: 0.0 0.0;
+                    fixed: 1 1;
+                    min: 250 70;
+                    max: 250 70;
+                    rel1 { relative: 0.62 0.5; to: "label_bg"; }
+                    rel2 { relative: 1.0 1.0; to: "label_bg"; }
+                }
+                description { "expand_sub_layout";
+                    inherit: "default" 0.0;
+                    visible: 0;
+                }
+            }
+            part {
+                name:"genlist_container";
+                type:SWALLOW;
+                description {
+                   state:"default" 0.0;
+                   visible: 0;
+                   align: 0.0 0.0;
+                   fixed: 1 1;
+                   rel1 { relative: 0.0 0.0; to: "label_bg"; offset: 0 80;}
+                   rel2 { relative: 0.9 0.0; to: "add_new_button_bg"; }
+                }
+                description { "expand_sub_layout";
+                    inherit: "default" 0.0;
+                    visible: 1;
+                }
+            }
+            part {
+                name: "add_new_button_bg";
+                type: RECT;
+                description {
+                    state: "default" 0.0;
+                    color: 240 240 240 255;
+                    visible: 0;
+                    align: 0.0 1.0;
+                    fixed: 1 1;
+                    min: 580 100;
+                    max: 580 100;
+                    rel1 { relative: 0.1 0.0; to: "label_bg"; }
+                    rel2 { relative: 1.0 1.0; to: "label_bg"; }
+                }
+                description { "expand_sub_layout";
+                    inherit: "default" 0.0;
+                    visible: 1;
+                }
+            }
+            part {
+                name: "add_new_button";
+                type: SWALLOW;
+                mouse_events: 1;
+                description {
+                    state: "default" 0.0;
+                    visible: 0;
+                    align: 0.0 0.0;
+                    fixed: 1 1;
+                    min: 400 100;
+                    max: 400 100;
+                    rel1 { relative: 0.0 0.0; to: "add_new_button_bg"; }
+                    rel2 { relative: 1.0 1.0; to: "add_new_button_bg"; }
+                }
+                description { "expand_sub_layout";
+                    inherit: "default" 0.0;
+                    visible: 1;
+                }
+            }
+        }
+        programs {
+            program {
+                "expand_sub_layout";
+                signal: "elm,action,expand,layout";
+                source: "";
+                action: STATE_SET "expand_sub_layout";
+                target: "selected_item_text";
+                target: "add_button";
+                target: "up_button_click";
+                target: "down_button_click";
+                target: "genlist_container";
+                target: "add_new_button_bg";
+                target: "add_new_button";
+            }
+            program {
+                "shrink_sub_layout";
+                signal: "elm,action,shrink,layout";
+                source: "";
+                action: STATE_SET "default" 0.0;
+                target: "selected_item_text";
+                target: "up_button_click";
+                target: "down_button_click";
+                target: "genlist_container";
+                target: "add_new_button_bg";
+                target: "add_new_button";
+            }
+            program {
+                "hide_add_button";
+                signal: "elm,action,hide,add,button";
+                source: "";
+                action: STATE_SET "expand_sub_layout";
+                target: "add_button";
+            }
+            program {
+                "show_add_button";
+                signal: "elm,action,show,add,button";
+                source: "";
+                action: STATE_SET "default";
+                target: "add_button";
+            }
+            program {
+                "disable_button_click";
+                signal: "elm,action,disable,expand,shrink,button";
+                source: "";
+                action: STATE_SET "disable_button_click";
+                target: "up_button_click";
+                target: "down_button_click";
+            }
+            program {
+                "enable_button_click";
+                signal: "elm,action,enable,expand,shrink,button";
+                source: "";
+                action: STATE_SET "enable_button_click";
+                target: "up_button_click";
+                target: "down_button_click";
+            }
+        }
+    }
+    group {
+        name: "shipping_option";
+        parts {
+            part {
+                name:"shipping_option_label_bg";
+                type:RECT;
+                description {
+                    state:"default" 0.0;
+                    color: 240 240 240 255;
+                    visible:1;
+                    align: 0.0 0.0;
+                    fixed: 1 1;
+                    min: 720 120;
+                    max: 720 120;
+                    rel1 { relative: 0.0 0.0; }
+                    rel2 { relative: 1.0 1.0; }
+                }
+            }
+            part {
+                name:"shipping_option_label";
+                type: TEXT;
+                mouse_events: 0;
+                description {
+                    state: "default" 0;
+                    align: 0 0;
+                    color: 100 149 237 255;
+                    rel1 { relative: 0.05 0.05; to: "shipping_option_label_bg"; }
+                    rel2 { relative: 1.0 1.0; }
+                    text {
+                        text: "Shipping Option";
+                        font: "Sans";
+                        size: 32;
+                        text_class: "total_value_class";
+                        fit: 0 0;
+                        min: 0 0;
+                        max: 0 0;
+                        align: 0.0 0.0;
+                        elipsis: 0.0;
+                    }
+                }
+            }
+            part {
+               name: "up_button_click";
+               scale:1;
+               type: SWALLOW;
+               description {
+                  state: "default" 0.0;
+                  visible: 0;
+                  fixed: 1 1;
+                  align: 0.0 0.0;
+                  min: 40 40;
+                  max: 40 40;
+                  rel1 { relative: 0.9 0.0; to: "shipping_option_label_bg"; }
+                  rel2 { relative: 1.0 1.0; to: "shipping_option_label_bg";
+                  }
+               }
+               description { "expand_shipping_option";
+                   inherit: "default" 0.0;
+                   visible: 1;
+               }
+            }
+            part {
+               name: "down_button_click";
+               scale:1;
+               type: SWALLOW;
+               description {
+                  state: "default" 0.0;
+                  visible: 1;
+                  fixed: 1 1;
+                  align: 0.0 0.0;
+                  min: 40 40;
+                  max: 40 40;
+                  rel1 { relative: 0.9 0.0; to: "shipping_option_label_bg"; }
+                  rel2 { relative: 1.0 1.0; to: "shipping_option_label_bg";
+                  }
+               }
+               description { "expand_shipping_option";
+                   inherit: "default" 0.0;
+                   visible: 0;
+               }
+            }
+            part {
+                name: "shipping_option_type";
+                type: TEXT;
+                mouse_events: 0;
+                description {
+                    state: "default" 0.0;
+                    align: 0 0;
+                    color: 0 0 0 255;
+                    visible: 1;
+                    rel1 { relative: 0.05 0.5; to: "shipping_option_label_bg"; }
+                    rel2 { relative: 1.0 1.0; to: "shipping_option_label_bg"; }
+                    text {
+                        text: "YOUR TEXT HERE";
+                        font: "Sans";
+                        size: 30;
+                        text_class: "title_text_class";
+                        fit: 0 0;
+                        min: 0 0;
+                        max: 0 0;
+                        align: 0.0 0.0;
+                        elipsis: 0.0;
+                    }
+                }
+                description { "expand_shipping_option";
+                    inherit: "default" 0.0;
+                    visible: 0;
+                }
+            }
+            part {
+                name: "shipping_option_currency";
+                type: TEXT;
+                mouse_events: 0;
+                description {
+                    state: "default" 0.0;
+                    align: 0 0;
+                    color: 128 128 128 255;
+                    visible: 1;
+                    rel1 { relative: 0.05 0.75; to: "shipping_option_label_bg"; }
+                    rel2 { relative: 1.0 1.0; to: "shipping_option_label_bg"; }
+                    text {
+                        text: "YOUR TEXT HERE";
+                        font: "Sans";
+                        size: 26;
+                        text_class: "title_text_class";
+                        fit: 0 0;
+                        min: 0 0;
+                        max: 0 0;
+                        align: 0.0 0.0;
+                        elipsis: 0.0;
+                    }
+                }
+                description { "expand_shipping_option";
+                    inherit: "default" 0.0;
+                    visible: 0;
+                }
+            }
+            part {
+                name:"genlist_container";
+                type:SWALLOW;
+                description {
+                   state:"default" 0.0;
+                   visible: 0;
+                   align: 0.0 0.0;
+                   fixed: 1 1;
+                   min: 580 120;
+                   max: 580 120;
+                   rel1 { relative: 0.0 0.65; to: "shipping_option_label_bg"; }
+                   rel2 { relative: 1.0 1.0; to: "shipping_option_label_bg"; }
+                }
+                description { "expand_shipping_option";
+                    inherit: "default" 0.0;
+                    visible: 1;
+                }
+            }
+        }
+        programs {
+            program {
+                "expand_shipping_option";
+                signal: "elm,action,expand,layout";
+                source: "";
+                action: STATE_SET "expand_shipping_option";
+                target: "shipping_option_type";
+                target: "shipping_option_currency";
+                target: "up_button_click";
+                target: "down_button_click";
+                target: "genlist_container";
+            }
+            program {
+                "shrink_shipping_option";
+                signal: "elm,action,shrink,layout";
+                source: "";
+                action: STATE_SET "default" 0.0;
+                target: "shipping_option_type";
+                target: "shipping_option_currency";
+                target: "up_button_click";
+                target: "down_button_click";
+                target: "genlist_container";
+            }
+        }
+    }
+    group {
+        name: "email_address";
+        parts {
+            part {
+                name: "email_address_text";
+                type: TEXT;
+                mouse_events: 0;
+                description {
+                    state: "default" 0;
+                    align: 0 0;
+                    color: 0 0 0 255;
+                    rel1 { relative: 0.0 0.0; }
+                    rel2 { relative: 1.0 1.0; }
+                    text {
+                        text: "EMAIL ADDRESS";
+                        font: "Sans:style=Bold";
+                        size: 34;
+                        text_class: "title_text_class";
+                        fit: 0 0;
+                        min: 0 0;
+                        max: 0 0;
+                        align: 0.0 0.0;
+                        elipsis: 0.0;
+                    }
+                }
+            }
+        }
+    }
+    group {
+        name: "elm/genlist/item/order_summary_item/default";
+        data.item: "texts" "item_text_left item_text_right";
+        parts {
+            part {
+                name: "bg";
+                type: RECT;
+                scale: 1;
+                mouse_events: 1;
+                description {
+                   state: "default" 0.0;
+                   visible: 1;
+                   color: 240 240 240 255;
+                   align: 0.0 0.0;
+                   rel1.relative: 0.0 0.0;
+                   rel2.relative: 1.0 1.0;
+                   min: 720 60;
+                   max: 720 60;
+                }
+            }
+            part {
+                name: "item_text_left";
+                type: TEXT;
+                mouse_events: 1;
+                description {
+                    state: "default" 0;
+                    align: 0 0;
+                    color: 128 128 128 255;
+                    rel1 { relative: 0.07 0.0;to: "bg";}
+                    rel2 { relative: 0.7 1.0;to: "bg";}
+                    text {
+                        text: "";
+                        font: "Sans";
+                        size: 30;
+                        text_class: "title_text_class";
+                        fit: 0 0;
+                        min: 0 0;
+                        max: 0 0;
+                        align: 0.0 0.0;
+                        elipsis: 0.0;
+                    }
+                }
+            }
+            part {
+                name: "item_text_right";
+                type: TEXT;
+                mouse_events: 1;
+                description {
+                    state: "default" 0;
+                    align: 0 0;
+                    color: 128 128 128 255;
+                    rel1 { relative: 0.75 0.0;to: "bg";}
+                    rel2 { relative: 0.95 1.0;to: "bg";}
+                    text {
+                        text: "";
+                        font: "Sans";
+                        size: 30;
+                        text_class: "title_text_class";
+                        fit: 0 0;
+                        min: 0 0;
+                        max: 0 0;
+                        align: 1.0 0.0;
+                        elipsis: 0.0;
+                    }
+                }
+            }
+        }
+    }
+
+    group {
+        name: "elm/genlist/item/shipping_option_item/default";
+        data.item: "texts" "item_text_main item_text_sub";
+        data.item: "contents" "radio_icon";
+        parts {
+            part {
+                name: "bg";
+                type: RECT;
+                scale: 1;
+                mouse_events: 1;
+                description {
+                   state: "default" 0.0;
+                   visible: 1;
+                   color: 240 240 240 255;
+                   align: 0.0 0.0;
+                   rel1.relative: 0.0 0.0;
+                   rel2.relative: 1.0 1.0;
+                   min: 500 60;
+                   max: 500 60;
+                }
+            }
+            part {
+                name:"radio_icon";
+                type:SWALLOW;
+                mouse_events: 1;
+                description {
+                    state:"default" 0.0;
+                    visible:1;
+                    align: 0.1 0.5;
+                    fixed: 1 1;
+                    min: 50 50;
+                    max: 50 50;
+                    rel1 { relative: 0.0 0.0;to: "bg";}
+                    rel2 { relative: 1.0 1.0 ;to: "bg";}
+                }
+            }
+            part {
+                name: "item_text_main";
+                type: TEXT;
+                mouse_events: 1;
+                description {
+                    state: "default" 0;
+                    align: 0 0;
+                    color: 0 0 0 255;
+                    rel1 { relative: 0.3 0.0;to: "bg";}
+                    rel2 { relative: 1.0 1.0;to: "bg";}
+                    text {
+                        text: "";
+                        font: "Sans";
+                        size: 30;
+                        text_class: "title_text_class";
+                        fit: 0 0;
+                        min: 0 0;
+                        max: 0 0;
+                        align: 0.0 0.0;
+                        elipsis: 0.0;
+                    }
+                }
+            }
+            part {
+                name: "item_text_sub";
+                type: TEXT;
+                mouse_events: 1;
+                description {
+                    state: "default" 0;
+                    align: 0 0;
+                    color: 128 128 128 255;
+                    rel1 { relative: 0.3 0.5;to: "bg";}
+                    rel2 { relative: 1.0 1.0;to: "bg";}
+                    text {
+                        text: "";
+                        font: "Sans";
+                        size: 26;
+                        text_class: "title_text_class";
+                        fit: 0 0;
+                        min: 0 0;
+                        max: 0 0;
+                        align: 0.0 0.0;
+                        elipsis: 0.0;
+                    }
+                }
+            }
+        }
+    }
+    group {
+        name: "elm/genlist/item/one.icon.one.text/default";
+        data.item: "texts" "item_text";
+        data.item: "contents" "radio_icon";
+        parts {
+            part {
+                name: "bg";
+                type: RECT;
+                scale: 1;
+                mouse_events: 0;
+                description {
+                   state: "default" 0.0;
+                   visible: 1;
+                   color: 240 240 240 255;
+                   align: 0.0 0.0;
+                   rel1.relative: 0.0 0.0;
+                   rel2.relative: 1.0 1.0;
+                   min: 550 60;
+                   max: 550 60;
+                }
+            }
+            part {
+                name:"radio_icon";
+                type:SWALLOW;
+                mouse_events: 1;
+                description {
+                    state:"default" 0.0;
+                    visible:1;
+                    align: 0.0 0.0;
+                    fixed: 1 1;
+                    min: 500 60;
+                    max: 500 60;
+                    rel1 { relative: 0.1 0.1;to: "bg";}
+                }
+            }
+            part {
+                name: "item_text";
+                type: TEXT;
+                mouse_events: 0;
+                description {
+                    state: "default" 0;
+                    align: 0 0;
+                    color: 128 128 128 255;
+                    rel1 { relative: 0.3 0.15;to: "bg";}
+                    rel2 { relative: 1.0 1.0;to: "bg";}
+                    text {
+                        text: "";
+                        font: "Sans";
+                        size: 30;
+                        text_class: "title_text_class";
+                        fit: 0 0;
+                        min: 0 0;
+                        max: 0 0;
+                        align: 0.0 0.0;
+                        elipsis: 0.0;
+                    }
+                }
+            }
+        }
+    }
+    group {
+        name: "elm/genlist/item/two.icon.one.text/default";
+        data.item: "texts" "item_text";
+        data.item: "contents" "radio_icon card_icon";
+        parts {
+            part {
+                name: "bg";
+                type: RECT;
+                scale: 1;
+                mouse_events: 0;
+                description {
+                   state: "default" 0.0;
+                   visible: 1;
+                   color: 240 240 240 255;
+                   align: 0.0 0.0;
+                   rel1.relative: 0.0 0.0;
+                   rel2.relative: 1.0 1.0;
+                   min: 550 60;
+                   max: 550 60;
+                }
+            }
+            part {
+                name:"radio_icon";
+                type:SWALLOW;
+                mouse_events: 1;
+                description {
+                    state:"default" 0.0;
+                    visible:1;
+                    align: 0.0 0.0;
+                    fixed: 1 1;
+                    min: 500 30;
+                    max: 500 30;
+                    rel1 { relative: 0.1 0.1;to: "bg";}
+                }
+            }
+            part {
+                name: "item_text";
+                type: TEXT;
+                mouse_events: 0;
+                description {
+                    state: "default" 0;
+                    align: 0 0;
+                    color: 128 128 128 255;
+                    rel1 { relative: 0.3 0.15;to: "bg";}
+                    rel2 { relative: 1.0 1.0;to: "bg";}
+                    text {
+                        text: "";
+                        font: "Sans";
+                        size: 30;
+                        text_class: "title_text_class";
+                        fit: 0 0;
+                        min: 0 0;
+                        max: 0 0;
+                        align: 0.0 0.0;
+                        elipsis: 0.0;
+                    }
+                }
+            }
+            part {
+               name: "card_icon";
+               scale:1;
+               type: SWALLOW;
+               description {
+                  state: "default" 0.0;
+                  visible: 1;
+                  fixed: 1 1;
+                  align: 1.0 0.5;
+                  min: 60 50;
+                  max: 60 50;
+                  rel1 { relative: 0.0 0.0; to: "bg"; }
+                  rel2 { relative: 1.0 1.0; to: "bg"; }
+               }
+            }
+        }
+    }
+    group {
+        name: "payment_progress_layout";
+        parts {
+            part {
+                name:"transparent";
+                type:RECT;
+                description {
+                    state:"default" 0.0;
+                    visible:1;
+                    align: 0.0 0.0;
+                    color: 0 0 0 128;
+                    min: 720 1240;
+                    max: 720 1240;
+                    rel1  { relative: 0.0 0.0; offset: 0 40;}
+                    rel2  { relative: 1.0 1.0; }
+                }
+            }
+            part {
+                name:"bg_spacer";
+                type:SPACER;
+                description {
+                    state:"default" 0.0;
+                    align: 0.0 0.0;
+                    min: 720 740;
+                    max: 720 740;
+                    rel1  { relative: 0.0 0.0; to: "transparent";}
+                    rel2  { relative: 1.0 1.0; to: "transparent";}
+                }
+            }
+            part {
+                name:"bg";
+                type:RECT;
+                description {
+                    state:"default" 0.0;
+                    visible:1;
+                    align: 0.0 0.0;
+                    color: 240 240 240 255;
+                    align: 0.0 1.0;
+                    min: 720 500;
+                    max: 720 500;
+                    rel1  { relative: 0.0 1.0; to: "bg_spacer";}
+                    rel2  { relative: 1.0 1.0; to: "transparent";}
+                }
+            }
+            part {
+                name:"header_swallow";
+                type:SWALLOW;
+                description {
+                    state:"default" 0.0;
+                    visible:1;
+                    align: 0 0;
+                    fixed: 1 1;
+                    min: 570 100;
+                    max: 570 100;
+                    rel1 { relative: 0.0 0.0;to: "bg";}
+                }
+            }
+            part {
+                name:"line";
+                type:RECT;
+                description {
+                    state:"default" 0.0;
+                    color: 169 169 169 255;
+                    visible:1;
+                    align: 0.0 0.0;
+                    fixed: 1 1;
+                    min: 720 2;
+                    max: 720 2;
+                    rel1 { relative: 0.0 0.25;to: "bg";}
+                }
+            }
+            part {
+                name:"progress_bg";
+                type:RECT;
+                description {
+                    state:"default" 0.0;
+                    color: 240 240 240 255;
+                    visible:1;
+                    align: 0.0 0.0;
+                    fixed: 1 1;
+                    rel1 { relative: 0.0 1.0;to: "line";}
+                    rel2 { relative: 1.0 1.0;to: "bg";}
+                }
+            }
+            part {
+                name: "progress_swallow";
+                type: SWALLOW;
+                scale: 1;
+                description {
+                    min: 150 150;
+                    max: 150 150;
+                    visible: 1;
+                    fixed: 1 1;
+                    align: 0.5 0.5;
+                    rel1 {
+                        relative: 0.0 0.0;
+                        to: "progress_bg";
+                    }
+                    rel2 {
+                        relative: 1.0 1.0;
+                        to: "progress_bg";
+                   }
+                }
+                description { "payment_completed";
+                    inherit: "default" 0.0;
+                    min: 300 300;
+                    max: 300 300;
+                }
+            }
+            part {
+                name: "progress_text";
+                type: TEXT;
+                mouse_events: 0;
+                description {
+                    state: "default" 0;
+                    align: 0 0;
+                    color: 128 128 128 255;
+                    rel1 { relative: 0.0 0.0;to: "progress_bg";}
+                    rel2 { relative: 1.0 1.0;to: "progress_bg";}
+                    text {
+                        text: "Processing payment...";
+                        font: "Sans";
+                        size: 32;
+                        text_class: "title_text_class";
+                        fit: 0 0;
+                        min: 0 0;
+                        max: 0 0;
+                        align: 0.5 0.7;
+                        elipsis: 0.0;
+                    }
+                }
+                description { "payment_completed";
+                    inherit: "default" 0.0;
+                    color: 0 0 192 255;
+                    text {
+                        text: "Payment Completed";
+                    }
+                }
+                description { "payment_failed";
+                    inherit: "default" 0.0;
+                    color: 0 0 192 255;
+                    text {
+                        text: "Payment Failed";
+                    }
+                }
+            }
+         }
+         programs {
+            program {
+                "payment_completed";
+                signal: "elm,action,payment,completed";
+                source: "";
+                action: STATE_SET "payment_completed";
+                target: "progress_text";
+                target: "progress_swallow";
+            }
+            program {
+                "payment_failed";
+                signal: "elm,action,payment,failed";
+                source: "";
+                action: STATE_SET "payment_failed";
+                target: "progress_text";
+                target: "progress_swallow";
+            }
+        }
+     }
+
+    group {
+        name: "elm/button/base/custom_button";
+        styles {
+            style {
+                name: "button_text_style";
+                base: "font=Sans font_size=25 color=#d3d3d3 wrap=word align=0.0";
+            }
+        }
+        parts
+        {
+            part
+            {
+                name: "button_bg";
+                type: RECT;
+                mouse_events: 1;
+                repeat_events: 1;
+                description {
+                    state: "default" 0.0;
+                    visible: 1;
+                    color: 0 0 0 0;
+                    rel1.relative: 0.0 0.0;
+                    rel2.relative: 1.0 1.0;
+                    align: 0.5 0.5;
+                }
+            }
+            part {
+                name:"button_icon";
+                type:SWALLOW;
+                mouse_events: 1;
+                repeat_events: 1;
+                description {
+                    state:"default" 0.0;
+                    visible:1;
+                    align: 0.5 0.5;
+                    fixed: 1 1;
+                    rel1 { relative: 0.0 0.0;to: "button_bg";}
+                    rel2 { relative: 1.0 1.0;to: "button_bg";}
+                }
+            }
+            part {
+                name: "button_text";
+                type: TEXT;
+                mouse_events: 0;
+                description {
+                    state: "default" 0;
+                    align: 0 0;
+                    color: 0 0 128 255;
+                    rel1 { relative: 0.0 0.0; to: "button_bg"; }
+                    rel2 { relative: 1.0 1.0; to: "button_bg"; }
+                    text {
+                        text: "";
+                        font: "Sans:style=Bold";
+                        size: 34;
+                        text_class: "title_text_class";
+                        fit: 0 0;
+                        min: 0 0;
+                        max: 0 0;
+                        align: 0.0 0.5;
+                        elipsis: 0.0;
+                    }
+                }
+                description {
+                    "small_font";
+                    inherit: "default" 0.0;
+                    color: 128 128 128 255;
+                    text {
+                        font: "Sans:style=Regular";
+                        size: 25;
+                    }
+                }
+            }
+        }
+        programs{
+            program {
+                name: "mouse_click";
+                signal: "mouse,clicked,1";
+                source: "button_bg";
+                script {
+                    emit("elm,action,click", "");
+                }
+            }
+            program {
+                    "small_font";
+                    signal: "elm,action,set,smallfont";
+                    source: "";
+                    action: STATE_SET "small_font";
+                    target: "button_text";
+            }
+
+        }
+    }
+}

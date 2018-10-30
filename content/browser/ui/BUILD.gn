@@ -1,0 +1,79 @@
+# Copyright 2014 The Chromium Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+import("//build/buildflag_header.gni")
+import("//build/config/android/rules.gni")
+import("//build/config/crypto.gni")
+import("//build/config/features.gni")
+import("//build/split_static_library.gni")
+
+buildflag_header("features") {
+  header = "features.h"
+  flags = [ "ANDROID_JAVA_UI=1" ]
+}
+
+config("ui_warnings") {
+  if (is_clang) {
+    # TODO(thakis): Remove this once http://crbug.com/383820 is figured out
+    cflags = [ "-Wno-nonnull" ]
+  }
+}
+
+split_static_library("ui") {
+  split_count = 1
+  sources = [
+    "autofill/autofill_popup_controller.h",
+    "autofill/autofill_popup_controller_impl.cc",
+    "autofill/autofill_popup_controller_impl.h",
+    "autofill/autofill_popup_controller_impl_sec.cc",
+    "autofill/autofill_popup_controller_impl_sec.h",
+    "autofill/autofill_popup_layout_model.cc",
+    "autofill/autofill_popup_layout_model.h",
+    "autofill/autofill_popup_view.h",
+    "autofill/autofill_popup_view_android.cc",
+    "autofill/autofill_popup_view_android.h",
+    "autofill/autofill_popup_view_android_sec.cc",
+    "autofill/autofill_popup_view_android_sec.h",
+    "autofill/autofill_popup_view_delegate.h",
+    "autofill/content_autofill_client.cc",
+    "autofill/content_autofill_client.h",
+    "autofill/content_autofill_client_sec.cc",
+    "autofill/content_autofill_client_sec.h",
+    "autofill/popup_controller_common.cc",
+    "autofill/popup_controller_common.h",
+    "autofill/popup_view_common.cc",
+    "autofill/popup_view_common.h",
+  ]
+
+  configs += [
+    ":ui_warnings",
+    "//build/config:precompiled_headers",
+    "//build/config/compiler:wexit_time_destructors",
+  ]
+
+  deps = [
+    # NOTE: New dependencies should generally be added in the OS!="ios"
+    # dependencies block below, rather than here.
+    ":features",
+    "//base",
+    "//components/autofill/android:autofill_java",
+    "//components/autofill/content/browser:risk_proto",
+    "//components/autofill/content/common:mojo_interfaces",
+    "//components/resources:components_scaled_resources",
+    "//skia",
+    "//terrace:terrace_jni_headers",
+    "//third_party/boringssl",
+    "//third_party/icu",
+    "//third_party/libaddressinput",
+  ]
+
+  # FIXME: m60_3112 bringup, needs to be checked by author
+  # https://codereview.chromium.org/2874833002
+  # https://codereview.chromium.org/2897503002
+  if (enable_s_cowboy_browser) {
+    deps += [
+      "//third_party/WebKit/public:blink_headers",
+    ]
+  }
+}

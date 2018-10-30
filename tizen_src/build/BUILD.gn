@@ -1,0 +1,882 @@
+# Copyright (c) 2015 Samsung Electronics. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+import("//tizen_src/build/config/tizen_features.gni")
+import("//tizen_src/build/config/linux/pkg_config.gni")
+
+config("evas") {
+  ldflags = [ "-levas" ]
+}
+
+tizen_pkg_config("libevas") {
+  packages = [ "evas" ]
+}
+
+config("evas-public") {
+  #cflags = [ "-evas" ]
+}
+
+config("ecore") {
+  ldflags = [ "-lecore" ]
+}
+
+tizen_pkg_config("libecore") {
+  packages = [ "ecore" ]
+}
+
+config("ecore-imf-evas") {
+  ldflags = [ "-lecore_imf_evas" ]
+}
+
+tizen_pkg_config("libecore-imf-evas") {
+  packages = [ "ecore-imf-evas" ]
+}
+
+config("ecore-imf-evas-public") {
+}
+
+config("ecore-x") {
+  if (!use_wayland) {
+    ldflags = [ "-lecore_x" ]
+  }
+}
+
+tizen_pkg_config("libecore-x") {
+  packages = []
+  if (!use_wayland) {
+    packages = [ "ecore-x" ]
+  }
+}
+
+config("ecore-x-public") {
+  if (!use_wayland) {
+    #cflags = [ "-ecore-x" ]
+  }
+}
+
+config("ecore-wayland") {
+  if (is_tizen && use_wayland) {
+    if (tizen_version >= 50) {
+      ldflags = [ "-lecore_wl2" ]
+    } else {
+      ldflags = [ "-lecore_wayland" ]
+    }
+  }
+}
+
+tizen_pkg_config("libecore-wayland") {
+  packages = []
+  if (is_tizen && use_wayland) {
+    if (tizen_version >= 50) {
+      packages = [ "ecore-wl2" ]
+    } else {
+      packages = [ "ecore-wayland" ]
+    }
+  }
+}
+
+config("ecore-wayland-public") {
+  if (is_tizen && use_wayland) {
+    if (tizen_version >= 50) {
+      cflags = [ "-ecore-wl2" ]
+    } else {
+      cflags = [ "-ecore-wayland" ]
+    }
+  }
+}
+
+config("ecore-evas") {
+  ldflags = [ "-lecore_evas" ]
+}
+
+tizen_pkg_config("libecore-evas") {
+  packages = [ "ecore-evas" ]
+}
+
+config("ecore-evas-public") {
+}
+
+config("atk") {
+  ldflags = [ "-latk-1.0" ]
+}
+
+tizen_pkg_config("libatk") {
+  packages = [ "atk" ]
+}
+
+config("atk-bridge") {
+  ldflags = [ "-latk-bridge-2.0" ]
+}
+
+tizen_pkg_config("libatk-bridge") {
+  packages = [ "atk-bridge-2.0" ]
+}
+
+config("eldbus") {
+  ldflags = [ "-leldbus" ]
+}
+
+tizen_pkg_config("libeldbus") {
+  packages = [ "eldbus" ]
+}
+
+config("eldbus-public") {
+}
+
+config("ecore-input") {
+  ldflags = [ "-lecore_input" ]
+}
+
+tizen_pkg_config("libecore-input") {
+  packages = [ "ecore-input" ]
+}
+
+config("ecore-input-public") {
+  cflags = [ "-ecore-input" ]
+}
+
+config("elementary") {
+  ldflags = [
+    "-lelementary",
+    "-leet",
+    "-lefreet",
+    "-lefreet_mime",
+    "-lefreet_trash",
+  ]
+}
+
+tizen_pkg_config("libelementary") {
+  packages = [ "elementary" ]
+}
+
+config("elementary-public") {
+  cflags = [] #[ "-elementary" ]
+  if (is_clang) {
+    # Fix: elm_prefs_common.h:27:9: warning: empty struct has size 0 in C, size 1 in C++
+    cflags += [ "-Wno-extern-c-compat" ]
+  }
+}
+
+config("edje") {
+  ldflags = [ "-ledje" ]
+}
+
+tizen_pkg_config("libedje") {
+  packages = [ "edje" ]
+}
+
+config("edje-public") {
+  cflags = [ "-edje" ]
+}
+
+config("efl-extension") {
+  if (is_tizen) {
+    ldflags = [ "-lefl-extension" ]
+  }
+}
+
+tizen_pkg_config("libefl-extension") {
+  packages = []
+  if (is_tizen) {
+    packages = [ "efl-extension" ]
+  }
+}
+
+config("efl-extension-public") {
+  if (is_tizen) {
+    cflags = [ "-efl-extension" ]
+  }
+}
+
+config("push") {
+  if (is_tizen && !tizen_product_tv) {
+    ldflags = [ "-lpush" ]
+  }
+}
+
+tizen_pkg_config("libpush") {
+  packages = []
+  if (is_tizen && !tizen_product_tv) {
+    packages = [ "push" ]
+  }
+}
+
+config("ui-gadget") {
+  if (is_tizen) {
+    ldflags = [ "-lui-gadget-1" ]
+  }
+}
+
+tizen_pkg_config("libui-gadget") {
+  packages = []
+  if (is_tizen) {
+    packages = [ "ui-gadget-1" ]
+  }
+}
+
+config("ui-gadget-public") {
+  if (is_tizen) {
+    cflags = [ "-DUG_WAYLAND" ]
+  }
+}
+
+tizen_pkg_config("libttrace") {
+  packages = []
+  if (is_tizen) {
+    packages = [ "ttrace" ]
+  }
+}
+
+tizen_pkg_config("accessory") {
+  packages = []
+  if (tizen_vd_accessory) {
+    packages = [ "accessory" ]
+  }
+}
+
+tizen_pkg_config("WebProduct") {
+  packages = []
+  if (tizen_product_tv) {
+    packages = [ "WebProduct" ]
+  }
+}
+
+tizen_pkg_config("libvr360") {
+  packages = []
+  if (is_tizen && tizen_product_tv && !tizen_vd_disable_gpu) {
+    packages = [ "libvr360" ]
+  }
+}
+
+tizen_pkg_config("soc-pq-interface") {
+  packages = []
+  if (is_tizen && tizen_product_tv && !tizen_vd_disable_gpu) {
+    packages = [ "soc-pq-interface" ]
+  }
+}
+
+config("capi-appfw-application") {
+  if (is_tizen) {
+    ldflags = [ "-lcapi-appfw-application" ]
+  }
+}
+
+tizen_pkg_config("libcapi-appfw-application") {
+  packages = []
+  if (is_tizen) {
+    packages = [ "capi-appfw-application" ]
+  }
+}
+
+config("capi-appfw-application-public") {
+  if (is_tizen) {
+#    cflags = [ "-capi-appfw-application" ]
+  }
+}
+
+config("capi-privacy-privilege-manager") {
+  if (is_tizen && !tizen_product_tv) {
+    ldflags = [ "-lcapi-privacy-privilege-manager" ]
+  }
+}
+
+tizen_pkg_config("libcapi-privacy-privilege-manager") {
+  packages = []
+  if (is_tizen && !tizen_product_tv) {
+    packages = [ "capi-privacy-privilege-manager" ]
+  }
+}
+
+config("capi-appfw-app-manager") {
+  if (is_tizen) {
+    ldflags = [ "-lcapi-appfw-app-manager" ]
+  }
+}
+
+tizen_pkg_config("libcapi-appfw-app-manager") {
+  packages = []
+  if (is_tizen) {
+    packages = [ "capi-appfw-app-manager" ]
+  }
+}
+
+config("capi-location-manager") {
+  if (is_tizen) {
+    ldflags = [ "-lcapi-location-manager" ]
+  }
+}
+
+tizen_pkg_config("libcapi-location-manager") {
+  packages = []
+  if (is_tizen) {
+    packages = [ "capi-location-manager" ]
+  }
+}
+
+config("capi-location-manager-public") {
+  if (is_tizen) {
+    #cflags = [ "-capi-location-manager" ]
+  }
+}
+
+config("capi-system-info") {
+  if (is_tizen) {
+    ldflags = [ "-lcapi-system-info" ]
+  }
+}
+
+tizen_pkg_config("libcapi-system-info") {
+  packages = []
+  if (is_tizen) {
+    packages = [ "capi-system-info" ]
+  }
+}
+
+config("capi-system-info-public") {
+  if (is_tizen) {
+    #cflags = [ "-capi-system-info" ]
+  }
+}
+
+config("capi-system-device") {
+  if (is_tizen) {
+    ldflags = [ "-lcapi-system-device" ]
+  }
+}
+
+tizen_pkg_config("libcapi-system-device") {
+  packages = []
+  if (is_tizen) {
+    packages = [ "capi-system-device" ]
+  }
+}
+
+config("capi-system-device-public") {
+  if (is_tizen) {
+    #cflags = [ "-capi-system-device" ]
+  }
+}
+
+config("capi-system-sensor") {
+  if (is_tizen) {
+    #ldflags = [ "-capi-system-sensor" ]
+  }
+}
+
+tizen_pkg_config("libcapi-system-sensor") {
+  packages = []
+  if (is_tizen) {
+    packages = [ "capi-system-sensor" ]
+  }
+}
+
+config("capi-system-sensor-public") {
+  if (is_tizen) {
+    cflags = [ "-capi-system-sensor" ]
+  }
+}
+
+config("capi-system-system-settings") {
+  if (is_tizen) {
+    ldflags = [ "-lcapi-system-system-settings" ]
+  }
+}
+
+tizen_pkg_config("libcapi-system-system-settings") {
+  packages = []
+  if (is_tizen) {
+    packages = [ "capi-system-system-settings" ]
+  }
+}
+
+config("capi-system-system-settings-public") {
+  if (is_tizen) {
+    cflags = [ "-capi-system-system-settings" ]
+  }
+}
+
+tizen_pkg_config("cynara-client") {
+  packages = []
+  if (tizen_product_tv && tizen_pepper_extensions) {
+    packages = [ "cynara-client" ]
+  }
+}
+
+tizen_pkg_config("pkgmgr-info") {
+  packages = []
+  if (is_tizen) {
+    packages = [ "pkgmgr-info" ]
+  }
+}
+
+tizen_pkg_config("security-privilege-manager") {
+  packages = []
+  if (tizen_product_tv && tizen_pepper_extensions) {
+    packages = [ "security-privilege-manager" ]
+  }
+}
+
+tizen_pkg_config("wayland-client") {
+  packages = []
+  if (tizen_product_tv && use_wayland && tizen_pepper_extensions) {
+    packages = [ "wayland-client" ]
+  }
+}
+
+tizen_pkg_config("tizen-extension-client") {
+  packages = []
+  if (tizen_product_tv && use_wayland && tizen_pepper_extensions) {
+    packages = [ "tizen-extension-client" ]
+  }
+}
+
+config("libdri2") {
+  if (is_tizen && !use_wayland) {
+    ldflags = [ "-llibdri2" ]
+  }
+}
+
+tizen_pkg_config("liblibdri2") {
+  packages = []
+  if (is_tizen && !use_wayland) {
+    packages = [ "libdri2" ]
+  }
+}
+
+tizen_pkg_config("libav") {
+  packages = []
+  if (tizen_libav) {
+    packages = [ "libavcodec", "libavformat", "libavutil" ]
+  }
+}
+
+config("libdri2-public") {
+  if (is_tizen && !use_wayland) {
+    cflags = [ "-libdri2" ]
+  }
+}
+
+config("libdrm") {
+  if (is_tizen) {
+    ldflags = [ "-llibdrm" ]
+  }
+}
+
+tizen_pkg_config("liblibdrm") {
+  packages = []
+  if (is_tizen) {
+    packages = [ "libdrm" ]
+  }
+}
+
+config("libdrm-public") {
+  if (is_tizen) {
+    cflags = [ "-libdrm" ]
+  }
+}
+
+config("libtbm") {
+  if (is_tizen) {
+    ldflags = [ "-llibtbm" ]
+  }
+}
+
+tizen_pkg_config("liblibtbm") {
+  packages = []
+  if (is_tizen) {
+    packages = [ "libtbm" ]
+  }
+}
+
+config("libtbm-public") {
+  if (is_tizen) {
+    cflags = [ "-libtbm" ]
+  }
+}
+
+config("x11") {
+  if (!use_wayland) {
+    #ldflags = [ "-x11" ]
+  }
+}
+
+tizen_pkg_config("libx11") {
+  packages = []
+  if (!use_wayland) {
+    packages = [ "x11" ]
+  }
+}
+
+config("x11-public") {
+  if (!use_wayland) {
+    cflags = [ "-x11" ]
+  }
+}
+
+tizen_pkg_config("tizen-tv-resource-manager-config") {
+  packages = []
+  if (is_tizen && tizen_resource_manager) {
+    packages = [
+     "tv-resource-manager",
+     "tv-resource-information"
+    ]
+  }
+}
+
+tizen_pkg_config("tizen_omx_video_decoder-config") {
+  packages = []
+  if (is_tizen && tizen_omx_video_decoder) {
+    packages = [
+      "omxil-e4x12-v4l2",
+      "vd_kernel-interfaces"
+    ]
+  }
+}
+
+config("gstreamer") {
+  if (is_tizen) {
+    ldflags = [
+      "-lgstreamer-1.0",
+      "-lgstbase-1.0",
+      "-lgstapp-1.0",
+      "-lgstpbutils-1.0",
+      "-lgstvideo-1.0",
+    ]
+  }
+}
+
+tizen_pkg_config("libgstreamer") {
+  packages = []
+  if (is_tizen) {
+    packages = [
+      "gstreamer-1.0",
+      "gstreamer-base-1.0",
+      "gstreamer-app-1.0",
+      "gstreamer-pbutils-1.0",
+      "gstreamer-video-1.0",
+    ]
+  }
+}
+
+config("gstreamer-public") {
+  #cflags = dependent_pkgs
+}
+
+config("gstreamer-fft") {
+  ldflags = [ "-gstreamer-fft-1.0" ]
+}
+
+tizen_pkg_config("libgstreamer-fft") {
+  packages = [ "gstreamer-fft-1.0" ]
+}
+
+config("gstreamer-fft-public") {
+  cflags = [ "-gstreamer-fft-1.0" ]
+}
+
+config("capi-media-camera") {
+  if (is_tizen) {
+    #ldflags = [ "-capi-media-camera" ]
+  }
+}
+
+tizen_pkg_config("libcapi-media-camera") {
+  packages = []
+  if (is_tizen) {
+    packages = [ "capi-media-camera" ]
+  }
+}
+
+config("capi-media-camera-public") {
+  if (is_tizen) {
+    #cflags = [ "-capi-media-camera" ]
+  }
+}
+
+config("capi-media-audio-io") {
+  if (is_tizen) {
+    ldflags = [ "-lcapi-media-audio-io" ]
+  }
+}
+
+tizen_pkg_config("libcapi-media-audio-io") {
+  packages = []
+  if (is_tizen) {
+    packages = [ "capi-media-audio-io" ]
+  }
+}
+
+config("capi-media-audio-io-public") {
+  if (is_tizen) {
+    cflags = [ "-capi-media-audio-io" ]
+  }
+}
+
+config("capi-media-sound-manager") {
+  if (is_tizen && tizen_sound_focus) {
+    ldflags = [ "-lcapi-media-sound-manager" ]
+  }
+}
+
+tizen_pkg_config("libcapi-media-sound-manager") {
+  packages = []
+  if (is_tizen && tizen_sound_focus) {
+    packages = [ "capi-media-sound-manager" ]
+  }
+}
+
+config("capi-media-player") {
+  if (is_tizen) {
+    ldflags = [ "-lcapi-media-player" ]
+  }
+}
+
+tizen_pkg_config("libcapi-media-player") {
+  packages = []
+  if (is_tizen) {
+    packages = [ "capi-media-player" ]
+  }
+}
+
+config("capi-media-player-public") {
+  if (is_tizen) {
+    cflags = [ "-capi-media-player" ]
+  }
+}
+
+config("capi-media-codec") {
+  if (tizen_webrtc) {
+    ldflags = [ "-lcapi-media-codec" ]
+  }
+}
+
+tizen_pkg_config("libcapi-media-codec") {
+  packages = []
+  if (tizen_webrtc) {
+    packages = [ "capi-media-codec" ]
+  }
+}
+
+config("capi-media-player-codec") {
+  if (tizen_webrtc) {
+    cflags = [ "-capi-media-codec" ]
+  }
+}
+
+config("capi-media-tool") {
+  if (is_tizen) {
+    ldflags = [ "-lcapi-media-tool" ]
+  }
+}
+
+tizen_pkg_config("libcapi-media-tool") {
+  packages = []
+  if (is_tizen) {
+    packages = [ "capi-media-tool" ]
+  }
+}
+
+config("capi-media-tool-public") {
+  if (is_tizen) {
+    cflags = [ "-capi-media-tool" ]
+  }
+}
+
+config("mm-player") {
+  if (is_tizen) {
+    ldflags = [ "-lmm-player" ]
+  }
+}
+
+tizen_pkg_config("libmm-player") {
+  packages = []
+  if (is_tizen) {
+    packages = [ "mm-player" ]
+  }
+}
+
+config("mm-player-public") {
+  if (is_tizen) {
+    cflags = [ "-mm-player" ]
+  }
+}
+
+config("notification") {
+  if (is_tizen) {
+    ldflags = [ "-lnotification" ]
+  }
+}
+
+tizen_pkg_config("libnotification") {
+  packages = []
+  if (is_tizen) {
+    packages = [ "notification" ]
+  }
+}
+
+config("security-manager") {
+  if (is_tizen) {
+    ldflags = [ "-lsecurity-manager-client" ]
+  }
+}
+
+tizen_pkg_config("libsecurity-manager") {
+  packages = []
+  if (is_tizen) {
+    packages = [ "security-manager" ]
+  }
+}
+
+config("security-manager-public") {
+  if (is_tizen) {
+    cflags = [ "-security-manager" ]
+  }
+}
+
+config("tts") {
+  if (is_tizen) {
+    ldflags = [ "-ltts" ]
+  }
+}
+
+tizen_pkg_config("libtts") {
+  packages = []
+  if (is_tizen) {
+    packages = [ "tts" ]
+  }
+}
+
+config("tts-public") {
+  if (is_tizen) {
+    cflags = [ "-tts" ]
+  }
+}
+
+config("capi-stt-wrapper-tv") {
+  if (is_tizen && tizen_product_tv) {
+    ldflags = [ "-lcapi-stt-wrapper-tv" ]
+  }
+}
+
+tizen_pkg_config("libcapi-stt-wrapper-tv") {
+  packages = []
+  if (is_tizen && tizen_product_tv) {
+    packages = [ "capi-stt-wrapper-tv" ]
+  }
+}
+
+config("stt") {
+  if (is_tizen) {
+    ldflags = [ "-lstt" ]
+  }
+}
+
+tizen_pkg_config("libstt") {
+  packages = []
+  if (is_tizen) {
+    packages = [ "stt" ]
+  }
+}
+
+config("stt-public") {
+  if (is_tizen) {
+    cflags = [ "-stt" ]
+  }
+}
+
+config("vconf") {
+  if (is_tizen) {
+    ldflags = [ "-lvconf" ]
+  }
+}
+
+tizen_pkg_config("libvconf") {
+  packages = []
+  if (is_tizen) {
+    packages = [ "vconf" ]
+  }
+}
+
+config("vconf-public") {
+  if (is_tizen) {
+    #cflags = [ "-vconf" ]
+  }
+}
+
+config("feedback") {
+  if (is_tizen) {
+    ldflags = [ "-lfeedback" ]
+  }
+}
+
+tizen_pkg_config("libfeedback") {
+  packages = []
+  if (is_tizen) {
+    packages = [ "feedback" ]
+  }
+}
+
+config("feedback-public") {
+  if (is_tizen) {
+    #cflags = [ "-feedback" ]
+  }
+}
+
+config("tizen_tzplatform_config") {
+  ldflags = [
+    "-ltzplatform-config-2.0",
+  ]
+}
+
+if (is_tizen) {
+  tizen_pkg_config("libtizen_tzplatform_config") {
+    packages = []
+    packages = [ "libtzplatform-config" ]
+  }
+}
+
+config("tizen_tzplatform_config-public") {
+  cflags = [ "-libtzplatform-config" ]
+}
+
+config("vd-win-util") {
+  if (tizen_product_tv && use_wayland) {
+    ldflags = [ "-lvd-win-util" ]
+  }
+}
+
+tizen_pkg_config("libvd-win-util") {
+  packages = []
+  if (tizen_product_tv && use_wayland) {
+    packages = [ "vd-win-util" ]
+  }
+}
+
+tizen_pkg_config("drmdecrypt") {
+  packages = []
+  if (tizen_product_tv) {
+    packages = [ "drmdecrypt" ]
+  }
+}
+
+tizen_pkg_config("marlin") {
+  packages = []
+  if (tizen_product_tv) {
+    packages = [ "marlin" ]
+  }
+}
+
+tizen_pkg_config("trustzone-nwd") {
+  packages = []
+  if (tizen_pepper_teec) {
+    packages = [ "trustzone-nwd" ]
+  }
+}
+tizen_pkg_config("sm-player") {
+  packages = []
+  if (tizen_pepper_player_d2tv) {
+    packages = [ "sm-player" ]
+  }
+}
+

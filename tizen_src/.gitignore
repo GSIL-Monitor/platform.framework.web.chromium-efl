@@ -1,0 +1,11 @@
+*.o
+*.dwo
+*.orig
+/*.list
+/out.*
+*.swp
+/packaging/*.tar.gz
+/build/TARGET
+/src/
+/ewk/test_log
+build/build_conf/*

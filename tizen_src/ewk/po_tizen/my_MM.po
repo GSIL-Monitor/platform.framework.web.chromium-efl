@@ -1,0 +1,9 @@
+msgid "IDS_WEBVIEW_OPT_OPEN_LINK_IN_NEW_TAB_ABB"
+msgstr "လင့်ခ်အား တက်ပ်အသစ်ဖြင့်ဖွင့်ပါ"
+
+msgid "IDS_WEBVIEW_OPT_OPEN_LINK_ABB"
+msgstr "ဖွင့်ပါ"
+
+msgid "IDS_WEBVIEW_OPEN"
+msgstr "ဖွင့်ပါ"
+

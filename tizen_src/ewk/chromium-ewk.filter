@@ -1,0 +1,33 @@
+{
+  global:
+    ewk_*;
+    efl_webprocess_main;
+    extern "C++" {
+      v8::Array::*;
+      v8::Context::*;
+      v8::EscapableHandleScope::*;
+      v8::Extension::*;
+      v8::External::*;
+      v8::Function::*;
+      v8::FunctionTemplate::*;
+      v8::HandleScope::*;
+      v8::Int32::*;
+      v8::Integer::*;
+      v8::Isolate::*;
+      v8::Message::*;
+      v8::MicrotasksScope::*;
+      v8::Number::*;
+      v8::Object::*;
+      v8::ObjectTemplate::*;
+      v8::RegisterExtension*;
+      v8::Script::*;
+      v8::String::*;
+      v8::Template::*;
+      v8::TryCatch::*;
+      v8::V8::*;
+      v8::Value::*;
+      std::*;
+    };
+
+  local: *;
+};

@@ -1,0 +1,9 @@
+# Copyright (c) 2018 Samsung Electronics. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+external_device_sensors_sources = [
+  "//tizen_src/chromium_impl/device/sensors/data_fetcher_impl_tizen.cc",
+  "//tizen_src/chromium_impl/device/sensors/data_fetcher_impl_tizen.h",
+  "//tizen_src/chromium_impl/device/sensors/data_fetcher_shared_memory_tizen.cc",
+]

@@ -1,0 +1,90 @@
+# Copyright (c) 2015 Samsung Electronics. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+import("//build/config/features.gni")
+
+import("//tizen_src/build/config/tizen_features.gni")
+import("//components/nacl/features.gni")
+
+##############################################################################
+# Configs
+##############################################################################
+external_content_renderer_efl_configs = [
+  "//tizen_src/build:ecore",
+  "//tizen_src/build:libecore",
+  "//tizen_src/build:tts",
+  "//tizen_src/build:libtts",
+]
+
+external_content_renderer_efl_sources = []
+
+if (tizen_multimedia_support) {
+  external_content_renderer_efl_configs += [
+    "//tizen_src/build:capi-media-player",
+    "//tizen_src/build:libcapi-media-player",
+    "//tizen_src/build:drmdecrypt",
+    "//tizen_src/chromium_impl/media:media_efl_config",
+  ]
+}
+
+##############################################################################
+# Dependency
+##############################################################################
+external_content_renderer_efl_deps = [
+  "//tizen_src/chromium_impl/content:android_content_detection",
+]
+
+##############################################################################
+# Source
+##############################################################################
+external_exclude_content_renderer_efl_sources = []
+external_content_renderer_efl_sources = [
+  "//tizen_src/chromium_impl/content/renderer/render_view_impl_efl.cc",
+]
+
+if (is_tizen) {
+  external_content_renderer_efl_sources += [
+    "//tizen_src/chromium_impl/content/renderer/tts_dispatcher_efl.cc",
+    "//tizen_src/chromium_impl/content/renderer/tts_dispatcher_efl.h",
+  ]
+}
+
+if (tizen_multimedia_support) {
+  external_exclude_content_renderer_efl_sources += [
+    "media/audio_decoder.cc",
+  ]
+
+  external_content_renderer_efl_sources += [
+    "//tizen_src/chromium_impl/content/renderer/media/tizen/audio_decoder_capi.cc",
+    "//tizen_src/chromium_impl/content/renderer/media/tizen/media_source_delegate_efl.cc",
+    "//tizen_src/chromium_impl/content/renderer/media/tizen/media_source_delegate_efl.h",
+    "//tizen_src/chromium_impl/content/renderer/media/tizen/renderer_demuxer_efl.cc",
+    "//tizen_src/chromium_impl/content/renderer/media/tizen/renderer_demuxer_efl.h",
+    "//tizen_src/chromium_impl/content/renderer/media/tizen/renderer_media_player_manager_efl.cc",
+    "//tizen_src/chromium_impl/content/renderer/media/tizen/renderer_media_player_manager_efl.h",
+    "//tizen_src/chromium_impl/content/renderer/media/tizen/webmediaplayer_efl.cc",
+    "//tizen_src/chromium_impl/content/renderer/media/tizen/webmediaplayer_efl.h",
+  ]
+}
+
+if (enable_nacl) {
+  external_content_renderer_efl_sources += [
+    "//tizen_src/chromium_impl/content/renderer/pepper/pepper_uma_host.cc",
+    "//tizen_src/chromium_impl/content/renderer/pepper/pepper_uma_host.h",
+  ]
+}
+
+if (tizen_pepper_player) {
+  external_content_renderer_efl_sources += [
+    "//tizen_src/chromium_impl/content/renderer/pepper/pepper_media_player_renderer_host.cc",
+    "//tizen_src/chromium_impl/content/renderer/pepper/pepper_media_player_renderer_host.h",
+  ]
+}
+
+if (enable_nacl || tizen_pepper_player) {
+  external_content_renderer_efl_sources += [
+    "//tizen_src/chromium_impl/content/renderer/pepper/renderer_pepper_host_factory_efl.cc",
+    "//tizen_src/chromium_impl/content/renderer/pepper/renderer_pepper_host_factory_efl.h",
+  ]
+}

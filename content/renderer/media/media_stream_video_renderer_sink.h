@@ -1,0 +1,123 @@
+// Copyright (c) 2012 The Chromium Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+#ifndef CONTENT_RENDERER_MEDIA_RTC_VIDEO_RENDERER_H_
+#define CONTENT_RENDERER_MEDIA_RTC_VIDEO_RENDERER_H_
+
+#include "base/callback.h"
+#include "base/macros.h"
+#include "base/threading/thread_checker.h"
+#include "content/common/content_export.h"
+#include "content/common/media/video_capture.h"
+#include "content/public/renderer/media_stream_video_renderer.h"
+#include "content/public/renderer/media_stream_video_sink.h"
+#include "third_party/WebKit/public/platform/WebMediaStreamTrack.h"
+#include "ui/gfx/geometry/size.h"
+
+namespace base {
+class SingleThreadTaskRunner;
+class TaskRunner;
+}  // namespace base
+
+namespace media {
+class GpuMemoryBufferVideoFramePool;
+class GpuVideoAcceleratorFactories;
+class MediaStreamVideoDecoderData;
+class SuspendingDecoder;
+}  // namespace media
+
+namespace content {
+
+// MediaStreamVideoRendererSink is a MediaStreamVideoRenderer designed for
+// rendering Video MediaStreamTracks [1], MediaStreamVideoRendererSink
+// implements MediaStreamVideoSink in order to render video frames provided from
+// a MediaStreamVideoTrack, to which it connects itself when the
+// MediaStreamVideoRenderer is Start()ed, and disconnects itself when the latter
+// is Stop()ed.
+//
+// [1] http://dev.w3.org/2011/webrtc/editor/getusermedia.html#mediastreamtrack
+//
+// TODO(wuchengli): Add unit test. See the link below for reference.
+// http://src.chromium.org/viewvc/chrome/trunk/src/content/renderer/media/rtc_vi
+// deo_decoder_unittest.cc?revision=180591&view=markup
+class CONTENT_EXPORT MediaStreamVideoRendererSink
+    : public MediaStreamVideoRenderer,
+      public MediaStreamVideoSink {
+ public:
+  MediaStreamVideoRendererSink(
+      const blink::WebMediaStreamTrack& video_track,
+      const base::Closure& error_cb,
+      const MediaStreamVideoRenderer::RepaintCB& repaint_cb,
+      const MediaStreamVideoRenderer::DecoderDataCB& decoder_data_cb,
+      const MediaStreamVideoRenderer::SuspendingDecoderCB&
+          suspending_decoder_cb_,
+      const scoped_refptr<base::SingleThreadTaskRunner>& io_task_runner,
+      const scoped_refptr<base::SingleThreadTaskRunner>& media_task_runner,
+      const scoped_refptr<base::TaskRunner>& worker_task_runner,
+      media::GpuVideoAcceleratorFactories* gpu_factories);
+
+  // MediaStreamVideoRenderer implementation. Called on the main thread.
+  void Start() override;
+  void Stop() override;
+  void Resume() override;
+  void Pause() override;
+
+ protected:
+  ~MediaStreamVideoRendererSink() override;
+
+ private:
+  friend class MediaStreamVideoRendererSinkTest;
+  enum State {
+    STARTED,
+    PAUSED,
+    STOPPED,
+  };
+
+  void OnVideoFrame(const scoped_refptr<media::VideoFrame>& frame,
+                    base::TimeTicks estimated_capture_time);
+  void FrameReady(const scoped_refptr<media::VideoFrame>& frame);
+
+  void OnDecoderType(
+      const scoped_refptr<media::MediaStreamVideoDecoderData>& decoder_data);
+
+  void OnSuspendingDecoder(
+      const scoped_refptr<media::SuspendingDecoder>& suspending_decoder);
+
+  // MediaStreamVideoSink implementation. Called on the main thread.
+  void OnReadyStateChanged(
+      blink::WebMediaStreamSource::ReadyState state) override;
+
+  // Helper methods used for testing.
+  State GetStateForTesting();
+  void SetGpuMemoryBufferVideoForTesting(
+      media::GpuMemoryBufferVideoFramePool* gpu_memory_buffer_pool);
+
+  const base::Closure error_cb_;
+  const RepaintCB repaint_cb_;
+  const DecoderDataCB decoder_data_cb_;
+  const SuspendingDecoderCB suspending_decoder_cb_;
+
+  const scoped_refptr<base::SingleThreadTaskRunner> task_runner_;
+  State state_;
+  gfx::Size frame_size_;
+  const blink::WebMediaStreamTrack video_track_;
+
+  // Inner class used for transfering frames on compositor thread and running
+  // |repaint_cb_|.
+  class FrameDeliverer;
+  std::unique_ptr<FrameDeliverer> frame_deliverer_;
+
+  const scoped_refptr<base::SingleThreadTaskRunner> io_task_runner_;
+  const scoped_refptr<base::SingleThreadTaskRunner> media_task_runner_;
+  const scoped_refptr<base::TaskRunner> worker_task_runner_;
+  media::GpuVideoAcceleratorFactories* const gpu_factories_;
+
+  base::ThreadChecker main_thread_checker_;
+
+  DISALLOW_COPY_AND_ASSIGN(MediaStreamVideoRendererSink);
+};
+
+}  // namespace content
+
+#endif  // CONTENT_RENDERER_MEDIA_RTC_VIDEO_RENDERER_H_

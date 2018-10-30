@@ -1,0 +1,2 @@
+.bbc.:/usr/share/cert/deviceCert_bbc.pem:/usr/share/cert/keyTV_bbc_p.pem,
+*:/usr/share/cert/SamsungDeviceCertificate.pem:/usr/share/cert/SamsungDeviceCertificateKey.pem,

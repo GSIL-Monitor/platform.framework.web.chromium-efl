@@ -1,0 +1,9 @@
+msgid "IDS_WEBVIEW_OPT_OPEN_LINK_IN_NEW_TAB_ABB"
+msgstr "নতুন টেবত লিংক খোলক"
+
+msgid "IDS_WEBVIEW_OPT_OPEN_LINK_ABB"
+msgstr "ৱেব ব্ৰাউজাৰত খোলক"
+
+msgid "IDS_WEBVIEW_OPEN"
+msgstr "খোলক"
+

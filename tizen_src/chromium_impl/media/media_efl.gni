@@ -1,0 +1,168 @@
+# Copyright (c) 2015 Samsung Electronics. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+import("//tizen_src/build/config/tizen_features.gni")
+
+external_media_efl_audio_config = []
+external_media_efl_audio_sources = []
+external_media_efl_base_config = []
+external_media_efl_base_sources = []
+external_media_efl_capture_config = []
+external_media_efl_capture_sources = []
+external_media_efl_video_decode_config = []
+external_media_efl_video_decode_sources = []
+external_media_efl_deps = []
+
+if (use_ozone) {
+  external_media_efl_deps += [
+    "//tizen_src/chromium_impl/ui/ozone:ozone_efl"
+  ]
+}
+
+if (tizen_multimedia_support) {
+  external_media_efl_deps += [
+    "//third_party/libyuv"
+  ]
+
+  external_media_efl_base_config += [
+    "//tizen_src/build:capi-media-player",
+    "//tizen_src/build:libcapi-media-player",
+    "//tizen_src/build:capi-system-device",
+    "//tizen_src/build:libcapi-system-device",
+    "//tizen_src/build:ecore",
+    "//tizen_src/build:libecore",
+    "//tizen_src/build:mm-player",
+    "//tizen_src/build:libmm-player",
+  ]
+
+  if (!use_wayland) {
+    external_media_efl_base_config += [
+      "//tizen_src/build:ecore-x",
+      "//tizen_src/build:libecore-x",
+      "//ui/gl:gl",
+    ]
+  } else {
+    external_media_efl_base_config += [ "//tizen_src/build:ecore-wayland" ]
+    external_media_efl_base_config += [ "//tizen_src/build:libecore-wayland" ]
+    external_media_efl_audio_config += [ "//tizen_src/build:ecore-wayland" ]
+    external_media_efl_audio_config += [ "//tizen_src/build:libecore-wayland" ]
+  }
+
+
+  external_media_efl_base_sources += [
+    "//tizen_src/chromium_impl/media/base/tizen/demuxer_efl.h",
+    "//tizen_src/chromium_impl/media/base/tizen/demuxer_stream_player_params_efl.cc",
+    "//tizen_src/chromium_impl/media/base/tizen/demuxer_stream_player_params_efl.h",
+    "//tizen_src/chromium_impl/media/base/tizen/longest_conflict_strategy.cc",
+    "//tizen_src/chromium_impl/media/base/tizen/longest_conflict_strategy.h",
+    "//tizen_src/chromium_impl/media/base/tizen/media_capability_manager.cc",
+    "//tizen_src/chromium_impl/media/base/tizen/media_capability_manager.h",
+    "//tizen_src/chromium_impl/media/base/tizen/media_packet_impl.cc",
+    "//tizen_src/chromium_impl/media/base/tizen/media_packet_impl.h",
+    "//tizen_src/chromium_impl/media/base/tizen/media_player_bridge_capi.cc",
+    "//tizen_src/chromium_impl/media/base/tizen/media_player_bridge_capi.h",
+    "//tizen_src/chromium_impl/media/base/tizen/media_player_efl.cc",
+    "//tizen_src/chromium_impl/media/base/tizen/media_player_efl.h",
+    "//tizen_src/chromium_impl/media/base/tizen/media_player_interface_efl.h",
+    "//tizen_src/chromium_impl/media/base/tizen/media_player_manager_efl.h",
+    "//tizen_src/chromium_impl/media/base/tizen/media_player_util_efl.cc",
+    "//tizen_src/chromium_impl/media/base/tizen/media_player_util_efl.h",
+    "//tizen_src/chromium_impl/media/base/tizen/media_source_player_capi.cc",
+    "//tizen_src/chromium_impl/media/base/tizen/media_source_player_capi.h",
+    "//tizen_src/chromium_impl/media/base/tizen/stream_framerate.cc",
+    "//tizen_src/chromium_impl/media/base/tizen/stream_framerate.h",
+    "//tizen_src/chromium_impl/media/base/tizen/media_stream_player_capi.cc",
+    "//tizen_src/chromium_impl/media/base/tizen/media_stream_player_capi.h",
+    "//tizen_src/chromium_impl/media/base/tizen/placeholder_media_player.cc",
+    "//tizen_src/chromium_impl/media/base/tizen/placeholder_media_player.h",
+    "//tizen_src/chromium_impl/media/base/tizen/suspending_media_player.cc",
+    "//tizen_src/chromium_impl/media/base/tizen/suspending_media_player.h",
+  ]
+
+  if (tizen_product_tv) {
+     external_media_efl_base_sources += [
+       "//tizen_src/chromium_impl/media/base/tizen/ieme_drm_bridge.cc",
+       "//tizen_src/chromium_impl/media/base/tizen/ieme_drm_bridge.h",
+       "//tizen_src/chromium_impl/media/filters/source_buffer_platform_efl.cc",
+     ]
+
+     external_media_efl_base_config += [
+       "//tizen_src/build:drmdecrypt",
+       "//tizen_src/build:marlin",
+     ]
+  }
+
+  external_media_efl_audio_config += [
+    "//tizen_src/build:capi-media-audio-io",
+    "//tizen_src/build:libcapi-media-audio-io",
+  ]
+
+  external_media_efl_audio_sources += [
+    "//tizen_src/chromium_impl/media/audio/tizen/audio_manager_capi.cc",
+    "//tizen_src/chromium_impl/media/audio/tizen/audio_manager_capi.h",
+    "//tizen_src/chromium_impl/media/audio/tizen/capi_audio_input.cc",
+    "//tizen_src/chromium_impl/media/audio/tizen/capi_audio_input.h",
+    "//tizen_src/chromium_impl/media/audio/tizen/capi_audio_output.cc",
+    "//tizen_src/chromium_impl/media/audio/tizen/capi_audio_output.h",
+    "//tizen_src/chromium_impl/media/audio/tizen/capi_util.cc",
+    "//tizen_src/chromium_impl/media/audio/tizen/capi_util.h",
+  ]
+
+  external_media_efl_capture_config += [
+    "//tizen_src/build:capi-media-camera",
+    "//tizen_src/build:libcapi-media-camera",
+  ]
+
+  external_media_efl_capture_sources += [
+    "//tizen_src/chromium_impl/media/capture/video/tizen/camera_device_tizen.cc",
+    "//tizen_src/chromium_impl/media/capture/video/tizen/camera_device_tizen.h",
+    "//tizen_src/chromium_impl/media/capture/video/tizen/video_capture_device_factory_tizen.cc",
+    "//tizen_src/chromium_impl/media/capture/video/tizen/video_capture_device_factory_tizen.h",
+    "//tizen_src/chromium_impl/media/capture/video/tizen/video_capture_device_tizen.cc",
+    "//tizen_src/chromium_impl/media/capture/video/tizen/video_capture_device_tizen.h",
+  ]
+
+  if (tizen_sound_focus) {
+    external_media_efl_base_sources += [
+      "//tizen_src/chromium_impl/media/base/tizen/sound_focus_manager.cc",
+      "//tizen_src/chromium_impl/media/base/tizen/sound_focus_manager.h",
+    ]
+
+    external_media_efl_base_config += [
+      "//tizen_src/build:capi-media-sound-manager",
+      "//tizen_src/build:libcapi-media-sound-manager",
+    ]
+  }
+
+  if (tizen_video_hole) {
+     external_media_efl_base_sources += [
+       "//tizen_src/chromium_impl/media/base/tizen/video_plane_controller_capi.cc",
+       "//tizen_src/chromium_impl/media/base/tizen/video_plane_controller_capi.h",
+       "//tizen_src/chromium_impl/media/base/tizen/video_plane_controller_window_efl.cc",
+       "//tizen_src/chromium_impl/media/base/tizen/video_plane_controller_window_efl.h",
+       "//tizen_src/chromium_impl/media/base/tizen/video_plane_manager_tizen.cc",
+       "//tizen_src/chromium_impl/media/base/tizen/video_plane_manager_tizen.h",
+     ]
+  }
+
+  if (tizen_product_tv) {
+    if (tizen_pepper_extensions) {
+      external_media_efl_audio_sources += [
+        "//tizen_src/chromium_impl/media/audio/tizen/mm_player_audio_output.cc",
+        "//tizen_src/chromium_impl/media/audio/tizen/mm_player_audio_output.h",
+      ]
+    }
+  }
+}
+
+if (tizen_libav) {
+  external_media_efl_video_decode_config += [
+    "//tizen_src/build:libav"
+  ]
+
+  external_media_efl_video_decode_sources += [
+    "//tizen_src/chromium_impl/media/filters/libav_video_decoder_tizen.cc",
+    "//tizen_src/chromium_impl/media/filters/libav_video_decoder_tizen.h",
+  ]
+}

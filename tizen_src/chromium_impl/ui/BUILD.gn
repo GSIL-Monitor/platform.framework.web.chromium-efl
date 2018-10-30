@@ -1,0 +1,49 @@
+# copyright (c) 2015 samsung electronics. all rights reserved.
+# use of this source code is governed by a bsd-style license that can be
+# found in the license file.
+
+import("//build/config/features.gni")
+
+static_library("ui_events_source_inject") {
+  sources = [
+    # Indirectly includes ui/events/gestures/gesture_recognizer_impl_efl.cc/h.
+    "//tizen_src/chromium_impl/ui/events/gestures/gesture_recognizer_impl_override.cc",
+    "//tizen_src/chromium_impl/ui/events/gestures/gesture_recognizer_impl_efl.cc",
+    "//tizen_src/chromium_impl/ui/events/gestures/gesture_recognizer_impl_efl.h",
+    "//ui/events/gestures/gesture_provider_aura.cc",
+    "//ui/events/gestures/gesture_provider_aura.h",
+    "//ui/events/gestures/motion_event_aura.cc",
+    "//ui/events/gestures/motion_event_aura.h",
+  ]
+  deps = [
+    "//skia",
+  ]
+}
+
+static_library("ui_native_theme_inject") {
+  sources = [
+    "//ui/native_theme/native_theme_aura.cc",
+    "//ui/native_theme/native_theme_aura.h",
+  ]
+  deps = [
+    "//skia",
+  ]
+
+  if (tizen_vd_native_scrollbars) {
+    sources += [
+      "//tizen_src/chromium_impl/ui/native_theme/native_theme_tizen_tv.cc",
+      "//tizen_src/chromium_impl/ui/native_theme/native_theme_tizen_tv.h",
+    ]
+    deps += [ "//tizen_src/chromium_impl/ui/resources:ui_resources_tizen_grd" ]
+  }
+}
+
+static_library("ui_base_inject") {
+  sources = [
+    #"//ui/base/cursor/cursors_aura.h",
+    #"//ui/base/cursor/cursors_aura.cc",
+  ]
+  deps = [
+    "//skia",
+  ]
+}

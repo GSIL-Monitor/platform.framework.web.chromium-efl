@@ -1,0 +1,900 @@
+# Copyright (c) 2015 Samsung Electronics. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+import("//build/config/allocator.gni")
+import("//build/config/compiler/compiler.gni")
+import("//build/config/features.gni")
+import("//testing/test.gni")
+import("//ppapi/features/features.gni")
+import("//components/nacl/features.gni")
+
+tizen_autofill_support = true
+
+# Components used to auto generate CHROMIUM_VERSION preprocessor define.
+version_file = "//chrome/VERSION"
+version_script = "//build/util/version.py"
+version_pattern = "@MAJOR@.@MINOR@.@BUILD@.@PATCH@"
+
+component("chromium_ewk_component") {
+  include_dirs = [
+    ".",
+  ]
+
+  deps = [
+    "//base:base_static",
+  ]
+}
+
+shared_library("chromium-ewk") {
+  include_dirs = [
+    ".",
+    "//tizen_src/ewk/efl_integration/public",
+    "//third_party/skia/include/core",
+    "//v8/include",
+    "$root_gen_dir/blink",
+  ]
+
+  if (is_tizen && symbol_level != 0) {
+    configs -= [ "//build/config/compiler:default_symbols" ]
+    configs += [ "//build/config/compiler:symbols" ]
+  }
+  configs += [ "//tizen_src/build:ecore" ]
+  configs += [ "//tizen_src/build:libecore" ]
+  configs += [ "//tizen_src/build:evas" ]
+  configs += [ "//tizen_src/build:libevas" ]
+  configs += [ "//tizen_src/build:ecore-evas" ]
+  configs += [ "//tizen_src/build:libecore-evas" ]
+  public_configs = [ "//tizen_src/build:ecore-evas-public" ]
+  configs += [ "//tizen_src/build:elementary" ]
+  configs += [ "//tizen_src/build:libelementary" ]
+  public_configs += [ "//tizen_src/build:elementary-public" ]
+  configs += [ "//tizen_src/build:gstreamer" ]
+  configs += [ "//tizen_src/build:libgstreamer" ]
+  public_configs += [ "//tizen_src/build:gstreamer-public" ]
+  configs += [ "//tizen_src/build:vconf" ]
+  configs += [ "//tizen_src/build:libvconf" ]
+  public_configs += [ "//tizen_src/build:vconf-public" ]
+  configs += [ "//tizen_src/build:capi-location-manager" ]
+  configs += [ "//tizen_src/build:libcapi-location-manager" ]
+  public_configs += [ "//tizen_src/build:capi-location-manager-public" ]
+  configs += [ "//tizen_src/build:capi-system-info" ]
+  configs += [ "//tizen_src/build:libcapi-system-info" ]
+  public_configs += [ "//tizen_src/build:capi-system-info-public" ]
+  configs += [ "//tizen_src/build:capi-media-camera" ]
+  configs += [ "//tizen_src/build:libcapi-media-camera" ]
+  public_configs += [ "//tizen_src/build:capi-media-camera-public" ]
+  configs += [ "//tizen_src/build:feedback" ]
+  configs += [ "//tizen_src/build:libfeedback" ]
+  public_configs += [ "//tizen_src/build:feedback-public" ]
+  configs += [ "//tizen_src/build:efl-extension" ]
+  configs += [ "//tizen_src/build:libefl-extension" ]
+  public_configs += [ "//tizen_src/build:efl-extension-public" ]
+  configs += [ "//tizen_src/build:ui-gadget" ]
+  configs += [ "//tizen_src/build:libui-gadget" ]
+  public_configs += [ "//tizen_src/build:ui-gadget-public" ]
+  configs += [ "//tizen_src/build:notification" ]
+  configs += [ "//tizen_src/build:libnotification" ]
+  if (tizen_product_tv) {
+    configs += [ "//tizen_src/build:WebProduct" ]
+    configs += [ "//tizen_src/build:drmdecrypt" ]
+  }
+  deps = [
+    "//tizen_src/ewk/po_tizen:locale_efl",
+    "//tizen_src/ewk/po_tizen:packed_locales_efl",
+    "//tizen_src/chromium_impl/components/spp_client",
+    "//tizen_src/chromium_impl/efl:efl-init",
+    "//tizen_src/chromium_impl/tizen:system-info",
+
+    "//base/:base_static",
+    "//content/public/app:both",
+    "//content/shell:resources",
+    "//content/shell:pak",
+    "//components/visitedlink/browser",
+    "//components/visitedlink/renderer",
+    "//components/sessions",
+    "//components/autofill/content/renderer",
+    "//components/autofill/content/browser",
+    "//components/certificate_transparency",
+    "//components/navigation_interception",
+    "//components/network_hints/common",
+    "//components/network_hints/renderer",
+    "//components/network_session_configurator/browser",
+    "//components/password_manager/content/browser",
+    "//components/password_manager/core/common",
+    "//components/password_manager/core/browser",
+    "//components/payments/content",
+    "//components/payments/core",
+    "//components/plugins/renderer",
+    "//components/variations",
+    "//services/device:lib",
+    "//printing",
+    "//skia",
+    "//storage/browser",
+    "//third_party/leveldatabase",
+    "//third_party/sqlite",
+    "//third_party/WebKit/Source/platform/wtf",
+    "//ui/events",
+    "//ui/events:events_base",
+    "//ui/gl",
+    "//v8",
+    "//tizen_src/ewk/efl_integration:chromium_ewk_component",
+    "//tizen_src/ewk/efl_integration/browser/webui/resources:resources",
+    "//components/nacl/common:features"
+  ]
+
+  chrome_version = exec_script(version_script,
+                               [
+                                 "-f",
+                                 rebase_path(version_file, root_build_dir),
+                                 "-t",
+                                 version_pattern
+                               ],
+                               "trim string",
+                               [])
+  defines = [ "CHROMIUM_VERSION=\"" + chrome_version + "\"" ]
+
+  if (tizen_vd_accessory) {
+    configs += [ "//tizen_src/build:accessory" ]
+  }
+
+  ldflags = [
+    "-Wl,--no-undefined",
+    "-Wl,--version-script="+ rebase_path("//tizen_src/ewk/chromium-ewk.filter")
+  ]
+  cflags = [
+    # Symbol visibility controled by chromium-ewk.filter
+    "-fvisibility=hidden",
+    # Treat warning as error for this target.
+    # It needs to be included by means of pattern list because '-Werror' cflag
+    # will be excluded in chromium side (src/build/common.gypi), and GYP
+    # processes pattern lists after exclusion lists.
+    # (ref: https://gyp.gsrc.io/docs/InputFormatReference.md#Processing-Order)
+    #"-Werror",
+    "-w",
+  ]
+
+  if (is_tizen) {
+    exclude_source_set = [
+      "browser/sound_effect.cc",
+      "browser/sound_effect.h",
+    ]
+    deps += [ "//cc:cc" ]
+    configs += [ "//tizen_src/build:capi-appfw-app-manager" ]
+    configs += [ "//tizen_src/build:libcapi-appfw-app-manager" ]
+    configs += [ "//tizen_src/build:pkgmgr-info" ]
+  } else {
+    if (use_gio) {
+      configs += [ "//build/linux:gio_config" ]
+    }
+    exclude_source_set = [
+      "browser/sound_effect_tizen.cc",
+      "browser/geolocation/location_provider_efl.cc",
+      "browser/geolocation/location_provider_efl.h"
+    ]
+  }
+
+  if (tizen_pepper_extensions) {
+    configs += [ "//tizen_src/build:cynara-client" ]
+    configs += [ "//tizen_src/build:wayland-client" ]
+    configs += [ "//tizen_src/build:tizen-extension-client" ]
+    configs += [ "//tizen_src/build:security-privilege-manager" ]
+  }
+
+  # TODO : Below dependency is set in chromium/device/battery_tizen.gypi,
+  # but since m47 it failed to get properly "injected"
+  # to device_battery target due to the new nesting
+  # used in the target declaration.
+  if (is_tizen) {
+    configs += [ "../../build:capi-system-device" ]
+    configs += [ "../../build:libcapi-system-device" ]
+    public_configs += [ "../../build:capi-system-device-public" ]
+  }
+
+  if (tizen_autofill_support) {
+    defines += [ "TIZEN_AUTOFILL_SUPPORT=true" ]
+  }
+
+  if (use_allocator == "tcmalloc") {
+    deps += [ "//base/allocator" ]
+  }
+
+  if (enable_nacl) {
+    deps += [
+      "//components/nacl/loader",
+      "//components/nacl/common",
+      "//components/nacl/browser",
+      "//components/nacl/renderer",
+    ]
+  }
+
+  if (use_wayland) {
+    configs += [ "../../build:ecore-wayland" ]
+    configs += [ "../../build:libecore-wayland" ]
+    public_configs += [ "../../build:ecore-wayland-public" ]
+  } else {
+    configs += [ "../../build:ecore-x" ]
+    configs += [ "../../build:libecore-x" ]
+    public_configs += [ "../../build:ecore-x-public" ]
+  }
+
+  if (use_ozone) {
+    deps += [ "//ui/ozone" ]
+  }
+
+  sources = []
+  if (tizen_atk_support) {
+    configs += [ "//tizen_src/build:atk" ]
+    configs += [ "//tizen_src/build:libatk" ]
+    configs += [ "//tizen_src/build:atk-bridge" ]
+    configs += [ "//tizen_src/build:libatk-bridge" ]
+    sources += [
+      "eweb_accessibility.cc",
+      "eweb_accessibility.h",
+      "eweb_accessibility_object.cc",
+      "eweb_accessibility_object.h",
+      "eweb_accessibility_util.cc",
+      "eweb_accessibility_util.h",
+    ]
+  }
+
+  if (tizen_product_tv) {
+    sources += [
+      "browser/mixed_content_observer.cc",
+      "browser/mixed_content_observer.h",
+      "browser/scroll_client_observer.cc",
+      "browser/scroll_client_observer.h",
+      "common/application_type.cc",
+      "common/application_type.h",
+      "devtools_port_manager.cc",
+      "devtools_port_manager.h",
+      "devtools_port_msg.cc",
+      "devtools_port_msg.h",
+      "devtools_port_shared_memory.cc",
+      "devtools_port_shared_memory.h",
+      "dvb_protocol_handler.cc",
+      "dvb_protocol_handler.h",
+      "io_thread_delegate_efl.cc",
+      "io_thread_delegate_efl.h",
+      "mmf_protocol_handler.cc",
+      "mmf_protocol_handler.h",
+      "renderer/key_systems_tizen.cc",
+      "renderer/key_systems_tizen.h",
+      "renderer/tizen_key_system_properties.cc",
+      "renderer/tizen_key_system_properties.h",
+      "wrt/hbbtv_dynamicplugin.cc",
+      "wrt/hbbtv_dynamicplugin.h",
+      "wrt/hbbtv_widget.cc",
+      "wrt/hbbtv_widget.h",
+      "wrt/hbbtv_widget_host.cc",
+      "wrt/hbbtv_widget_host.h",
+    ]
+  }
+
+  sources += [
+    "authentication_challenge_popup.cc",
+    "authentication_challenge_popup.h",
+    "autofill_popup_view_efl.cc",
+    "autofill_popup_view_efl.h",
+    "browser_context_efl.cc",
+    "browser_context_efl.h",
+    "browser_main_parts_efl.cc",
+    "browser_main_parts_efl.h",
+    "chromium_ewk.gypi",
+    "command_line_efl.cc",
+    "command_line_efl.h",
+    "content_browser_client_efl.cc",
+    "content_browser_client_efl.h",
+    "content_main_delegate_efl.cc",
+    "content_main_delegate_efl.h",
+    "context_menu_controller_efl.cc",
+    "context_menu_controller_efl.h",
+    "cookie_manager.cc",
+    "cookie_manager.h",
+    "devtools_delegate_efl.cc",
+    "devtools_delegate_efl.h",
+    "efl_webprocess_main.cc",
+    "efl_webprocess_main.h",
+    "eweb_context.cc",
+    "eweb_context.h",
+    "eweb_view_callbacks.h",
+    "eweb_view.cc",
+    "eweb_view.h",
+    "ewk_global_data.cc",
+    "ewk_global_data.h",
+    "file_chooser_controller_efl.cc",
+    "file_chooser_controller_efl.h",
+    "geolocation_permission_popup.cc",
+    "geolocation_permission_popup.h",
+    "http_user_agent_settings_efl.cc",
+    "http_user_agent_settings_efl.h",
+    "message_pump_for_ui_efl.cc",
+    "message_pump_for_ui_efl.h",
+    "network_delegate_efl.cc",
+    "network_delegate_efl.h",
+    "notification_permission_popup.cc",
+    "notification_permission_popup.h",
+    "permission_popup.h",
+    "permission_popup_manager.cc",
+    "permission_popup_manager.h",
+    "popup_controller_efl.cc",
+    "popup_controller_efl.h",
+    "scroll_detector.cc",
+    "scroll_detector.h",
+    "text_encoding_map_efl.cc",
+    "text_encoding_map_efl.h",
+    "url_request_context_getter_efl.cc",
+    "url_request_context_getter_efl.h",
+    "url_request_interceptor_efl.cc",
+    "url_request_interceptor_efl.h",
+    "url_request_job_efl.cc",
+    "url_request_job_efl.h",
+    "usermedia_permission_popup.cc",
+    "usermedia_permission_popup.h",
+    "web_contents_efl_delegate_ewk.cc",
+    "web_contents_efl_delegate_ewk.h",
+    "web_contents_delegate_efl.cc",
+    "web_contents_delegate_efl.h",
+    "web_contents_view_delegate_ewk.cc",
+    "web_contents_view_delegate_ewk.h",
+    "web_contents_view_efl_delegate_ewk.cc",
+    "web_contents_view_efl_delegate_ewk.h",
+
+    "browser/browsing_data_remover_efl.cc",
+    "browser/browsing_data_remover_efl.h",
+    "browser/download_manager_delegate_efl.cc",
+    "browser/download_manager_delegate_efl.h",
+    "browser/editor_client_observer.cc",
+    "browser/editor_client_observer.h",
+    "browser/javascript_dialog_manager_efl.cc",
+    "browser/javascript_dialog_manager_efl.h",
+    "browser/javascript_modal_dialog_efl.cc",
+    "browser/javascript_modal_dialog_efl.h",
+    "browser/login_delegate_efl.cc",
+    "browser/login_delegate_efl.h",
+    "browser/mime_override_manager_efl.cc",
+    "browser/mime_override_manager_efl.h",
+    "browser/navigation_policy_handler_efl.cc",
+    "browser/navigation_policy_handler_efl.h",
+    "browser/network_hints_message_filter_efl.cc",
+    "browser/network_hints_message_filter_efl.h",
+    "browser/net/predictor_efl.cc",
+    "browser/net/predictor_efl.h",
+    "browser/net/url_info.cc",
+    "browser/net/url_info.h",
+    "browser/notification/notification_controller_efl.cc",
+    "browser/notification/notification_controller_efl.h",
+    "browser/permission_manager_efl.cc",
+    "browser/permission_manager_efl.h",
+    "browser/policy_response_delegate_efl.cc",
+    "browser/policy_response_delegate_efl.h",
+    "browser/quota_permission_context_efl.cc",
+    "browser/quota_permission_context_efl.h",
+    "browser/render_message_filter_efl.cc",
+    "browser/render_message_filter_efl.h",
+    "browser/resource_dispatcher_host_delegate_efl.cc",
+    "browser/resource_dispatcher_host_delegate_efl.h",
+    "browser/resource_throttle_efl.cc",
+    "browser/resource_throttle_efl.h",
+    "browser/scoped_allow_wait_for_legacy_web_view_api.h",
+    "browser/scoped_wait_for_ewk.h",
+    "browser/sound_effect.cc",
+    "browser/sound_effect.h",
+    "browser/sound_effect_tizen.cc",
+    "browser/special_storage_policy_efl.cc",
+    "browser/special_storage_policy_efl.h",
+    "browser/ssl_host_state_delegate_efl.cc",
+    "browser/ssl_host_state_delegate_efl.h",
+    "browser/tizen_extensible_host.cc",
+    "browser/tizen_extensible_host.h",
+    "browser/web_view_browser_message_filter.cc",
+    "browser/web_view_browser_message_filter.h",
+    "browser/webui/version_ui_efl.cc",
+    "browser/webui/version_ui_efl.h",
+    "browser/webui/web_ui_controller_factory_efl.cc",
+    "browser/webui/web_ui_controller_factory_efl.h",
+
+    # Make use of Android webview"s simplified pref class.
+    "browser/autofill/autofill_client_efl.h",
+    "browser/autofill/autofill_client_efl.cc",
+    "browser/autofill/personal_data_manager_factory.cc",
+    "browser/autofill/personal_data_manager_factory.h",
+    "browser/autofill/validation_rules_storage_factory_efl.cc",
+    "browser/autofill/validation_rules_storage_factory_efl.h",
+
+    "browser/favicon/favicon_database.h",
+    "browser/favicon/favicon_database_p.cc",
+    "browser/favicon/favicon_commands.cc",
+    "browser/favicon/favicon_downloader.h",
+    "browser/favicon/favicon_database_p.h",
+    "browser/favicon/favicon_database.cc",
+    "browser/favicon/favicon_commands.h",
+    "browser/favicon/favicon_downloader.cc",
+    "browser/geolocation/access_token_store_efl.cc",
+    "browser/geolocation/access_token_store_efl.h",
+    "browser/geolocation/geolocation_permission_context_efl.cc",
+    "browser/geolocation/geolocation_permission_context_efl.h",
+    "browser/geolocation/location_provider_efl.cc",
+    "browser/geolocation/location_provider_efl.h",
+    "browser/input_picker/color_chooser_efl.cc",
+    "browser/input_picker/color_chooser_efl.h",
+    "browser/input_picker/input_picker.cc",
+    "browser/input_picker/input_picker.h",
+
+    "browser/javascript_interface/gin_native_bound_object.cc",
+    "browser/javascript_interface/gin_native_bound_object.h",
+    "browser/javascript_interface/gin_native_bridge_dispatcher_host.cc",
+    "browser/javascript_interface/gin_native_bridge_dispatcher_host.h",
+    "browser/javascript_interface/gin_native_bridge_message_filter.cc",
+    "browser/javascript_interface/gin_native_bridge_message_filter.h",
+
+    "browser/password_manager/password_helper_efl.cc",
+    "browser/password_manager/password_helper_efl.h",
+    "browser/password_manager/password_manager_client_efl.cc",
+    "browser/password_manager/password_manager_client_efl.h",
+    "browser/password_manager/password_store_factory.cc",
+    "browser/password_manager/password_store_factory.h",
+
+    "browser/payments/cvc_unmask_view_controller_efl.cc",
+    "browser/payments/cvc_unmask_view_controller_efl.h",
+    "browser/payments/payment_request_delegate_efl.cc",
+    "browser/payments/payment_request_delegate_efl.h",
+    "browser/payments/payment_request_dialog_efl.cc",
+    "browser/payments/payment_request_dialog_efl.h",
+    "browser/payments/payment_request_factory_efl.cc",
+    "browser/payments/payment_request_factory_efl.h",
+
+    "browser/push_messaging/push_messaging_app_identifier_efl.h",
+    "browser/push_messaging/push_messaging_app_identifier_efl.cc",
+    "browser/push_messaging/push_messaging_service_factory_efl.h",
+    "browser/push_messaging/push_messaging_service_factory_efl.cc",
+
+    "browser/select_picker/form_navigable_picker.cc",
+    "browser/select_picker/form_navigable_picker.h",
+    "browser/select_picker/select_picker.cc",
+    "browser/select_picker/select_picker.h",
+    "browser/select_picker/select_picker_base.cc",
+    "browser/select_picker/select_picker_base.h",
+    "browser/select_picker/select_picker_tv.cc",
+    "browser/select_picker/select_picker_tv.h",
+    "browser/select_picker/select_picker_util.cc",
+    "browser/select_picker/select_picker_util.h",
+    "browser/select_picker/select_picker_wearable.cc",
+    "browser/select_picker/select_picker_wearable.h",
+
+    "browser/vibration/vibration_provider_client.cc",
+    "browser/vibration/vibration_provider_client.h",
+
+    "browser/web_cache_efl/web_cache_manager_efl.cc",
+    "browser/web_cache_efl/web_cache_manager_efl.h",
+
+    "browser/webdata/web_data_service.h",
+    "browser/webdata/web_data_service_factory.h",
+    "browser/webdata/web_data_service_factory.cc",
+    "browser/webdata/web_data_service.cc",
+
+    "common/content_client_efl.cc",
+    "common/content_client_efl.h",
+    "common/content_switches_efl.cc",
+    "common/content_switches_efl.h",
+    "common/editing_messages.h",
+    "common/gin_native_bridge_errors.cc",
+    "common/gin_native_bridge_errors.h",
+    "common/gin_native_bridge_messages.h",
+    "common/gin_native_bridge_value.cc",
+    "common/gin_native_bridge_value.h",
+    "common/hit_test_params.h",
+    "common/message_generator_ewk.h",
+    "common/message_generator_ewk.cc",
+    "common/navigation_policy_params.cc",
+    "common/navigation_policy_params.h",
+    "common/print_pages_params.h",
+    "common/print_pages_params.cc",
+    "common/render_messages_ewk.h",
+    "common/skia_bitmap_utils.cc",
+    "common/skia_bitmap_utils.h",
+    "common/url_constants_efl.cc",
+    "common/url_constants_efl.h",
+    "common/version_info_efl.h",
+    "common/version_info.h",
+    "common/version_info.cc",
+    "common/web_contents_utils.cc",
+    "common/web_contents_utils.h",
+    "common/web_preferences_efl.h",
+
+    "private/back_forward_list.h",
+    "private/ewk_app_control_private.cc",
+    "private/ewk_app_control_private.h",
+    "private/ewk_auth_challenge_private.h",
+    "private/ewk_autofill_credit_card_private.cc",
+    "private/ewk_autofill_credit_card_private.h",
+    "private/ewk_autofill_profile_private.cc",
+    "private/ewk_autofill_profile_private.h",
+    "private/ewk_back_forward_list_private.cc",
+    "private/ewk_back_forward_list_private.h",
+    "private/ewk_certificate_info_private.h",
+    "private/ewk_certificate_private.cc",
+    "private/ewk_certificate_private.h",
+    "private/ewk_console_message_private.h",
+    "private/ewk_context_form_autofill_credit_card_private.cc",
+    "private/ewk_context_form_autofill_credit_card_private.h",
+    "private/ewk_context_form_autofill_profile_private.cc",
+    "private/ewk_context_form_autofill_profile_private.h",
+    "private/ewk_context_menu_private.h",
+    "private/ewk_context_private.cc",
+    "private/ewk_context_private.h",
+    "private/ewk_cookie_manager_private.h",
+    "private/ewk_error_private.cc",
+    "private/ewk_error_private.h",
+    "private/ewk_favicon_database_private.h",
+    "private/ewk_form_repost_decision_private.cc",
+    "private/ewk_form_repost_decision_private.h",
+    "private/ewk_frame_private.cc",
+    "private/ewk_frame_private.h",
+    "private/ewk_geolocation_private.cc",
+    "private/ewk_geolocation_private.h",
+    "private/ewk_history_private.cc",
+    "private/ewk_history_private.h",
+    "private/ewk_hit_test_private.cc",
+    "private/ewk_hit_test_private.h",
+    "private/ewk_intercept_request_private.cc",
+    "private/ewk_intercept_request_private.h",
+    "private/ewk_main_private.cc",
+    "private/ewk_main_private.h",
+    "private/ewk_manifest_private.cc",
+    "private/ewk_manifest_private.h",
+    "private/ewk_notification_private.cc",
+    "private/ewk_notification_private.h",
+    "private/ewk_object_private.h",
+    "private/ewk_policy_decision_private.cc",
+    "private/ewk_policy_decision_private.h",
+    "private/ewk_private.h",
+    "private/ewk_quota_permission_request_private.cc",
+    "private/ewk_quota_permission_request_private.h",
+    "private/ewk_security_origin_private.cc",
+    "private/ewk_security_origin_private.h",
+    "private/ewk_settings_private.cc",
+    "private/ewk_settings_private.h",
+    "private/ewk_suspendable_object.cc",
+    "private/ewk_suspendable_object.h",
+    "private/ewk_text_style_private.h",
+    "private/ewk_tracing_private.cc",
+    "private/ewk_tracing_private.h",
+    "private/ewk_user_media_private.cc",
+    "private/ewk_user_media_private.h",
+    "private/ewk_view_private.cc",
+    "private/ewk_view_private.h",
+    "private/ewk_web_application_icon_data_private.cc",
+    "private/ewk_web_application_icon_data_private.h",
+    "private/ewk_window_features_private.h",
+    "private/ewk_wrt_private.cc",
+    "private/ewk_wrt_private.h",
+    "private/webview_delegate_ewk.cc",
+    "private/webview_delegate_ewk.h",
+
+    "public/EWebKit.h",
+    "public/EWebKit_internal.h",
+    "public/EWebKit_product.h",
+    "public/ewk_app_installation_request_internal.cc",
+    "public/ewk_app_installation_request_internal.h",
+    "public/ewk_application_cache_manager.cc",
+    "public/ewk_application_cache_manager_internal.h",
+    "public/ewk_auth_challenge.cc",
+    "public/ewk_auth_challenge_internal.h",
+    "public/ewk_auth_request.cc",
+    "public/ewk_auth_request_internal.h",
+    "public/ewk_autofill_credit_card.cc",
+    "public/ewk_autofill_credit_card_internal.h",
+    "public/ewk_autofill_profile.cc",
+    "public/ewk_autofill_profile.h",
+    "public/ewk_autofill_profile_product.h",
+    "public/ewk_back_forward_list.cc",
+    "public/ewk_back_forward_list.h",
+    "public/ewk_back_forward_list_item.cc",
+    "public/ewk_back_forward_list_item.h",
+    "public/ewk_certificate.cc",
+    "public/ewk_certificate_internal.h",
+    "public/ewk_chromium.cc",
+    "public/ewk_chromium.h",
+    "public/ewk_console_message.cc",
+    "public/ewk_console_message_internal.h",
+    "public/ewk_content_screening_detection.cc",
+    "public/ewk_content_screening_detection_internal.h",
+    "public/ewk_content_screening_detection_product.h",
+    "public/ewk_context.cc",
+    "public/ewk_context.h",
+    "public/ewk_context_internal.h",
+    "public/ewk_context_menu.cc",
+    "public/ewk_context_menu.h",
+    "public/ewk_context_product.h",
+    "public/ewk_cookie_manager.cc",
+    "public/ewk_cookie_manager.h",
+    "public/ewk_cookie_manager_internal.h",
+    "public/ewk_cookie_manager_product.h",
+    "public/ewk_cookie_parser.cc",
+    "public/ewk_cookie_parser.h",
+    "public/ewk_custom_handlers.cc",
+    "public/ewk_custom_handlers_internal.h",
+    "public/ewk_dispatcher.cc",
+    "public/ewk_dispatcher_internal.h",
+    "public/ewk_enums_internal.h",
+    "public/ewk_error.cc",
+    "public/ewk_error.h",
+    "public/ewk_error_internal.h",
+    "public/ewk_export.h",
+    "public/ewk_favicon_database.cc",
+    "public/ewk_favicon_database_internal.h",
+    "public/ewk_form_repost_decision.cc",
+    "public/ewk_form_repost_decision_product.h",
+    "public/ewk_frame.cc",
+    "public/ewk_frame_internal.h",
+    "public/ewk_geolocation.cc",
+    "public/ewk_geolocation.h",
+    "public/ewk_geolocation_internal.h",
+    "public/ewk_highcontrast.cc",
+    "public/ewk_highcontrast_product.h",
+    "public/ewk_history.cc",
+    "public/ewk_history_internal.h",
+    "public/ewk_hit_test.cc",
+    "public/ewk_hit_test_internal.h",
+    "public/ewk_intercept_request.cc",
+    "public/ewk_intercept_request_internal.h",
+    "public/ewk_ipc_message.cc",
+    "public/ewk_ipc_message_internal.h",
+    "public/ewk_log_internal.h",
+    "public/ewk_main.cc",
+    "public/ewk_main.h",
+    "public/ewk_main_internal.h",
+    "public/ewk_manifest.cc",
+    "public/ewk_manifest.h",
+    "public/ewk_manifest_internal.h",
+    "public/ewk_media_playback_info.cc",
+    "public/ewk_media_playback_info_product.h",
+    "public/ewk_media_subtitle_info.cc",
+    "public/ewk_media_subtitle_info_product.h",
+    "public/ewk_media_parental_rating_info.h",
+    "public/ewk_media_parental_rating_info_product.h",
+    "public/ewk_notification.cc",
+    "public/ewk_notification_internal.h",
+    "public/ewk_object.cc",
+    "public/ewk_object_internal.h",
+    "public/ewk_page_group.cc",
+    "public/ewk_page_group_internal.h",
+    "public/ewk_policy_decision.cc",
+    "public/ewk_policy_decision.h",
+    "public/ewk_policy_decision_internal.h",
+    "public/ewk_policy_decision_product.h",
+    "public/ewk_popup_menu_item.cc",
+    "public/ewk_popup_menu_item_internal.h",
+    "public/ewk_quota_permission_request.cc",
+    "public/ewk_quota_permission_request_internal.h",
+    "public/ewk_security_origin.cc",
+    "public/ewk_security_origin.h",
+    "public/ewk_security_origin_internal.h",
+    "public/ewk_settings.cc",
+    "public/ewk_settings.h",
+    "public/ewk_settings_internal.h",
+    "public/ewk_settings_product.h",
+    "public/ewk_storage_manager.cc",
+    "public/ewk_storage_manager_internal.h",
+    "public/ewk_text_style.cc",
+    "public/ewk_text_style_internal.h",
+    "public/ewk_touch_internal.h",
+    "public/ewk_tracing.cc",
+    "public/ewk_tracing_internal.h",
+    "public/ewk_user_media.cc",
+    "public/ewk_user_media_internal.h",
+    "public/ewk_view.cc",
+    "public/ewk_view.h",
+    "public/ewk_view_internal.h",
+    "public/ewk_view_product.h",
+    "public/ewk_web_application_icon_data.cc",
+    "public/ewk_web_application_icon_data_internal.h",
+    "public/ewk_window_features.cc",
+    "public/ewk_window_features_internal.h",
+
+    "browser/web_view_evas_handler.cc",
+    "browser/web_view_evas_handler.h",
+    "renderer/content_renderer_client_efl.cc",
+    "renderer/content_renderer_client_efl.h",
+    "renderer/content_settings_client_efl.cc",
+    "renderer/content_settings_client_efl.h",
+    "renderer/editorclient_agent.cc",
+    "renderer/editorclient_agent.h",
+    "renderer/gin_native_bridge_dispatcher.cc",
+    "renderer/gin_native_bridge_dispatcher.h",
+    "renderer/gin_native_bridge_object.cc",
+    "renderer/gin_native_bridge_object.h",
+    "renderer/gin_native_bridge_value_converter.cc",
+    "renderer/gin_native_bridge_value_converter.h",
+    "renderer/gin_native_function_invocation_helper.cc",
+    "renderer/gin_native_function_invocation_helper.h",
+    "renderer/plugins/hole_layer.cc",
+    "renderer/plugins/hole_layer.h",
+    "renderer/plugins/plugin_placeholder_avplayer.cc",
+    "renderer/plugins/plugin_placeholder_avplayer.h",
+    "renderer/plugins/plugin_placeholder_hole.cc",
+    "renderer/plugins/plugin_placeholder_hole.h",
+    "renderer/plugins/plugin_placeholder_efl.cc",
+    "renderer/plugins/plugin_placeholder_efl.h",
+    "renderer/print_web_view_helper_efl.cc",
+    "renderer/print_web_view_helper_efl.h",
+    "renderer/render_frame_observer_efl.cc",
+    "renderer/render_frame_observer_efl.h",
+    "renderer/render_thread_observer_efl.cc",
+    "renderer/render_thread_observer_efl.h",
+    "renderer/render_view_observer_efl.cc",
+    "renderer/render_view_observer_efl.h",
+    "renderer/tizen_extensible.cc",
+    "renderer/tizen_extensible.h",
+    "wrt/dynamicplugin.cc",
+    "wrt/dynamicplugin.h",
+    "wrt/v8widget.cc",
+    "wrt/v8widget.h",
+    "wrt/wrtwidget.cc",
+    "wrt/wrtwidget.h",
+    "wrt/wrt_dynamicplugin.cc",
+    "wrt/wrt_dynamicplugin.h",
+    "wrt/wrt_url_request_interceptor.cc",
+    "wrt/wrt_url_request_interceptor.h",
+    "wrt/wrt_widget_host.cc",
+    "wrt/wrt_widget_host.h",
+  ]
+
+  if(tizen_vd_accessory){
+    sources += [
+      # add tizen_tv gamepad platform data fetcher
+      "browser/gamepad/gamepad_platform_data_fetcher_tizen_tv.cc",
+      "browser/gamepad/gamepad_platform_data_fetcher_tizen_tv.h",
+      "browser/gamepad/oci_gamepad_item.cc",
+      "browser/gamepad/oci_gamepad_item.h",
+    ]
+  }
+
+  if (tizen_pepper_extensions) {
+    sources += [
+      "renderer/pepper/pepper_helper.cc",
+      "renderer/pepper/pepper_helper.h",
+      "renderer/pepper/pepper_shared_memory_message_filter.cc",
+      "renderer/pepper/pepper_shared_memory_message_filter.h",
+      "common/trusted_pepper_plugin_info_cache.cc",
+      "common/trusted_pepper_plugin_info_cache.h",
+      "common/trusted_pepper_plugin_util.cc",
+      "common/trusted_pepper_plugin_util.h",
+      "ewk_extension_system_delegate.cc",
+      "ewk_extension_system_delegate.h",
+      "ewk_privilege_checker.cc",
+      "ewk_privilege_checker.h",
+      "private/ewk_value_private.cc",
+      "private/ewk_value_private.h",
+      "public/ewk_value.cc",
+      "public/ewk_value_product.h",
+      "public/ewk_value_type.h",
+    ]
+  }
+
+  if (!enable_plugins) {
+    exclude_source_set += [
+      "renderer/plugins/hole_layer.cc",
+      "renderer/plugins/hole_layer.h",
+      "renderer/plugins/plugin_placeholder_avplayer.cc",
+      "renderer/plugins/plugin_placeholder_avplayer.h",
+      "renderer/plugins/plugin_placeholder_efl.cc",
+      "renderer/plugins/plugin_placeholder_efl.h",
+    ]
+  }
+
+  if (!enable_plugins || !use_plugin_placeholder_hole) {
+    exclude_source_set += [
+      "renderer/plugins/plugin_placeholder_hole.cc",
+      "renderer/plugins/plugin_placeholder_hole.h",
+    ]
+  }
+
+  sources -= exclude_source_set
+
+  deps += [ "resource:edje_resources_ewk" ]
+  deps += [ ":broken_image" ]
+  deps += [ ":popup_btns" ]
+
+  if (tizen_product_tv) {
+   deps += [ ":cert_list" ]
+  }
+
+  if (enable_gcov) {
+    cflags += [
+      "-fprofile-arcs",
+      "-ftest-coverage",
+    ]
+    ldflags += [
+      "-fprofile-arcs",
+    ]
+  }
+}
+
+executable("efl_webprocess") {
+  sources = [ "efl_webprocess.cc" ]
+  deps = [ ":chromium-ewk" ]
+  if (is_tizen) {
+    configs += [ "//tizen_src/build/config/tizen:executable_config" ]
+  }
+  if (is_tizen && symbol_level != 0) {
+    configs -= [ "//build/config/compiler:default_symbols" ]
+    configs += [ "//build/config/compiler:symbols" ]
+  }
+}
+
+
+test("efl_integration_unittests") {
+ deps = [
+    "//base/test:test_support",
+    "//ipc",
+    "//ipc:run_all_unittests",
+ ]
+
+ libs = [ "dlog" ]
+
+ if (use_ttrace) {
+    libs += [ "ttrace" ]
+ }
+
+ include_dirs = [
+    ".",
+    "test"
+ ]
+
+ cflags = [
+   # Treat warning as error for this target.
+   # It needs to be included by means of pattern list because '-Werror' cflag
+   # will be excluded in chromium side (src/build/common.gypi), and GYP
+   # processes pattern lists after exclusion lists.
+   # (ref: https://gyp.gsrc.io/docs/InputFormatReference.md#Processing-Order)
+   "-Werror"
+ ]
+
+ if(tizen_pepper_extensions && enable_plugins) {
+   sources = [
+     "common/trusted_pepper_plugin_info_cache_unittest.cc",
+     "common/trusted_pepper_plugin_info_cache.cc",
+     "common/trusted_pepper_plugin_info_cache.h",
+     "../../../content/public/common/pepper_plugin_info.cc",
+     "../../../content/public/common/pepper_plugin_info.h",
+     "../../../content/public/common/webplugininfo.cc",
+     "../../../content/public/common/webplugininfo.h",
+     "../../../base/logging.cc",
+     "../../../base/logging.h",
+   ]
+   deps += [
+     "//net:net",
+     "//url:url"
+   ]
+}
+}
+
+copy("launch_exec_script") {
+  sources = [ "launch_exec.sh" ]
+  outputs = [ "$root_out_dir/{{source_file_part}}" ]
+}
+
+source_set("launch_exec") {
+  sources = [ "launch_exec.sh" ]
+  deps = [ ":launch_exec_script" ]
+}
+
+if (tizen_product_tv) {
+  copy("cert_list") {
+    sources=[ "./resource/clientcert/ClientCertList" ]
+    outputs = [ "$root_out_dir/resources/clientcert/{{source_file_part}}" ]
+  }
+}
+
+copy("broken_image") {
+  sources = [ "./resource/images/broken_image.png" ]
+  outputs = [ "$root_out_dir/images/{{source_file_part}}" ]
+}
+
+copy("popup_btns") {
+  sources = [ "./resource/images/popup_btn_ok.png",
+              "./resource/images/popup_btn_cancel.png", ]
+  outputs = [ "$root_out_dir/images/{{source_file_part}}" ]
+}

@@ -1,0 +1,18 @@
+# Copyright (c) 2015 Samsung Electronics. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+#import("//build/config/features.gni")
+#import("//tizen_src/supplement.gni")
+#import("//build/config/sanitizers/sanitizers.gni")
+#import("//build/config/ui.gni")
+#import("//build_overrides/v8.gni")
+#import("//media/media_options.gni")
+#import("//third_party/openh264/openh264_args.gni")
+
+group("tizen_src_root") {
+  testonly = true
+  deps = [
+    "//tizen_src/ewk:chromium_efl_all"
+  ]
+}

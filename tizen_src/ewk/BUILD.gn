@@ -1,0 +1,12 @@
+# Copyright (c) 2015 Samsung Electronics. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+group("chromium_efl_all") {
+  testonly = true
+  deps = [
+#    "//tizen_src/ewk/unittest:ewk_unittests",
+    "//tizen_src/ewk/ubrowser:ubrowser",
+    "//tizen_src/ewk/efl_webview_app:efl_webview_app",
+  ]
+}

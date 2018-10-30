@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<grit latest_public_release="0" current_release="1">
+  <outputs>
+    <output filename="grit/ui_resources_tizen.h" type="rc_header">
+      <emit emit_type='prepend'></emit>
+    </output>
+    <output filename="ui_resources_tizen.pak" type="data_package" />
+  </outputs>
+  <release seq="1">
+    <includes>
+      <include name="IDR_TIZEN_THICK_SCROLLBAR_ARROW_BUTTON_DISABLED" file="tizen/scrollbar_thick_arrow_button_disabled.png" type="BINDATA" />
+      <include name="IDR_TIZEN_THICK_SCROLLBAR_ARROW_BUTTON_HOVER" file="tizen/scrollbar_thick_arrow_button_hover.png" type="BINDATA" />
+      <include name="IDR_TIZEN_THICK_SCROLLBAR_ARROW_BUTTON_NORMAL" file="tizen/scrollbar_thick_arrow_button_normal.png" type="BINDATA" />
+      <include name="IDR_TIZEN_THICK_SCROLLBAR_HORIZONTAL_THUMB_NORMAL_CENTER" file="tizen/scrollbar_thick_thumb_horizontal_normal_center.png" type="BINDATA" />
+      <include name="IDR_TIZEN_THICK_SCROLLBAR_HORIZONTAL_THUMB_NORMAL_LEFT" file="tizen/scrollbar_thick_thumb_horizontal_normal_left.png" type="BINDATA" />
+      <include name="IDR_TIZEN_THICK_SCROLLBAR_HORIZONTAL_THUMB_NORMAL_RIGHT" file="tizen/scrollbar_thick_thumb_horizontal_normal_right.png" type="BINDATA" />
+      <include name="IDR_TIZEN_THICK_SCROLLBAR_HORIZONTAL_THUMB_PRESSED_CENTER" file="tizen/scrollbar_thick_thumb_horizontal_pressed_center.png" type="BINDATA" />
+      <include name="IDR_TIZEN_THICK_SCROLLBAR_HORIZONTAL_THUMB_PRESSED_LEFT" file="tizen/scrollbar_thick_thumb_horizontal_pressed_left.png" type="BINDATA" />
+      <include name="IDR_TIZEN_THICK_SCROLLBAR_HORIZONTAL_THUMB_PRESSED_RIGHT" file="tizen/scrollbar_thick_thumb_horizontal_pressed_right.png" type="BINDATA" />
+      <include name="IDR_TIZEN_THICK_SCROLLBAR_VERTICAL_THUMB_NORMAL_BOTTOM" file="tizen/scrollbar_thick_thumb_vertical_normal_bottom.png" type="BINDATA" />
+      <include name="IDR_TIZEN_THICK_SCROLLBAR_VERTICAL_THUMB_NORMAL_CENTER" file="tizen/scrollbar_thick_thumb_vertical_normal_center.png" type="BINDATA" />
+      <include name="IDR_TIZEN_THICK_SCROLLBAR_VERTICAL_THUMB_NORMAL_TOP" file="tizen/scrollbar_thick_thumb_vertical_normal_top.png" type="BINDATA" />
+      <include name="IDR_TIZEN_THICK_SCROLLBAR_VERTICAL_THUMB_PRESSED_BOTTOM" file="tizen/scrollbar_thick_thumb_vertical_pressed_bottom.png" type="BINDATA" />
+      <include name="IDR_TIZEN_THICK_SCROLLBAR_VERTICAL_THUMB_PRESSED_CENTER" file="tizen/scrollbar_thick_thumb_vertical_pressed_center.png" type="BINDATA" />
+      <include name="IDR_TIZEN_THICK_SCROLLBAR_VERTICAL_THUMB_PRESSED_TOP" file="tizen/scrollbar_thick_thumb_vertical_pressed_top.png" type="BINDATA" />
+      <include name="IDR_TIZEN_THICK_SCROLLBAR_HORIZONTAL_TRACK_NORMAL_CENTER" file="tizen/scrollbar_thick_track_horizontal_normal_center.png" type="BINDATA" />
+      <include name="IDR_TIZEN_THICK_SCROLLBAR_HORIZONTAL_TRACK_NORMAL_LEFT" file="tizen/scrollbar_thick_track_horizontal_normal_left.png" type="BINDATA" />
+      <include name="IDR_TIZEN_THICK_SCROLLBAR_HORIZONTAL_TRACK_NORMAL_RIGHT" file="tizen/scrollbar_thick_track_horizontal_normal_right.png" type="BINDATA" />
+      <include name="IDR_TIZEN_THICK_SCROLLBAR_VERTICAL_TRACK_NORMAL_BOTTOM" file="tizen/scrollbar_thick_track_vertical_normal_bottom.png" type="BINDATA" />
+      <include name="IDR_TIZEN_THICK_SCROLLBAR_VERTICAL_TRACK_NORMAL_CENTER" file="tizen/scrollbar_thick_track_vertical_normal_center.png" type="BINDATA" />
+      <include name="IDR_TIZEN_THICK_SCROLLBAR_VERTICAL_TRACK_NORMAL_TOP" file="tizen/scrollbar_thick_track_vertical_normal_top.png" type="BINDATA" />
+      <include name="IDR_TIZEN_THIN_SCROLLBAR_HORIZONTAL_THUMB_CENTER" file="tizen/scrollbar_thin_thumb_horizontal_normal_center.png" type="BINDATA" />
+      <include name="IDR_TIZEN_THIN_SCROLLBAR_HORIZONTAL_THUMB_LEFT" file="tizen/scrollbar_thin_thumb_horizontal_normal_left.png" type="BINDATA" />
+      <include name="IDR_TIZEN_THIN_SCROLLBAR_HORIZONTAL_THUMB_RIGHT" file="tizen/scrollbar_thin_thumb_horizontal_normal_right.png" type="BINDATA" />
+      <include name="IDR_TIZEN_THIN_SCROLLBAR_VERTICAL_THUMB_BOTTOM" file="tizen/scrollbar_thin_thumb_vertical_normal_bottom.png" type="BINDATA" />
+      <include name="IDR_TIZEN_THIN_SCROLLBAR_VERTICAL_THUMB_CENTER" file="tizen/scrollbar_thin_thumb_vertical_normal_center.png" type="BINDATA" />
+      <include name="IDR_TIZEN_THIN_SCROLLBAR_VERTICAL_THUMB_TOP" file="tizen/scrollbar_thin_thumb_vertical_normal_top.png" type="BINDATA" />
+      <include name="IDR_TIZEN_THIN_SCROLLBAR_HORIZONTAL_TRACK_CENTER" file="tizen/scrollbar_thin_track_horizontal_normal_center.png" type="BINDATA" />
+      <include name="IDR_TIZEN_THIN_SCROLLBAR_HORIZONTAL_TRACK_LEFT" file="tizen/scrollbar_thin_track_horizontal_normal_left.png" type="BINDATA" />
+      <include name="IDR_TIZEN_THIN_SCROLLBAR_HORIZONTAL_TRACK_RIGHT" file="tizen/scrollbar_thin_track_horizontal_normal_right.png" type="BINDATA" />
+      <include name="IDR_TIZEN_THIN_SCROLLBAR_VERTICAL_TRACK_BOTTOM" file="tizen/scrollbar_thin_track_vertical_normal_bottom.png" type="BINDATA" />
+      <include name="IDR_TIZEN_THIN_SCROLLBAR_VERTICAL_TRACK_CENTER" file="tizen/scrollbar_thin_track_vertical_normal_center.png" type="BINDATA" />
+      <include name="IDR_TIZEN_THIN_SCROLLBAR_VERTICAL_TRACK_TOP" file="tizen/scrollbar_thin_track_vertical_normal_top.png" type="BINDATA" />
+    </includes>
+  </release>
+</grit>

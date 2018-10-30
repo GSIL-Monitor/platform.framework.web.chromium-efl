@@ -1,0 +1,27 @@
+# Copyright (c) 2015 Samsung Electronics. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+# For //third_party/WebKit/Source/core:rendering target
+# Temporary kept in the //third_party/WebKit/Source/core:remaining target
+if (is_tizen) {
+  # Already excluded using !linux in //third_party/WebKit/Source/core/BUILD.gn
+  external_exclude_webkit_core_layout_sources = []
+} else {
+  external_exclude_webkit_core_layout_sources = [
+    "LayoutThemeLinux.cpp",
+    "LayoutThemeLinux.h",
+  ]
+}
+external_webkit_core_layout_sources = [
+  "//tizen_src/chromium_impl/third_party/WebKit/Source/core/layout/LayoutThemeChromiumTizen.cpp",
+  "//tizen_src/chromium_impl/third_party/WebKit/Source/core/layout/LayoutThemeChromiumTizen.h",
+]
+
+# For //third_party/WebKit/Source/core:core_generated target
+external_webkit_core_generated_deps = [
+  "//tizen_src/chromium_impl/third_party/WebKit/Source/core:webkit_core_generated",
+]
+
+# For //third_party/WebKit/Source/core:make_core_generated target
+external_webkit_core_make_generated_deps = [ "//tizen_src/chromium_impl/third_party/WebKit/Source/core:TizenUserAgentStyleSheets" ]

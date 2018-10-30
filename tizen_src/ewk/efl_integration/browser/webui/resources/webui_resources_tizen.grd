@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright 2018 Samsung Electronics. All rights reserved.
+Use of this source code is governed by a BSD-style license that can be
+found in the LICENSE file.
+-->
+<grit latest_public_release="0" current_release="1">
+  <outputs>
+    <output filename="grit/webui_resources_tizen.h" type="rc_header">
+      <emit emit_type='prepend'></emit>
+    </output>
+    <output filename="webui_resources_tizen.pak" type="data_package" />
+  </outputs>
+  <release seq="1">
+    <includes>
+      <include name="IDR_VERSION_UI_EFL_HTML" file="about_version.html" flattenhtml="true" allowexternalscript="true" type="BINDATA" />
+      <include name="IDR_VERSION_UI_EFL_JS" file="about_version.js" type="BINDATA" />
+      <include name="IDR_VERSION_UI_EFL_CSS" file="about_version.css" type="BINDATA" />
+    </includes>
+    <messages fallback_to_english="true">
+      <!-- about:version strings -->
+      <message name="IDS_ABOUT_VERSION_TITLE" desc="Title on the about:version page">
+        About Version
+      </message>
+      <message name="IDS_ABOUT_VERSION_OFFICIAL" desc="official build on the about:version page">
+        Official Build
+      </message>
+      <message name="IDS_ABOUT_VERSION_32BIT" desc="32-bit on the chrome://version page">
+        (32-bit)
+      </message>
+      <message name="IDS_ABOUT_VERSION_64BIT" desc="64-bit on the chrome://version page">
+        (64-bit)
+      </message>
+      <message name="IDS_ABOUT_VERSION_REVISION" desc="label for the revision on the about:version page">
+        Revision
+      </message>
+      <message name="IDS_ABOUT_VERSION_OS" desc="label for the OS on the about:version page">
+        OS
+      </message>
+      <message name="IDS_ABOUT_VERSION_USER_AGENT" desc="label for the user agent on the about:version page">
+        User Agent
+      </message>
+      <message name="IDS_ABOUT_VERSION_COMMAND_LINE" desc="label for the command line on the about:version page">
+        Command Line
+      </message>
+      <message name="IDS_ABOUT_VERSION_EXECUTABLE_PATH" desc="label for the executable path on the about:version page">
+        Executable Path
+      </message>
+      <message name="IDS_ABOUT_VERSION_PROFILE_PATH" desc="label for the profile path on the about:version page">
+        Profile Path
+      </message>
+      <message name="IDS_ABOUT_VERSION_PATH_NOTFOUND" desc="label for the non-existent path on the about:version page">
+        No such file or directory
+      </message>
+      <message name="IDS_ABOUT_VERSION_VARIATIONS" desc="label for the variations list on the about:version page">
+        Variations
+      </message>
+      <message name="IDS_PRODUCT_NAME" desc="The Chrome application name">
+        Chromium
+      </message>
+      <message name="IDS_ABOUT_VERSION_COPYRIGHT" desc="Copyright information on the about pages">
+        Copyright <ph name="YEAR">$1</ph> Samsung Electronics. All rights reserved.
+      </message>
+      <message name="IDS_ABOUT_VERSION_COMPANY_NAME" desc="Company name on the about pages">
+        Samsung Electronics
+      </message>
+    </messages>
+  </release>
+</grit>

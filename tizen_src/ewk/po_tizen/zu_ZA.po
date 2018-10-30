@@ -1,0 +1,9 @@
+msgid "IDS_WEBVIEW_OPT_OPEN_LINK_IN_NEW_TAB_ABB"
+msgstr "Vula Isixhumanisi Kuthebhu Entsha"
+
+msgid "IDS_WEBVIEW_OPT_OPEN_LINK_ABB"
+msgstr "Vula kusipheqi sewebhu"
+
+msgid "IDS_WEBVIEW_OPEN"
+msgstr "Vula"
+

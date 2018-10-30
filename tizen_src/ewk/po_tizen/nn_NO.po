@@ -1,0 +1,9 @@
+msgid "IDS_WEBVIEW_OPT_OPEN_LINK_IN_NEW_TAB_ABB"
+msgstr "Åpne kobling i ny fane"
+
+msgid "IDS_WEBVIEW_OPT_OPEN_LINK_ABB"
+msgstr "Åpne i webleser"
+
+msgid "IDS_WEBVIEW_OPEN"
+msgstr "Åpne"
+

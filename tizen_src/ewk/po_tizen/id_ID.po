@@ -1,0 +1,9 @@
+msgid "IDS_WEBVIEW_OPT_OPEN_LINK_IN_NEW_TAB_ABB"
+msgstr "Buka Link di Tab Baru"
+
+msgid "IDS_WEBVIEW_OPT_OPEN_LINK_ABB"
+msgstr "Buka di Browser Web"
+
+msgid "IDS_WEBVIEW_OPEN"
+msgstr "Buka"
+

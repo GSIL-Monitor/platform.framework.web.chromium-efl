@@ -1,0 +1,9 @@
+msgid "IDS_WEBVIEW_OPT_OPEN_LINK_IN_NEW_TAB_ABB"
+msgstr "Fungua Kiungo kwenye Kichupo Kipya"
+
+msgid "IDS_WEBVIEW_OPT_OPEN_LINK_ABB"
+msgstr "Fungua katika Kivinjari cha Wavuti"
+
+msgid "IDS_WEBVIEW_OPEN"
+msgstr "Fungua"
+

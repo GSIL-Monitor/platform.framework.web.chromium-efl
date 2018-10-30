@@ -1,0 +1,808 @@
+/*
+ * Copyright (c) 2010 Samsung Electronics Co., Ltd All Rights Reserved
+ *
+ * BSD 2-Clause License (http://www.opensource.org/licenses/bsd-license.php)
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ *
+ *   1. Redistributions of source code must retain the above copyright notice, this
+ *      list of conditions and the following disclaimer.
+ *   2. Redistributions in binary form must reproduce the above copyright notice,
+ *      this list of conditions and the following disclaimer in the documentation
+ *      and/or other materials provided with the distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR
+ * ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+
+#define ENTRY_SELECTION_BLOCK_HANDLE_MIN_WIDTH_INC 34
+#define ENTRY_SELECTION_BLOCK_HANDLE_MIN_HEIGHT_INC 34
+#define ENTRY_SELECTION_BLOCK_HANDLE_EDGE_WIDTH 2
+#define ENTRY_CURSOR_HANDLE_MIN_HEIGHT_INC 51
+#define ENTRY_CURSOR_HANDLE_MIN_WIDTH_INC 51
+#define ENTRY_CURSOR_SIZE_INC 2 0
+
+collections {
+ group { name: "elm/entry/cursor/default";
+        parts {
+            part { name: "clip2";
+                type: RECT;
+                mouse_events: 0;
+                scale: 1;
+                description { state: "default" 0.0;
+                    rel1.to: "clip";
+                    rel2.to: "clip";
+                visible: 0;
+                }
+                description { state: "focused" 0.0;
+                    inherit: "default" 0.0;
+                    visible: 1;
+                }
+            }
+            part { name: "clip";
+                type: RECT;
+                mouse_events: 0;
+                scale: 1;
+                clip_to: "clip2";
+                description { state: "default" 0.0;
+                    rel1.offset: -10 0;
+                    rel2.offset: 9 9;
+                }
+                description { state: "hidden" 0.0;
+                    inherit: "default" 0.0;
+                    visible: 0;
+                }
+            }
+            part { name: "base";
+                type: RECT;
+                mouse_events: 0;
+                scale: 1;
+                clip_to: "clip";
+                description { state: "default" 0.0;
+                    min: ENTRY_CURSOR_SIZE_INC;
+                    align: 0.5 1.0;
+                    color: 0 0 0 0;
+                }
+            }
+            part { name: "glow";
+                type: RECT;
+                mouse_events: 0;
+                scale: 1;
+                clip_to: "clip2";
+                description { state: "default" 0.0;
+                    min: ENTRY_CURSOR_SIZE_INC;
+                    fixed: 1 0;
+                    align: 0.5 0.5;
+                    rel1 {
+                        relative: 0.0  0.0;
+                        offset: 0 -2;
+                    }
+                    rel2 {
+                        relative: 0.0  1.0;
+                        offset: 0 -2;
+                    }
+                    color: 2 61 132 255; /*(Changeable UI) color_class: "F052";*/
+                    visible: 1;
+                }
+                description { state: "hidden" 0.0;
+                    inherit: "default" 0.0;
+                    visible: 0;
+                }
+            }
+        }
+        programs {
+            program { name: "show";
+                action: STATE_SET "hidden" 0.0;
+                in: 0.6 0.0;
+                target: "glow";
+                after: "show4";
+            }
+            program { name: "show4";
+                action: STATE_SET "default" 0.0;
+                in: 0.6 0.0;
+                target: "glow";
+                after: "show";
+            }
+            program { name: "focused";
+                signal: "elm,action,focus";
+                source: "elm";
+                action: STATE_SET "focused" 0.0;
+                target: "clip2";
+                after: "show4";
+            }
+            program { name: "unfocused";
+                signal: "elm,action,unfocus";
+                source: "elm";
+                action: STATE_SET "default" 0.0;
+                target: "clip2";
+                after: "stop_glow";
+            }
+            program { name: "stop_glow";
+            action: ACTION_STOP;
+                target: "show";
+                target: "show4";
+            }
+            program { name: "show_cursor";
+                signal: "elm,action,show,cursor";
+                source: "elm";
+                action: ACTION_STOP;
+                target: "show";
+                target: "show4";
+                after: "show_cursor1";
+            }
+            program { name: "show_cursor1";
+                action: STATE_SET "default" 0.0;
+                target: "glow";
+                after: "show";
+            }
+        }
+    }
+
+
+    group { name: "elm/entry/selection/default";
+        parts {
+            part { name: "bg";
+                type: RECT;
+                scale: 1;
+                mouse_events: 0;
+                description { state: "default" 0.0;
+                    color_class: "F065";
+                }
+            }
+        }
+    }
+
+    group { name: "elm/entry/selection/block_handle_left";
+        images {
+          image: "copy&paste_handler_circle_bottom.png" COMP;
+          image: "copy&paste_handler_line_bottom.png" COMP;
+          image: "copy&paste_handler_circle_top.png" COMP;
+          image: "copy&paste_handler_line_top.png" COMP;
+        }
+        parts {
+            part { name: "handle";
+                mouse_events: 1;
+                scale: 1;
+                description { state: "default" 0.0;
+                    visible: 0;
+                    fixed: 1 1;
+                    align: 0.5 0;
+                    min: ENTRY_SELECTION_BLOCK_HANDLE_MIN_WIDTH_INC ENTRY_SELECTION_BLOCK_HANDLE_MIN_HEIGHT_INC;
+                    max: ENTRY_SELECTION_BLOCK_HANDLE_MIN_WIDTH_INC ENTRY_SELECTION_BLOCK_HANDLE_MIN_HEIGHT_INC;
+                    color: 2 61 132 255;
+                    image {
+                        normal: "copy&paste_handler_circle_bottom.png";
+                        border: 0 0 0 0;
+                    }
+                }
+                description { state: "show" 0.0;
+                    inherit: "default" 0.0;
+                    visible: 1;
+                }
+                description { state: "top" 0.0;
+                    inherit: "default" 0.0;
+                    visible: 1;
+                    align: 0.5 1;
+                    image {
+                        normal: "copy&paste_handler_circle_top.png";
+                    }
+                }
+                description { state: "bottom_reversed" 0.0;
+                    inherit: "default" 0.0;
+                    visible: 1;
+                    align: 0.5 0;
+                }
+                description { state: "top_reversed" 0.0;
+                    inherit: "default" 0.0;
+                    visible: 1;
+                    align: 0.5 1;
+                    image {
+                        normal: "copy&paste_handler_circle_top.png";
+                    }
+                }
+            }
+            part { name: "handler_line";
+                mouse_events: 1;
+                scale: 1;
+                description { state: "default" 0.0;
+                    visible: 0;
+                    fixed: 1 1;
+                    align: 0.5 0;
+                    min: ENTRY_SELECTION_BLOCK_HANDLE_MIN_WIDTH_INC ENTRY_SELECTION_BLOCK_HANDLE_MIN_HEIGHT_INC;
+                    max: ENTRY_SELECTION_BLOCK_HANDLE_MIN_WIDTH_INC ENTRY_SELECTION_BLOCK_HANDLE_MIN_HEIGHT_INC;
+                    color_class: "F052L1";
+                    image {
+                        normal: "copy&paste_handler_line_bottom.png";
+                        border: 0 0 0 0;
+                    }
+                }
+                description { state: "show" 0.0;
+                    inherit: "default" 0.0;
+                    visible: 1;
+                }
+                description { state: "top" 0.0;
+                    inherit: "default" 0.0;
+                    visible: 1;
+                    align: 0.5 1;
+                    image {
+                        normal: "copy&paste_handler_line_top.png";
+                    }
+                }
+                description { state: "bottom_reversed" 0.0;
+                    inherit: "default" 0.0;
+                    visible: 1;
+                    align: 0.5 0;
+                }
+                description { state: "top_reversed" 0.0;
+                    inherit: "default" 0.0;
+                    visible: 1;
+                    align: 0.5 1;
+                    image {
+                        normal: "copy&paste_handler_line_top.png";
+                    }
+                }
+            }
+        }
+        script {
+            public handler_ontop;
+            public handler_focused;
+            public handler_disabled;
+        }
+        programs {
+            program { name: "focused";
+                signal: "edje,focus,in";
+                source: "edje";
+                script {
+                    set_int(handler_focused, 1);
+                }
+            }
+            program { name: "unfocused";
+                signal: "edje,focus,out";
+                source: "edje";
+                script {
+                    set_int(handler_focused, 0);
+                    set_state(PART:"handle", "default", 0.0);
+                    set_state(PART:"handler_line", "default", 0.0);
+                }
+            }
+            program { name: "bottom_reversed";
+                signal: "elm,state,bottom,reversed";
+                source: "elm";
+                script {
+                    new disabled;
+                    disabled = get_int(handler_disabled);
+                    if (disabled == 0)
+                    {
+                        set_state(PART:"handle", "bottom_reversed", 0.0);
+                        set_state(PART:"handler_line", "bottom_reversed", 0.0);
+                    }
+                    else
+                    {
+                        set_state(PART:"handle", "default", 0.0);
+                        set_state(PART:"handler_line", "default", 0.0);
+                    }
+                }
+            }
+            program { name: "top_reversed";
+                signal: "elm,state,top,reversed";
+                source: "elm";
+                script {
+                    new disabled;
+                    disabled = get_int(handler_disabled);
+                    if (disabled == 0)
+                    {
+                        set_state(PART:"handle", "top_reversed", 0.0);
+                        set_state(PART:"handler_line", "top_reversed", 0.0);
+                    }
+                    else
+                    {
+                        set_state(PART:"handle", "default", 0.0);
+                        set_state(PART:"handler_line", "default", 0.0);
+                    }
+                }
+            }
+            program { name: "top";
+                signal: "elm,state,top";
+                source: "elm";
+                script {
+                    new focused, disabled;
+                    focused = get_int(handler_focused);
+                    disabled = get_int(handler_disabled);
+                    set_int(handler_ontop, 1);
+                    if ((focused == 1) && (disabled == 0))
+                    {
+                        set_state(PART:"handle", "top", 0.0);
+                        set_state(PART:"handler_line", "top", 0.0);
+                    }
+                    else
+                    {
+                        set_state(PART:"handle", "default", 0.0);
+                        set_state(PART:"handler_line", "default", 0.0);
+                    }
+                }
+            }
+            program { name: "bottom";
+                signal: "elm,state,bottom";
+                source: "elm";
+                script {
+                    new focused, disabled;
+                    focused = get_int(handler_focused);
+                    disabled = get_int(handler_disabled);
+                    set_int(handler_ontop, 0);
+                    if ((focused == 1) && (disabled == 0))
+                    {
+                        set_state(PART:"handle", "show", 0.0);
+                        set_state(PART:"handler_line", "show", 0.0);
+                    }
+                    else
+                    {
+                        set_state(PART:"handle", "default", 0.0);
+                        set_state(PART:"handler_line", "default", 0.0);
+                    }
+                }
+            }
+            program { name: "disabled";
+                signal: "app,selection,handler,disable";
+                source: "app";
+                script {
+                    set_int(handler_disabled, 1);
+                }
+            }
+            program { name: "enabled";
+                signal: "app,selection,handler,enable";
+                source: "app";
+                script {
+                    set_int(handler_disabled, 0);
+                }
+            }
+        }
+    }
+
+    group { name: "elm/entry/selection/block_handle_right";
+        images {
+          image: "copy&paste_handler_circle_bottom.png" COMP;
+          image: "copy&paste_handler_line_bottom.png" COMP;
+          image: "copy&paste_handler_circle_top.png" COMP;
+          image: "copy&paste_handler_line_top.png" COMP;
+        }
+
+        parts {
+            part { name: "handle";
+                mouse_events: 1;
+                scale: 1;
+                description { state: "default" 0.0;
+                    visible: 0;
+                    fixed: 1 1;
+                    align: 0.5 0;
+                    min: ENTRY_SELECTION_BLOCK_HANDLE_MIN_WIDTH_INC ENTRY_SELECTION_BLOCK_HANDLE_MIN_HEIGHT_INC;
+                    max: ENTRY_SELECTION_BLOCK_HANDLE_MIN_WIDTH_INC ENTRY_SELECTION_BLOCK_HANDLE_MIN_HEIGHT_INC;
+                    color: 2 61 132 255;
+                    image {
+                        normal: "copy&paste_handler_circle_bottom.png";
+                        border: 0 0 0 0;
+                    }
+                }
+                description { state: "show" 0.0;
+                    inherit: "default" 0.0;
+                    visible: 1;
+                }
+                description { state: "top" 0.0;
+                    inherit: "default" 0.0;
+                    visible: 1;
+                    align: 0.5 1;
+                    image {
+                        normal: "copy&paste_handler_circle_top.png";
+                    }
+                }
+                description { state: "bottom_reversed" 0.0;
+                    inherit: "default" 0.0;
+                    visible: 1;
+                    align: 0.5 0;
+                }
+                description { state: "top_reversed" 0.0;
+                    inherit: "default" 0.0;
+                    visible: 1;
+                    align: 0.5 1;
+                    image {
+                        normal: "copy&paste_handler_circle_top.png";
+                    }
+                }
+            }
+            part { name: "handler_line";
+                mouse_events: 1;
+                scale: 1;
+                description { state: "default" 0.0;
+                    visible: 0;
+                    fixed: 1 1;
+                    align: 0.5 0;
+                    min: ENTRY_SELECTION_BLOCK_HANDLE_MIN_WIDTH_INC ENTRY_SELECTION_BLOCK_HANDLE_MIN_HEIGHT_INC;
+                    max: ENTRY_SELECTION_BLOCK_HANDLE_MIN_WIDTH_INC ENTRY_SELECTION_BLOCK_HANDLE_MIN_HEIGHT_INC;
+                    color: 2 61 132 255;
+                    image {
+                        normal: "copy&paste_handler_line_bottom.png";
+                        border: 0 0 0 0;
+                    }
+                }
+                description { state: "show" 0.0;
+                    inherit: "default" 0.0;
+                    visible: 1;
+                }
+                description { state: "top" 0.0;
+                    inherit: "default" 0.0;
+                    visible: 1;
+                    align: 0.5 1;
+                    image {
+                        normal: "copy&paste_handler_line_top.png";
+                    }
+                }
+                description { state: "bottom_reversed" 0.0;
+                    inherit: "default" 0.0;
+                    visible: 1;
+                    align: 0.5 0;
+                    }
+                description { state: "top_reversed" 0.0;
+                    inherit: "default" 0.0;
+                    visible: 1;
+                    align: 0.5 1;
+                    image {
+                        normal: "copy&paste_handler_line_top.png";
+                    }
+                }
+            }
+        }
+        script {
+            public handler_ontop;
+            public handler_focused;
+            public handler_disabled;
+        }
+        programs {
+            program { name: "focused";
+                signal: "edje,focus,in";
+                source: "edje";
+                script {
+                    set_int(handler_focused, 1);
+                }
+            }
+            program { name: "unfocused";
+                signal: "edje,focus,out";
+                source: "edje";
+                script {
+                    set_int(handler_focused, 0);
+                    set_state(PART:"handle", "default", 0.0);
+                    set_state(PART:"handler_line", "default", 0.0);
+                }
+            }
+            program { name: "top";
+                signal: "elm,state,top";
+                source: "elm";
+                script {
+                    new focused, disabled;
+                    focused = get_int(handler_focused);
+                    disabled = get_int(handler_disabled);
+                    set_int(handler_ontop, 1);
+                    if ((focused == 1) && (disabled == 0))
+                        {
+                            set_state(PART:"handle", "top", 0.0);
+                            set_state(PART:"handler_line", "top", 0.0);
+                        }
+                    else
+                        {
+                            set_state(PART:"handle", "default", 0.0);
+                            set_state(PART:"handler_line", "default", 0.0);
+                    }
+                }
+            }
+            program { name: "bottom";
+                signal: "elm,state,bottom";
+                source: "elm";
+                script {
+                    new focused, disabled;
+                    focused = get_int(handler_focused);
+                    disabled = get_int(handler_disabled);
+                    set_int(handler_ontop, 0);
+                    if ((focused == 1) && (disabled == 0))
+                        {
+                            set_state(PART:"handle", "show", 0.0);
+                            set_state(PART:"handler_line", "show", 0.0);
+                        }
+                    else
+                        {
+                            set_state(PART:"handle", "default", 0.0);
+                            set_state(PART:"handler_line", "default", 0.0);
+                    }
+                }
+            }
+            program { name: "bottom_reversed";
+                signal: "elm,state,bottom,reversed";
+                source: "elm";
+                script {
+                    new disabled;
+                    disabled = get_int(handler_disabled);
+                    if (disabled == 0)
+                    {
+                        set_state(PART:"handle", "bottom_reversed", 0.0);
+                        set_state(PART:"handler_line", "bottom_reversed", 0.0);
+                    }
+                    else
+                    {
+                        set_state(PART:"handle", "default", 0.0);
+                        set_state(PART:"handler_line", "default", 0.0);
+                    }
+                }
+            }
+            program { name: "top_reversed";
+                signal: "elm,state,top,reversed";
+                source: "elm";
+                script {
+                    new disabled;
+                    disabled = get_int(handler_disabled);
+                    if (disabled == 0)
+                    {
+                        set_state(PART:"handle", "top_reversed", 0.0);
+                        set_state(PART:"handler_line", "top_reversed", 0.0);
+                    }
+                    else
+                    {
+                        set_state(PART:"handle", "default", 0.0);
+                        set_state(PART:"handler_line", "default", 0.0);
+                    }
+                }
+            }
+            program { name: "disabled";
+                signal: "app,selection,handler,disable";
+                source: "app";
+                script {
+                    set_int(handler_disabled, 1);
+                }
+            }
+            program { name: "enabled";
+                signal: "app,selection,handler,enable";
+                source: "app";
+                script {
+                    set_int(handler_disabled, 0);
+                }
+            }
+        }
+    }
+
+   group { name: "elm/entry/cursor_handle/default";
+      images {
+         set {
+            name: "copy&paste_handler_center_circle";
+            image {
+              image: "copy&paste_handler_center_circle.png" COMP;
+            }
+         }
+         set {
+            name: "copy&paste_handler_center_line";
+            image {
+               image: "copy&paste_handler_center_line.png" COMP;
+            }
+         }
+      }
+        parts {
+            part { name: "sens";
+                type: RECT;
+                scale: 1;
+                mouse_events: 1;
+                description { state: "default" 0.0;
+                    visible: 0;
+                    color: 0 0 0 0;
+                    rel1 { relative: -0.25 0.0; to: "handle";}
+                    rel2 { relative: 1.25 1.0; to: "handle";}
+                }
+                description { state: "show" 0.0;
+                    inherit: "default" 0.0;
+                    visible: 1;
+                }
+            }
+            part { name: "handle";
+                scale: 1;
+                mouse_events: 1;
+                description { state: "default" 0.0;
+                    min: ENTRY_CURSOR_HANDLE_MIN_WIDTH_INC ENTRY_CURSOR_HANDLE_MIN_HEIGHT_INC;
+                    max: ENTRY_CURSOR_HANDLE_MIN_WIDTH_INC ENTRY_CURSOR_HANDLE_MIN_HEIGHT_INC;
+                    align: 0 0;
+                    visible: 0;
+                    align: 0.5 0;
+                    color: 2 61 132 255;
+                    image {
+                        normal: "copy&paste_handler_center_circle";
+                        border: 0 0 0 0;
+                    }
+                    image.middle: SOLID;
+                    fill.smooth: 0;
+                }
+                description { state: "show" 0.0;
+                    inherit: "default" 0.0;
+                    visible: 1;
+                }
+                description { state: "top" 0.0;
+                    inherit: "default" 0.0;
+                    visible: 1;
+                    align: 0.5 1.0;
+                }
+            }
+            part { name: "handler_line";
+                scale: 1;
+                mouse_events: 1;
+                description { state: "default" 0.0;
+                    min: ENTRY_CURSOR_HANDLE_MIN_WIDTH_INC ENTRY_CURSOR_HANDLE_MIN_HEIGHT_INC;
+                    max: ENTRY_CURSOR_HANDLE_MIN_WIDTH_INC ENTRY_CURSOR_HANDLE_MIN_HEIGHT_INC;
+                    align: 0 0;
+                    visible: 0;
+                    align: 0.5 0;
+                    color: 2 61 132 255;
+                    image {
+                        normal: "copy&paste_handler_center_line";
+                        border: 0 0 0 0;
+                    }
+                    image.middle: SOLID;
+                    fill.smooth: 0;
+                }
+                description { state: "show" 0.0;
+                    inherit: "default" 0.0;
+                    visible: 1;
+                }
+                description { state: "top" 0.0;
+                    inherit: "default" 0.0;
+                    visible: 1;
+                    align: 0.5 1.0;
+                }
+            }
+        }
+        script {
+            public on_top;
+        }
+        programs {
+            program { name: "focused";
+                signal: "edje,focus,in";
+                source: "edje";
+                script {
+                    new on_top_val = get_int(on_top);
+                    if (on_top_val)
+                    {
+                        set_state(PART:"handle", "top", 0.0);
+                        set_state(PART:"handler_line", "top", 0.0);
+                    }
+                    else
+                    {
+                        set_state(PART:"handle", "show", 0.0);
+                        set_state(PART:"handler_line", "show", 0.0);
+                    }
+                    set_state(PART:"sens", "show", 0.0);
+                }
+            }
+            program { name: "unfocused";
+                signal: "edje,focus,out";
+                source: "edje";
+                script {
+                    set_state(PART:"handle", "default", 0.0);
+                    set_state(PART:"handler_line", "default", 0.0);
+                    set_state(PART:"sens", "default", 0.0);
+                }
+            }
+            program { name: "show";
+                signal: "edje,cursor,handle,show";
+                source: "edje";
+                script {
+                    set_int(on_top, 0);
+                    set_state(PART:"handle", "show", 0.0);
+                    set_state(PART:"handler_line", "show", 0.0);
+                    set_state(PART:"sens", "show", 0.0);
+                }
+            }
+            program { name: "hide";
+                signal: "edje,cursor,handle,hide";
+                source: "edje";
+                script {
+                    set_state(PART:"handle", "default", 0.0);
+                    set_state(PART:"handler_line", "default", 0.0);
+                    set_state(PART:"sens", "default", 0.0);
+                }
+            }
+            program { name: "top";
+                signal: "edje,cursor,handle,top";
+                source: "edje";
+                script {
+                    set_int(on_top, 1);
+                    set_state(PART:"handle", "top", 0.0);
+                    set_state(PART:"handler_line", "top", 0.0);
+                    set_state(PART:"sens", "show", 0.0);
+                }
+            }
+        }
+    }
+    group { name: "elm/entry/selection/block_handle_edge_left";
+        parts {
+            part { name: "align";
+                type: SPACER;
+                scale: 1;
+                description { state: "default" 0.0;
+                    min: 0 0;
+                    max: 0 0;
+                    align: 0 0;
+                }
+            }
+            part { name: "bg";
+                type: RECT;
+                scale: 1;
+                mouse_events: 0;
+                description { state: "default" 0.0;
+                    fixed: 1 0;
+                    color: 2 61 132 255;
+                    min: ENTRY_SELECTION_BLOCK_HANDLE_EDGE_WIDTH 0;
+                    max: ENTRY_SELECTION_BLOCK_HANDLE_EDGE_WIDTH -1;
+                    rel2 { relative: 0 1; to_x: "align"; }
+                    align: 0 0;
+                    visible: 0;
+                }
+                description { state: "show" 0.0;
+                    inherit: "default" 0.0;
+                    visible: 1;
+                }
+            }
+        }
+        programs {
+            program { name: "show";
+                signal: "edje,focus,in";
+                source: "edje";
+                script {
+                    set_state(PART:"bg", "show", 0.0);
+                }
+            }
+            program { name: "hide";
+                signal: "edje,focus,out";
+                source: "edje";
+                script {
+                    set_state(PART:"bg", "default", 0.0);
+                }
+            }
+        }
+    }
+
+    group { name: "elm/entry/selection/block_handle_edge_right";
+        parts {
+            part { name: "bg";
+                type: RECT;
+                scale: 1;
+                mouse_events: 0;
+                description { state: "default" 0.0;
+                    color: 2 61 132 255;
+                    min: ENTRY_SELECTION_BLOCK_HANDLE_EDGE_WIDTH 0;
+                    max: ENTRY_SELECTION_BLOCK_HANDLE_EDGE_WIDTH -1;
+                    visible: 0;
+                }
+                description { state: "show" 0.0;
+                    inherit: "default" 0.0;
+                    visible: 1;
+                }
+            }
+        }
+        programs {
+            program { name: "show";
+                signal: "edje,focus,in";
+                source: "edje";
+                script {
+                    set_state(PART:"bg", "show", 0.0);
+                }
+            }
+            program { name: "hide";
+                signal: "edje,focus,out";
+                source: "edje";
+                script {
+                    set_state(PART:"bg", "default", 0.0);
+                }
+            }
+        }
+    }
+}

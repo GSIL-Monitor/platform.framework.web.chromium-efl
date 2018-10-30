@@ -1,0 +1,46 @@
+collections { base_scale: 2.0;
+    group {
+        name: "main_layout";
+        parts {
+            part {
+                name: "content";
+                type: SWALLOW;
+                scale: 1;
+                description {
+                    state: "default" 0.0;
+                    visible: 1;
+                    fixed: 1 1;
+                    align: 0.0 0.0;
+                    rel1 { relative: 0.0 0.0; }
+                    rel2 { relative: 1.0 1.0; }
+                }
+            }
+            part {
+                name: "autofill_popup";
+                type: SWALLOW;
+                scale: 1;
+                description {
+                    state: "default" 0.0;
+                    visible: 1;
+                    fixed: 1 1;
+                    align: 0.0 0.0;
+                    rel1 { relative: 0.0 0.0; to:"content";}
+                    rel2 { relative: 1.0 1.0; to:"content";}
+                }
+            }
+            part {
+                name: "context_menu_popup";
+                type: SWALLOW;
+                scale: 1;
+                description {
+                    state: "default" 0.0;
+                    visible: 1;
+                    fixed: 1 1;
+                    align: 0.0 0.0;
+                    rel1 { relative: 0.0 0.0; to:"content";}
+                    rel2 { relative: 1.0 1.0; to:"content";}
+                }
+            }
+        }
+    }
+}

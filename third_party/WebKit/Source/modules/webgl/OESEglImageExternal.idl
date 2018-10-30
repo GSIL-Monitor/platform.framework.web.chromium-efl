@@ -1,0 +1,22 @@
+/*
+ * Copyright 2017 Samsung Electronics Inc. All rights reserved.
+ * Use of this source code is governed by a BSD-style license that can be
+ * found in the LICENSE file.
+ */
+
+typedef unsigned long GLenum;
+
+[
+  DependentLifetime,
+  NoInterfaceObject,
+  DoNotCheckConstants
+] interface OESEglImageExternal {
+  const GLenum TEXTURE_EXTERNAL_OES             = 0x8D65;
+  const GLenum SAMPLER_EXTERNAL_OES             = 0x8D66;
+  const GLenum TEXTURE_BINDING_EXTERNAL_OES     = 0x8D67;
+  const GLenum REQUIRED_TEXTURE_IMAGE_UNITS_OES = 0x8D68;
+
+  [CallWith=ExecutionContext, RaisesException] void EGLImageTargetTexture2DOES(
+       GLenum target, HTMLVideoElement video);
+};
+

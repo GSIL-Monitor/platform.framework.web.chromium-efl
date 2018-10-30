@@ -1,0 +1,132 @@
+# Copyright (c) 2015 Samsung Electronics. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+import("ui_efl_injections.gni")
+import("//tizen_src/build/config/tizen_features.gni")
+
+external_ui_base_configs = [
+  "//tizen_src/build:elementary",
+  "//tizen_src/build:libelementary",
+]
+
+external_ui_gl_configs = [
+  "//tizen_src/build:evas",
+  "//tizen_src/build:libevas",
+  "//tizen_src/build:ecore-evas",
+  "//tizen_src/build:libecore-evas",
+  "//tizen_src/build:libdrm",
+  "//tizen_src/build:liblibdrm",
+  "//tizen_src/build:libtbm",
+  "//tizen_src/build:liblibtbm",
+]
+
+external_ui_gfx_x11_configs = []
+external_ui_gfx_configs = []
+external_ozone_platform_deps = []
+
+if (!use_wayland) {
+  external_ui_base_configs += [
+    "//tizen_src/build:ecore-x",
+    "//tizen_src/build:libecore-x",
+    "//tizen_src/build:x11",
+    "//tizen_src/build:libx11",
+  ]
+  external_ui_gl_configs += [ "//tizen_src/build:libdri2" ]
+  external_ui_gl_configs += [ "//tizen_src/build:liblibdri2" ]
+  external_ui_gfx_x11_configs += [ "//tizen_src/build:ecore-x" ]
+  external_ui_gfx_x11_configs += [ "//tizen_src/build:libecore-x" ]
+  external_ui_gfx_configs += [ "//tizen_src/build:ecore-x" ]
+  external_ui_gfx_configs += [ "//tizen_src/build:libecore-x" ]
+
+  if (is_tizen) {
+    # needed for efl_pixmap.cc/h
+    external_ui_gl_configs += [ "//tizen_src/build:x11" ]
+    external_ui_gl_configs += [ "//tizen_src/build:libx11" ]
+  }
+} else {
+  external_ui_gfx_configs += [ "//tizen_src/build:ecore-wayland" ]
+  external_ui_gfx_configs += [ "//tizen_src/build:libecore-wayland" ]
+  external_ui_gfx_configs += [ "//tizen_src/build:capi-system-info" ]
+  external_ui_gfx_configs += [ "//tizen_src/build:libcapi-system-info" ]
+}
+
+if (use_ozone) {
+  external_ozone_platform_deps += [
+    "//tizen_src/chromium_impl/ui/ozone:ozone_efl",
+    "//ui/events/devices:devices",
+  ]
+}
+
+# For //ui/gfx target
+external_ui_gfx_sources = [
+  "//ui/gfx/nine_image_painter.cc",
+  "//ui/gfx/nine_image_painter.h",
+  "//ui/gfx/tbm_buffer_handle.h",
+  "//tizen_src/chromium_impl/ui/display/device_display_info_efl.cc",
+  "//tizen_src/chromium_impl/ui/display/device_display_info_efl.h",
+  "//tizen_src/chromium_impl/ui/display/device_display_info_observer_efl.h",
+  "//tizen_src/chromium_impl/ui/display/screen_efl.h",
+  "//tizen_src/chromium_impl/ui/display/screen_efl.cc",
+]
+
+# For //ui/gfx/x target
+external_ui_gfx_x11_sources =
+    [ "//tizen_src/chromium_impl/ui/gfx/x/x11_types_override.cc" ]
+external_exclude_ui_gfx_x11_sources = [ "x11_types.cc" ]
+if (wayland_bringup) {
+  external_exclude_ui_gfx_x11_sources += [ "gfx/x11_types_override.cc" ]
+}
+
+external_exclude_ui_gl_sources = []
+
+# For //ui/gl target
+#external_exclude_ui_gl_sources += [ "gl_context_egl.cc" ]
+external_ui_gl_sources = [
+  "//tizen_src/chromium_impl/ui/gl/gl_shared_context_efl.h",
+  "//tizen_src/chromium_impl/ui/gl/gl_shared_context_efl.cc",
+  "//tizen_src/chromium_impl/ui/gl/gl_current_context_efl.cc",
+]
+
+# For //ui/events/platform/x11 target
+external_exclude_ui_x11_event_sources = []
+if (wayland_bringup) {
+  external_exclude_ui_x11_event_sources = [
+    "gfx/x11_event_source_efl.h",
+    "gfx/x11_event_source_efl.cc",
+  ]
+}
+
+# For //ui/base target
+external_ui_base_includes = [ "//third_party/mojo/src/" ]
+external_ui_base_sources = [
+  "//tizen_src/chromium_impl/ui/base/resource/resource_bundle_efl.cc",
+  "//tizen_src/chromium_impl/ui/base/clipboard/clipboard_efl.cc",
+  "//tizen_src/chromium_impl/ui/base/clipboard/clipboard_efl.h",
+  "//tizen_src/chromium_impl/ui/base/clipboard/clipboard_helper_efl.cc",
+  "//tizen_src/chromium_impl/ui/base/clipboard/clipboard_helper_efl.h",
+  "//ui/base/cursor/cursor.cc",
+  "//ui/base/cursor/cursor.h",
+  "//ui/base/nine_image_painter_factory.h",
+]
+if (use_wayland) {
+  external_ui_base_sources += [
+    "//tizen_src/chromium_impl/ui/base/clipboard/clipboard_helper_efl_wayland.cc",
+    "//tizen_src/chromium_impl/ui/base/clipboard/clipboard_helper_efl_wayland.h",
+  ]
+} else {
+  external_ui_base_sources += [
+    "//tizen_src/chromium_impl/ui/base/clipboard/clipboard_helper_efl_X11.cc",
+    "//tizen_src/chromium_impl/ui/base/clipboard/clipboard_helper_efl_X11.h",
+  ]
+}
+external_exclude_ui_base_sources = []
+
+# For //ui/snapshot target
+external_ui_snapshot_sources =
+    [ "//tizen_src/chromium_impl/ui/snapshot/snapshot_efl.cc" ]
+
+# For //ui/events:gesture_detection target
+external_exclude_ui_gesture_detection_sources =
+    [ "gesture_detection/gesture_configuration_default.cc" ]
+external_ui_gesture_detection_sources = [ "//tizen_src/chromium_impl/ui/events/gesture_detection/gesture_configuration_efl.cc" ]

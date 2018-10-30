@@ -1,0 +1,12 @@
+# Copyright (c) 2015 Samsung Electronics. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+import("//third_party/protobuf/proto_library.gni")
+
+proto_library("proto") {
+  proto_out_dir = "components/spp_client/proto"
+  sources = [
+    "spp_client_data.proto",
+  ]
+}

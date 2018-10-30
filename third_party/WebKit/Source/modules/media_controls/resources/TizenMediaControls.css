@@ -1,0 +1,30 @@
+/*
+ * Copyright 2018 Samsung Electronics Inc. All rights reserved.
+ * Use of this source code is governed by a BSD-style license that can be
+ * found in the LICENSE file.
+ */
+
+/* Tizen specific media controls */
+
+/* WARNING: This css file can only style <audio> and <video> elements */
+
+video::-webkit-media-controls-overlay-spinner {
+    -webkit-appearance: -internal-media-control;
+    background-image: -webkit-image-set(
+      url(default_100_percent/spinner/spinner.gif) 1x);
+    background-size: 48px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0;
+    border-width: 0px;
+    background-color: transparent;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+}
+
+.state-no-source input[pseudo="-webkit-media-controls-overlay-spinner"],

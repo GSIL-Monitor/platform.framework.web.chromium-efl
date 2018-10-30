@@ -1,0 +1,88 @@
+# Copyright 2013 The Chromium Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+import("//build/config/clang/clang.gni")
+import("//build/toolchain/gcc_toolchain.gni")
+
+template("tizen_gcc_toolchain") {
+  gcc_toolchain(target_name) {
+    assert(defined(invoker.toolchain_args),
+           "toolchain_args must be defined for tizen_gcc_toolchain()")
+    toolchain_args = invoker.toolchain_args
+    toolchain_args.current_os = "tizen"
+
+    if (defined(toolchain_args.is_clang)) {
+      toolchain_uses_clang = toolchain_args.is_clang
+    } else {
+      toolchain_uses_clang = is_clang
+    }
+
+    if (toolchain_uses_clang) {
+      _prefix = rebase_path("$clang_base_path/bin", root_build_dir)
+      cc = "$_prefix/clang"
+      cxx = "$_prefix/clang++"
+      ar = "$_prefix/llvm-ar"
+    } else {
+      cc = "gcc"
+      cxx = "g++"
+      ar = cc + "-ar"
+    }
+    ld = cxx
+    readelf = "readelf"
+    nm = "nm"
+    #strip = "strip"
+
+    # Don't use .cr.so for loadable_modules since they are always loaded via
+    # absolute path.
+    loadable_module_extension = ".so"
+  }
+}
+
+template("tizen_gcc_toolchains_helper") {
+  tizen_gcc_toolchain("tizen_$target_name") {
+    forward_variables_from(invoker, "*")
+    toolchain_args.is_clang = false
+  }
+
+  tizen_gcc_toolchain("tizen_clang_$target_name") {
+    forward_variables_from(invoker, "*")
+    toolchain_args.is_clang = true
+  }
+}
+
+tizen_gcc_toolchains_helper("x86") {
+  toolchain_args = {
+    current_cpu = "x86"
+  }
+}
+
+tizen_gcc_toolchains_helper("arm") {
+  toolchain_args = {
+    current_cpu = "arm"
+  }
+}
+
+tizen_gcc_toolchains_helper("mipsel") {
+  toolchain_args = {
+    current_cpu = "mipsel"
+  }
+}
+
+tizen_gcc_toolchains_helper("x64") {
+  toolchain_args = {
+    current_cpu = "x64"
+  }
+}
+
+tizen_gcc_toolchains_helper("arm64") {
+  toolchain_args = {
+    current_cpu = "arm64"
+  }
+}
+
+tizen_gcc_toolchains_helper("mips64el") {
+  toolchain_args = {
+    current_cpu = "mips64el"
+  }
+}

@@ -1,0 +1,41 @@
+#!/bin/bash
+_script=$(readlink -f $0)
+_top_dir=$(dirname $_script)/../..
+_runner=$_top_dir/third_party/WebKit/Tools/Scripts/run-webkit-tests
+_out="out.x64"
+
+echo $@ | grep -q \\-\\-help && $_runner --help
+
+echo $@ | grep -q \\-\\-debug
+[ $? -gt 0 ] && _mode="Release" || _mode="Debug"
+
+if [ ! -x $_top_dir/$_out/$_mode/content_shell ]; then
+    echo "Please build content_shell in $_mode mode first"
+    exit 1
+fi
+
+getHostArch() {
+  echo $(uname -m | sed -e \
+        's/i.86/ia32/;s/x86_64/x64/;s/amd64/x64/;s/arm.*/arm/;s/i86pc/ia32/')
+}
+
+_LIBDIR=lib
+if [ "$(getHostArch)" == "x64" ]; then
+      _LIBDIR=lib64
+fi
+
+BUILDDIR=$_top_dir/out.$(getHostArch)/$_mode
+CHROMIUM_EFL_LIBDIR=$BUILDDIR/lib
+CHROMIUM_EFL_DEPENDENCIES_LIBDIR=$BUILDDIR/../Dependencies/Root/$_LIBDIR
+
+export LD_LIBRARY_PATH=$CHROMIUM_EFL_DEPENDENCIES_LIBDIR:$CHROMIUM_EFL_LIBDIR:${LD_LIBRARY_PATH}
+echo "LD_LIBRARY_PATH=${LD_LIBRARY_PATH}"
+
+exec $_runner \
+    --additional-env-var=EVAS_GL_NO_BLACKLIST=1 \
+    --additional-expectations=$_top_dir/third_party/WebKit/LayoutTests/platform/tizen/TestExpectations \
+    --build-directory=$_top_dir/out.x64 \
+    --additional-drt-flag=--no-sandbox \
+    --additional-drt-flag=--ignore-gpu-blacklist \
+    --additional-drt-flag=--use-gl=egl \
+    "$@"

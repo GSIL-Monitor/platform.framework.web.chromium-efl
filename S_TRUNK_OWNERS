@@ -1,0 +1,37 @@
+set noparent
+
+ancilgeorge@samsung.com
+b.kelemen@samsung.com
+bw80.lee@samsung.com
+dw.im@samsung.com
+heejin.r.chung@samsung.com
+kangil.han@samsung.com
+kihong.kwon@samsung.com
+l.gombos@samsung.com
+mohan.reddy@samsung.com
+r.ghatage@samsung.com
+seojin.kim@samsung.com INACTIVE
+sl.ostapenko@samsung.com
+sns.park@samsung.com
+bs0425.lee@samsung.com
+yongha78.lee@samsung.com
+keonho07.kim@samsung.com
+kyosun.song@samsung.com
+
+# DEPS OWNERS for Samsung internal trunk
+# You should ask the following members when you make any change in DEPS file
+per-file DEPS=set noparent
+per-file DEPS=anujk.sharma@samsung.com
+per-file DEPS=david.barr@samsung.com
+per-file DEPS=donggwan.kim@samsung.com
+per-file DEPS=dw.im@samsung.com
+per-file DEPS=jungjik.lee@samsung.com
+per-file DEPS=l.gombos@samsung.com
+per-file DEPS=mohan.reddy@samsung.com
+per-file DEPS=sns.park@samsung.com
+
+# gclient OWNERS for Samsung internal trunk
+# You should ask the following members when you make any change in gclient file
+per-file gclient=anujk.sharma@samsung.com
+per-file gclient=david.barr@samsung.com
+per-file gclient=jungjik.lee@samsung.com

@@ -1,0 +1,346 @@
+# Copyright (c) 2015 Samsung Electronics. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+import("//build/config/features.gni")
+import("//tizen_src/build/config/tizen_features.gni")
+import("//ppapi/features/features.gni")
+import("//components/nacl/features.gni")
+
+##############################################################################
+# Configs
+##############################################################################
+
+external_content_browser_efl_configs = [
+  "//tizen_src/build:capi-system-sensor",
+  "//tizen_src/build:libcapi-system-sensor",
+  "//tizen_src/build:ecore",
+  "//tizen_src/build:libecore",
+  "//tizen_src/build:ecore-imf-evas",
+  "//tizen_src/build:libecore-imf-evas",
+  "//tizen_src/build:ecore-evas",
+  "//tizen_src/build:libecore-evas",
+  "//tizen_src/build:elementary",
+  "//tizen_src/build:libelementary",
+  "//tizen_src/build:efl-extension",
+  "//tizen_src/build:libefl-extension",
+  "//tizen_src/build:security-manager",
+  "//tizen_src/build:libsecurity-manager",
+  "//tizen_src/build:tts",
+  "//tizen_src/build:libtts",
+]
+
+if (is_tizen) {
+  external_content_browser_efl_configs += [
+    "//tizen_src/build:vconf",
+    "//tizen_src/build:libvconf"
+  ]
+}
+
+if (!use_wayland) {
+  external_content_browser_efl_configs += [
+    "//tizen_src/build:x11",
+    "//tizen_src/build:libx11",
+    "//tizen_src/build:ecore-x",
+    "//tizen_src/build:libecore-x"
+  ]
+}
+
+if (tizen_multimedia_support) {
+  external_content_browser_efl_configs += [
+    "//tizen_src/build:capi-media-player",
+    "//tizen_src/build:libcapi-media-player",
+    "//tizen_src/build:capi-media-tool",
+    "//tizen_src/build:libcapi-media-tool",
+  ]
+}
+
+if (tizen_pepper_player_d2tv) {
+  external_content_browser_efl_configs += [
+    "//tizen_src/build:sm-player",
+  ]
+}
+
+if (tizen_web_speech_recognition) {
+  external_content_browser_efl_configs += [
+    "//tizen_src/build:stt",
+    "//tizen_src/build:libstt",
+  ]
+  if (tizen_product_tv) {
+    external_content_browser_efl_configs += [
+      "//tizen_src/build:capi-stt-wrapper-tv",
+      "//tizen_src/build:libcapi-stt-wrapper-tv",
+    ]
+  }
+}
+
+##############################################################################
+# Dependency
+##############################################################################
+
+external_content_browser_efl_deps = [
+  "//components/user_prefs",
+  "//tizen_src/chromium_impl/efl:window-factory",
+  "//tizen_src/chromium_impl/edje_resources:edje_resources_efl",
+  "//ui/gl:gl",
+]
+
+##############################################################################
+# Source
+##############################################################################
+external_exclude_content_browser_efl_sources = []
+
+external_content_browser_efl_sources = [
+  "//tizen_src/chromium_impl/content/browser/compositor/evasgl_context_provider.cc",
+  "//tizen_src/chromium_impl/content/browser/compositor/evasgl_context_provider.h",
+  "//tizen_src/chromium_impl/content/browser/compositor/evasgl_delegated_frame_host.cc",
+  "//tizen_src/chromium_impl/content/browser/compositor/evasgl_delegated_frame_host.h",
+  "//tizen_src/chromium_impl/content/browser/compositor/evasgl_output_surface.cc",
+  "//tizen_src/chromium_impl/content/browser/compositor/evasgl_output_surface.h",
+  "//tizen_src/chromium_impl/content/browser/public/browser/web_contents_efl_delegate.h",
+  "//tizen_src/chromium_impl/content/browser/public/browser/web_contents_view_efl_delegate.h",
+  "//tizen_src/chromium_impl/content/browser/push_messaging/push_messaging_service_impl_efl.cc",
+  "//tizen_src/chromium_impl/content/browser/push_messaging/push_messaging_service_impl_efl.h",
+  "//tizen_src/chromium_impl/content/browser/renderer_host/disambiguation_popup_efl.cc",
+  "//tizen_src/chromium_impl/content/browser/renderer_host/disambiguation_popup_efl.h",
+  "//tizen_src/chromium_impl/content/browser/renderer_host/edge_effect.cc",
+  "//tizen_src/chromium_impl/content/browser/renderer_host/edge_effect.h",
+  "//tizen_src/chromium_impl/content/browser/renderer_host/event_resampler.cc",
+  "//tizen_src/chromium_impl/content/browser/renderer_host/event_resampler.h",
+  "//tizen_src/chromium_impl/content/browser/renderer_host/im_context_efl.cc",
+  "//tizen_src/chromium_impl/content/browser/renderer_host/im_context_efl.h",
+  "//tizen_src/chromium_impl/content/browser/renderer_host/mirrored_blur_effect.h",
+  "//tizen_src/chromium_impl/content/browser/renderer_host/mirrored_blur_effect.cc",
+  "//tizen_src/chromium_impl/content/browser/renderer_host/native_web_keyboard_event_efl.cc",
+  "//tizen_src/chromium_impl/content/browser/renderer_host/render_widget_host_view_efl.cc",
+  "//tizen_src/chromium_impl/content/browser/renderer_host/render_widget_host_view_efl.h",
+  "//tizen_src/chromium_impl/content/browser/renderer_host/web_event_factory_efl.cc",
+  "//tizen_src/chromium_impl/content/browser/renderer_host/web_event_factory_efl.h",
+  "//tizen_src/chromium_impl/content/browser/screen_orientation/screen_orientation_delegate_efl.cc",
+  "//tizen_src/chromium_impl/content/browser/screen_orientation/screen_orientation_delegate_efl.h",
+  "//tizen_src/chromium_impl/content/browser/selection/selection_box_efl.cc",
+  "//tizen_src/chromium_impl/content/browser/selection/selection_box_efl.h",
+  "//tizen_src/chromium_impl/content/browser/selection/selection_controller_efl.cc",
+  "//tizen_src/chromium_impl/content/browser/selection/selection_controller_efl.h",
+  "//tizen_src/chromium_impl/content/browser/selection/selection_handle_efl.cc",
+  "//tizen_src/chromium_impl/content/browser/selection/selection_handle_efl.h",
+  "//tizen_src/chromium_impl/content/browser/selection/selection_magnifier_efl.cc",
+  "//tizen_src/chromium_impl/content/browser/selection/selection_magnifier_efl.h",
+  "//tizen_src/chromium_impl/content/browser/tracing/tracing_controller_efl.cc",
+  "//tizen_src/chromium_impl/content/browser/tracing/tracing_controller_efl.h",
+  "//tizen_src/chromium_impl/content/browser/web_contents/web_contents_view_efl.cc",
+  "//tizen_src/chromium_impl/content/browser/web_contents/web_contents_view_efl.h",
+  "//tizen_src/chromium_impl/content/browser/web_contents/web_contents_impl_efl.cc",
+  "//tizen_src/chromium_impl/content/browser/web_contents/web_contents_impl_efl.h",
+  "//tizen_src/chromium_impl/content/browser/web_contents/web_drag_dest_efl.cc",
+  "//tizen_src/chromium_impl/content/browser/web_contents/web_drag_dest_efl.h",
+  "//tizen_src/chromium_impl/content/browser/web_contents/web_drag_source_efl.cc",
+  "//tizen_src/chromium_impl/content/browser/web_contents/web_drag_source_efl.h",
+]
+
+external_content_browser_efl_sources += [
+  "//content/browser/renderer_host/ui_events_helper.cc",
+  "//content/browser/renderer_host/ui_events_helper.h",
+]
+
+if (is_tizen) {
+  external_content_browser_efl_sources += [
+    "//tizen_src/chromium_impl/content/browser/speech/tts_message_filter_efl.cc",
+    "//tizen_src/chromium_impl/content/browser/speech/tts_message_filter_efl.h",
+    "//tizen_src/chromium_impl/content/browser/speech/tts_tizen.cc",
+    "//tizen_src/chromium_impl/content/browser/speech/tts_tizen.h",
+  ]
+}
+
+if (tizen_atk_support) {
+  external_content_browser_efl_configs += [
+    "//tizen_src/build:atk",
+    "//tizen_src/build:libatk",
+    "//tizen_src/build:atk-bridge",
+    "//tizen_src/build:libatk-bridge",
+  ]
+
+  external_content_browser_efl_sources += [
+    "//tizen_src/chromium_impl/content/browser/accessibility/browser_accessibility_efl.cc",
+    "//tizen_src/chromium_impl/content/browser/accessibility/browser_accessibility_efl.h",
+    "//tizen_src/chromium_impl/content/browser/accessibility/browser_accessibility_manager_efl.cc",
+    "//tizen_src/chromium_impl/content/browser/accessibility/browser_accessibility_manager_efl.h",
+  ]
+}
+
+if (tizen_multimedia_support) {
+  external_exclude_content_browser_efl_sources += [
+    "media/media_web_contents_observer.cc",
+    "media/media_web_contents_observer.h",
+  ]
+
+  external_content_browser_efl_sources += [
+    "//tizen_src/chromium_impl/content/browser/media/tizen/browser_demuxer_efl.cc",
+    "//tizen_src/chromium_impl/content/browser/media/tizen/browser_demuxer_efl.h",
+    "//tizen_src/chromium_impl/content/browser/media/tizen/browser_media_player_manager_efl.cc",
+    "//tizen_src/chromium_impl/content/browser/media/tizen/browser_media_player_manager_efl.h",
+    "//tizen_src/chromium_impl/content/browser/media/tizen/media_storage_helper.cc",
+    "//tizen_src/chromium_impl/content/browser/media/tizen/media_storage_helper.h",
+    "//tizen_src/chromium_impl/content/browser/media/tizen/media_web_contents_observer_efl.cc",
+    "//tizen_src/chromium_impl/content/browser/media/tizen/media_web_contents_observer_efl.h",
+  ]
+}
+
+if (tizen_tbm_support) {
+  external_content_browser_efl_sources += [
+    "//tizen_src/chromium_impl/content/browser/media/tizen/browser_mediapacket_manager.cc",
+    "//tizen_src/chromium_impl/content/browser/media/tizen/browser_mediapacket_manager.h",
+  ]
+}
+
+if (tizen_product_tv) {
+  external_content_browser_efl_sources += [
+        "//tizen_src/chromium_impl/content/browser/high_contrast/high_contrast_controller.h",
+        "//tizen_src/chromium_impl/content/browser/high_contrast/high_contrast_controller.cc",
+  ]
+}
+
+if (tizen_pepper_extensions && enable_plugins) {
+  external_content_browser_efl_sources += [
+    "//tizen_src/chromium_impl/content/browser/permissions/pepper_permission_challenger.cc",
+    "//tizen_src/chromium_impl/content/browser/permissions/pepper_permission_challenger.h",
+    "//tizen_src/chromium_impl/content/browser/renderer_host/pepper/browser_pepper_host_factory_efl.h",
+    "//tizen_src/chromium_impl/content/browser/renderer_host/pepper/browser_pepper_host_factory_efl.cc",
+    "//tizen_src/chromium_impl/content/browser/renderer_host/pepper/pepper_extension_system_host.cc",
+    "//tizen_src/chromium_impl/content/browser/renderer_host/pepper/pepper_extension_system_host.h",
+    "//tizen_src/chromium_impl/content/browser/renderer_host/pepper/pepper_remote_controller_host.cc",
+    "//tizen_src/chromium_impl/content/browser/renderer_host/pepper/pepper_remote_controller_host.h",
+    "//tizen_src/chromium_impl/content/browser/renderer_host/pepper/remote_controller_wrt.cc",
+    "//tizen_src/chromium_impl/content/browser/renderer_host/pepper/remote_controller_wrt.h",
+    "//tizen_src/chromium_impl/content/public/browser/extension_system_delegate.cc",
+    "//tizen_src/chromium_impl/content/public/browser/extension_system_delegate.h",
+  ]
+}
+
+if (tizen_product_tv) {
+  external_content_browser_efl_sources += [
+    "//tizen_src/chromium_impl/content/public/browser/storage_partition_path_observer.cc",
+    "//tizen_src/chromium_impl/content/public/browser/storage_partition_path_observer.h",
+  ]
+}
+
+if (tizen_web_speech_recognition) {
+  external_content_browser_efl_sources += [
+    "//content/browser/speech/speech_recognition_dispatcher_host.cc",
+    "//content/browser/speech/speech_recognition_dispatcher_host.h",
+    "//content/browser/speech/speech_recognition_manager_impl.cc",
+    "//content/browser/speech/speech_recognition_manager_impl.h",
+    "//tizen_src/chromium_impl/content/browser/speech/speech_recognizer_impl_tizen.cc",
+    "//tizen_src/chromium_impl/content/browser/speech/speech_recognizer_impl_tizen.h",
+    "//tizen_src/chromium_impl/content/browser/speech/tizen_speech_recognition_manager_delegate.cc",
+    "//tizen_src/chromium_impl/content/browser/speech/tizen_speech_recognition_manager_delegate.h",
+  ]
+}
+
+if (enable_nacl) {
+  external_content_browser_efl_sources += [
+    "//tizen_src/chromium_impl/components/nacl/browser/nacl_browser_delegate_impl_efl.cc",
+    "//tizen_src/chromium_impl/components/nacl/browser/nacl_browser_delegate_impl_efl.h",
+  ]
+}
+
+if (tizen_pepper_player) {
+  external_content_browser_efl_sources += [
+    "//tizen_src/chromium_impl/content/browser/renderer_host/pepper/browser_host_callback_helpers.h",
+    "//tizen_src/chromium_impl/content/browser/renderer_host/pepper/media_player/buffering_listener_private.h",
+    "//tizen_src/chromium_impl/content/browser/renderer_host/pepper/media_player/drm_listener_private.h",
+    "//tizen_src/chromium_impl/content/browser/renderer_host/pepper/media_player/elementary_stream_listener_private.h",
+    "//tizen_src/chromium_impl/content/browser/renderer_host/pepper/media_player/media_events_listener_private.h",
+    "//tizen_src/chromium_impl/content/browser/renderer_host/pepper/media_player/pepper_audio_elementary_stream_host.cc",
+    "//tizen_src/chromium_impl/content/browser/renderer_host/pepper/media_player/pepper_audio_elementary_stream_host.h",
+    "//tizen_src/chromium_impl/content/browser/renderer_host/pepper/media_player/pepper_audio_elementary_stream_private.h",
+    "//tizen_src/chromium_impl/content/browser/renderer_host/pepper/media_player/pepper_elementary_stream_host.cc",
+    "//tizen_src/chromium_impl/content/browser/renderer_host/pepper/media_player/pepper_elementary_stream_host.h",
+    "//tizen_src/chromium_impl/content/browser/renderer_host/pepper/media_player/pepper_elementary_stream_private.h",
+    "//tizen_src/chromium_impl/content/browser/renderer_host/pepper/media_player/pepper_es_data_source_host.cc",
+    "//tizen_src/chromium_impl/content/browser/renderer_host/pepper/media_player/pepper_es_data_source_host.h",
+    "//tizen_src/chromium_impl/content/browser/renderer_host/pepper/media_player/pepper_es_data_source_private.h",
+    "//tizen_src/chromium_impl/content/browser/renderer_host/pepper/media_player/pepper_media_data_source_host.cc",
+    "//tizen_src/chromium_impl/content/browser/renderer_host/pepper/media_player/pepper_media_data_source_host.h",
+    "//tizen_src/chromium_impl/content/browser/renderer_host/pepper/media_player/pepper_media_data_source_private.h",
+    "//tizen_src/chromium_impl/content/browser/renderer_host/pepper/media_player/pepper_media_player_host.cc",
+    "//tizen_src/chromium_impl/content/browser/renderer_host/pepper/media_player/pepper_media_player_host.h",
+    "//tizen_src/chromium_impl/content/browser/renderer_host/pepper/media_player/pepper_media_player_message_filter.cc",
+    "//tizen_src/chromium_impl/content/browser/renderer_host/pepper/media_player/pepper_media_player_message_filter.h",
+    "//tizen_src/chromium_impl/content/browser/renderer_host/pepper/media_player/pepper_media_player_private.h",
+    "//tizen_src/chromium_impl/content/browser/renderer_host/pepper/media_player/pepper_media_player_private_factory.h",
+    "//tizen_src/chromium_impl/content/browser/renderer_host/pepper/media_player/pepper_url_data_source_host.cc",
+    "//tizen_src/chromium_impl/content/browser/renderer_host/pepper/media_player/pepper_url_data_source_host.h",
+    "//tizen_src/chromium_impl/content/browser/renderer_host/pepper/media_player/pepper_url_data_source_private.h",
+    "//tizen_src/chromium_impl/content/browser/renderer_host/pepper/media_player/pepper_url_helper.cc",
+    "//tizen_src/chromium_impl/content/browser/renderer_host/pepper/media_player/pepper_url_helper.h",
+    "//tizen_src/chromium_impl/content/browser/renderer_host/pepper/media_player/pepper_video_elementary_stream_host.cc",
+    "//tizen_src/chromium_impl/content/browser/renderer_host/pepper/media_player/pepper_video_elementary_stream_host.h",
+    "//tizen_src/chromium_impl/content/browser/renderer_host/pepper/media_player/pepper_video_elementary_stream_private.h",
+    "//tizen_src/chromium_impl/content/browser/renderer_host/pepper/media_player/subtitle_listener_private.h",
+    "//tizen_src/chromium_impl/content/browser/renderer_host/pepper/media_player/tizen/drm_stream_configuration.cc",
+    "//tizen_src/chromium_impl/content/browser/renderer_host/pepper/media_player/tizen/drm_stream_configuration.h",
+    "//tizen_src/chromium_impl/content/browser/renderer_host/pepper/media_player/tizen/elementary_stream_listener_private_wrapper.cc",
+    "//tizen_src/chromium_impl/content/browser/renderer_host/pepper/media_player/tizen/elementary_stream_listener_private_wrapper.h",
+    "//tizen_src/chromium_impl/content/browser/renderer_host/pepper/media_player/tizen/pepper_audio_elementary_stream_private_tizen.cc",
+    "//tizen_src/chromium_impl/content/browser/renderer_host/pepper/media_player/tizen/pepper_audio_elementary_stream_private_tizen.h",
+    "//tizen_src/chromium_impl/content/browser/renderer_host/pepper/media_player/tizen/pepper_elementary_stream_private_tizen.h",
+    "//tizen_src/chromium_impl/content/browser/renderer_host/pepper/media_player/tizen/pepper_es_data_source_private_tizen.cc",
+    "//tizen_src/chromium_impl/content/browser/renderer_host/pepper/media_player/tizen/pepper_es_data_source_private_tizen.h",
+    "//tizen_src/chromium_impl/content/browser/renderer_host/pepper/media_player/tizen/pepper_media_player_private_factory_tizen.cc",
+    "//tizen_src/chromium_impl/content/browser/renderer_host/pepper/media_player/tizen/pepper_media_player_private_factory_tizen.h",
+    "//tizen_src/chromium_impl/content/browser/renderer_host/pepper/media_player/tizen/pepper_media_player_private_tizen.cc",
+    "//tizen_src/chromium_impl/content/browser/renderer_host/pepper/media_player/tizen/pepper_media_player_private_tizen.h",
+    "//tizen_src/chromium_impl/content/browser/renderer_host/pepper/media_player/tizen/pepper_mmplayer_adapter.cc",
+    "//tizen_src/chromium_impl/content/browser/renderer_host/pepper/media_player/tizen/pepper_mmplayer_adapter.h",
+    "//tizen_src/chromium_impl/content/browser/renderer_host/pepper/media_player/tizen/pepper_player_adapter_base.cc",
+    "//tizen_src/chromium_impl/content/browser/renderer_host/pepper/media_player/tizen/pepper_player_adapter_base.h",
+    "//tizen_src/chromium_impl/content/browser/renderer_host/pepper/media_player/tizen/pepper_player_adapter_interface.h",
+    "//tizen_src/chromium_impl/content/browser/renderer_host/pepper/media_player/tizen/pepper_player_utils_tizen.cc",
+    "//tizen_src/chromium_impl/content/browser/renderer_host/pepper/media_player/tizen/pepper_player_utils_tizen.h",
+    "//tizen_src/chromium_impl/content/browser/renderer_host/pepper/media_player/tizen/pepper_tizen_drm_manager.cc",
+    "//tizen_src/chromium_impl/content/browser/renderer_host/pepper/media_player/tizen/pepper_tizen_drm_manager.h",
+    "//tizen_src/chromium_impl/content/browser/renderer_host/pepper/media_player/tizen/pepper_tizen_drm_session.cc",
+    "//tizen_src/chromium_impl/content/browser/renderer_host/pepper/media_player/tizen/pepper_tizen_drm_session.h",
+    "//tizen_src/chromium_impl/content/browser/renderer_host/pepper/media_player/tizen/pepper_tizen_player_dispatcher.cc",
+    "//tizen_src/chromium_impl/content/browser/renderer_host/pepper/media_player/tizen/pepper_tizen_player_dispatcher.h",
+    "//tizen_src/chromium_impl/content/browser/renderer_host/pepper/media_player/tizen/pepper_url_data_source_private_tizen.cc",
+    "//tizen_src/chromium_impl/content/browser/renderer_host/pepper/media_player/tizen/pepper_url_data_source_private_tizen.h",
+    "//tizen_src/chromium_impl/content/browser/renderer_host/pepper/media_player/tizen/pepper_video_elementary_stream_private_tizen.cc",
+    "//tizen_src/chromium_impl/content/browser/renderer_host/pepper/media_player/tizen/pepper_video_elementary_stream_private_tizen.h",
+    "//tizen_src/chromium_impl/content/browser/renderer_host/pepper/media_player/tizen/platform_context_tizen.cc",
+    "//tizen_src/chromium_impl/content/browser/renderer_host/pepper/media_player/tizen/platform_context_tizen.h",
+  ]
+
+  external_content_browser_efl_configs += [
+    "//tizen_src/build:drmdecrypt",
+  ]
+}
+
+if (tizen_pepper_player_d2tv) {
+  external_content_browser_efl_sources += [
+    "//tizen_src/chromium_impl/content/browser/renderer_host/pepper/media_player/tizen/pepper_smplayer_adapter.cc",
+    "//tizen_src/chromium_impl/content/browser/renderer_host/pepper/media_player/tizen/pepper_smplayer_adapter.h",
+  ]
+}
+
+if (tizen_pepper_teec) {
+  external_content_browser_efl_sources += [
+    "//tizen_src/chromium_impl/content/browser/renderer_host/pepper/pepper_teec_context_host.cc",
+    "//tizen_src/chromium_impl/content/browser/renderer_host/pepper/pepper_teec_context_host.h",
+    "//tizen_src/chromium_impl/content/browser/renderer_host/pepper/pepper_teec_context_impl.cc",
+    "//tizen_src/chromium_impl/content/browser/renderer_host/pepper/pepper_teec_context_impl.h",
+    "//tizen_src/chromium_impl/content/browser/renderer_host/pepper/pepper_teec_session_host.cc",
+    "//tizen_src/chromium_impl/content/browser/renderer_host/pepper/pepper_teec_session_host.h",
+    "//tizen_src/chromium_impl/content/browser/renderer_host/pepper/pepper_teec_session_impl.cc",
+    "//tizen_src/chromium_impl/content/browser/renderer_host/pepper/pepper_teec_session_impl.h",
+    "//tizen_src/chromium_impl/content/browser/renderer_host/pepper/pepper_teec_shared_memory_host.cc",
+    "//tizen_src/chromium_impl/content/browser/renderer_host/pepper/pepper_teec_shared_memory_host.h",
+    "//tizen_src/chromium_impl/content/browser/renderer_host/pepper/pepper_teec_shared_memory_impl.cc",
+    "//tizen_src/chromium_impl/content/browser/renderer_host/pepper/pepper_teec_shared_memory_impl.h",
+  ]
+
+  external_content_browser_efl_configs += [
+    "//tizen_src/build:trustzone-nwd",
+  ]
+}

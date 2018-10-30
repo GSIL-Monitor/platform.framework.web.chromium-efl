@@ -1,0 +1,76 @@
+# Copyright (c) 2015 Samsung Electronics. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+import("//tizen_src/build/config/tizen_features.gni")
+
+config("content_common_efl") {
+  visibility = [ "//tizen_src/chromium_impl/content/common/common_efl.gni" ]
+
+  defines = [
+    "DATA_DIR=\"$data_dir\"",
+    "EXE_DIR=\"$exe_dir\"",
+    "IMAGE_DIR=\"$image_dir\"",
+  ]
+
+  include_dirs = [ "//tizen_src/ewk/efl_integration" ]
+
+  if (is_tizen) {
+    defines += [
+      "EDJE_DIR=\"$edje_dir\"",
+      "LOCALE_DIR=\"$locale_dir\"",
+    ]
+    include_dirs += [
+      "//third_party/libyuv/include",
+    ]
+  } else {
+    outdir = rebase_path("$root_out_dir")
+    defines += [
+      "EDJE_DIR=\"$outdir/resources\"",
+      "LOCALE_DIR=\"$outdir/locale\"",
+    ]
+  }
+}
+
+static_library("tizen-tv-resource-manager") {
+  sources = [
+   "tizen_resource_manager.cc",
+   "tizen_resource_manager.h",
+   "tizen_resource_manager_impl.cc",
+   "tizen_resource_manager_impl.h",
+  ]
+
+  # skia is needed for some include paths
+  public_deps = [
+    "//skia"
+  ]
+
+  public_configs = [
+    "//tizen_src/build:tizen-tv-resource-manager-config"
+  ]
+
+  include_dirs = [
+    "//tizen_src/chromium_impl/"
+  ]
+}
+
+static_library("tizen_omx_video_decoder") {
+  sources = [
+    "media/tizen_omx_video_decoder.cc",
+    "media/tizen_omx_video_decoder.h",
+    "media/tizen_omx_video_decoder_utils.cc",
+    "media/tizen_omx_video_decoder_utils.h",
+  ]
+
+  public_configs = [
+   "//tizen_src/build:tizen_omx_video_decoder-config",
+  ]
+
+  deps = [
+    ":tizen-tv-resource-manager",
+  ]
+
+  include_dirs = [
+    "//tizen_src/chromium_impl/"
+  ]
+}

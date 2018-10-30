@@ -1,0 +1,9 @@
+msgid "IDS_WEBVIEW_OPT_OPEN_LINK_IN_NEW_TAB_ABB"
+msgstr "नव्या टॅबात दुवो उगडचो"
+
+msgid "IDS_WEBVIEW_OPT_OPEN_LINK_ABB"
+msgstr "वॅब ब्रावजरांत उगडचें"
+
+msgid "IDS_WEBVIEW_OPEN"
+msgstr "उगडचें"
+

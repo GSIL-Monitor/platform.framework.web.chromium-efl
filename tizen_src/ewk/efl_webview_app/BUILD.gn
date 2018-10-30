@@ -1,0 +1,143 @@
+# Copyright (c) 2015 Samsung Electronics. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+import("//build/config/compiler/compiler.gni")
+import("//tizen_src/build/config/tizen_features.gni")
+
+copy("efl_webview_app_script") {
+  sources = [ "efl_webview_app.sh" ]
+  outputs = [ "$root_out_dir/{{source_file_part}}" ]
+}
+
+executable("efl_webview_app") {
+  deps = [
+    ":efl_webview_app_script",
+  ]
+  if (is_tizen) {
+    configs += [ "//tizen_src/build/config/tizen:executable_config" ]
+  }
+  if (is_tizen && symbol_level != 0) {
+    configs -= [ "//build/config/compiler:default_symbols" ]
+    configs += [ "//build/config/compiler:symbols" ]
+  }
+  configs += [ "//tizen_src/build:capi-system-device" ]
+  configs += [ "//tizen_src/build:libcapi-system-device" ]
+  public_configs = [ "//tizen_src/build:capi-system-device-public" ]
+  configs += [ "//tizen_src/build:evas" ]
+  configs += [ "//tizen_src/build:libevas" ]
+  configs += [ "//tizen_src/build:ecore" ]
+  configs += [ "//tizen_src/build:libecore" ]
+  configs += [ "//tizen_src/build:ecore-evas" ]
+  configs += [ "//tizen_src/build:libecore-evas" ]
+  public_configs += [ "//tizen_src/build:ecore-evas-public" ]
+  configs += [ "//tizen_src/build:elementary" ]
+  configs += [ "//tizen_src/build:libelementary" ]
+  public_configs += [ "//tizen_src/build:elementary-public" ]
+  deps += [
+    "//tizen_src/ewk/efl_integration:chromium-ewk",
+    "//tizen_src/ewk/efl_integration:launch_exec",
+    "//tizen_src/chromium_impl/tizen:system-info",
+  ]
+  cflags = [
+    # Treat warning as error for this target.
+    # It needs to be included by means of pattern list because '-Werror' cflag
+    # will be excluded in chromium side (src/build/common.gypi), and GYP
+    # processes pattern lists after exclusion lists.
+    # (ref: https://gyp.gsrc.io/docs/InputFormatReference.md#Processing-Order)
+    "-Werror"
+  ]
+  if (!use_wayland) {
+    configs += [ "//tizen_src/build:ecore-x" ]
+    configs += [ "//tizen_src/build:libecore-x" ]
+    public_configs += [ "//tizen_src/build:ecore-x-public" ]
+  } else {
+    configs += [ "//tizen_src/build:ecore-wayland" ]
+    configs += [ "//tizen_src/build:libecore-wayland" ]
+    public_configs += [ "//tizen_src/build:ecore-wayland-public" ]
+  }
+  if (tizen_product_tv) {
+    configs += [ "//tizen_src/build:libvd-win-util" ]
+  } else {
+    configs += [ "//tizen_src/build:libcapi-privacy-privilege-manager" ]
+    configs += [ "//tizen_src/build:capi-privacy-privilege-manager" ]
+  }
+  include_dirs = [ "../efl_integration" ]
+  sources = [ "app.c" ]
+  ldflags = [ "-Llib" ]
+  #libs = [ "libchromium-ewk" ]
+}
+
+executable("mini_browser") {
+  cflags = [
+    # Treat warning as error for this target.
+    # It needs to be included by means of pattern list because '-Werror' cflag
+    # will be excluded in chromium side (src/build/common.gypi), and GYP
+    # processes pattern lists after exclusion lists.
+    # (ref: https://gyp.gsrc.io/docs/InputFormatReference.md#Processing-Order)
+    "-Werror"
+  ]
+  sources = []
+  include_dirs = []
+  ldflags = []
+  libs = []
+  deps = []
+  if (is_tizen) { # FIXME: mini_browser shouldn't depend on dlog and appcore-efl without OS(TIZEN) checks
+    sources += [
+      "mini_browser.c",
+      "browser-object.h",
+      "browser-string.h",
+    ]
+    include_dirs += [
+      "../efl_integration",
+      "../../chromium_impl/build",
+    ]
+    if (symbol_level != 0) {
+      configs -= [ "//build/config/compiler:default_symbols" ]
+      configs += [ "//build/config/compiler:symbols" ]
+    }
+    configs += [ "//tizen_src/build:capi-system-device" ]
+    configs += [ "//tizen_src/build/config/tizen:executable_config" ]
+    configs += [ "//tizen_src/build:libcapi-system-device" ]
+    public_configs = [ "//tizen_src/build:capi-system-device-public" ]
+    configs += [ "//tizen_src/build:capi-appfw-application" ]
+    configs += [ "//tizen_src/build:libcapi-appfw-application" ]
+    public_configs += [ "//tizen_src/build:capi-appfw-application-public" ]
+    configs += [ "//tizen_src/build:evas" ]
+    configs += [ "//tizen_src/build:libevas" ]
+    configs += [ "//tizen_src/build:ecore" ]
+    configs += [ "//tizen_src/build:libecore" ]
+    configs += [ "//tizen_src/build:ecore-evas" ]
+    configs += [ "//tizen_src/build:libecore-evas" ]
+    public_configs += [ "//tizen_src/build:ecore-evas-public" ]
+    configs += [ "//tizen_src/build:efl-extension" ]
+    configs += [ "//tizen_src/build:libefl-extension" ]
+    public_configs += [ "//tizen_src/build:efl-extension-public" ]
+    configs += [ "//tizen_src/build:elementary" ]
+    configs += [ "//tizen_src/build:libelementary" ]
+    public_configs += [ "//tizen_src/build:elementary-public" ]
+    deps += [
+      "//tizen_src/chromium_impl/tizen:system-info",
+      "//tizen_src/ewk/efl_integration:chromium-ewk",
+      #"//build/linux:glib",   removed from the chromium
+    ]
+    configs += [ "//build/config/linux:glib" ]
+    if (!use_wayland) {
+      configs += [ "//tizen_src/build:ecore-x" ]
+      configs += [ "//tizen_src/build:libecore-x" ]
+      public_configs += [ "//tizen_src/build:ecore-x-public" ]
+    } else {
+      configs += [ "//tizen_src/build:ecore-wayland" ]
+      configs += [ "//tizen_src/build:libecore-wayland" ]
+      public_configs += [ "//tizen_src/build:ecore-wayland-public" ]
+    }
+    ldflags += [ "-ldlog" ]
+    libs += [ "dlog" ]
+    if (tizen_product_tv) {
+      configs += [ "//tizen_src/build:libvd-win-util" ]
+    } else {
+      configs += [ "//tizen_src/build:libcapi-privacy-privilege-manager" ]
+      configs += [ "//tizen_src/build:capi-privacy-privilege-manager" ]
+    }
+  }
+}

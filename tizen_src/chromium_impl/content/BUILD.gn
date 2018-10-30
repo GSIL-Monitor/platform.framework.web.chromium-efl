@@ -1,0 +1,22 @@
+# copyright (c) 2015 samsung electronics. all rights reserved.
+# use of this source code is governed by a bsd-style license that can be
+# found in the license file.
+
+static_library("android_content_detection") {
+  set_sources_assignment_filter([])
+  sources = [
+    "//content/renderer/android/disambiguation_popup_helper.cc",
+    "//content/renderer/android/disambiguation_popup_helper.h",
+    "//content/renderer/android/renderer_date_time_picker.cc",
+    "//content/renderer/android/renderer_date_time_picker.h",
+  ]
+
+  deps = [
+    "//mojo/public/cpp/bindings:bindings",
+    "//third_party/WebKit/public:blink",
+    "//third_party/icu:icui18n",
+    "//third_party/libphonenumber:libphonenumber",
+  ]
+
+  configs += [ "//third_party/leveldatabase:leveldatabase_config" ]
+}

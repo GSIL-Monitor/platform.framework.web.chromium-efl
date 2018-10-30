@@ -1,0 +1,39 @@
+# Copyright (c) 2015 Samsung Electronics. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+import("//tizen_src/build/config/tizen_features.gni")
+import("//tizen_src/chromium_impl/components/components.gni")
+
+external_content_shell_efl_configs = [
+  "//tizen_src/build:evas",
+  "//tizen_src/build:libevas",
+  "//tizen_src/build:ecore-evas",
+  "//tizen_src/build:libecore-evas",
+  "//tizen_src/build:elementary",
+  "//tizen_src/build:libelementary",
+]
+
+if (use_wayland) {
+  external_content_shell_efl_configs += [
+    "//tizen_src/build:ecore-wayland",
+    "//tizen_src/build:libecore-wayland"
+  ]
+} else {
+  external_content_shell_efl_configs += [
+    "//tizen_src/build:ecore-x",
+    "//tizen_src/build:libecore-x"
+  ]
+}
+
+external_content_shell_efl_deps = [ "//tizen_src/chromium_impl/efl:efl-init" ]
+external_content_shell_efl_deps += js_dialog_efl_deps
+
+external_content_shell_lib_efl_sources = [
+  "//tizen_src/chromium_impl/content/shell/browser/shell_efl.cc",
+  "//tizen_src/chromium_impl/content/shell/browser/shell_web_contents_view_delegate_efl.cc"
+]
+
+external_content_shell_efl_sources = [ "//tizen_src/chromium_impl/content/shell/browser/shell_main_efl.cc" ]
+
+external_exclude_content_shell_efl_sources = [ "app/shell_main.cc" ]

@@ -1,0 +1,6 @@
+include_rules = [
+  "+device/base/synchronization",
+  "+jni",
+  "+third_party/sudden_motion_sensor",
+  "+ui/gfx/geometry"
+]

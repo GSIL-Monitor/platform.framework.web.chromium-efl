@@ -1,0 +1,45 @@
+# Copyright (c) 2015 Samsung Electronics. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+import("//tizen_src/build/config/tizen_features.gni")
+
+static_library("window-factory") {
+  configs += [ "//tizen_src/build:evas" ]
+  configs += [ "//tizen_src/build:libevas" ]
+  configs += [ "//tizen_src/build:elementary" ]
+  configs += [ "//tizen_src/build:libelementary" ]
+  public_configs = [ "//tizen_src/build:elementary-public" ]
+
+  sources = [
+    "window_factory.h",
+    "window_factory.cc",
+  ]
+}
+
+static_library("efl-init") {
+  configs += [ "//tizen_src/build:evas" ]
+  configs += [ "//tizen_src/build:libevas" ]
+  configs += [ "//tizen_src/build:elementary" ]
+  configs += [ "//tizen_src/build:libelementary" ]
+  public_configs = [ "//tizen_src/build:elementary-public" ]
+
+  sources = [
+    "efl_export.h",
+    "init.h",
+    "init.cc",
+  ]
+
+  if (use_ozone) {
+    deps = [ "//ui/ozone:ozone" ]
+  }
+  if (use_wayland) {
+    configs += [ "//tizen_src/build:ecore-wayland" ]
+    configs += [ "//tizen_src/build:libecore-wayland" ]
+    public_configs += [ "//tizen_src/build:ecore-wayland-public" ]
+  } else {
+    configs += [ "//tizen_src/build:ecore-x" ]
+    configs += [ "//tizen_src/build:libecore-x" ]
+    public_configs += [ "//tizen_src/build:ecore-x-public" ]
+  }
+}

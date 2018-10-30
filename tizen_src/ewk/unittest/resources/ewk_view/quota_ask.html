@@ -1,0 +1,23 @@
+<html>
+<head>
+<title>No reply yet</title>
+</head>
+<body>
+<script>
+
+function successCB(storageInfo)
+{
+  console.debug("success");
+  document.title = "" + storageInfo.quota;
+}
+
+function errorCB(e)
+{
+  console.debug("error");
+  document.title = "" + e
+}
+navigator.storageQuota.requestPersistentQuota(10000).then(successCB, errorCB);
+
+</script>
+</body>
+</html>

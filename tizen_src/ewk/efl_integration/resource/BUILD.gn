@@ -1,0 +1,40 @@
+# Copyright (c) 2015 Samsung Electronics. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+import("//tizen_src/build/config/tizen_features.gni")
+
+template("edje_res_ewk") {
+  edje_target_name = "${target_name}_generate"
+  action_foreach(edje_target_name) {
+    script = "//tizen_src/build/cmd_execution.py"
+    sources = invoker.sources
+    outputs = [ "$root_out_dir/resources/{{source_name_part}}.edj" ]
+    args = [
+      "$edje_compiler",
+      "-id",
+      rebase_path("./images/"),
+      rebase_path("{{source_file_part}}"),
+      rebase_path("$root_out_dir/resources/{{source_name_part}}.edj"),
+    ]
+  }
+
+  source_set(target_name) {
+    deps = [ ":$edje_target_name" ]
+  }
+}
+
+edje_res_ewk("edje_resources_ewk") {
+  sources = [
+    "AuthenticationPopup.edc",
+    "AutofillPopup.edc",
+    "JavaScriptPopup.edc",
+    "control.edc",
+    "controlTV.edc",
+    "PaymentAddCard.edc",
+    "PaymentAddContact.edc",
+    "PaymentCvc.edc",
+    "PaymentMain.edc",
+    "PaymentShippingAddress.edc",
+  ]
+}

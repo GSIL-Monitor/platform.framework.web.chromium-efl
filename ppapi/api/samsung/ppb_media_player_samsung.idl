@@ -1,0 +1,688 @@
+/* Copyright (c) 2016 Samsung Electronics. All rights reserved.
+ */
+
+/**
+ * This file defines the <code>PPB_MediaPlayer_Samsung</code> interface,
+ * which provides multimedia streaming, playback control capabilities.
+ *
+ * Part of Pepper Media Player interfaces (Samsung's extension).
+ *
+ * Basic idea:
+ * - <code>PPB_MediaPlayer_Samsung</code> is interface allowing application
+ *   to control playback state, inquire about playback state and to
+ *   set listeners for various playback related events (see
+ *   <code>PPP_MediaEventsListener_Samsung</code>). It's also responsible for
+ *   assigning data source which will feed player with media data.
+ *
+ * For full description of Data Sources see ppb_media_data_source_samsung.idl.
+ */
+
+label Chrome {
+  M42 = 1.0,
+  M47 = 1.1,
+  M55 = 1.2,
+  M56 = 1.3
+};
+
+/**
+ * Interface representing player and providing functionality of playback
+ * control and attaching data source feeding player.
+ *
+ * Assumptions:
+ * - Video is displayed in area of embed/object element of HTML page
+ *   in which plugin is embedded.
+ * - Video and graphics from module can be displayed simultaneously.
+ *   (see <code>PPB_Instance.BindGraphics</code>). Application must
+ *   set proper CSS style for embed element with NaCl application
+ *   (mostly transparent background).
+ */
+interface PPB_MediaPlayer_Samsung {
+  /**
+   * Creates a new media player resource with <code>PP_MEDIAPLAYERMODE_DEFAULT
+   * </code> player mode and binds it to the instance.
+   *
+   * @param[in] instance A <code>PP_Instance</code> identifying the instance
+   * with the media player.
+   *
+   * @return A <code>PP_Resource</code> corresponding to a media player if
+   * successful or 0 otherwise.
+   */
+  PP_Resource Create(
+      [in] PP_Instance instance);
+
+  /**
+   * Creates a new media player resource without binding it to the instance.
+   *
+   * @param[in] instance A <code>PP_Instance</code> identifying the instance
+   * with the media player.
+   *
+   * @return A <code>PP_Resource</code> corresponding to a media player if
+   * successful or 0 otherwise.
+   */
+  [version = 1.1, deprecate=1.2]
+  PP_Resource CreateWithoutBindingToInstance(
+      [in] PP_Instance instance);
+
+  /**
+   * Creates a player with specified modes of player and binding to
+   * pp::Instance.
+   *
+   * @param[in] instance A <code>PP_Instance</code> identifying the instance
+   * with the media player.
+   * @param[in] player_mode A <code>PP_MediaPlayerMode</code> identifying the
+   * player mode used for media player instance.
+   * @param[in] bind_mode A <code>PP_BindToInstanceMode</code> specifying if
+   * binding to <code>PPB_Instance</code> graphics should be performed.
+   *
+   * @return A <code>PP_Resource</code> corresponding to a media player if
+   * successful or 0 otherwise.
+   */
+  [version = 1.2]
+  PP_Resource CreateWithOptions(
+      [in] PP_Instance instance,
+      [in] PP_MediaPlayerMode player_mode,
+      [in] PP_BindToInstanceMode bind_mode);
+
+  /**
+   * Determines if the given resource is a media player.
+   *
+   * @param[in] resource A <code>PP_Resource</code> identifying a resource.
+   *
+   * @return <code>PP_TRUE</code> if the resource is a
+   * <code>PPB_MediaPlayer_Samsung</code>, <code>PP_FALSE</code>
+   * if the resource is invalid or some other type.
+   */
+  PP_Bool IsMediaPlayer(
+      [in] PP_Resource controller);
+
+  /**
+   * Attaches <code>PPP_MediaEventsListener_Samsung</code> to the player.
+   * After attaching plugin is notified about media playback related event.
+   * Previously attached listener (if any) is detached.
+   *
+   * All listeners will be called in the same thread. If this method was
+   * invoked in a thread with a running message loop, the listener will run in
+   * the current thread. Otherwise, it will run on the main thread.
+   *
+   * @param[in] player A <code>PP_Resource</code> identifying the media player.
+   * @param[in] listener A <code>PPP_MediaEventsListener_Samsung</code>
+   * interface whose methods will be notified about subscribed events.
+   * Passing <code>NULL</code> will detach currently set listener.
+   * @param[in] user_data A pointer to user data which  will be passed
+   * to the listeners during method invocation (optional).
+   *
+   * @return <code>PP_TRUE</code> if listener has been successfully attached,
+   * <code>PP_FALSE</code> otherwise. This method will return false only when
+   * called on resource not representing <code>PPB_MediaPlayer_Samsung</code>.
+   */
+  PP_Bool SetMediaEventsListener(
+      [in] PP_Resource player,
+      [in] PPP_MediaEventsListener_Samsung listener,
+      [inout] mem_t user_data);
+
+  /**
+   * Attaches <code>PPP_SubtitleListener_Samsung</code> to the player.
+   * After attaching plugin is notified about subtitle texts that are parsed by
+   * the internal player subtitle parser at the time when they should be
+   * displayed. Only notifications regarding texts that originate from active
+   * text track are delivered this way.
+   * Previously attached listener (if any) is detached.
+   *
+   * All listeners will be called in the same thread. If this method was
+   * invoked in a thread with a running message loop, the listener will run in
+   * the current thread. Otherwise, it will run on the main thread.
+   *
+   * @param[in] player A <code>PP_Resource</code> identifying the media player.
+   * @param[in] listener A <code>PPP_SubtitleListener_Samsung</code>
+   * interface whose methods will be notified about subscribed events.
+   * Passing <code>NULL</code> will detach currently set listener.
+   * @param[in] user_data A pointer to user data which  will be passed
+   * to the listeners during method invocation (optional).
+   *
+   * @return <code>PP_TRUE</code> if listener has been successfully attached,
+   * <code>PP_FALSE</code> otherwise. This method will return false only when
+   * called on resource not representing <code>PPB_MediaPlayer_Samsung</code>.
+   */
+  PP_Bool SetSubtitleListener(
+      [in] PP_Resource player,
+      [in] PPP_SubtitleListener_Samsung listener,
+      [inout] mem_t user_data);
+
+  /**
+   * Attaches <code>PPP_BufferingListener_Samsung</code> to the player.
+   * After attaching plugin is notified about initial media buffering events.
+   * Previously attached listener (if any) is detached.
+   *
+   * All listeners will be called in the same thread. If this method was
+   * invoked in a thread with a running message loop, the listener will run in
+   * the current thread. Otherwise, it will run on the main thread.
+   *
+   * @param[in] player A <code>PP_Resource</code> identifying the media player.
+   * @param[in] listener A <code>PPP_BufferingListener_Samsung</code>
+   * interface whose methods will be notified about subscribed events.
+   * Passing <code>NULL</code> will detach currently set listener.
+   * @param[in] user_data A pointer to user data which  will be passed
+   * to the listeners during method invocation (optional).
+   *
+   * @return <code>PP_TRUE</code> if listener has been successfully attached,
+   * <code>PP_FALSE</code> otherwise. This method will return false only when
+   * called on resource not representing <code>PPB_MediaPlayer_Samsung</code>.
+   */
+  PP_Bool SetBufferingListener(
+      [in] PP_Resource data_source,
+      [in] PPP_BufferingListener_Samsung listener,
+      [inout] mem_t user_data);
+
+  /**
+   * Attaches <code>PPP_DRMListener_Samsung</code> to the player.
+   * After attaching plugin is notified about DRM related events.
+   * Previously attached listener (if any) is detached.
+   *
+   * All listeners will be called in the same thread. If this method was
+   * invoked in a thread with a running message loop, the listener will run in
+   * the current thread. Otherwise, it will run on the main thread.
+   *
+   * @param[in] player A <code>PP_Resource</code> identifying the media player.
+   * @param[in] listener A <code>PPP_DRMListener_Samsung</code>
+   * interface whose methods will be notified about subscribed events.
+   * Passing <code>NULL</code> will detach currently set listener.
+   * @param[in] user_data A pointer to user data which  will be passed
+   * to the listeners during method invocation (optional).
+   *
+   * @return <code>PP_TRUE</code> if listener has been successfully attached,
+   * <code>PP_FALSE</code> otherwise. This method will return false only when
+   * called on resource not representing <code>PPB_MediaPlayer_Samsung</code>.
+   */
+  PP_Bool SetDRMListener(
+      [in] PP_Resource data_source,
+      [in] PPP_DRMListener_Samsung listener,
+      [inout] mem_t user_data);
+
+  /**
+   * Attaches given <code>PPB_MediaDataSource</code> to the player.
+   *
+   * You can pass a <code>NULL</code> resource as buffer to detach currently
+   * attached data source. Reattaching data source will return
+   * <code>PP_OK</code> and do nothing.
+   *
+   * Attached data source must be valid. Otherwise
+   * <code>PP_ERROR_BADARGUMENT</code> will be returned. Attaching data source
+   * to the player will cause:
+   * 1. Detaching currently attached data source
+   * 2. Performing initialization of newly bound data source (this step
+   *    is specific to data source which is being bound).
+   *
+   * @param[in] player A <code>PP_Resource</code> identifying the media player.
+   * @param[in] data_source A <code>PP_Resource</code> identifying data source
+   * to be attached to the player.
+   * @param[in] callback A <code>PP_CompletionCallback</code> to be called upon
+   * completion.
+   *
+   * @return PP_OK on success, otherwise an error code from
+   * <code>pp_errors.h</code>.
+   */
+  int32_t AttachDataSource(
+      [in] PP_Resource player,
+      [in] PP_Resource data_source,
+      [in] PP_CompletionCallback callback);
+
+  /* Playback control */
+
+  /**
+   * Requests to start playback of media from data source attached to the
+   * media player.
+   *
+   * @param[in] player A <code>PP_Resource</code> identifying the media player.
+   * @param[in] callback A <code>PP_CompletionCallback</code> to be called upon
+   * completion.
+   *
+   * @return PP_OK on success, otherwise an error code from
+   * <code>pp_errors.h</code>. Meaning of errors:
+   * - <code>PP_ERROR_BADARGUMENT</code> - if no data source is connected
+   *   to the media player.
+   * - <code>PP_ERROR_NOTSUPPORTED</code> - if given operation is not
+   *   supported by attached data source.
+   */
+  int32_t Play(
+      [in] PP_Resource player,
+      [in] PP_CompletionCallback callback);
+
+  /**
+   * Requests to pause playback of media from data source attached to the
+   * media player.
+   *
+   * @param[in] player A <code>PP_Resource</code> identifying the media player.
+   * @param[in] callback A <code>PP_CompletionCallback</code> to be called upon
+   * completion.
+   *
+   * @return PP_OK on success, otherwise an error code from
+   * <code>pp_errors.h</code>. Meaning of errors:
+   * - <code>PP_ERROR_BADARGUMENT</code> - if no data source is connected
+   *   to the media player.
+   * - <code>PP_ERROR_NOTSUPPORTED</code> - if given operation is not
+   *   supported by attached data source.
+   */
+  int32_t Pause(
+      [in] PP_Resource player,
+      [in] PP_CompletionCallback callback);
+
+  /**
+   * Requests to stop playback of media from data source attached to the
+   * media player.
+   *
+   * @param[in] player A <code>PP_Resource</code> identifying the media player.
+   * @param[in] callback A <code>PP_CompletionCallback</code> to be called upon
+   * completion.
+   *
+   * @return PP_OK on success, otherwise an error code from
+   * <code>pp_errors.h</code>. Meaning of errors:
+   * - <code>PP_ERROR_BADARGUMENT</code> - if no data source is connected
+   *   to the media player.
+   * - <code>PP_ERROR_NOTSUPPORTED</code> - if given operation is not
+   *   supported by attached data source.
+   */
+  int32_t Stop(
+      [in] PP_Resource player,
+      [in] PP_CompletionCallback callback);
+
+  /**
+   * Requests to seek media from attached data source to the given time stamp.
+   * After calling Seek new packets should be sent to the player. Only after
+   * receiving a number of packets the player can complete a seek operation and
+   * run a callback.
+   *
+   * @param[in] player A <code>PP_Resource</code> identifying the media player.
+   * @param[in] time A time stamp from begging of the clip to from which
+   * playback should be resumed.
+   * @param[in] callback A <code>PP_CompletionCallback</code> to be called upon
+   * completion.
+   *
+   * @return PP_OK on success, otherwise an error code from
+   * <code>pp_errors.h</code>. Meaning of errors:
+   * - <code>PP_ERROR_BADARGUMENT</code> - if no data source is connected
+   *   to the media player.
+   * - <code>PP_ERROR_NOTSUPPORTED</code> - if given operation is not
+   *   supported by attached data source.
+   */
+  int32_t Seek(
+      [in] PP_Resource player,
+      [in] PP_TimeTicks time,
+      [in] PP_CompletionCallback callback);
+
+  /**
+   * Sets playback rate, pass:
+   * |rate| == 1.0      to mark normal playback
+   * 0.0 < |rate| < 1.0 to mark speeds slower than normal
+   * |rate| > 1.0       to mark speeds faster than normal
+   *
+   * @param[in] player A <code>PP_Resource</code> identifying the media player.
+   * @param[in] rate A rate of the playback.
+   * @param[in] callback A <code>PP_CompletionCallback</code> to be called upon
+   * completion.
+   *
+   * @return PP_OK on success, otherwise an error code from
+   * <code>pp_errors.h</code>. Meaning of errors:
+   * - <code>PP_ERROR_BADARGUMENT</code> - if no data source is connected
+   *   to the media player.
+   * - <code>PP_ERROR_NOTSUPPORTED</code> - if given operation is not
+   *   supported by attached data source.
+   */
+  int32_t SetPlaybackRate(
+      [in] PP_Resource player,
+      [in] double_t rate,
+      [in] PP_CompletionCallback callback);
+
+  /* Playback time info */
+
+  /**
+   * Retrieves duration of the media played from attached data source.
+   *
+   * @param[in] player A <code>PP_Resource</code> identifying the media player.
+   * @param[out] duration Retrieved duration of the media.
+   * @param[in] callback A <code>PP_CompletionCallback</code> to be called upon
+   * completion.
+   *
+   * @return PP_OK on success, otherwise an error code from
+   * <code>pp_errors.h</code>. Meaning of errors:
+   * - <code>PP_ERROR_BADARGUMENT</code> - if no data source is connected
+   *   to the media player.
+   * - <code>PP_ERROR_NOTSUPPORTED</code> - if given operation is not
+   *   supported by attached data source (e.g. live content playback).
+   */
+  int32_t GetDuration(
+      [in] PP_Resource player,
+      [out] PP_TimeDelta duration,
+      [in] PP_CompletionCallback callback);
+
+  /**
+   * Retrieves current time/position of the media played from attached
+   * data source.
+   *
+   * This operation can be performed only for media player in
+   * <code>PP_MEDIAPLAYERSTATE_PLAYING</code> or
+   * <code>PP_MEDIAPLAYERSTATE_PAUSED</code> states.
+   *
+   * @param[in] player A <code>PP_Resource</code> identifying the media player.
+   * @param[out] duration Retrieved current time/position of the media.
+   * @param[in] callback A <code>PP_CompletionCallback</code> to be called upon
+   * completion.
+   *
+   * @return PP_OK on success, otherwise an error code from
+   * <code>pp_errors.h</code>. Meaning of errors:
+   * - <code>PP_ERROR_BADARGUMENT</code> - if no data source is connected
+   *   to the media player.
+   * - <code>PP_ERROR_NOTSUPPORTED</code> - if data can't be retrieved
+   *   due to invalid player state.
+   */
+  int32_t GetCurrentTime(
+      [in] PP_Resource player,
+      [out] PP_TimeTicks time,
+      [in] PP_CompletionCallback callback);
+
+  /* Playback state info */
+
+  /**
+   * Retrieves current state the media player.
+   *
+   * @param[in] player A <code>PP_Resource</code> identifying the media player.
+   * @param[out] state Retrieved current state of the media player.
+   * @param[in] callback A <code>PP_CompletionCallback</code> to be called upon
+   * completion.
+   *
+   * @return PP_OK on success, otherwise an error code from
+   * <code>pp_errors.h</code>.
+   */
+  int32_t GetPlayerState(
+      [in] PP_Resource player,
+      [out] PP_MediaPlayerState state,
+      [in] PP_CompletionCallback callback);
+
+  /* Tracks info */
+
+  /**
+   * Retrieves information of current video track from the media played from
+   * attached data source.
+   *
+   * @param[in] player A <code>PP_Resource</code> identifying the media player.
+   * @param[out] track_info Retrieved video track information.
+   * @param[in] callback A <code>PP_CompletionCallback</code> to be called upon
+   * completion.
+   *
+   * @return PP_OK on success, otherwise an error code from
+   * <code>pp_errors.h</code>. Meaning of errors:
+   * - <code>PP_ERROR_BADARGUMENT</code> - if no data source is connected
+   *   to the media player.
+   * - <code>PP_ERROR_NOTSUPPORTED</code> - if no video track is available
+   *   in media played from attached data source.
+   */
+  int32_t GetCurrentVideoTrackInfo(
+      [in] PP_Resource player,
+      [out] PP_VideoTrackInfo track_info,
+      [in] PP_CompletionCallback callback);
+
+  /**
+   * Retrieves information of all video tracks from the media played from
+   * attached data source.
+   *
+   * @param[in] player A <code>PP_Resource</code> identifying the media player.
+   * @param[in] output A <code>PP_ArrayOutput</code> to receive list of the
+   * supported <code>PP_VideoTrackInfo</code> tracks descriptions.
+   * @param[in] callback A <code>PP_CompletionCallback</code> to be called upon
+   * completion.
+   *
+   * @return If >= 0, the number of the tracks is returned, otherwise an
+   * error code from <code>pp_errors.h</code>. Meaning of errors:
+   * - <code>PP_ERROR_BADARGUMENT</code> - if no data source is connected
+   *   to the media player.
+   */
+  int32_t GetVideoTracksList(
+      [in] PP_Resource player,
+      [in] PP_ArrayOutput output,
+      [in] PP_CompletionCallback callback);
+
+  /**
+   * Retrieves information of current audio track from the media played from
+   * attached data source.
+   *
+   * @param[in] player A <code>PP_Resource</code> identifying the media player.
+   * @param[out] track_info Retrieved audio track information.
+   * @param[in] callback A <code>PP_CompletionCallback</code> to be called upon
+   * completion.
+   *
+   * @return PP_OK on success, otherwise an error code from
+   * <code>pp_errors.h</code>. Meaning of errors:
+   * - <code>PP_ERROR_BADARGUMENT</code> - if no data source is connected
+   *   to the media player.
+   * - <code>PP_ERROR_NOTSUPPORTED</code> - if no audio track is available
+   *   in media played from attached data source.
+   */
+  int32_t GetCurrentAudioTrackInfo(
+      [in] PP_Resource player,
+      [out] PP_AudioTrackInfo track_info,
+      [in] PP_CompletionCallback callback);
+
+  /**
+    * Retrieves information of all audio tracks from the media played from
+    * attached data source.
+    *
+    * @param[in] player A <code>PP_Resource</code> identifying the media player.
+    * @param[in] output A <code>PP_ArrayOutput</code> to receive list of the
+    * supported <code>PP_AudioTrackInfo</code> tracks descriptions.
+    * @param[in] callback A <code>PP_CompletionCallback</code> to be called upon
+    * completion.
+    *
+    * @return If >= 0, the number of the tracks is returned, otherwise an
+    * error code from <code>pp_errors.h</code>. Meaning of errors:
+    * - <code>PP_ERROR_BADARGUMENT</code> - if no data source is connected
+    *   to the media player.
+    */
+  int32_t GetAudioTracksList(
+      [in] PP_Resource player,
+      [in] PP_ArrayOutput output,
+      [in] PP_CompletionCallback callback);
+
+  /**
+   * Retrieves information of current text/subtitles track from the media played
+   * from attached data source.
+   *
+   * @param[in] player A <code>PP_Resource</code> identifying the media player.
+   * @param[out] track_info Retrieved video track information.
+   * @param[in] callback A <code>PP_CompletionCallback</code> to be called upon
+   * completion.
+   *
+   * @return PP_OK on success, otherwise an error code from
+   * <code>pp_errors.h</code>. Meaning of errors:
+   * - <code>PP_ERROR_BADARGUMENT</code> - if no data source is connected
+   *   to the media player.
+   * - <code>PP_ERROR_NOTSUPPORTED</code> - if no text/subtitles track
+   *   is available in media played from attached data source.
+   */
+  int32_t GetCurrentTextTrackInfo(
+      [in] PP_Resource player,
+      [out] PP_TextTrackInfo track_info,
+      [in] PP_CompletionCallback callback);
+
+  /**
+    * Retrieves information of all text/subtitles tracks from the media played
+    * from attached data source.
+    *
+    * @param[in] player A <code>PP_Resource</code> identifying the media player.
+    * @param[in] output A <code>PP_ArrayOutput</code> to receive list of the
+    * supported <code>PP_TextTrackInfo</code> tracks descriptions.
+    * @param[in] callback A <code>PP_CompletionCallback</code> to be called upon
+    * completion.
+    *
+    * @return If >= 0, the number of the tracks is returned, otherwise an
+    * error code from <code>pp_errors.h</code>. Meaning of errors:
+    * - <code>PP_ERROR_BADARGUMENT</code> - if no data source is connected
+    *   to the media player.
+    */
+  int32_t GetTextTracksList(
+      [in] PP_Resource player,
+      [in] PP_ArrayOutput output,
+      [in] PP_CompletionCallback callback);
+
+  /**
+    * Selects a track for the given stream type to be activated for media
+    * played from the attached data source.
+    *
+    * Remarks:
+    * If activated track is a text track, it will be automatically activated and
+    * therefore it's subtitles will be delivered as events to the
+    * <code>PPP_SubtitleListener_Samsung</code>.
+    *
+    * Constraints:
+    * An ability to handle multiple video tracks at a time is not guaranteed to
+    * be supported on all platforms, therefore calling this method with a
+    * <code>PP_ElementaryStream_Type_Samsung_VIDEO</code> as a stream type may
+    * result with a <code>PP_ERROR_NOTSUPPORTED</code> error code.
+    *
+    * @param[in] player A <code>PP_Resource</code> identifying the media player.
+    * @param[in] track_type A type of the stream for which activate track.
+    * @param[in] track_index An index of the track which has to be activated.
+    * Valid track index can be obtained from one of PP_*TrackInfo structures
+    * returned by corresponding call to Get*TracksInfo.
+    * @param[in] callback A <code>PP_CompletionCallback</code> to be called upon
+    * completion.
+    *
+    * @return  PP_OK on success, otherwise an error code from
+    * <code>pp_errors.h</code>. Meaning of errors:
+    * - <code>PP_ERROR_BADARGUMENT</code> - if no data source is connected
+    *   to the media player or passed |track_type| or |track_index| are
+    *   not valid.
+    * - <code>PP_ERROR_NOTSUPPORTED</code> - if called with
+    *   <code>PP_ElementaryStream_Type_Samsung_VIDEO</code> on a platform that
+    *   supports only one video track at a time.
+    */
+  int32_t SelectTrack(
+      [in] PP_Resource player,
+      [in] PP_ElementaryStream_Type_Samsung track_type,
+      [in] uint32_t track_index,
+      [in] PP_CompletionCallback callback);
+
+  /* Subtitles (text track) control */
+
+  /**
+   * Adds external subtitles.
+   * Returns <code>PP_OK/code> in case of success and writes added text track
+   * information to |subtitles| param. After that newly added subtitles will be
+   * activated and <code>PPB_SubtitleListener_Samsung</code> will be
+   * notified about it's texts at the time those texts should be shown.
+   *
+   * Please note that player is responsible only for subtitle file parsing. No
+   * subtitles are displayed by the player. Application can use
+   * <code>PPB_SubtitleListener_Samsung</code> to get subtitle texts at correct
+   * playback times and display them manually.
+   *
+   * Constraints:
+   * Ability to add external subtitles after attaching data source is
+   * implementation dependent. If it is impossible to add external subtitles
+   * after data source is attached, this method will fail with
+   * <code>PP_ERROR_NOTSUPPORTED</code> error code. Therefore this method is
+   * guaranteed to succeed only before data source is attached.
+   *
+   * @param[in] player A <code>PP_Resource</code> identifying the media player.
+   * @param[in] file_path A path of the subtitles.
+   * @param[in] encoding Subtitle encoding. May be NULL or empty string, which
+   * will cause subtitles to be interpreted as UTF-8 text.
+   * @param[out] subtitles Added text/subtitles track information.
+   * @param[in] callback A <code>PP_CompletionCallback</code> to be called upon
+   * completion.
+   *
+   * @return PP_OK on success, otherwise an error code from
+   * <code>pp_errors.h</code>. Meaning of errors:
+   * - <code>PP_ERROR_FILENOTFOUND</code> - if provided file_path is invalid.
+   * - <code>PP_ERROR_BADARGUMENT</code> - if provided encoding is invalid.
+   * - <code>PP_ERROR_NOTSUPPORTED</code> - if method was called after attaching
+   *   a data source and such operation is not supported on the current
+   *   implementation.
+   */
+  int32_t AddExternalSubtitles(
+      [in] PP_Resource player,
+      [in] str_t file_path,
+      [in] str_t encoding,
+      [out] PP_TextTrackInfo subtitles,
+      [in] PP_CompletionCallback callback);
+
+  /**
+   * Sets subtitles (text stream) <code>PPP_SubtitleListener_Samsung</code>
+   * event emission delay regarding to the current media time.
+   *
+   * @param[in] player A <code>PP_Resource</code> identifying the media player.
+   * @param[in] delay A delay to be set.
+   * @param[in] callback A <code>PP_CompletionCallback</code> to be called upon
+   * completion.
+   *
+   * @return PP_OK on success, otherwise an error code from
+   * <code>pp_errors.h</code>. Meaning of errors:
+   * - <code>PP_ERROR_BADARGUMENT</code> - if no data source is connected
+   *   to the media player.
+   */
+  int32_t SetSubtitlesDelay(
+      [in] PP_Resource player,
+      [in] PP_TimeDelta delay,
+      [in] PP_CompletionCallback callback);
+
+  /* Other - player control */
+
+  /**
+   * Sets display region in which video will be displayed. Passed position
+   * is relative to the embed/object element of WebPage associated with given
+   * plugin.
+   *
+   * @param[in] player A <code>PP_Resource</code> identifying the media player.
+   * @param[in] rect Video region in which video will be displayed.
+   * @param[in] callback A <code>PP_CompletionCallback</code> to be called upon
+   * completion.
+   *
+   * @return PP_OK on success, otherwise an error code from
+   * <code>pp_errors.h</code>.
+   */
+  int32_t SetDisplayRect(
+      [in] PP_Resource player,
+      [in] PP_Rect rect,
+      [in] PP_CompletionCallback callback);
+
+  /**
+   * Sets a display mode which will be used by player. If no display mode is
+   * set, <code>PP_MEDIAPLAYERDISPLAYMODE_STRETCH</code> is used.
+   *
+   * @param[in] player A <code>PP_Resource</code> identifying the media player.
+   * @param[in] display_mode A display mode to be used. See <code>
+   * PP_MediaPlayerDisplayMode</code> enum for possible options.
+   * @param[in] callback A <code>PP_CompletionCallback</code> to be called upon
+   * completion.
+   *
+   * @return PP_OK on success, otherwise an error code from
+   * <code>pp_errors.h</code>.
+   */
+  [version = 1.3]
+  int32_t SetDisplayMode(
+      [in] PP_Resource player,
+      [in] PP_MediaPlayerDisplayMode display_mode,
+      [in] PP_CompletionCallback callback);
+
+  /**
+   * Calls DRM system specific operation.
+   *
+   * @param[in] player A <code>PP_Resource</code> identifying the media player.
+   * @param[in] drm_type A DRM system to be used
+   * @param[in] drm_operation A DRM specific operation to be performed.
+   * @param[in] drm_data_size A size of data buffer passed to DRM system.
+   * @param[in] drm_data A data buffer passed to DRM system.
+   * @param[in] callback A <code>PP_CompletionCallback</code> to be called upon
+   * completion.
+   *
+   * @return PP_OK on success, otherwise an error code from
+   * <code>pp_errors.h</code>. Meaning of errors:
+   * - <code>PP_ERROR_BADARGUMENT</code> - if no data source is connected
+   *   to the media player.
+   */
+  int32_t SetDRMSpecificData(
+      [in] PP_Resource player,
+      [in] PP_MediaPlayerDRMType drm_type,
+      [in] PP_MediaPlayerDRMOperation drm_operation,
+      [in] uint32_t drm_data_size,
+      [in] mem_t drm_data,
+      [in] PP_CompletionCallback callback);
+};

@@ -1,0 +1,68 @@
+// Copyright 2016 Samsung Electronics. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+/**
+ * This file defines the <code>PPB_ExtensionSystem_Samsung</code> interface.
+ */
+
+[generate_thunk]
+
+label Chrome {
+   M35 = 0.1
+ };
+
+/**
+ * The PPB_ExtensionSystem_Samsung interface contains pointers to functions
+ * related to the extension system. The extension system can be different for
+ * each browser.
+ */
+ [singleton]
+interface PPB_ExtensionSystem_Samsung {
+  /**
+   * GetEmbedderName() provides string with embedder name (embedder of current
+   * extension). "Chrome", "TizenWRT", "ExtensionEngine" are one of possible
+   * values.
+   *
+   * @param[in] instance A <code>PP_Instance</code> identifying one instance
+   * of a module.
+   *
+   * @return A <code>PP_Var</code> with name of extension embedder.
+   */
+  PP_Var GetEmbedderName(
+      [in] PP_Instance instance);
+
+  /**
+   * GetCurrentExtensionInfo() gets dictionary with information for current
+   * extension. Keys and values of the dictionary are dependant on the
+   * embedder, and they can differ between embedders. If current embedder does
+   * not support extension system undefined value is returned.
+   *
+   * @param[in] instance A <code>PP_Instance</code> identifying one instance
+   * of a module.
+   *
+   * @return A <code>PP_Var</code> with information of current extension.
+   */
+  PP_Var GetCurrentExtensionInfo(
+      [in] PP_Instance instance);
+
+  /**
+   * GenericSyncCall() executes operation associated with the current
+   * extension. The operation is synchronous and blocks the caller until
+   * completes. See embedder documentation to know what operations are
+   * possible.
+   *
+   * @param[in] instance A <code>PP_Instance</code> identifying one instance
+   * of a module.
+   * @param[in] operation_name A string with name of operation to execute.
+   * @param[in] operation_argument A variable to be passed to embedder
+   * @param[out] result A variable containing result of execution (embedder
+   * defined).
+   *
+   * @return An int32_t containing an error code from <code>pp_errors.h</code>.
+   */
+  int32_t GenericSyncCall(
+      [in] PP_Instance instance,
+      [in] PP_Var operation_name,
+      [in] PP_Var operation_argument,
+      [out] PP_Var result);
+};

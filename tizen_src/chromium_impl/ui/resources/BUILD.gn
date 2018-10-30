@@ -1,0 +1,15 @@
+# copyright (c) 2018 samsung electronics. all rights reserved.
+# use of this source code is governed by a bsd-style license that can be
+# found in the license file.
+
+import("//tools/grit/grit_rule.gni")
+
+grit("ui_resources_tizen_grd") {
+  source = "ui_resources_tizen.grd"
+  output_dir = "$root_gen_dir/ui/resources"
+  outputs = [
+    "grit/ui_resources_tizen.h",
+    "ui_resources_tizen.pak",
+  ]
+}
+

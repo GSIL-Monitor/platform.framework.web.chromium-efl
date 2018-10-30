@@ -1,0 +1,23 @@
+# Copyright (c) 2015 Samsung Electronics. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+import("//tizen_src/build/config/tizen_features.gni")
+
+if (tizen_multimedia_support) {
+  config("media_efl_config") {
+    defines = [
+      "TIZEN_VIDEO_CAPTURE_SUPPORT",
+      "TIZEN_MULTIMEDIA_ZEROCOPY_SUPPORT",
+    ]
+
+    include_dirs = [
+      "//third_party/WebKit",
+      "//third_party/libyuv/include",
+      "//third_party/mojo/src",
+      "//v8/include",
+    ]
+
+    defines += [ "TIZEN_MULTIMEDIA_EME_SUPPORT = 1" ]
+  }
+}

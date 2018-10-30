@@ -1,0 +1,73 @@
+# Source code dependencies required for building Chromium-efl.
+#
+# This file is used as a template to generate .gclient-efl, which is a
+# regular .gclient file pointing to additional source code repositories that
+# need to be checked out in order to build Chromium-efl.
+#
+# These dependencies are not specified in DEPS for historical compatibility
+# reasons and also to allow us to perform some additional manipulation on some
+# entries (such as setting a custom value for "deps_file" in certain
+# solutions).
+#
+# If you are doing a DEPS roll, you should only need to worry about the *_rev
+# variables below.
+
+# -----------------------------------
+# Chromium-efl dependencies.
+# Edit these when rolling DEPS.efl.
+# -----------------------------------
+
+efl_integration_branch = 'origin/dev/m63_3239'
+ct_git = 'ssh://165.213.202.130:29418/webplatform'
+
+# ------------------------------------------------------
+# gclient solutions.
+# You do not need to worry about these most of the time.
+# ------------------------------------------------------
+
+solutions = [
+  { 'name': 'src',
+    'url': ct_git + '/s-chromium.git@' + efl_integration_branch,
+    'deps_file': 'DEPS',
+    'custom_deps': {
+      'src':
+        ct_git + '/s-chromium.git@' + efl_integration_branch,
+      'src/third_party/skia':
+        ct_git + '/s-skia.git@' + efl_integration_branch,
+      #'src/third_party/webrtc':
+      #  ct_git + '/s-webrtc.git@' + efl_integration_branch,
+      'src/v8':
+        ct_git + '/s-v8.git@' + efl_integration_branch,
+
+      # These directories are not relevant to Chromium-efl and can be safely ignored
+      # in a checkout. It avoids creating additional directories outside src/ that
+      # are not used and also saves some bandwidth.
+      'build': None,
+      'build/scripts/command_wrapper/bin': None,
+      'build/scripts/gsd_generate_index': None,
+      'build/scripts/private/data/reliability': None,
+      'build/scripts/tools/deps2git': None,
+      'build/third_party/cbuildbot_chromite': None,
+      'build/third_party/gsutil': None,
+      'build/third_party/lighttpd': None,
+      'build/third_party/swarm_client': None,
+      'build/third_party/xvfb': None,
+      'build/xvfb': None,
+      'commit-queue': None,
+      'depot_tools': None,
+    },
+
+    'custom_hooks': [
+      # Disable Chromium's "gyp" hooks, which runs the gyp_chromium script. We
+      # are not interested in running it as we use gyp_chromiumefl instead (and it is
+      # run at a later stage as a hook in Chromium-efl's own DEPS).
+      {
+        'name': 'gyp',
+      },
+    ],
+  },
+]
+
+# -------------------------------------------------
+# This area is edited by generate_gclient-efl.py.
+# -------------------------------------------------

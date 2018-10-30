@@ -1,0 +1,81 @@
+html {
+  font-size: 1.2em;
+  background-color: #fafafa;
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+    height:100%;
+    padding-bottom:24px;
+}
+
+.icon {
+background-image: -webkit-image-set(
+      url(images/1x/internet_alert.png) 1x,
+      url(images/2x/internet_alert.png) 2x);
+  background-repeat: no-repeat;
+  background-size: 100%;
+  height: 31px;
+  width: 31px;
+  margin: 47px 0px 15px 24px;
+  box-sizing: border-box;
+}
+
+h1 {
+  color: #dd2c00;
+  font-size: 1.498em;
+  font-weight: normal;
+  font-family: Roboto-Regular,Helvetica;
+  margin-left: 24px;
+  margin-right: 24px;
+  margin-bottom: 6px;
+}
+
+p {
+  margin-top: 0px;
+  font-family: Roboto-Regular,Helvetica;
+  font-size: 0.936em;
+  margin-left: 24px;
+  margin-right: 24px;
+  margin-bottom: 0px;
+  color: #505050;
+}
+
+.hidden {
+  display: none;
+}
+
+.nav-wrapper {
+  margin-top: 16px;
+  margin-left: 24px;
+  margin-right: 24px;
+  text-align: center;
+}
+
+#primary-button {
+  box-sizing: border-box;
+  color: #252525;
+  font-size: 0.936em;
+  font-family: Roboto-Regular,Helvetica;
+  background-color: rgb(250, 250, 250);
+  border: 1px solid rgb(175, 175, 175);
+  min-width: 50%;
+  max-width: 75%;
+  border-radius: 6%;
+  height: 40px;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+}
+
+.footer {
+  font-color: #bfbfbf;
+  font-size: 0.686em;
+  font-family: Roboto-Regular,Helvetica;
+  position: absolute;
+  bottom: 24px;
+  right: 24px;
+  height: 20px;
+}

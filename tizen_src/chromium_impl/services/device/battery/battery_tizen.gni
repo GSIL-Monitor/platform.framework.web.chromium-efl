@@ -1,0 +1,15 @@
+# Copyright (c) 2015 Samsung Electronics. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+external_device_battery_configs = [
+  "//tizen_src/build:capi-system-device",
+  "//tizen_src/build:libcapi-system-device",
+  "//tizen_src/build:vconf",
+  "//tizen_src/build:libvconf",
+]
+
+external_device_battery_sources = [
+  "//tizen_src/chromium_impl/services/device/battery/battery_status_manager_tizen.cc",
+  "//tizen_src/chromium_impl/services/device/battery/battery_status_manager_tizen.h",
+]

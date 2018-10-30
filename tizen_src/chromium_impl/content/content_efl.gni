@@ -1,0 +1,111 @@
+# Copyright (c) 2015 Samsung Electronics. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+import("//tizen_src/build/config/tizen_features.gni")
+import("//tizen_src/chromium_impl/components/components.gni")
+
+external_content_common_configs = [
+  "//tizen_src/build:capi-appfw-application",
+  "//tizen_src/build:libcapi-appfw-application",
+  "//tizen_src/build:tizen_tzplatform_config",
+  "//tizen_src/build:libtizen_tzplatform_config",
+  "//tizen_src/build:tts",
+  "//tizen_src/build:libtts",
+]
+
+external_content_common_deps = [
+  "//build/linux:fontconfig",
+  "//tizen_src/chromium_impl/tizen:system-info",
+]
+
+external_content_browser_configs = [
+  "//tizen_src/build:capi-system-sensor",
+  "//tizen_src/build:libcapi-system-sensor",
+  "//tizen_src/build:ecore",
+  "//tizen_src/build:libecore",
+  "//tizen_src/build:ecore-imf-evas",
+  "//tizen_src/build:libecore-imf-evas",
+  "//tizen_src/build:ecore-evas",
+  "//tizen_src/build:libecore-evas",
+  "//tizen_src/build:elementary",
+  "//tizen_src/build:libelementary",
+  "//tizen_src/build:efl-extension",
+  "//tizen_src/build:libefl-extension",
+  "//tizen_src/build:security-manager",
+  "//tizen_src/build:libsecurity-manager",
+]
+
+external_content_browser_extra_configs = [
+  "//tizen_src/build:tts",
+  "//tizen_src/build:libtts",
+]
+
+external_content_browser_deps = [
+  "//tizen_src/chromium_impl/efl:window-factory",
+  "//tizen_src/chromium_impl/edje_resources:edje_resources_efl",
+  "//ui/gl:gl",
+]
+
+external_content_renderer_extra_configs = [
+  "//tizen_src/build:tts",
+  "//tizen_src/build:libtts",
+]
+
+external_content_renderer_deps =
+    [ "//tizen_src/chromium_impl/content:android_content_detection" ]
+
+external_content_gpu_configs = [
+  "//tizen_src/build:evas",
+  "//tizen_src/build:libevas",
+]
+
+external_content_shell_configs = [
+  "//tizen_src/build:evas",
+  "//tizen_src/build:libevas",
+  "//tizen_src/build:ecore-evas",
+  "//tizen_src/build:libecore-evas",
+  "//tizen_src/build:elementary",
+  "//tizen_src/build:libelementary",
+]
+
+external_content_shell_deps = [ "//tizen_src/chromium_impl/efl:efl-init" ]
+external_content_shell_deps += js_dialog_efl_deps
+
+if (is_tizen) {
+  external_content_browser_configs += [
+    "//tizen_src/build:vconf",
+    "//tizen_src/build:libvconf",
+  ]
+}
+
+if (!use_wayland) {
+  external_content_common_configs += [ "//tizen_src/build:ecore-x" ]
+  external_content_common_configs += [ "//tizen_src/build:libecore-x" ]
+  external_content_browser_configs += [ "//tizen_src/build:x11" ]
+  external_content_browser_configs += [ "//tizen_src/build:libx11" ]
+  external_content_browser_extra_configs += [ "//tizen_src/build:ecore-x" ]
+  external_content_browser_extra_configs += [ "//tizen_src/build:libecore-x" ]
+  external_content_shell_configs += [ "//tizen_src/build:ecore-x" ]
+  external_content_shell_configs += [ "//tizen_src/build:libecore-x" ]
+} else {
+  external_content_common_configs += [ "//tizen_src/build:ecore-wayland" ]
+  external_content_common_configs += [ "//tizen_src/build:libecore-wayland" ]
+  external_content_shell_configs += [ "//tizen_src/build:ecore-wayland" ]
+  external_content_shell_configs += [ "//tizen_src/build:libecore-wayland" ]
+}
+
+if (tizen_multimedia_support) {
+  external_content_browser_configs += [
+    "//tizen_src/build:capi-media-tool",
+    "//tizen_src/build:libcapi-media-tool",
+  ]
+
+  external_content_common_configs += [
+    "//tizen_src/build:capi-media-player",
+    "//tizen_src/build:libcapi-media-player",
+    "//tizen_src/build:gstreamer",
+    "//tizen_src/build:libgstreamer",
+  ]
+
+}

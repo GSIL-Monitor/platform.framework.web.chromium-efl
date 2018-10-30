@@ -1,0 +1,338 @@
+msgid "IDS_BR_OPT_CALL"
+msgstr "Hovor"
+
+msgid "IDS_BR_HEADER_UNABLE_TO_OPEN_FILE"
+msgstr "Súbor sa nedá otvoriť"
+
+msgid "IDS_BR_BODY_UNABLE_TO_OPEN_THE_FILE_AT_PS_IT_MAY_HAVE_BEEN_REMOVED_OR_RENAMED_OR_FILE_PERMISSIONS_MAY_BE_PREVENTING_ACCESS"
+msgstr "Nedá sa otvoriť súbor v priečinku %s. Pravdepodobne bol odstránený alebo premenovaný alebo povolenia súboru zabraňujú v prístupe."
+
+msgid "IDS_BR_BODY_SAVE_LINK"
+msgstr "Uložiť prepojenie"
+
+msgid "IDS_BR_BODY_ADD_TO_CONTACT"
+msgstr "Pridať do kontaktu"
+
+msgid "IDS_WEBVIEW_TPOP_UNABLE_TO_PLAY_VIDEOS_DURING_CALLS"
+msgstr "Počas hovorov sa nedajú prehrávať videá."
+
+msgid "IDS_WEBVIEW_POP_SIGN_IN_TO_THIS_WEBSITE_AGAIN_BY_SWIPING_ANY_OF_YOUR_REGISTERED_FINGERS_OVER_THE_HOME_KEY_MSG"
+msgstr "Potiahnutím ľubovoľného zaregistrovaného prsta cez tlačidlo domovskej obrazovky sa môžete znova prihlásiť na túto webovú lokalitu. Vykoná sa uloženie vášho mena používateľa a hesla pre túto webovú lokalitu do vášho zariadenia."
+
+msgid "IDS_WEBVIEW_POP_SAVE_THIS_PASSWORD_ON_THIS_DEVICE_Q"
+msgstr "Uložiť toto heslo v tomto zariadení?"
+
+msgid "IDS_WEBVIEW_POP_P1SS_HP2SS_IS_REQUESTING_PERMISSION_TO_USE_YOUR_CAMERA"
+msgstr "%1$s (%2$s) žiada o povolenie používať váš fotoaparát."
+
+msgid "IDS_WEBVIEW_POP_P1SS_HP2SS_IS_REQUESTING_PERMISSION_TO_STORE_DATA_ON_YOUR_DEVICE_FOR_OFFLINE_USE"
+msgstr "%1$s (%2$s) žiada o povolenie uložiť údaje do vášho zariadenia na používanie v režime offline."
+
+msgid "IDS_WEBVIEW_POP_P1SS_HP2SS_IS_REQUESTING_PERMISSION_TO_STORE_A_LARGE_AMOUNT_OF_DATA_ON_YOUR_DEVICE_FOR_OFFLINE_USE"
+msgstr "%1$s (%2$s) žiada o povolenie uložiť veľké množstvo údajov do vášho zariadenia na používanie v režime offline."
+
+msgid "IDS_WEBVIEW_POP_P1SS_HP2SS_IS_REQUESTING_PERMISSION_TO_SHOW_NOTIFICATIONS"
+msgstr "%1$s (%2$s) žiada o povolenie zobrazovať oznámenia."
+
+msgid "IDS_WEBVIEW_POP_P1SS_HP2SS_IS_REQUESTING_PERMISSION_TO_ACCESS_YOUR_LOCATION"
+msgstr "%1$s (%2$s) žiada o povolenie na prístup k vášmu umiestneniu."
+
+msgid "IDS_WEBVIEW_POP_LEAVE_THIS_PAGE_Q"
+msgstr "Opustiť túto stránku?"
+
+msgid "IDS_WEBVIEW_POP_DO_YOU_WANT_THE_DEVICE_TO_REMEMBER_YOUR_PASSWORD_Q"
+msgstr "Chcete, aby si zariadenie zapamätalo vaše heslo?"
+
+msgid "IDS_WEBVIEW_POP_A_TEMPORARY_ERROR_HAS_OCCURRED"
+msgstr "Vyskytla sa dočasná chyba."
+
+msgid "IDS_WEBVIEW_OPT_WEB_SEARCH"
+msgstr "Vyhľadávanie na webe"
+
+msgid "IDS_WEBVIEW_OPT_UNMUTE"
+msgstr "Zrušiť stlmenie"
+
+msgid "IDS_WEBVIEW_OPT_TRANSLATE_ABB"
+msgstr "Preložiť"
+
+msgid "IDS_WEBVIEW_OPT_SIGN_IN_USING_FINGERPRINTS"
+msgstr "Prihlasovanie pomocou odtlačkov prstov"
+
+msgid "IDS_WEBVIEW_OPT_SHOW_HIDE_MEDIA_CONTROLS_ABB"
+msgstr "Zobr./skryť ovlád. prvky médií"
+
+msgid "IDS_WEBVIEW_OPT_SELECT_TEXT_ABB"
+msgstr "Vybrať text"
+
+msgid "IDS_WEBVIEW_OPT_SELECTION_MODE_ABB"
+msgstr "Režim výberu"
+
+msgid "IDS_WEBVIEW_OPT_SAVE_IMAGE_ABB"
+msgstr "Uložiť obrázok"
+
+msgid "IDS_WEBVIEW_OPT_PLAY_AUDIO_IN_NEW_TAB_ABB"
+msgstr "Prehrať zvuk na novej karte"
+
+msgid "IDS_WEBVIEW_OPT_PLAY"
+msgstr "Prehrať"
+
+msgid "IDS_WEBVIEW_OPT_OPEN_VIDEO_IN_NEW_WINDOW_ABB"
+msgstr "Otvoriť video v novom okne"
+
+msgid "IDS_WEBVIEW_OPT_OPEN_LINK_IN_NEW_TAB_ABB"
+msgstr "Otvoriť prepoj. na novej karte"
+
+msgid "IDS_WEBVIEW_OPT_OPEN_IMAGE_IN_NEW_TAB_ABB"
+msgstr "Otvoriť fotogr. na novej karte"
+
+msgid "IDS_WEBVIEW_OPT_FULL_VIEW_ABB"
+msgstr "Úplné zobrazenie"
+
+msgid "IDS_WEBVIEW_OPT_ENABLE_DISABLE_REPEAT_MEDIA_ABB"
+msgstr "Zapnúť/vypnúť opakovanie médií"
+
+msgid "IDS_WEBVIEW_OPT_DRAG_AND_DROP_ABB"
+msgstr "Uchopiť a presunúť"
+
+msgid "IDS_WEBVIEW_OPT_DO_NOT_SHOW_AGAIN"
+msgstr "Nezobrazovať znova"
+
+msgid "IDS_WEBVIEW_OPT_CUT_ABB"
+msgstr "Vystr."
+
+msgid "IDS_WEBVIEW_OPT_COPY_VIDEO_URL_ABB"
+msgstr "Kopírovať adresu URL videa"
+
+msgid "IDS_WEBVIEW_OPT_COPY_TO_CLIPBOARD"
+msgstr "Kopírovať do schránky"
+
+msgid "IDS_WEBVIEW_OPT_COPY_LINK_URL_ABB"
+msgstr "Kopír. URL prepoj."
+
+msgid "IDS_WEBVIEW_OPT_COPY_IMAGE"
+msgstr "Kopírovať obrázok"
+
+msgid "IDS_WEBVIEW_OPT_COPY_AUDIO_URL_ABB"
+msgstr "Kopírovať adresu URL zvuku"
+
+msgid "IDS_WEBVIEW_OPT_CLIPBOARD"
+msgstr "Schránka"
+
+msgid "IDS_WEBVIEW_HEADER_THIS_WEBPAGE_IS_NOT_AVAILABLE"
+msgstr "Táto webová stránka nie je k dispozícii."
+
+msgid "IDS_WEBVIEW_HEADER_SET_WEEK"
+msgstr "Nastavte týždeň"
+
+msgid "IDS_WEBVIEW_HEADER_SET_TIME"
+msgstr "Nastavte čas"
+
+msgid "IDS_WEBVIEW_HEADER_SET_MONTH"
+msgstr "Nastavte mesiac"
+
+msgid "IDS_WEBVIEW_HEADER_SET_DATE"
+msgstr "Nastavte dátum"
+
+msgid "IDS_WEBVIEW_HEADER_SELECT_COLOUR"
+msgstr "Vyberte farbu"
+
+msgid "IDS_WEBVIEW_HEADER_REMEMBER_PASSWORD"
+msgstr "Zapamätať heslo"
+
+msgid "IDS_WEBVIEW_HEADER_MESSAGE_FROM_PS_M_WEBSITE"
+msgstr "Správa od odosielateľa %s"
+
+msgid "IDS_WEBVIEW_BUTTON_UPLOAD_MULTIPLE_FILES"
+msgstr "Odoslať viacero súborov"
+
+msgid "IDS_WEBVIEW_BUTTON_UPLOAD_FILE"
+msgstr "Odoslať súbor"
+
+msgid "IDS_WEBVIEW_BUTTON_SUBMIT"
+msgstr "Odoslať"
+
+msgid "IDS_WEBVIEW_BUTTON_STAY"
+msgstr "Zostať"
+
+msgid "IDS_WEBVIEW_BUTTON_PREV_ABB"
+msgstr "Pred"
+
+msgid "IDS_WEBVIEW_BUTTON_OK_ABB4"
+msgstr "OK"
+
+msgid "IDS_WEBVIEW_BUTTON_NOT_NOW_ABB"
+msgstr "Ter. nie"
+
+msgid "IDS_WEBVIEW_BUTTON_LEAVE"
+msgstr "Opustiť"
+
+msgid "IDS_WEBVIEW_BUTTON_CANCEL_ABB4"
+msgstr "Zrušiť"
+
+msgid "IDS_WEBVIEW_BUTTON2_NEVER"
+msgstr "Nikdy"
+
+msgid "IDS_WEBVIEW_BODY_YOU_CAN_SEARCH_THIS_INDEX_ENTER_KEYWORDS_C"
+msgstr "Tento register možno prehľadávať. Zadajte kľúčové slová:"
+
+msgid "IDS_WEBVIEW_BODY_VALUE_MUST_BE_NO_HIGHER_THAN_PD"
+msgstr "Hodnota nesmie byť vyššia než %d."
+
+msgid "IDS_WEBVIEW_BODY_VALUE_MUST_BE_AT_LEAST_PD"
+msgstr "Hodnota musí byť aspoň %d."
+
+msgid "IDS_WEBVIEW_BODY_UNABLE_TO_LOAD_THE_PAGE_PS_TOOK_TOO_LONG_TO_RESPOND_THE_WEBSITE_MAY_BE_DOWN_OR_THERE_MAY_HAVE_BEEN_A_NETWORK_CONNECTION_ERROR"
+msgstr "Nepodarilo sa načítať stránku. Čakanie na odpoveď zo stránky %s trvalo príliš dlho. Táto webová lokalita je možno odstavená alebo sa mohla vyskytnúť chyba sieťového pripojenia."
+
+msgid "IDS_WEBVIEW_BODY_UNABLE_TO_LOAD_THE_PAGE_PS_MAY_BE_TEMPORARILY_DOWN_OR_HAVE_MOVED_TO_A_NEW_URL"
+msgstr "Stránka sa nedá načítať. Stránka %s môže byť dočasne odstavená alebo premiestnená na novú adresu URL."
+
+msgid "IDS_WEBVIEW_BODY_UNABLE_TO_LOAD_THE_PAGE_A_SECURE_CONNECTION_COULD_NOT_BE_MADE_TO_PS_THE_MOST_LIKELY_CAUSE_IS_THE_DEVICES_CLOCK_CHECK_THAT_THE_TIME_ON_YOUR_DEVICE_IS_CORRECT_AND_REFRESH_THE_PAGE"
+msgstr "Nepodarilo sa načítať stránku. Nepodarilo sa nadviazať bezpečné pripojenie k stránke %s. Najpravdepodobnejšou príčinou sú hodiny zariadenia. Skontrolujte správne nastavenie času vášho zariadenia a obnovte zobrazenie stránky."
+
+msgid "IDS_WEBVIEW_BODY_THE_SERVER_AT_PS_CANT_BE_FOUND_BECAUSE_THE_DNS_LOOK_UP_FAILED_MSG"
+msgstr "Server na adrese %s nemožno nájsť, pretože zlyhalo vyhľadanie pomocou služby DNS. DNS je sieťová služba, ktorá prekladá názov webovej lokality na jej internetovú adresu. Túto chybu najčastejšie spôsobuje chýbajúce pripojenie na internet alebo nesprávne nakonfigurovaná sieť. Môže ju spôsobovať aj neodpovedajúci server DNS alebo brána firewall zabraňujúca v internetovom prístupe k sieti."
+
+msgid "IDS_WEBVIEW_BODY_SHOWING_PD_ITEMS_TTS"
+msgstr "Počet zobrazených položiek: %d"
+
+msgid "IDS_WEBVIEW_BODY_PLUG_IN_MISSING"
+msgstr "Doplnok chýba"
+
+msgid "IDS_WEBVIEW_BODY_PD_CHARACTERS_TTS"
+msgstr "Znaky: %d."
+
+msgid "IDS_WEBVIEW_BODY_NO_FILES_HAVE_BEEN_SELECTED"
+msgstr "Neboli vybraté žiadne súbory."
+
+msgid "IDS_WEBVIEW_BODY_INVALID_VALUE_ENTERED"
+msgstr "Bola zadaná neplatná hodnota."
+
+msgid "IDS_WEBVIEW_BODY_INVALID_FORMAT_ENTERED"
+msgstr "Bol zadaný neplatný formát."
+
+msgid "IDS_WEBVIEW_BODY_FIELD_CANNOT_BE_BLANK"
+msgstr "Pole nemôže byť prázdne."
+
+msgid "IDS_WEBVIEW_BODY_ENTER_A_URL"
+msgstr "Zadajte adresu URL."
+
+msgid "IDS_WEBVIEW_BODY_ENTER_A_LIST_OF_EMAIL_ADDRESSES_SEPARATED_BY_COMMAS"
+msgstr "Zadajte zoznam e-mailových adries oddelených čiarkami."
+
+msgid "IDS_WEBVIEW_BODY_ENTER_AN_EMAIL_ADDRESS"
+msgstr "Zadajte e-mailovú adresu."
+
+msgid "IDS_WEBVIEW_BODY_EDIT_FIELD__M_NOUN_TTS"
+msgstr "Upraviť pole"
+
+msgid "IDS_WEBVIEW_BODY_EDITING_TTS"
+msgstr "Úprava."
+
+msgid "IDS_BR_POP_SAVED"
+msgstr "Uložené."
+
+msgid "IDS_BR_POP_FAIL"
+msgstr "Nepodarilo sa."
+
+msgid "IDS_BR_OPT_SEND_EMAIL"
+msgstr "Odoslať e-mail"
+
+msgid "IDS_WEBVIEW_OPT_SELECT_ALL_ABB"
+msgstr "Vybrať vš."
+
+msgid "IDS_WEBVIEW_OPT_SELECT_ABB"
+msgstr "Vybrať"
+
+msgid "IDS_WEBVIEW_OPT_PAUSE"
+msgstr "Pozastaviť"
+
+msgid "IDS_WEBVIEW_OPT_PASTE"
+msgstr "Vložiť"
+
+msgid "IDS_WEBVIEW_OPT_MUTE"
+msgstr "Stlmiť"
+
+msgid "IDS_WEBVIEW_OPT_COPY"
+msgstr "Kopírovať"
+
+msgid "IDS_WEBVIEW_HEADER_SET_DATE_AND_TIME"
+msgstr "Nastaviť dátum a čas"
+
+msgid "IDS_WEBVIEW_BUTTON_SET_ABB2"
+msgstr "Nast."
+
+msgid "IDS_WEBVIEW_BUTTON_SAVE"
+msgstr "Uložiť"
+
+msgid "IDS_WEBVIEW_BUTTON_RESET"
+msgstr "Vynulovať"
+
+msgid "IDS_WEBVIEW_BUTTON_NEXT_ABB3"
+msgstr "Ďalej"
+
+msgid "IDS_WEBVIEW_BUTTON_LATER_ABB"
+msgstr "Neskôr"
+
+msgid "IDS_WEBVIEW_BUTTON_DONE"
+msgstr "Hotovo"
+
+msgid "IDS_WEBVIEW_BODY_USERNAME"
+msgstr "Meno používateľa"
+
+msgid "IDS_WEBVIEW_BODY_SELECTED_TTS"
+msgstr "Vybraté"
+
+msgid "IDS_WEBVIEW_BODY_PASSWORD"
+msgstr "Heslo"
+
+msgid "IDS_WEBVIEW_BODY_NOT_SELECTED_TTS"
+msgstr "Nevybraté"
+
+msgid "IDS_WEBVIEW_BODY_DOUBLE_TAB_TO_EDIT_TTS"
+msgstr "Dvojitým ťuknutím môžete vykonať úpravu."
+
+msgid "IDS_WEBVIEW_BODY_DETAILS"
+msgstr "Podrobnosti"
+
+msgid "IDS_WEBVIEW_OPT_SHARE"
+msgstr "Zdieľať"
+
+msgid "IDS_WEBVIEW_POP_SAVE_YOUR_USERNAME_AND_PASSWORD_FOR_THIS_WEBSITE_Q"
+msgstr "Chcete uložiť meno používateľa a heslo pre túto webovú lokalitu?"
+
+msgid "IDS_WEBVIEW_HEADER_SAVE_SIGN_IN_INFO"
+msgstr "Uloženie prihlasovacích údajov"
+
+msgid "IDS_WEBVIEW_POP_P1SS_HP2SS_IS_REQUESTING_PERMISSION_TO_USE_YOUR_MICROPHONE"
+msgstr "%1$s (%2$s) žiada o povolenie používať váš mikrofón."
+
+msgid "IDS_WEBVIEW_POP_P1SS_HP2SS_IS_REQUESTING_PERMISSION_TO_USE_YOUR_CAMERA_AND_MICROPHONE"
+msgstr "%1$s (%2$s) žiada o povolenie používať váš fotoaparát a mikrofón."
+
+msgid "IDS_WEBVIEW_BODY_YOUR_DEVICE_IS_NOT_CONNECTED_TO_A_WI_FI_OR_MOBILE_NETWORK_CONNECT_TO_A_NETWORK_AND_TRY_AGAIN"
+msgstr "Vaše zariadenie nie je pripojené k sieti Wi-Fi ani k mobilnej sieti. Pripojte sa k sieti a skúste to znova."
+
+msgid "IDS_WEBVIEW_POP_YOU_ARE_OFFLINE"
+msgstr "Ste offline."
+
+msgid "IDS_BR_BODY_LOG_IN"
+msgstr "Prihlásiť"
+
+msgid "IDS_COM_BODY_SEND_MESSAGE"
+msgstr "Odoslať správu"
+
+msgid "IDS_TPLATFORM_OPT_COPY_LINK_TEXT"
+msgstr "Kopírovať text prepojenia"
+
+msgid "IDS_WEBVIEW_OPT_OPEN_LINK_IN_CURRENT_TAB"
+msgstr "Otvoriť prepojenie na aktuálnej karte"
+
+msgid "IDS_WEBVIEW_OPT_OPEN_IMAGE_IN_CURRENT_TAB"
+msgstr "Otvoriť fotografiu na aktuálnej karte"
+
+msgid "IDS_WEBVIEW_HEADER_QUICK_MEMO"
+msgstr "Rýchla pripomienka"
+
+msgid "IDS_WEBVIEW_OPEN"
+msgstr "Otvoriť"

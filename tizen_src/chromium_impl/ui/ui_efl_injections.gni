@@ -1,0 +1,37 @@
+# Copyright (c) 2015 Samsung Electronics. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+# In static mode, we build some sources that is needed
+# by efl-port as injectable static library.
+# However, in component mode, we build each of ui modules
+# as single DLL. So we include needed sources directly.
+
+external_ui_base_static_lib_deps = [ "//tizen_src/chromium_impl/ui:ui_base_inject" ]
+
+external_ui_events_static_lib_deps = [ "//tizen_src/chromium_impl/ui:ui_events_source_inject" ]
+
+external_native_theme_static_lib_deps = [ "//tizen_src/chromium_impl/ui:ui_native_theme_inject" ]
+
+# For //ui/base target
+external_ui_base_shared_lib_sources = [
+  "cursor/cursors_aura.cc",
+  "cursor/cursors_aura.h",
+]
+
+# For //ui/events target
+external_ui_events_shared_lib_sources = [
+  "//tizen_src/chromium_impl/ui/events/gestures/gesture_recognizer_impl_override.cc",
+  "//tizen_src/chromium_impl/ui/events/gestures/gesture_recognizer_impl_efl.cc",
+  "//tizen_src/chromium_impl/ui/events/gestures/gesture_recognizer_impl_efl.h",
+  "gestures/gesture_provider_aura.cc",
+  "gestures/gesture_provider_aura.h",
+  "gestures/motion_event_aura.cc",
+  "gestures/motion_event_aura.h",
+]
+
+# For //ui/native_theme target
+external_ui_native_theme_shared_lib_sources = [
+  "native_theme_aura.cc",
+  "native_theme_aura.h",
+]

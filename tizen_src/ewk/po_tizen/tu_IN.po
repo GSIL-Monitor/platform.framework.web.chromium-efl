@@ -1,0 +1,9 @@
+msgid "IDS_WEBVIEW_OPT_OPEN_LINK_IN_NEW_TAB_ABB"
+msgstr "ಪೊಸತ್ ಟ್ಯಾಬ್‌ಡ್ ಲಿಂಕ್‌ನ್ ಓಪನ್ ಮಲ್ಪುಲೆ"
+
+msgid "IDS_WEBVIEW_OPT_OPEN_LINK_ABB"
+msgstr "ವೆಬ್ ಬ್ರೌಸರ್‌ಡ್ ಓಪನ್ ಮಲ್ಪುಲೆ"
+
+msgid "IDS_WEBVIEW_OPEN"
+msgstr "ಓಪನ್"
+

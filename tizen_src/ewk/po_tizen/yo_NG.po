@@ -1,0 +1,9 @@
+msgid "IDS_WEBVIEW_OPT_OPEN_LINK_IN_NEW_TAB_ABB"
+msgstr "Ṣí Ìsopọ̀ nínú Táàbù Tuntun"
+
+msgid "IDS_WEBVIEW_OPT_OPEN_LINK_ABB"
+msgstr "Ṣí nínú Aṣàwákiri Wẹ́ẹ̀bù"
+
+msgid "IDS_WEBVIEW_OPEN"
+msgstr "Ṣí"
+

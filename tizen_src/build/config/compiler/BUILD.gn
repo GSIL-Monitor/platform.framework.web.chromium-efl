@@ -1,0 +1,134 @@
+# Copyright (c) 2015 Samsung Electronics. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+import("//build/config/features.gni")
+
+declare_args() {
+  if (is_tizen) {
+    deps_include_path = "/usr/include"
+    deps_lib_path = "/usr/lib"
+  } else {
+    deps_include_path = ""
+  }
+}
+
+config("tizen_default_include_dirs") {
+  include_dirs = [
+    "//tizen_src",
+    "//tizen_src/chromium_impl",
+    "//tizen_src/ecore_wrapper",
+
+    "//third_party/WebKit/Source",
+
+    # find / -name *.h -printf '%h\n' | sort --unique
+    "$deps_include_path/dbus-1.0",
+    "$deps_include_path/ecore-1",
+    "$deps_include_path/ecore-audio-1",
+    "$deps_include_path/ecore-audio-cxx-1",
+    "$deps_include_path/ecore-avahi-1",
+    "$deps_include_path/ecore-con-1",
+    "$deps_include_path/ecore-cxx-1",
+    "$deps_include_path/ecore-evas-1",
+    "$deps_include_path/ecore-file-1",
+    "$deps_include_path/ecore-imf-1",
+    "$deps_include_path/ecore-imf-evas-1",
+    "$deps_include_path/ecore-input-1",
+    "$deps_include_path/ecore-input-evas-1",
+    "$deps_include_path/ecore-ipc-1",
+    "$deps_include_path/ecore-x-1",
+    "$deps_include_path/ector-1",
+    "$deps_include_path/ector-1/cairo",
+    "$deps_include_path/ector-1/generic",
+    "$deps_include_path/ector-1/software",
+    "$deps_include_path/edje-1",
+    "$deps_include_path/eet-1",
+    "$deps_include_path/eet-cxx-1",
+    "$deps_include_path/eet-cxx-1/eet-cxx",
+    "$deps_include_path/eeze-1",
+    "$deps_include_path/efl-1",
+    "$deps_include_path/efl-1/interfaces",
+    "$deps_include_path/efl-cxx-1",
+    "$deps_include_path/efreet-1",
+    "$deps_include_path/eina-1",
+    "$deps_include_path/eina-1/eina",
+    "$deps_include_path/eina-cxx-1",
+    "$deps_include_path/eina-cxx-1/eina-cxx",
+    "$deps_include_path/eio-1",
+    "$deps_include_path/eio-cxx-1",
+    "$deps_include_path/eldbus-1",
+    "$deps_include_path/eldbus_cxx-1",
+    "$deps_include_path/elementary-1",
+    "$deps_include_path/elementary-cxx-1",
+    "$deps_include_path/elocation-1",
+    "$deps_include_path/elua-1",
+    "$deps_include_path/embryo-1",
+    "$deps_include_path/emile-1",
+    "$deps_include_path/emotion-1",
+    "$deps_include_path/eo-1",
+    "$deps_include_path/eo-cxx-1",
+    "$deps_include_path/eolian-1",
+    "$deps_include_path/eolian-cxx-1",
+    "$deps_include_path/eolian-cxx-1/grammar",
+    "$deps_include_path/ethumb-1",
+    "$deps_include_path/ethumb-client-1",
+    "$deps_include_path/evas-1",
+    "$deps_include_path/evas-1/canvas",
+    "$deps_include_path/evas-cxx-1",
+    "$deps_include_path/evas-cxx-1/canvas",
+    "$deps_include_path/gio-unix-2.0",
+    "$deps_include_path/gio-unix-2.0/gio",
+    "$deps_include_path/glib-2.0",
+    "$deps_include_path/glib-2.0/gio",
+    "$deps_include_path/glib-2.0/glib",
+    "$deps_include_path/glib-2.0/glib/deprecated",
+    "$deps_include_path/glib-2.0/gobject",
+    "$deps_include_path/gstreamer-1.0",
+    "$deps_include_path/gstreamer-1.0/gst",
+    "$deps_include_path/gstreamer-1.0/gst/allocators",
+    "$deps_include_path/gstreamer-1.0/gst/app",
+    "$deps_include_path/gstreamer-1.0/gst/audio",
+    "$deps_include_path/gstreamer-1.0/gst/base",
+    "$deps_include_path/gstreamer-1.0/gst/basecamerabinsrc",
+    "$deps_include_path/gstreamer-1.0/gst/check",
+    "$deps_include_path/gstreamer-1.0/gst/codecparsers",
+    "$deps_include_path/gstreamer-1.0/gst/controller",
+    "$deps_include_path/gstreamer-1.0/gst/egl",
+    "$deps_include_path/gstreamer-1.0/gst/fft",
+    "$deps_include_path/gstreamer-1.0/gst/insertbin",
+    "$deps_include_path/gstreamer-1.0/gst/interfaces",
+    "$deps_include_path/gstreamer-1.0/gst/mpegts",
+    "$deps_include_path/gstreamer-1.0/gst/net",
+    "$deps_include_path/gstreamer-1.0/gst/pbutils",
+    "$deps_include_path/gstreamer-1.0/gst/riff",
+    "$deps_include_path/gstreamer-1.0/gst/rtp",
+    "$deps_include_path/gstreamer-1.0/gst/rtsp",
+    "$deps_include_path/gstreamer-1.0/gst/sdp",
+    "$deps_include_path/gstreamer-1.0/gst/tag",
+    "$deps_include_path/gstreamer-1.0/gst/uridownloader",
+    "$deps_include_path/gstreamer-1.0/gst/video",
+    "$deps_include_path/libsoup-2.4",
+    "$deps_include_path/libsoup-2.4/libsoup",
+    "$deps_include_path/orc-0.4",
+    "$deps_include_path/orc-0.4/orc",
+    "$deps_include_path/orc-0.4/orc-test",
+  ]
+
+  if (!is_nacl) {
+    include_dirs += [
+      deps_include_path,
+    ]
+  }
+
+  if (is_tizen) {
+    include_dirs += [
+      "$deps_include_path/appfw",
+      "$deps_include_path/system",
+
+      "$deps_lib_path/dbus-1.0/include",
+      "$deps_lib_path/glib-2.0/include",
+      "$deps_lib_path/gstreamer-1.0/include",
+      "$deps_lib_path/gstreamer-1.0/include/gst",
+    ]
+  }
+}

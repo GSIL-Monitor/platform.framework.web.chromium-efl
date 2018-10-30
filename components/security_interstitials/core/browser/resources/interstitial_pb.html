@@ -1,0 +1,34 @@
+<!doctype html>
+<html i18n-values="dir:textdirection;lang:language">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport"
+      content="initial-scale=1, minimum-scale=1, width=device-width">
+  <title i18n-content="tabTitle"></title>
+  <link rel="stylesheet" href="interstitial_pb.css">
+  <script src="../../../../../ui/webui/resources/js/util.js"></script>
+  <script src="captive_portal.js"></script>
+  <script src="ssl.js"></script>
+  <script src="extended_reporting.js"></script>
+  <script src="interstitial_pb.js"></script>
+  <script src="interstitial_large.js"></script>
+</head>
+<body id="body">
+  <div class="interstitial-wrapper">
+    <div id="main-content">
+      <div class="icon" id="icon"></div>
+      <div id="main-message">
+        <h1 i18n-content="heading"></h1>
+        <p i18n-values=".innerHTML:primaryParagraph"></p>
+      </div>
+    </div>
+    <div class="nav-wrapper">
+      <button i18n-content="primaryButtonText" id="primary-button"></button>
+    </div>
+    <p i18n-values=".innerHTML:finalParagraph"></p>
+    <br>
+    <p i18n-values=".innerHTML:userProtectionNotice"></p>
+  </div>
+  <div class="footer">powered by <strong>Google</strong></div>
+</body>
+</html>

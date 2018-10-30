@@ -1,0 +1,4 @@
+# BEGIN trunk extra GN args
+ffmpeg_branding = "Chrome"
+proprietary_codecs = true
+# END trunk extra GN args

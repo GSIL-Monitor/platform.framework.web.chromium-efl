@@ -1,0 +1,11 @@
+// Copyright 2018 Samsung Electronics Inc. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+[
+    Constructor(DOMString type, optional SyncTimelineEventInit eventInitDict)
+] interface SyncTimelineEvent : Event {
+    readonly attribute DOMString timelineSelector;
+    readonly attribute unsigned short sync;
+};
+

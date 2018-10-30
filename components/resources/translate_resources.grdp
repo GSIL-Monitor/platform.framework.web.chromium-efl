@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<grit-part>
+  <include name="IDR_TRANSLATE_JS" file="../translate/core/browser/resources/translate.js" type="BINDATA" />
+  <include name="IDR_TRANSLATE_JS_SAMSUNG" file="../translate/core/browser/resources/samsung.js" type="BINDATA" />
+</grit-part>

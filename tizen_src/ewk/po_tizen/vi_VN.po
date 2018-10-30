@@ -1,0 +1,9 @@
+msgid "IDS_WEBVIEW_OPT_OPEN_LINK_IN_NEW_TAB_ABB"
+msgstr "Mở liên kết trong Thẻ mới"
+
+msgid "IDS_WEBVIEW_OPT_OPEN_LINK_ABB"
+msgstr "Mở trong Trình duyệt web"
+
+msgid "IDS_WEBVIEW_OPEN"
+msgstr "Mở"
+

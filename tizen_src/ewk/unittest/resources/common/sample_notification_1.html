@@ -1,0 +1,30 @@
+<html>
+<head>
+<title>EWK Notifications</title>
+</head>
+<body onload="testNotifications()">
+
+<h1>Sample Page</h1>
+
+<p id="notificationTest">This is a sample page to test EWK Notification APIs.</p>
+
+<script type="text/javascript">
+function testNotifications()
+{
+  Notification.requestPermission(function() {
+      var notification = new Notification('Notification Title', {
+            body: 'Notification body content',
+            icon: 'logo.png',
+            tag: 'replace_tag',
+            silent: true
+            });
+      notification.onshow = function() { console.log('notification.show'); }
+      notification.onclick = function() { console.log('notification.click'); }
+      notification.onclose = function() { console.log('notification.close'); }
+  });
+}
+
+</script>
+
+</body>
+</html>

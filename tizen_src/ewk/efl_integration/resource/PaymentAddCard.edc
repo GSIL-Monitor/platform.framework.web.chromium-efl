@@ -1,0 +1,1032 @@
+collections { base_scale: 2.6;
+    group {
+        name: "Addcard_layout";
+        images {
+            image: "americanexpress.png" COMP;
+            image: "mastercard.png" COMP;
+            image: "visa.png" COMP;
+        }
+        parts {
+            part {
+                name: "bg";
+                type: RECT;
+                description {
+                    state: "default" 0.0;
+                    visible: 1;
+                    align: 0.0 0.0;
+                    min: 720 1280;
+                    max: 720 1280;
+                    color: 240 240 240 255;
+                    rel1 { relative: 0.0 0.0; }
+                    rel2 { relative: 1.0 1.0; }
+                }
+            }
+            part {
+                name: "padding_top";
+                type: SPACER;
+                description {
+                    state: "default" 0.0;
+                    align: 0.0 0.0;
+                    fixed: 1 1;
+                    min: 720 5;
+                    max: 720 5;
+                    rel1 { relative: 0.0 0.0; to: "bg"; }
+                    rel2 { relative: 1.0 1.0; to: "bg"; }
+                }
+            }
+            part {
+                name: "cancel_button_bg";
+                type: RECT;
+                description {
+                    state: "default" 0.0;
+                    color: 240 240 240 255;
+                    visible: 1;
+                    align: 0.0 0.0;
+                    fixed: 1 1;
+                    min: 350 80;
+                    max: 350 80;
+                    rel1 { relative: 0.0 1.0; to: "padding_top"; }
+                    rel2 { relative: 1.0 1.0; to: "padding_top"; }
+                }
+            }
+            part {
+                name: "cancel_button";
+                type: SWALLOW;
+                mouse_events: 1;
+                description {
+                    state: "default" 0.0;
+                    visible: 1;
+                    align: 0.0 0.0;
+                    fixed: 1 1;
+                    min: 350 80;
+                    max: 350 80;
+                    rel1 { relative: 0.0 0.0; to: "cancel_button_bg"; }
+                    rel2 { relative: 1.0 1.0; to: "cancel_button_bg"; }
+                }
+            }
+            part {
+                name: "padding_buttons";
+                type: SPACER;
+                description {
+                    state: "default" 0.0;
+                    align: 0.0 0.0;
+                    fixed: 1 1;
+                    min: 20 80;
+                    max: 20 80;
+                    rel1 { relative: 1.0 0.0; to: "cancel_button_bg"; }
+                    rel2 { relative: 1.0 1.0; to: "cancel_button_bg"; }
+                }
+            }
+            part {
+                name: "done_button_bg";
+                type: RECT;
+                description {
+                    state: "default" 0.0;
+                    color: 240 240 240 255;
+                    visible: 1;
+                    align: 0.0 0.0;
+                    fixed: 1 1;
+                    min: 350 80;
+                    max: 350 80;
+                    rel1 { relative: 1.0 0.0; to: "padding_buttons"; }
+                    rel2 { relative: 1.0 1.0; to: "padding_buttons"; }
+                }
+            }
+            part {
+                name: "done_button";
+                type: SWALLOW;
+                mouse_events: 1;
+                description {
+                    state: "default" 0.0;
+                    visible: 1;
+                    align: 0.0 0.0;
+                    fixed: 1 1;
+                    min: 350 80;
+                    max: 350 80;
+                    rel1 { relative: 0.0 0.0; to: "done_button_bg"; }
+                    rel2 { relative: 1.0 1.0; to: "done_button_bg"; }
+                }
+            }
+            part {
+                name: "padding_top_buttons";
+                type: SPACER;
+                description {
+                    state: "default" 0.0;
+                    align: 0.0 0.0;
+                    fixed: 1 1;
+                    min: 720 50;
+                    max: 720 50;
+                    rel1 { relative: 0.0 1.0; to: "cancel_button_bg"; }
+                    rel2 { relative: 1.0 1.0; to: "cancel_button_bg"; }
+                }
+            }
+            part {
+                name: "cards_accepted_bg";
+                type: RECT;
+                description {
+                    state: "default" 0.0;
+                    color: 240 240 240 255;
+                    visible: 1;
+                    align: 0.5 0.0;
+                    fixed: 1 1;
+                    min: 680 40;
+                    max: 680 40;
+                    rel1 { relative: 0.0 1.0; to: "padding_top_buttons"; }
+                    rel2 { relative: 1.0 1.0; to: "padding_top_buttons"; }
+                }
+            }
+            part {
+                name: "cards_accepted";
+                type: TEXT;
+                mouse_events: 0;
+                description {
+                    state: "default" 0;
+                    align: 0.0 0.0;
+                    color: 105 105 105 255;
+                    rel1 { relative: 0.0 0.0; to: "cards_accepted_bg"; }
+                    rel2 { relative: 1.0 1.0; to: "cards_accepted_bg"; }
+                    text {
+                        text: "Cards accepted";
+                        font: "Sans";
+                        size: 30;
+                        fit: 0 0;
+                        min: 0 0;
+                        max: 0 0;
+                        align: 0.0 0.0;
+                        elipsis: 0.0;
+                    }
+                }
+            }
+            part {
+                name: "padding_title1";
+                type: SPACER;
+                description {
+                    state: "default" 0.0;
+                    align: 0.0 0.0;
+                    fixed: 1 1;
+                    min: 680 10;
+                    max: 680 10;
+                    rel1 { relative: 0.0 1.0; to: "cards_accepted_bg"; }
+                    rel2 { relative: 1.0 1.0; to: "cards_accepted_bg"; }
+                }
+            }
+            part {
+                name: "cards_icons_bg";
+                type: RECT;
+                description {
+                    state: "default" 0.0;
+                    color: 240 240 240 255;
+                    visible: 1;
+                    align: 0.0 0.0;
+                    fixed: 1 1;
+                    min: 680 60;
+                    max: 680 60;
+                    rel1 { relative: 0.0 1.0; to: "padding_title1"; }
+                    rel2 { relative: 1.0 1.0; to: "padding_title1"; }
+                }
+            }
+            part {
+                name: "icon1_bg";
+                type: RECT;
+                description {
+                    state: "default" 0.0;
+                    color: 255 0 0 255;
+                    visible: 1;
+                    align: 0.0 0.0;
+                    fixed: 1 1;
+                    min: 70 60;
+                    max: 70 60;
+                    rel1 { relative: 0.0 0.0; to: "cards_icons_bg"; }
+                    rel2 { relative: 1.0 1.0; to: "cards_icons_bg"; }
+                }
+            }
+            part {
+                name: "icon1";
+                type: IMAGE;
+                mouse_events: 0;
+                description {
+                    state: "default" 0.0;
+                    visible: 1;
+                    align: 0.0 0.0;
+                    fixed: 1 1;
+                    min: 70 60;
+                    max: 70 60;
+                    rel1 { relative: 0.0 0.0; to: "icon1_bg"; }
+                    rel2 { relative: 1.0 1.0; to: "icon1_bg"; }
+                    image.normal: "visa.png";
+                }
+            }
+            part {
+                name: "padding_icon1";
+                type: SPACER;
+                description{
+                    state: "default" 0.0;
+                    align: 0.0 0.0;
+                    fixed: 1 1;
+                    min: 20 20;
+                    max: 20 20;
+                    rel1 { relative: 1.0 0.0; to: "icon1_bg"; }
+                    rel2 { relative: 1.0 1.0; to: "icon1_bg"; }
+                }
+            }
+            part {
+                name: "icon2_bg";
+                type: RECT;
+                description {
+                    state: "default" 0.0;
+                    color: 240 240 240 255;
+                    visible: 1;
+                    align: 0.0 0.0;
+                    fixed: 1 1;
+                    min: 70 60;
+                    max: 70 60;
+                    rel1 { relative: 1.0 0.0; to: "padding_icon1"; }
+                    rel2 { relative: 1.0 1.0; to: "padding_icon1"; }
+                }
+            }
+            part {
+                name: "icon2";
+                type: IMAGE;
+                mouse_events: 0;
+                description {
+                    state: "default" 0.0;
+                    visible: 1;
+                    align: 0.0 0.0;
+                    fixed: 1 1;
+                    min: 70 60;
+                    max: 70 60;
+                    rel1 { relative: 0.0 0.0; to: "icon2_bg"; }
+                    rel2 { relative: 1.0 1.0; to: "icon2_bg"; }
+                    image.normal: "americanexpress.png";
+                }
+            }
+            part {
+                name: "padding_icon2";
+                type: SPACER;
+                description {
+                    state: "default" 0.0;
+                    align: 0.0 0.0;
+                    fixed: 1 1;
+                    min: 20 20;
+                    max: 20 20;
+                    rel1 { relative: 1.0 0.0; to: "icon2_bg"; }
+                    rel2 { relative: 1.0 1.0; to: "icon2_bg"; }
+                }
+            }
+            part {
+                name: "icon3_bg";
+                type: RECT;
+                description {
+                    state: "default" 0.0;
+                    color: 240 240 240 255;
+                    visible: 1;
+                    align: 0.0 0.0;
+                    fixed: 1 1;
+                    min: 70 60;
+                    max: 70 60;
+                    rel1 { relative: 1.0 0.0; to: "padding_icon2"; }
+                    rel2 { relative: 1.0 1.0; to: "padding_icon2"; }
+                }
+            }
+            part {
+                name: "icon3";
+                type: IMAGE;
+                mouse_events: 0;
+                description {
+                    state: "default" 0.0;
+                    visible: 1;
+                    align: 0.0 0.0;
+                    fixed: 1 1;
+                    min: 70 60;
+                    max: 70 60;
+                    rel1 { relative: 0.0 0.0; to: "icon3_bg"; }
+                    rel2 { relative: 1.0 1.0; to: "icon3_bg"; }
+                    image.normal: "mastercard.png";
+                }
+            }
+            part {
+                name: "padding_title2";
+                type: SPACER;
+                description {
+                    state: "default" 0.0;
+                    align: 0.0 0.0;
+                    fixed: 1 1;
+                    min: 680 20;
+                    max: 680 20;
+                    rel1 { relative: 0.0 1.0; to: "cards_icons_bg"; }
+                    rel2 { relative: 1.0 1.0; to: "cards_icons_bg"; }
+                }
+            }
+            part {
+                name: "creditcardname_bg";
+                type: RECT;
+                description {
+                    state: "default" 0.0;
+                    color: 240 240 240 255;
+                    visible: 1;
+                    align: 0.0 0.0;
+                    fixed: 1 1;
+                    min: 680 40;
+                    max: 680 40;
+                    rel1 { relative: 0.0 1.0; to: "padding_title2"; }
+                    rel2 { relative: 1.0 1.0; to: "padding_title2"; }
+                }
+            }
+            part {
+                name: "creditcardname";
+                type: TEXT;
+                mouse_events: 0;
+                description {
+                    state: "default" 0;
+                    align: 0.0 0.0;
+                    color: 105 105 105 255;
+                    rel1 { relative: 0.0 0.0; to: "creditcardname_bg"; }
+                    rel2 { relative: 1.0 1.0; to: "creditcardname_bg"; }
+                    text {
+                        text: "Name on card*";
+                        font: "Sans";
+                        size: 30;
+                        fit: 0 0;
+                        min: 0 0;
+                        max: 0 0;
+                        align: 0.0 0.0;
+                        elipsis: 0.0;
+                    }
+                }
+            }
+            part {
+                name: "padding_title4";
+                type: SPACER;
+                description {
+                    state: "default" 0.0;
+                    align: 0.0 0.0;
+                    fixed: 1 1;
+                    min: 720 20;
+                    max: 720 20;
+                    rel1 { relative: 0.0 1.0; to: "creditcardname_bg"; }
+                    rel2 { relative: 1.0 1.0; to: "creditcardname_bg"; }
+                }
+            }
+            part {
+                name: "card_name_blank_bg";
+                type: RECT;
+                mouse_events: 1;
+                description {
+                    state: "default" 0.0;
+                    color: 240 240 240 255;
+                    visible: 1;
+                    align: 0.0 0.0;
+                    fixed: 1 1;
+                    min: 680 70;
+                    max: 680 70;
+                    rel1 { relative: 0.0 1.0; to: "padding_title4"; }
+                    rel2 { relative: 1.0 1.0; to: "padding_title4"; }
+                }
+            }
+            part {
+                name: "card_name_input_entry";
+                type: SWALLOW;
+                mouse_events: 1;
+                scale: 1;
+                description {
+                    state: "default" 0;
+                    visible: 1;
+                    align: 0.0 0.0;
+                    min: 680 70;
+                    max: 680 70;
+                    rel1 { relative: 0.0 0.0; to: "card_name_blank_bg"; }
+                    rel2 { relative: 1.0 1.0; to: "card_name_blank_bg"; }
+                }
+            }
+            part {
+                name: "baseline";
+                type: RECT;
+                description {
+                    state: "default" 0.0;
+                    color: 105 105 105 255;
+                    visible: 1;
+                    align: 0.0 0.0;
+                    fixed: 1 1;
+                    min: 680 2;
+                    max: 680 2;
+                    rel1 { relative: 0.0 1.0; to: "card_name_blank_bg"; }
+                    rel2 { relative: 1.0 1.0; to: "card_name_blank_bg"; }
+                }
+             }
+             part {
+                 name: "padding_title5";
+                 type: SPACER;
+                 description {
+                     state: "default" 0.0;
+                     align: 0.0 0.0;
+                     fixed: 1 1;
+                     min: 680 50;
+                     max: 680 50;
+                     rel1 { relative: 0.0 1.0; to: "baseline"; }
+                     rel2 { relative: 1.0 1.0; to: "baseline"; }
+                 }
+             }
+             part {
+                 name: "number_on_card_bg";
+                 type: RECT;
+                 description {
+                     state: "default" 0.0;
+                     color: 240 240 240 255;
+                     visible: 1;
+                     align: 0.0 0.0;
+                     fixed: 1 1;
+                     min: 680 40;
+                     max: 680 40;
+                     rel1 { relative: 0.0 1.0; to: "padding_title5"; }
+                     rel2 { relative: 1.0 1.0; to: "padding_title5"; }
+                 }
+             }
+             part {
+                 name: "number_on_card";
+                 type: TEXT;
+                 mouse_events: 1;
+                 description {
+                     state: "default" 0.0;
+                     align: 0.0 0.0;
+                     color: 105 105 105 255;
+                     rel1 { relative: 0.0 0.0; to: "number_on_card_bg"; }
+                     rel2 { relative: 1.0 1.0; to: "number_on_card_bg"; }
+                     text {
+                         text: "Card number*";
+                         font: "Sans";
+                         size: 30;
+                         fit: 0 0;
+                         min: 0 0;
+                         max: 0 0;
+                         align: 0.0 0.0;
+                         elipsis: 0.0;
+                     }
+                 }
+             }
+             part {
+                 name: "padding_title6";
+                 type: SPACER;
+                 description {
+                     state: "default" 0.0;
+                     align: 0.0 0.0;
+                     fixed: 1 1;
+                     min: 680 20;
+                     max: 680 20;
+                     rel1 { relative: 0.0 1.0; to: "number_on_card_bg"; }
+                     rel2 { relative: 1.0 1.0; to: "number_on_card_bg"; }
+                 }
+             }
+            part {
+                name: "card_number_blank_bg";
+                type: RECT;
+                mouse_events: 1;
+                description {
+                    state: "default" 0.0;
+                    color: 240 240 240 255;
+                    visible: 1;
+                    align: 0.0 0.0;
+                    fixed: 1 1;
+                    min: 600 70;
+                    max: 600 70;
+                    rel1 { relative: 0.0 1.0; to: "padding_title6"; }
+                    rel2 { relative: 1.0 1.0; to: "padding_title6"; }
+                }
+            }
+            part {
+                name: "card_number_input";
+                type: SWALLOW;
+                mouse_events: 1;
+                scale: 1;
+                description {
+                    state: "default" 0;
+                    align: 0.0 0.0;
+                    color: 105 105 105 255;
+                    min: 600 70;
+                    max: 600 70;
+                    rel1 { relative: 0.0 0.0; to: "card_number_blank_bg"; }
+                    rel2 { relative: 1.0 1.0; to: "card_number_blank_bg"; }
+                }
+            }
+            part {
+                name: "credit_card_image_bg";
+                type: RECT;
+                description {
+                    state: "default" 0.0;
+                    color: 240 240 240 255;
+                    visible: 1;
+                    align: 0.0 0.0;
+                    fixed: 1 1;
+                    min: 70 60;
+                    max: 70 60;
+                    rel1 { relative: 1.0 0.0; to: "card_number_blank_bg"; }
+                    rel2 { relative: 1.0 1.0; to: "card_number_blank_bg"; }
+                }
+            }
+            part {
+                name: "credit_card_image";
+                type: IMAGE;
+                mouse_events: 0;
+                description {
+                    state: "default" 0.0;
+                    visible: 0;
+                    align: 0.0 0.0;
+                    fixed: 1 1;
+                    min: 70 60;
+                    max: 70 60;
+                    rel1 { relative: 0.0 0.0; to: "credit_card_image_bg"; }
+                    rel2 { relative: 1.0 1.0; to: "credit_card_image_bg"; }
+                    image.normal: "visa.png";
+                }
+                description {
+                    "show_visa";
+                    inherit: "default" 0.0;
+                    visible: 1;
+                }
+                description {
+                    "show_mastercard";
+                    inherit: "default" 0.0;
+                    visible: 1;
+                    image.normal: "mastercard.png";
+                }
+                description {
+                    "show_amex";
+                    inherit: "default" 0.0;
+                    visible: 1;
+                    image.normal: "americanexpress.png";
+                }
+            }
+             part {
+                 name: "baseline2";
+                 type: RECT;
+                 description {
+                     state: "default" 0.0;
+                     color: 105 105 105 255;
+                     visible: 1;
+                     align: 0.0 0.0;
+                     fixed: 1 1;
+                     min: 680 2;
+                     max: 680 2;
+                     rel1 { relative: 0.0 1.0; to: "card_number_blank_bg"; }
+                     rel2 { relative: 1.0 1.0; to: "card_number_blank_bg"; }
+                 }
+             }
+             part {
+                 name: "card_number_message_bg";
+                 type: RECT;
+                 description {
+                     state: "default" 0.0;
+                     color: 240 240 240 255;
+                     visible: 1;
+                     align: 0.0 0.0;
+                     fixed: 1 1;
+                     min: 680 40;
+                     max: 680 40;
+                     rel1 { relative: 0.0 1.0; to: "baseline2"; }
+                     rel2 { relative: 1.0 1.0; to: "baseline2"; }
+                 }
+             }
+             part {
+                 name: "card_number_message";
+                 type: TEXT;
+                 description {
+                     state: "default" 0;
+                     align: 0.0 0.0;
+                     color: 255 0 0 255;
+                     visible: 0;
+                     rel1 { relative: 0.0 0.0; to: "card_number_message_bg"; }
+                     rel2 { relative: 1.0 1.0; to: "card_number_message_bg"; }
+                     text {
+                         text: "Please enter valid number";
+                         font: "Sans";
+                         size: 30;
+                         fit: 0 0;
+                         min: 0 0;
+                         max: 0 0;
+                         align: 0.0 0.0;
+                         elipsis: 0.0;
+                     }
+                 }
+                 description { "show_error";
+                    inherit: "default" 0;
+                    visible: 1;
+                }
+             }
+             part {
+                 name: "padding_title7";
+                 type: SPACER;
+                 description {
+                     state: "default" 0.0;
+                     align: 0.0 0.0;
+                     fixed: 1 1;
+                     min: 720 60;
+                     max: 720 60;
+                     rel1 { relative: 0.0 1.0; to: "baseline2"; }
+                     rel2 { relative: 1.0 1.0; to: "baseline2"; }
+                 }
+             }
+             part {
+                 name: "expiration_date_bg";
+                 type: RECT;
+                 description {
+                     state: "default" 0.0;
+                     color: 240 240 240 255;
+                     visible: 1;
+                     align: 0.0 0.0;
+                     fixed: 1 1;
+                     min: 680 40;
+                     max: 680 40;
+                     rel1 { relative: 0.0 1.0; to: "padding_title7"; }
+                     rel2 { relative: 1.0 1.0; to: "padding_title7"; }
+                 }
+             }
+             part {
+                 name: "expiration_date";
+                 type: TEXT;
+                 description {
+                     state: "default" 0;
+                     align: 0.0 0.0;
+                     color: 105 105 105 255;
+                     rel1 { relative: 0.0 0.0; to: "expiration_date_bg"; }
+                     rel2 { relative: 1.0 1.0; to: "expiration_date_bg"; }
+                     text {
+                         text: "Expiration date";
+                         font: "Sans";
+                         size: 30;
+                         fit: 0 0;
+                         min: 0 0;
+                         max: 0 0;
+                         align: 0.0 0.0;
+                         elipsis: 0.0;
+                     }
+                 }
+             }
+             part {
+                 name: "padding_8";
+                 type: SPACER;
+                 description {
+                     state: "default" 0.0;
+                     align: 0.0 0.0;
+                     fixed: 1 1;
+                     min: 680 10;
+                     max: 680 10;
+                     rel1 { relative: 0.0 1.0; to: "expiration_date_bg";}
+                     rel2 { relative: 1.0 1.0; to: "expiration_date_bg";}
+                 }
+             }
+             part {
+                 name: "month_bg";
+                 type: RECT;
+                 description {
+                     state: "default" 0.0;
+                     color: 240 240 240 255;
+                     visible: 1;
+                     align: 0.0 0.0;
+                     fixed: 1 1;
+                     min: 110 70;
+                     max: 110 70;
+                     rel1 { relative: 0.0 1.0; to: "padding_8"; }
+                     rel2 { relative: 1.0 1.0; to: "padding_8"; }
+                 }
+             }
+             part {
+                 name: "month";
+                 type: SWALLOW;
+                 mouse_events: 1;
+                 description {
+                     state: "default" 0.0;
+                     visible: 1;
+                     align: 0.0 0.0;
+                     fixed: 1 1;
+                     min: 110 70;
+                     max: 110 70;
+                     rel1 { relative: 0.0 0.0; to: "month_bg"; }
+                     rel2 { relative: 1.0 1.0; to: "month_bg"; }
+                 }
+             }
+             part {
+                 name: "padding_d";
+                 type: SPACER;
+                 description {
+                     state: "default" 0.0;
+                     align: 0.0 0.0;
+                     fixed: 1 1;
+                     min: 10 70;
+                     max: 10 70;
+                     rel1 { relative: 1.0 0.0; to: "month_bg"; }
+                     rel2 { relative: 1.0 1.0; to: "month_bg"; }
+                 }
+             }
+             part {
+                 name: "slash_bg";
+                 type: RECT;
+                 description {
+                     state: "default" 0.0;
+                     color: 240 240 240 255;
+                     visible: 1;
+                     align: 0.0 0.0;
+                     fixed: 1 1;
+                     min: 30 70;
+                     max: 30 70;
+                     rel1 { relative: 1.0 0.0; to: "padding_d"; }
+                     rel2 { relative: 1.0 1.0; to: "padding_d"; }
+                 }
+             }
+             part {
+                 name: "slash";
+                 type: TEXT;
+                 description {
+                     state: "default" 0;
+                     align: 0.0 0.0;
+                     color: 0 0 0 255;
+                     rel1 { relative: 0.0 0.0; to: "slash_bg"; }
+                     rel2 { relative: 1.0 1.0; to: "slash_bg"; }
+                     text {
+                         text: "/";
+                         font: "Sans";
+                         size: 38;
+                         fit: 0 0;
+                         min: 0 0;
+                         max: 0 0;
+                         align: 0.5 0.75;
+                         elipsis: 0.0;
+                     }
+                 }
+             }
+             part {
+                 name: "padding_d1";
+                 type: SPACER;
+                 description {
+                     state: "default" 0.0;
+                     align: 0.0 0.0;
+                     fixed: 1 1;
+                     min: 10 70;
+                     max: 10 70;
+                     rel1 { relative: 1.0 0.0; to: "slash_bg"; }
+                     rel2 { relative: 1.0 1.0; to: "slash_bg"; }
+                 }
+             }
+             part {
+                 name: "year_bg";
+                 type: RECT;
+                 description {
+                     state: "default" 0.0;
+                     color: 240 240 240 255;
+                     visible: 1;
+                     align: 0.0 0.0;
+                     fixed: 1 1;
+                     min: 130 70;
+                     max: 130 70;
+                     rel1 { relative: 1.0 0.0; to: "padding_d1"; }
+                     rel2 { relative: 1.0 1.0; to: "padding_d1"; }
+                 }
+             }
+             part {
+                 name: "year";
+                 type: SWALLOW;
+                 mouse_events: 1;
+                 description {
+                     state: "default" 0.0;
+                     visible: 1;
+                     align: 0.0 0.0;
+                     fixed: 1 1;
+                     min: 130 70;
+                     max: 130 70;
+                     rel1 { relative: 0.0 0.0; to: "year_bg"; }
+                     rel2 { relative: 1.0 1.0; to: "year_bg"; }
+                 }
+             }
+             part {
+                 name: "padding_9";
+                 type: SPACER;
+                 description {
+                     state: "default" 0.0;
+                     align: 0.0 0.0;
+                     fixed: 1 1;
+                     min: 680 20;
+                     max: 680 20;
+                     rel1 { relative: 0.0 1.0; to: "month_bg"; }
+                     rel2 { relative: 1.0 1.0; to: "month_bg"; }
+                 }
+             }
+             part {
+                 name: "expiry_date_message_bg";
+                 type: RECT;
+                 description {
+                     state: "default" 0.0;
+                     color: 240 240 240 255;
+                     visible: 1;
+                     align: 0.0 0.0;
+                     fixed: 1 1;
+                     min: 680 40;
+                     max: 680 40;
+                     rel1 { relative: 0.0 1.0; to: "padding_9"; }
+                     rel2 { relative: 1.0 1.0; to: "padding_9"; }
+                 }
+             }
+             part {
+                 name: "expiry_date_message";
+                 type: TEXT;
+                 description {
+                     state: "default" 0;
+                     align: 0.0 0.0;
+                     color: 255 0 0 255;
+                     visible: 0;
+                     rel1 { relative: 0.0 0.0; to: "expiry_date_message_bg"; }
+                     rel2 { relative: 1.0 1.0; to: "expiry_date_message_bg"; }
+                     text {
+                         text: "Please enter valid expiry date";
+                         font: "Sans";
+                         size: 30;
+                         fit: 0 0;
+                         min: 0 0;
+                         max: 0 0;
+                         align: 0.0 0.0;
+                         elipsis: 0.0;
+                     }
+                 }
+                 description { "show_exp_date_error";
+                    inherit: "default" 0;
+                    visible: 1;
+                }
+             }
+             part {
+                 name: "billingaddress_bg";
+                 type: RECT;
+                 description {
+                     state: "default" 0.0;
+                     color: 240 240 240 255;
+                     visible: 1;
+                     align: 0.0 0.0;
+                     fixed: 1 1;
+                     min: 680 40;
+                     max: 680 40;
+                     rel1 { relative: 0.0 1.0; to: "expiry_date_message_bg"; }
+                     rel2 { relative: 1.0 1.0; to: "expiry_date_message_bg"; }
+                 }
+             }
+             part {
+                 name: "billingaddress";
+                 type: TEXT;
+                 description {
+                     state: "default" 0;
+                     align: 0.0 0.0;
+                     color: 105 105 105 255;
+                     rel1 { relative: 0.0 0.0; to: "billingaddress_bg"; }
+                     rel2 { relative: 1.0 1.0; to: "billingaddress_bg"; }
+                     text {
+                         text: "Billing address*";
+                         font: "Sans";
+                         size: 30;
+                         fit: 0 0;
+                         min: 0 0;
+                         max: 0 0;
+                         align: 0.0 0.0;
+                         elipsis: 0.0;
+                     }
+                 }
+             }
+             part {
+                 name: "padding_10";
+                 type: SPACER;
+                 description {
+                     state: "default" 0.0;
+                     align: 0.0 0.0;
+                     fixed: 1 1;
+                     min: 680 10;
+                     max: 680 10;
+                     rel1 { relative: 0.0 1.0; to: "billingaddress_bg"; }
+                     rel2 { relative: 1.0 1.0; to: "billingaddress_bg"; }
+                 }
+             }
+             part {
+                 name: "billaddressdropdown";
+                 type: SWALLOW;
+                 mouse_events: 1;
+                 description {
+                     state: "default" 0.0;
+                     visible: 1;
+                     align: 0.0 0.0;
+                     fixed: 1 1;
+                     min: 680 70;
+                     max: 680 70;
+                     rel1 { relative: 0.0 1.0; to: "padding_10"; }
+                     rel2 { relative: 1.0 1.0; to: "padding_10"; }
+                 }
+             }
+             part {
+                 name: "padding_11";
+                 type: SPACER;
+                 description {
+                     state: "default" 0.0;
+                     align: 0.0 0.0;
+                     fixed: 1 1;
+                     min: 680 40;
+                     max: 680 40;
+                     rel1 { relative: 0.0 1.0; to: "billaddressdropdown"; }
+                     rel2 { relative: 1.0 1.0; to: "billaddressdropdown"; }
+                 }
+             }
+             part {
+                 name: "requiredfields_bg";
+                 type: RECT;
+                 description {
+                     state: "default" 0.0;
+                     color: 240 240 240 255;
+                     visible: 1;
+                     align: 0.0 0.0;
+                     fixed: 1 1;
+                     min: 680 30;
+                     max: 680 30;
+                     rel1 { relative: 0.0 1.0; to: "padding_11"; }
+                     rel2 { relative: 1.0 1.0; to: "padding_11"; }
+                 }
+             }
+             part {
+                 name: "requiredfields";
+                 type: TEXT;
+                 description {
+                     state: "default" 0;
+                     align: 0.0 0.0;
+                     color: 0 0 0 255;
+                     rel1 { relative: 0.0 0.0; to: "requiredfields_bg"; }
+                     rel2 { relative: 1.0 1.0; to: "requiredfields_bg"; }
+                     text {
+                         text: "* indicates required fields";
+                         font: "Sans";
+                         size: 28;
+                         fit: 0 0;
+                         min: 0 0;
+                         max: 0 0;
+                         align: 0.0 0.0;
+                         elipsis: 0.0;
+                     }
+                 }
+             }
+             programs {
+                 program {
+                     "selected";
+                     signal: "elm,state,selected";
+                     source: "";
+                     script {
+                     }
+                 }
+                 program {
+                     "show_error";
+                     signal: "elm,action,show,error";
+                     source: "";
+                     action: STATE_SET "show_error";
+                     target: "card_number_message";
+                 }
+                 program {
+                     "hide_error";
+                     signal: "elm,action,hide,error";
+                     source: "";
+                     action: STATE_SET "default" 0;
+                     target: "card_number_message";
+                 }
+                 program {
+                     "show_exp_date_error";
+                     signal: "elm,action,show,expDateError";
+                     source: "";
+                     action: STATE_SET "show_exp_date_error";
+                     target: "expiry_date_message";
+                 }
+                 program {
+                     "hide_exp_date_error";
+                     signal: "elm,action,hide,expDateError";
+                     source: "";
+                     action: STATE_SET "default" 0;
+                     target: "expiry_date_message";
+                 }
+                 program {
+                     "show_nothing";
+                     signal: "elm,action,show,nothing";
+                     source: "";
+                     action: STATE_SET "default" 0.0;
+                     target: "credit_card_image";
+                 }
+                 program {
+                     "show_visa";
+                     signal: "elm,action,show,visa";
+                     source: "";
+                     action: STATE_SET "show_visa";
+                     target: "credit_card_image";
+                 }
+                 program {
+                     "show_mastercard";
+                     signal: "elm,action,show,mastercard";
+                     source: "";
+                     action: STATE_SET "show_mastercard";
+                     target: "credit_card_image";
+                 }
+                 program {
+                     "show_amex";
+                     signal: "elm,action,show,amex";
+                     source: "";
+                     action: STATE_SET "show_amex";
+                     target: "credit_card_image";
+                 }
+             }
+         }
+     }
+}

@@ -1,0 +1,67 @@
+/* Copyright (c) 2017 Samsung Electronics. All rights reserved.
+ */
+
+label Chrome {
+  M47 = 1.0
+};
+
+/**
+ * This type denotes a Shared Memory block which has either been registered
+ * with the implementation or allocated by it.
+ */
+interface PPB_TEECSharedMemory_Samsung {
+  /**
+   * Creates a new TEEC shared memory resource.
+   *
+   * @param[in] teec_context A <code>PP_Resource</code> identifying
+   * the parent TEEC_Context for the TEEC shared memory.
+   * @param[in] flags describing if memory can be used as input and/or output.
+   * See the PP_TEEC_MemoryType type for more details.
+   *
+   * @return A <code>PP_Resource</code> corresponding to a TEEC Shared Memory
+   * if successful or 0 otherwise.
+   */
+  PP_Resource Create(
+      [in] PP_Resource context,
+      [in] uint32_t flags
+  );
+
+  /**
+   * Determines if the given resource is a TEEC shared memory.
+   *
+   * @param[in] resource A <code>PP_Resource</code> identifying a resource.
+   *
+   * @return <code>PP_TRUE</code> if the resource is a
+   * <code>PPB_TEECSharedMemory_Samsung</code>, <code>PP_FALSE</code>
+   * if the resource is invalid or some other type.
+   */
+  PP_Bool IsTEECSharedMemory(
+      [in] PP_Resource resource);
+
+  /**
+   * This function registers a block of existing Client Application memory as
+   * a block of Shared Memory
+   */
+  int32_t Register(
+      [in] PP_Resource shared_mem,
+      [in] mem_t buffer,
+      [in] uint32_t size,
+      [out] PP_TEEC_Result result,
+      [in] PP_CompletionCallback callback);
+
+   /**
+    * This function allocates a new block of memory as a block of Shared Memory
+    */
+  int32_t Allocate(
+      [in] PP_Resource shared_mem,
+      [in] uint32_t size,
+      [out] PP_TEEC_Result result,
+      [in] PP_CompletionCallback callback);
+
+  /**
+   * Maps this shared memory into the plugin address space
+   * and returns a pointer to the beginning of the data.
+   */
+  mem_t Map(
+      [in] PP_Resource shared_mem);
+};

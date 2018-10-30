@@ -1,0 +1,37 @@
+# Copyright (c) 2015 Samsung Electronics. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+import("//tizen_src/build/config/tizen_features.gni")
+
+source_set("webkit_core_generated") {
+  sources = [
+    "$root_gen_dir/TizenUserAgentStyleSheets.h",
+    "$root_gen_dir/TizenUserAgentStyleSheetsData.cpp",
+  ]
+
+  deps = [ ":TizenUserAgentStyleSheets" ]
+}
+
+action("TizenUserAgentStyleSheets") {
+  script = "make-file-arrays.py"
+  if (tizen_product_tv) {
+    stylesheet = "css/themeChromiumTizenTV.css"
+  } else {
+    stylesheet = "css/themeChromiumTizen.css"
+  }
+  inputs = [
+    stylesheet,
+  ]
+  outputs = [
+    "$root_gen_dir/TizenUserAgentStyleSheets.h",
+    "$root_gen_dir/TizenUserAgentStyleSheetsData.cpp",
+  ]
+  out_h = rebase_path("$root_gen_dir/TizenUserAgentStyleSheets.h", root_build_dir)
+  out_cpp = rebase_path("$root_gen_dir/TizenUserAgentStyleSheetsData.cpp", root_build_dir)
+  args = [
+    "--namespace",
+    "blink",
+    "--out-h=$out_h",
+    "--out-cpp=$out_cpp",
+  ] + rebase_path(inputs, root_build_dir)
+}

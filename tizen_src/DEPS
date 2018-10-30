@@ -1,0 +1,24 @@
+include_rules = [
+]
+
+vars = {
+}
+
+deps = {
+}
+
+hooks = [
+  {
+    # Generate .gclient-efl for chromium-efl's dependencies, including
+    # custom chromium and WebKit repositories.
+    "name": "generate-gclient-efl",
+    "pattern": ".",
+    "action": ["python", "src/tizen_src/scripts/generate_gclient-efl.py"],
+  },
+  {
+    # Fetch Crosswalk dependencies.
+    "name": "fetch-deps",
+    "pattern": ".",
+    "action": ["python", "src/tizen_src/scripts/fetch_deps.py", "-v"],
+  },
+]

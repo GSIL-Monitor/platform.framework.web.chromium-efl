@@ -1,0 +1,52 @@
+# Copyright 2017 Samsung Electronics. All rights reserved.
+# Copyright 2015 The Chromium Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+# This is fork of //android_webview/webview_repack_locales.gni
+# This repacks only minimal set of strings which is need for Chromium-efl.
+# * components_strings
+# * content_strings
+# * bluetooth_strings
+# * libaddressinput_strings
+# * ui_strings
+# * extensions_strings (if chrome extensions are enabled)
+
+import("//extensions/features/features.gni")
+import("//tools/grit/repack.gni")
+
+# Wraps repack_locales(), setting the source_patterns and deps required for
+# EFL WebView.
+template("chromium_efl_repack_locales") {
+  repack_locales(target_name) {
+    forward_variables_from(invoker, "*")
+    if (!defined(deps)) {
+      deps = []
+    }
+
+    source_patterns = [
+      "${root_gen_dir}/components/strings/components_locale_settings_",
+      "${root_gen_dir}/components/strings/components_strings_",
+      "${root_gen_dir}/content/app/strings/content_strings_",
+      "${root_gen_dir}/device/bluetooth/strings/bluetooth_strings_",
+      "${root_gen_dir}/third_party/libaddressinput/address_input_strings_",
+      "${root_gen_dir}/ui/strings/app_locale_settings_",
+      "${root_gen_dir}/ui/strings/ui_strings_",
+    ]
+    deps += [
+      "//components/strings:components_locale_settings",
+      "//components/strings:components_strings",
+      "//content/app/strings",
+      "//device/bluetooth/strings",
+      "//third_party/libaddressinput:strings",
+      "//ui/strings:app_locale_settings",
+      "//ui/strings:ui_strings",
+    ]
+    if (enable_extensions) {
+      source_patterns +=
+          [ "${root_gen_dir}/extensions/strings/extensions_strings_" ]
+      deps += [ "//extensions/strings" ]
+    }
+    output_dir = "$root_out_dir/locales/efl"
+  }
+}

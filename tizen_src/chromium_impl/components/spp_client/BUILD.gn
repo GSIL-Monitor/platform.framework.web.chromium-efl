@@ -1,0 +1,42 @@
+# Copyright (c) 2015 Samsung Electronics. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+import("//tizen_src/build/config/tizen_features.gni")
+
+static_library("spp_client") {
+  if (is_tizen && !tizen_product_tv) {
+     configs += [
+      "//tizen_src/build:push",
+    ]
+    deps = [
+      "//base",
+      "//components/leveldb_proto",
+      "//crypto",
+      "//net",
+      "//skia",
+      "//tizen_src/chromium_impl/components/spp_client/proto",
+    ]
+    include_dirs = [
+      "/usr/include/appfw",
+    ]
+    sources = [
+      "spp_client_encryption_util.cc",
+      "spp_client_encryption_util.h",
+      "spp_client.h",
+      "spp_client_impl.cc",
+      "spp_client_impl.h",
+      "spp_client_registration.cc",
+      "spp_client_registration.h",
+    ]
+    libs = [ "push" ]
+  } else {
+    deps = [
+      "//base",
+    ]
+    sources = [
+      "fake_spp_client_impl.cc",
+      "fake_spp_client_impl.h",
+    ]
+  }
+}

@@ -1,0 +1,144 @@
+# Copyright (c) 2015 Samsung Electronics. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+import("//build/config/ui.gni")
+
+declare_args() {
+  arm_thumb = false
+  ewk_bringup = false
+  gcc_version = 49
+
+  use_wayland = false
+
+  linux_use_gold_flags = false   # no use of this variable, if removing then revome from gn_chromiumefl.sh also
+
+  python_ver = "2.5"  # no use of this variable, if removing then revome from gn_chromiumefl.sh also
+
+  depth = ""  # no use of this variable, if removing then revome from gn_chromiumefl.sh also
+
+  lto_level = ""
+
+  use_cairo = false
+  use_pango = false
+  use_symbolize = false
+  use_system_libevent = false
+  use_ttrace = false
+
+  direct_canvas = false
+
+  tizen_multimedia_eme_support = false
+  tizen_multimedia_support = false
+
+  # declared from BUILDCONFIG.gn
+  #is_clang = false
+
+  tizen_product_da = false
+  tizen_product_tv = false
+  tizen_public_target = false
+  tizen_vd_disable_gpu = false
+  tizen_dlp = false
+
+  exe_dir = "/usr/lib/chromium-efl/"
+  edje_dir = "/usr/share/chromium-efl/themes/"
+  data_dir = "/usr/share/chromium-efl/"
+  locale_dir = "/usr/share/chromium-efl/locale/"
+  image_dir = "/usr/share/chromium-efl/images/"
+
+  tizen_version = 0
+  tizen_version_major = 0
+  tizen_version_minor = 0
+  tizen_version_patch = 0
+  prebuilt_ld_gold_dir = ""
+  tizen_pepper_extensions = false
+  tizen_pepper_player = false
+  tizen_pepper_player_d2tv = false
+  tizen_pepper_player_h264_uhd_only_30fps = false
+  tizen_mfc_texture_video_decoder = false
+  tizen_omx_video_decoder = false
+  tizen_resource_manager = false
+  tizen_pepper_teec = false
+  tizen_libav = false
+  tizen_tbm_support = false
+  tizen_vd_native_scrollbars = false
+  tizen_video_hole = false
+  enable_gcov = false
+  use_openmax_dl_fft = false
+  use_plugin_placeholder_hole = false
+  tizen_vd_lfd = false
+  tizen_vd_accessory = false
+}
+
+# Multimedia related variables
+
+tizen_pixmap_support = false
+tizen_multimedia_tbm_zerocopy_support = false
+tizen_web_speech_recognition = false
+tizen_webrtc = false
+tizen_sound_focus = false
+
+if (is_tizen && tizen_multimedia_support) {
+  tizen_multimedia_eme_support = true
+  tizen_web_speech_recognition = true
+
+  if (tizen_tbm_support) {
+    tizen_multimedia_tbm_zerocopy_support = true
+  }
+
+  if (!tizen_product_tv) {
+    tizen_sound_focus = true
+    tizen_webrtc = true
+  }
+}
+
+if (use_atk) {
+  tizen_atk_support = true
+  if (tizen_product_tv) {
+    tizen_atk_feature_vd = true
+  } else {
+    tizen_atk_feature_vd = false
+  }
+}
+else {
+  tizen_atk_support = false
+  tizen_atk_feature_vd = false
+}
+
+werror = false
+
+# This file should contain gn code that is supposed to be common
+# for all build targets we have in chromium-ewk. Things specific only to one
+# component should go to appropriate gni file included below.
+
+use_gstreamer_fft = true
+
+use_aura = false
+
+# Moved it in //tizen_src/build/config/BUILDCONFIG.gn
+#use_efl = true
+# Declared from the //build/config/ui.gni
+#use_default_render_theme = true
+
+direct_canvas = true
+
+ewk_bringup = true
+wayland_bringup = use_wayland
+
+compile_suid_client = true
+compile_credentials = true
+# Declared from the //build/config/features.gni
+#enable_web_speech = false
+# Declare from //third_party/webrtc/webrtc.gni
+#rtc_use_h264 = false # override value in //third_party/webrtc/webrtc.gni
+
+edje_compiler = "edje_cc"
+
+grit_additional_defines = "-Duse_aura"
+
+if (use_ozone) {
+  external_ozone_platforms = [ "efl" ]
+}
+
+treat_warnings_as_errors=werror
+
+use_x11=false

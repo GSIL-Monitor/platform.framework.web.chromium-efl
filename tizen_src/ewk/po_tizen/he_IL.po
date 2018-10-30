@@ -1,0 +1,9 @@
+msgid "IDS_WEBVIEW_OPT_OPEN_LINK_IN_NEW_TAB_ABB"
+msgstr "פתח קישור בלשונית חדשה"
+
+msgid "IDS_WEBVIEW_OPT_OPEN_LINK_ABB"
+msgstr "פתח בדפדפן אינטרנט"
+
+msgid "IDS_WEBVIEW_OPEN"
+msgstr "פתח"
+

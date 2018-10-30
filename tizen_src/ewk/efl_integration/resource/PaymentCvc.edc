@@ -1,0 +1,232 @@
+collections { base_scale: 2.6;
+    group {
+        name: "CVC_layout";
+        images {
+            image: "cvc_icon.png" COMP;
+        }
+        styles {
+            style {
+                name: "cvc_style";
+                base: "font=Sans font_size=28 color=#d3d3d3 wrap=word align=0.0";
+            }
+        }
+
+        parts {
+            part {
+                name: "bg";
+                type: RECT;
+                description {
+                    state: "default" 0.0;
+                    visible: 1;
+                    align: 0.0 0.0;
+                    min: 720 1280;
+                    max: 720 1280;
+                    color: 0 0 0 128;
+                    rel1 { relative: 0 0; }
+                    rel2 { relative: 1.0 1.0; }
+                }
+            }
+            part {
+                name: "cvc_bg";
+                type: RECT;
+                description {
+                    state: "default" 0.0;
+                    visible: 1;
+                    align: 0.5 0.5;
+                    min: 660 500;
+                    max: 660 500;
+                    color: 255 255 255 255;
+                    rel1 { relative: 0.0 0.0; to: "bg"; }
+                    rel2 { relative: 1.0 1.0; to: "bg"; }
+                }
+            }
+            part {
+                name: "cvc_title_bg";
+                type: RECT;
+                description {
+                    state: "default" 0.0;
+                    color: 255 255 255 255;
+                    visible: 1;
+                    align: 0.0 0.0;
+                    fixed: 1 1;
+                    min: 600 50;
+                    max: 600 50;
+                    rel1 { relative: 0.0 0.1; to: "cvc_bg"; }
+                    rel2 { relative: 1.0 1.0; to: "cvc_bg"; }
+                }
+            }
+            part {
+                name: "cvc_title";
+                type: TEXT;
+                mouse_events: 0;
+                description {
+                    state: "default" 0;
+                    align: 0.0 0.0;
+                    color: 0 0 0 255;
+                    rel1 { relative: 0.07 0.0; to: "cvc_title_bg"; }
+                    rel2 { relative: 1.0 1.0; to: "cvc_title_bg"; }
+                    text {
+                        text: "Enter the CVC for Visa ***1111";
+                        font: "Sans:style=Bold";
+                        size: 38;
+                        fit: 0 0;
+                        align: 0.0 0.0;
+                        elipsis: 0.0;
+                    }
+                }
+            }
+            part {
+                name: "cvc_body_bg";
+                type: RECT;
+                description {
+                    state: "default" 0.0;
+                    color: 255 255 255 255;
+                    visible: 1;
+                    align: 0.0 0.0;
+                    fixed: 1 1;
+                    min: 600 100;
+                    max: 600 100;
+                    rel1 { relative: 0.0 0.3; to: "cvc_bg"; }
+                    rel2 { relative: 1.0 1.0; to: "cvc_bg"; }
+                }
+            }
+            part {
+                name: "cvc_body";
+                type: TEXTBLOCK;
+                mouse_events: 0;
+                description {
+                    state: "default" 0;
+                    visible: 1;
+                    fixed: 1 1;
+                    align: 0.0 0.0;
+                    color: 0 0 0 255;
+                    rel1 { relative: 0.07 0.0; to: "cvc_body_bg"; }
+                    rel2 { relative: 1.0 1.0; to: "cvc_body_bg"; }
+                    text {
+                        style: "cvc_style";
+                        text: "Once you've confirmed, your card details will be shared with this site";
+                    }
+                }
+            }
+            part {
+                name: "cvc_icon_bg";
+                type: RECT;
+                description {
+                    state: "default" 0.0;
+                    color: 255 255 255 255;
+                    visible: 1;
+                    align: 0.0 0.0;
+                    min: 600 60;
+                    max: 600 60;
+                    rel1 { relative: 0.0 0.55; to: "cvc_bg"; }
+                    rel2 { relative: 1.0 1.0; to: "cvc_bg"; }
+                }
+            }
+            part {
+                name: "cvc_icon";
+                type: IMAGE;
+                mouse_events: 0;
+                description {
+                    state: "default" 0.0;
+                    visible: 1;
+                    align: 0.0 0.0;
+                    fixed: 1 1;
+                    min: 70 60;
+                    max: 70 60;
+                    rel1 { relative: 0.07 0.0; to: "cvc_icon_bg"; }
+                    rel2 { relative: 1.0 1.0; to: "cvc_icon_bg"; }
+                    image.normal: "cvc_icon.png";
+                }
+            }
+            part {
+                name: "cvc_number_input_entry";
+                type: SWALLOW;
+                mouse_events: 1;
+                description {
+                    state: "default" 0;
+                    visible: 1;
+                    align: 0.0 0.0;
+                    fixed: 1 1;
+                    min: 100 60;
+                    max: 100 60;
+                    rel1 { relative: 0.3 0.0; to: "cvc_icon_bg"; }
+                    rel2 { relative: 1.0 1.0; to: "cvc_icon_bg"; }
+                }
+            }
+            part {
+                name: "line";
+                type: RECT;
+                description {
+                    state: "default" 0.0;
+                    color: 0 0 0 255;
+                    visible: 1;
+                    align: 0.0 0.0;
+                    fixed: 1 1;
+                    min: 80 3;
+                    max: 80 3;
+                    rel1 { relative: 0.0 1.0; to: "cvc_number_input_entry"; }
+                }
+            }
+
+            part {
+                name: "cancel_cvc_button_bg";
+                type: RECT;
+                description {
+                    state: "default" 0.0;
+                    color: 255 255 255 255;
+                    visible: 1;
+                    align: 0.0 0.0;
+                    fixed: 1 1;
+                    min: 220 100;
+                    max: 220 100;
+                    rel1 { relative: 0.25 0.7; to: "cvc_bg"; }
+                    rel2 { relative: 1.0 1.0; to: "cvc_bg"; }
+                }
+            }
+            part {
+                name: "cancel_cvc_button";
+                type: SWALLOW;
+                mouse_events: 1;
+                description {
+                    state: "default" 0.0;
+                    visible: 1;
+                    align: 0.0 0.0;
+                    fixed: 1 1;
+                    min: 200 36;
+                    max: 200 36;
+                    rel1 { relative: 0.0 0.1; to: "cancel_cvc_button_bg"; }
+                }
+            }
+
+            part {
+                name: "confirm_cvc_button_bg";
+                type: RECT;
+                description {
+                    state: "default" 0.0;
+                    color: 255 255 255 255;
+                    visible: 1;
+                    align: 0.0 0.0;
+                    min: 220 100;
+                    max: 220 100;
+                    rel1 { relative: 0.6 0.7; to: "cvc_bg"; }
+                    rel2 { relative: 1.0 1.0; to: "cvc_bg"; }
+                }
+            }
+            part {
+                name: "confirm_cvc_button";
+                type: SWALLOW;
+                mouse_events: 1;
+                description {
+                    state: "default" 0.0;
+                    visible: 1;
+                    align: 0.0 0.0;
+                    fixed: 1 1;
+                    min: 220 36;
+                    max: 220 36;
+                    rel1 { relative: 0.0 0.1; to: "confirm_cvc_button_bg"; }
+                }
+            }
+        }
+    }
+}
+

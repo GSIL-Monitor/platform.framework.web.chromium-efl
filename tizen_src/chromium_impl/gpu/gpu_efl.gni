@@ -1,0 +1,41 @@
+# Copyright (c) 2015 Samsung Electronics. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+external_exclude_gpu_efl_sources = []
+
+if (!is_tizen) {
+  external_exclude_gpu_efl_sources += [ "gpu_info_collector_linux.cc" ]
+}
+
+if (is_tizen) {
+  direct_canvas = true
+} else {
+  direct_canvas = false
+}
+
+external_gpu_efl_sources = [
+  "//tizen_src/chromium_impl/gpu/config/gpu_info_collector_efl.cc",
+  "//tizen_src/chromium_impl/gpu/config/scoped_restore_non_owned_egl_context.cc",
+  "//tizen_src/chromium_impl/gpu/config/scoped_restore_non_owned_egl_context.h",
+  "//tizen_src/chromium_impl/gpu/config/scoped_restore_non_owned_evasgl_context.cc",
+  "//tizen_src/chromium_impl/gpu/config/scoped_restore_non_owned_evasgl_context.h",
+]
+
+external_gpu_ipc_efl_sources = [
+  "//tizen_src/chromium_impl/gpu/ipc/direct_canvas_in_process_thread_service.cc",
+  "//tizen_src/chromium_impl/gpu/ipc/direct_canvas_in_process_thread_service.h",
+  "//tizen_src/chromium_impl/gpu/ipc/service/direct_canvas_command_buffer_stub.cc",
+  "//tizen_src/chromium_impl/gpu/ipc/service/direct_canvas_command_buffer_stub.h",
+  "//tizen_src/chromium_impl/gpu/ipc/service/direct_canvas_gpu_channel.cc",
+  "//tizen_src/chromium_impl/gpu/ipc/service/direct_canvas_gpu_channel.h",
+  "//tizen_src/chromium_impl/gpu/ipc/service/direct_canvas_gpu_channel_manager.cc",
+  "//tizen_src/chromium_impl/gpu/ipc/service/direct_canvas_gpu_channel_manager.h",
+]
+
+external_gles2_implementation_sources = [
+  "//tizen_src/chromium_impl/gpu/command_buffer/client/gles2_implementation_efl.cc",
+  "//tizen_src/chromium_impl/gpu/command_buffer/client/gles2_implementation_efl.h",
+  "//tizen_src/chromium_impl/gpu/command_buffer/client/shared_mailbox_manager.cc",
+  "//tizen_src/chromium_impl/gpu/command_buffer/client/shared_mailbox_manager.h",
+]

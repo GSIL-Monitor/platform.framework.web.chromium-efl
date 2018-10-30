@@ -1,0 +1,124 @@
+# Copyright (c) 2015 Samsung Electronics. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+import("//tizen_src/build/config/tizen_features.gni")
+
+##############################################################################
+# Configs
+##############################################################################
+
+external_content_common_efl_configs = [
+  "//tizen_src/build:capi-appfw-application",
+  "//tizen_src/build:libcapi-appfw-application",
+  "//tizen_src/build:ecore",
+  "//tizen_src/build:evas",
+  "//tizen_src/build:push",
+  "//tizen_src/build:tts",
+  "//tizen_src/build:libtts",
+  "//tizen_src/chromium_impl/content/common:content_common_efl"
+]
+
+if (is_tizen) {
+  external_content_common_efl_configs += [
+    "//tizen_src/build:tizen_tzplatform_config",
+    "//tizen_src/build:libtizen_tzplatform_config",
+  ]
+}
+
+if (use_wayland) {
+  external_content_common_efl_configs += [
+    "//tizen_src/build:ecore-wayland",
+    "//tizen_src/build:libecore-wayland"
+  ]
+} else {
+  external_content_common_efl_configs += [
+    "//tizen_src/build:ecore-x",
+    "//tizen_src/build:libecore-x"
+  ]
+}
+
+if (tizen_multimedia_support) {
+  external_content_common_efl_configs += [
+    "//tizen_src/build:capi-media-player",
+    "//tizen_src/build:libcapi-media-player",
+    "//tizen_src/build:gstreamer",
+    "//tizen_src/build:libgstreamer",
+  ]
+}
+
+if (tizen_webrtc) {
+  external_content_common_efl_configs += [
+    "//tizen_src/build:capi-media-codec",
+    "//tizen_src/build:libcapi-media-codec",
+  ]
+}
+
+##############################################################################
+# Dependency
+##############################################################################
+
+external_content_common_efl_deps = [
+  "//third_party/fontconfig",
+  "//tizen_src/chromium_impl/tizen:system-info",
+  "//tizen_src/chromium_impl/dlp:privacy-guard-dlp",
+]
+
+##############################################################################
+# Source
+##############################################################################
+
+external_exclude_content_common_efl_sources = []
+
+external_content_common_efl_sources = [
+  "//tizen_src/chromium_impl/content/common/content_client_export.cc",
+  "//tizen_src/chromium_impl/content/common/content_client_export.h",
+  "//tizen_src/chromium_impl/content/common/locale_efl.cc",
+  "//tizen_src/chromium_impl/content/common/locale_efl.h",
+  "//tizen_src/chromium_impl/content/common/message_generator_efl.cc",
+  "//tizen_src/chromium_impl/content/common/message_generator_efl.h",
+  "//tizen_src/chromium_impl/content/common/paths_efl.h",
+  "//tizen_src/chromium_impl/content/common/paths_efl.cc",
+  "//tizen_src/chromium_impl/content/common/cursors/webcursor_efl.cc",
+  "//tizen_src/chromium_impl/content/common/cursors/webcursor_efl.h",
+  "//tizen_src/chromium_impl/content/common/wrt/wrt_url_parse.h",
+]
+
+if (is_tizen) {
+  external_content_common_efl_sources += [
+    "//tizen_src/chromium_impl/content/common/tts_messages_efl.h",
+    "//tizen_src/chromium_impl/content/common/tts_utterance_request_efl.cc",
+    "//tizen_src/chromium_impl/content/common/tts_utterance_request_efl.h",
+  ]
+}
+
+
+if (tizen_multimedia_support) {
+  external_content_common_efl_sources += [
+    "//tizen_src/chromium_impl/content/common/media/media_param_traits_efl.h",
+    "//tizen_src/chromium_impl/content/common/media/media_param_traits_efl.cc",
+    "//tizen_src/chromium_impl/content/common/media/media_player_messages_enums_efl.h",
+    "//tizen_src/chromium_impl/content/common/media/media_player_messages_efl.h",
+  ]
+}
+
+if (tizen_webrtc) {
+  external_content_common_efl_sources += [
+    "//tizen_src/chromium_impl/content/common/gpu/media/tizen_video_decode_accelerator.h",
+    "//tizen_src/chromium_impl/content/common/gpu/media/tizen_video_decode_accelerator.cc",
+    "//tizen_src/chromium_impl/content/common/gpu/media/tizen_video_encode_accelerator.h",
+    "//tizen_src/chromium_impl/content/common/gpu/media/tizen_video_encode_accelerator.cc",
+  ]
+}
+
+if (tizen_mfc_texture_video_decoder) {
+  external_content_common_efl_deps += [
+    "//tizen_src/chromium_impl/content/common:tizen_omx_video_decoder",
+    "//ui/gl:gl",
+  ]
+
+  external_content_common_efl_sources += [
+    "//tizen_src/chromium_impl/content/common/gpu/media/tizen_mfc_video_decode_accelerator.cc",
+    "//tizen_src/chromium_impl/content/common/gpu/media/tizen_mfc_video_decode_accelerator.h",
+  ]
+}

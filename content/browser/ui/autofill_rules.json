@@ -1,0 +1,153 @@
+{
+  "chrome/browser/ui/autofill/popup_view_common.h" : {
+    "dest": "content/browser/ui/autofill/popup_view_common.h"
+  },
+  "chrome/browser/ui/autofill/popup_view_common.cc" : {
+    "dest": "content/browser/ui/autofill/popup_view_common.cc",
+    "replace" : ["chrome", "content"]
+  },
+  "chrome/browser/ui/autofill/popup_constants.h" : {
+    "dest": "content/browser/ui/autofill/popup_constants.h"
+  },
+  "chrome/browser/ui/autofill/popup_controller_common.cc" : {
+    "dest": "content/browser/ui/autofill/popup_controller_common.cc",
+    "replace" : ["chrome", "content"]
+  },
+  "chrome/browser/ui/autofill/popup_controller_common.h" : {
+    "dest": "content/browser/ui/autofill/popup_controller_common.h"
+  },
+  "chrome/browser/ui/autofill/autofill_popup_controller.h" : {
+    "dest": "content/browser/ui/autofill/autofill_popup_controller.h",
+    "replace" : ["chrome", "content"]
+  },
+  "chrome/browser/ui/autofill/autofill_popup_controller_impl.cc" : {
+    "dest": "content/browser/ui/autofill/autofill_popup_controller_impl.cc",
+    "replace" : ["chrome", "content"]
+  },
+  "chrome/browser/ui/autofill/autofill_popup_controller_impl.h" : {
+    "dest": "content/browser/ui/autofill/autofill_popup_controller_impl.h",
+    "replace" : ["chrome", "content"]
+  },
+  "chrome/browser/ui/autofill/autofill_popup_view.h" : {
+    "dest": "content/browser/ui/autofill/autofill_popup_view.h",
+    "replace" : ["chrome", "content"]
+  },
+  "chrome/browser/ui/autofill/autofill_popup_layout_model.h" : {
+    "dest": "content/browser/ui/autofill/autofill_popup_layout_model.h",
+    "replace" : ["chrome", "content"]
+  },
+  "chrome/browser/ui/autofill/autofill_popup_layout_model.cc" : {
+    "dest": "content/browser/ui/autofill/autofill_popup_layout_model.cc",
+    "replace" : ["chrome", "content"]
+  },
+  "chrome/browser/ui/android/autofill/autofill_popup_view_android.cc" : {
+    "dest": "content/browser/ui/autofill/autofill_popup_view_android.cc",
+    "replace" : ["chrome", "content",
+      "ResourceMapper::MapFromChromiumId",
+      "TinResourceMapper::MapFromChromiumId",
+      "browser/ui/android/autofill/autofill_popup_view_android.h",
+      "browser/ui/autofill/autofill_popup_view_android.h",
+      "Java_AutofillPopupBridge_",
+      "Java_TinAutofillPopupBridge_"
+    ],
+    "comment_h": [
+      "resource_mapper.h",
+      "autofill_keyboard_accessory_view.h",
+      "view_android_helper.h"
+    ],
+    "comment": [
+      "if (IsKeyboardAccessoryEnabled())",
+      "return new AutofillKeyboardAccessoryView(controller);"
+    ]
+  },
+  "chrome/browser/ui/android/autofill/autofill_popup_view_android.h" : {
+    "dest": "content/browser/ui/autofill/autofill_popup_view_android.h",
+    "replace": ["chrome", "content"]
+  },
+  "chrome/browser/ui/autofill/autofill_popup_view_delegate.h" : {
+    "dest": "content/browser/ui/autofill/autofill_popup_view_delegate.h"
+  },
+  "chrome/browser/ui/autofill/chrome_autofill_client.h" : {
+    "dest": "content/browser/ui/autofill/content_autofill_client.h",
+    "replace": ["Chrome", "Content"],
+    "comment": [
+    ]
+  },
+  "chrome/browser/ui/autofill/chrome_autofill_client.cc" : {
+    "dest": "content/browser/ui/autofill/content_autofill_client.cc",
+    "comment_h": [
+      "personal_data_manager_factory.h",
+      "risk_util.h",
+      "browser_process.h",
+      "chrome_password_manager_client.h",
+      "profile.h",
+      "profile_manager.h",
+      "profile_oauth2_token_service_factory.h",
+      "signin_manager_factory.h",
+      "signin_promo_util.h",
+      "profile_sync_service_factory.h",
+      "create_card_unmask_prompt_view.h",
+      "credit_card_scanner_controller.h",
+      "save_card_bubble_controller_impl.h",
+      "browser_finder.h",
+      "browser_window.h",
+      "chrome_pages.h",
+      "tab_strip_model_observer.h",
+      "web_data_service_factory.h",
+      "features.h",
+      "url_constants.h",
+      "chrome_application.h",
+      "autofill_logger_android.h",
+      "signin_promo_util_android.h",
+      "infobar_service.h",
+      "autofill_credit_card_filling_infobar.h"
+    ],
+    "replace": [
+      "chrome", "content",
+      "Chrome", "Content",
+      "content/browser/autofill/personal_data_manager_factory.h",
+      "content/browser/ui/autofill/personal_data_manager_factory.h"
+    ],
+    "comment_func": [
+      "GetSyncService",
+      "GetIdentityProvider",
+      "GetRapporService",
+      "GetUkmService",
+      "ShowAutofillSettings",
+      "ConfirmSaveCreditCardLocally",
+      "ConfirmSaveCreditCardToCloud",
+      "ConfirmCreditCardFillAssist",
+      "LoadRiskData",
+      "HasCreditCardScanFeature",
+      "ScanCreditCard",
+      "PropagateAutofillPredictions",
+      "DidFillOrPreviewField",
+      "ShouldShowSigninPromo",
+      "StartSigninFlow"
+    ],
+    "comment_from_to": [
+      "ChromePasswordManagerClient* password_client =",
+      "password_client->HidePasswordGenerationPopup();",
+      "return Profile::FromBrowserContext(web_contents()->GetBrowserContext())",
+      "->GetPrefs();"
+    ]
+  },
+  "chrome/android/java/src/org/chromium/chrome/browser/autofill/AutofillPopupBridge.java": {
+    "dest": "terrace/browser/java/com/sec/terrace/browser/autofill/TinAutofillPopupBridge.java",
+    "comment": [
+      "import android.support.v7.app.AlertDialog;",
+      "import org.chromium.chrome.R;",
+      "import org.chromium.chrome.browser.ResourceId;",
+      "private AlertDialog mDeletionDialog;",
+      "if (mDeletionDialog != null) mDeletionDialog.dismiss();"
+    ],
+    "replace": [
+      "org.chromium.chrome.browser.autofill", "com.sec.terrace.browser.autofill",
+      "chrome", "content",
+      "AutofillPopupBridge", "TinAutofillPopupBridge"
+    ],
+    "comment_from_to": [
+      "AlertDialog.Builder", "mDeletionDialog.show"
+    ]
+  }
+}

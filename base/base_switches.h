@@ -1,0 +1,62 @@
+// Copyright (c) 2012 The Chromium Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+// Defines all the "base" command-line switches.
+
+#ifndef BASE_BASE_SWITCHES_H_
+#define BASE_BASE_SWITCHES_H_
+
+#include "build/build_config.h"
+
+namespace switches {
+
+extern const char kDisableBreakpad[];
+extern const char kDisableLowEndDeviceMode[];
+extern const char kEnableCrashReporter[];
+extern const char kEnableHeapProfiling[];
+extern const char kEnableHeapProfilingModePseudo[];
+extern const char kEnableHeapProfilingModeNative[];
+extern const char kEnableHeapProfilingTaskProfiler[];
+extern const char kEnableLowEndDeviceMode[];
+extern const char kForceFieldTrials[];
+extern const char kFullMemoryCrashReport[];
+extern const char kNoErrorDialogs[];
+extern const char kProfilingFile[];
+extern const char kTestChildProcess[];
+extern const char kTestDoNotInitializeIcu[];
+extern const char kTraceToFile[];
+extern const char kTraceToFileName[];
+extern const char kV[];
+extern const char kVModule[];
+extern const char kWaitForDebugger[];
+
+// UserAgent related
+extern const char kCscFeatureUserAgent[];
+
+// CustomErrorPage related
+extern const char kCscFeatureCustomErrorPage[];
+
+// Samsung related.
+extern const char kEnableSamsungDex[];
+extern const char kSamsungDexEnabledValue[];
+
+// GED flag
+extern const char kUseGEDFeature[];
+
+#if defined(OS_WIN)
+extern const char kDisableUsbKeyboardDetect[];
+#endif
+
+#if defined(OS_TIZEN)
+extern const char kDiscardableMemoryLimit[];
+extern const char kDiscardableMemoryPurgeDelay[];
+#endif
+
+#if defined(OS_POSIX)
+extern const char kEnableCrashReporterForTesting[];
+#endif
+
+}  // namespace switches
+
+#endif  // BASE_BASE_SWITCHES_H_

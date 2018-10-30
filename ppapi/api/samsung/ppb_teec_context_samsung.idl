@@ -1,0 +1,44 @@
+/* Copyright (c) 2017 Samsung Electronics. All rights reserved.
+ */
+
+label Chrome {
+  M47 = 1.0
+};
+
+interface PPB_TEECContext_Samsung {
+  /**
+   * Creates a new TEEC context resource.
+   *
+   * @param[in] instance A <code>PP_Instance</code> identifying the instance
+   * with the TEEC context.
+   * @param[in] string describing the TEE to connect to.
+   *
+   * @return A <code>PP_Resource</code> corresponding to a TEEC Context if
+   * successful or 0 otherwise.
+   */
+  PP_Resource Create(
+      [in] PP_Instance instance);
+
+  /**
+   * Determines if the given resource is a TEEC context.
+   *
+   * @param[in] resource A <code>PP_Resource</code> identifying a resource.
+   *
+   * @return <code>PP_TRUE</code> if the resource is a
+   * <code>PPB_TEECContext_Samsung</code>, <code>PP_FALSE</code>
+   * if the resource is invalid or some other type.
+   */
+  PP_Bool IsTEECContext(
+      [in] PP_Resource resource);
+
+  /**
+   * This function initializes a new TEEC Context, forming a connection
+   * between this Client Application and the TEE identified by the string
+   * identifier name.
+   */
+  int32_t Open(
+      [in] PP_Resource resource,
+      [in] str_t name,
+      [out] PP_TEEC_Result result,
+      [in] PP_CompletionCallback callback);
+};

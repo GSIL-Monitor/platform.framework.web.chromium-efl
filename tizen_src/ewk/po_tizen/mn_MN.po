@@ -1,0 +1,9 @@
+msgid "IDS_WEBVIEW_OPT_OPEN_LINK_IN_NEW_TAB_ABB"
+msgstr "Холбоосыг шинэ табанд нээх"
+
+msgid "IDS_WEBVIEW_OPT_OPEN_LINK_ABB"
+msgstr "Вэб хөтөч дотор нээх"
+
+msgid "IDS_WEBVIEW_OPEN"
+msgstr "Нээх"
+

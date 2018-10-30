@@ -1,0 +1,10 @@
+# Copyright (c) 2015 Samsung Electronics. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+import("//tizen_src/build/config/tizen_features.gni")
+
+if (use_gstreamer_fft) {
+  external_webkit_modules_configs = [ "//tizen_src/build:gstreamer-fft" ]
+  external_webkit_modules_configs += [ "//tizen_src/build:libgstreamer-fft" ]
+}

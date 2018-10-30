@@ -1,0 +1,338 @@
+msgid "IDS_BR_OPT_CALL"
+msgstr "Повикване"
+
+msgid "IDS_BR_HEADER_UNABLE_TO_OPEN_FILE"
+msgstr "Файлът не може да се отвори"
+
+msgid "IDS_BR_BODY_UNABLE_TO_OPEN_THE_FILE_AT_PS_IT_MAY_HAVE_BEEN_REMOVED_OR_RENAMED_OR_FILE_PERMISSIONS_MAY_BE_PREVENTING_ACCESS"
+msgstr "Не може да се отвори файлът в %s. Може да е бил премахнат или преименуван или разрешенията за файл може да предотвратяват достъп."
+
+msgid "IDS_BR_BODY_SAVE_LINK"
+msgstr "Записване на връзка"
+
+msgid "IDS_BR_BODY_ADD_TO_CONTACT"
+msgstr "Добави към запис"
+
+msgid "IDS_WEBVIEW_TPOP_UNABLE_TO_PLAY_VIDEOS_DURING_CALLS"
+msgstr "Не може да се възпроизвеждат видеоклипове по време на разговори."
+
+msgid "IDS_WEBVIEW_POP_SIGN_IN_TO_THIS_WEBSITE_AGAIN_BY_SWIPING_ANY_OF_YOUR_REGISTERED_FINGERS_OVER_THE_HOME_KEY_MSG"
+msgstr "Влезте отново в този уебсайт, като плъзнете някой от регистрираните си пръсти над клавиша за начало. Потребителското ви име и парола за този уебсайт ще бъдат записани в устройството."
+
+msgid "IDS_WEBVIEW_POP_SAVE_THIS_PASSWORD_ON_THIS_DEVICE_Q"
+msgstr "Ще запишете ли тази парола на това устройство?"
+
+msgid "IDS_WEBVIEW_POP_P1SS_HP2SS_IS_REQUESTING_PERMISSION_TO_USE_YOUR_CAMERA"
+msgstr "%1$s (%2$s) иска разрешение за използване на вашата камера."
+
+msgid "IDS_WEBVIEW_POP_P1SS_HP2SS_IS_REQUESTING_PERMISSION_TO_STORE_DATA_ON_YOUR_DEVICE_FOR_OFFLINE_USE"
+msgstr "%1$s (%2$s) иска разрешение за съхраняване на данни на вашето устройство за използване офлайн."
+
+msgid "IDS_WEBVIEW_POP_P1SS_HP2SS_IS_REQUESTING_PERMISSION_TO_STORE_A_LARGE_AMOUNT_OF_DATA_ON_YOUR_DEVICE_FOR_OFFLINE_USE"
+msgstr "%1$s (%2$s) се иска разрешение да съхранява голямо количество данни на вашето устройство за използване офлайн."
+
+msgid "IDS_WEBVIEW_POP_P1SS_HP2SS_IS_REQUESTING_PERMISSION_TO_SHOW_NOTIFICATIONS"
+msgstr "%1$s (%2$s) иска разрешение за показване на известия."
+
+msgid "IDS_WEBVIEW_POP_P1SS_HP2SS_IS_REQUESTING_PERMISSION_TO_ACCESS_YOUR_LOCATION"
+msgstr "%1$s (%2$s) иска разрешение за достъп до вашето местоположение."
+
+msgid "IDS_WEBVIEW_POP_LEAVE_THIS_PAGE_Q"
+msgstr "Искате ли да напуснете тази страница?"
+
+msgid "IDS_WEBVIEW_POP_DO_YOU_WANT_THE_DEVICE_TO_REMEMBER_YOUR_PASSWORD_Q"
+msgstr "Искате ли устройството да помни вашата парола?"
+
+msgid "IDS_WEBVIEW_POP_A_TEMPORARY_ERROR_HAS_OCCURRED"
+msgstr "Възникна временна грешка."
+
+msgid "IDS_WEBVIEW_OPT_WEB_SEARCH"
+msgstr "Търсене в Интернет"
+
+msgid "IDS_WEBVIEW_OPT_UNMUTE"
+msgstr "Със звук"
+
+msgid "IDS_WEBVIEW_OPT_TRANSLATE_ABB"
+msgstr "Превеждане"
+
+msgid "IDS_WEBVIEW_OPT_SIGN_IN_USING_FINGERPRINTS"
+msgstr "Влизане с пръстови отпечатъци"
+
+msgid "IDS_WEBVIEW_OPT_SHOW_HIDE_MEDIA_CONTROLS_ABB"
+msgstr "Пок./скр. управ. на мултимедия"
+
+msgid "IDS_WEBVIEW_OPT_SELECT_TEXT_ABB"
+msgstr "Избор текст"
+
+msgid "IDS_WEBVIEW_OPT_SELECTION_MODE_ABB"
+msgstr "Режим на избор"
+
+msgid "IDS_WEBVIEW_OPT_SAVE_IMAGE_ABB"
+msgstr "Запаметяване на снимка"
+
+msgid "IDS_WEBVIEW_OPT_PLAY_AUDIO_IN_NEW_TAB_ABB"
+msgstr "Пускане на звука в нов раздел"
+
+msgid "IDS_WEBVIEW_OPT_PLAY"
+msgstr "Пускане"
+
+msgid "IDS_WEBVIEW_OPT_OPEN_VIDEO_IN_NEW_WINDOW_ABB"
+msgstr "Отвори видеото в нов прозорец"
+
+msgid "IDS_WEBVIEW_OPT_OPEN_LINK_IN_NEW_TAB_ABB"
+msgstr "Отвори връзката в нов раздел"
+
+msgid "IDS_WEBVIEW_OPT_OPEN_IMAGE_IN_NEW_TAB_ABB"
+msgstr "Отвори изображ. в нов раздел"
+
+msgid "IDS_WEBVIEW_OPT_FULL_VIEW_ABB"
+msgstr "Пълен изглед"
+
+msgid "IDS_WEBVIEW_OPT_ENABLE_DISABLE_REPEAT_MEDIA_ABB"
+msgstr "Актив./деакт. повт. мултимедия"
+
+msgid "IDS_WEBVIEW_OPT_DRAG_AND_DROP_ABB"
+msgstr "Плъзнете и пуснете"
+
+msgid "IDS_WEBVIEW_OPT_DO_NOT_SHOW_AGAIN"
+msgstr "Не показвай повече"
+
+msgid "IDS_WEBVIEW_OPT_CUT_ABB"
+msgstr "Отрежи"
+
+msgid "IDS_WEBVIEW_OPT_COPY_VIDEO_URL_ABB"
+msgstr "Копиране на URL на видео"
+
+msgid "IDS_WEBVIEW_OPT_COPY_TO_CLIPBOARD"
+msgstr "Копирай в клипборда"
+
+msgid "IDS_WEBVIEW_OPT_COPY_LINK_URL_ABB"
+msgstr "Копиране на URL"
+
+msgid "IDS_WEBVIEW_OPT_COPY_IMAGE"
+msgstr "Копиране на изображение"
+
+msgid "IDS_WEBVIEW_OPT_COPY_AUDIO_URL_ABB"
+msgstr "Копиране на URL на аудио"
+
+msgid "IDS_WEBVIEW_OPT_CLIPBOARD"
+msgstr "Системен буфер"
+
+msgid "IDS_WEBVIEW_HEADER_THIS_WEBPAGE_IS_NOT_AVAILABLE"
+msgstr "Тази уеб страница не е достъпна."
+
+msgid "IDS_WEBVIEW_HEADER_SET_WEEK"
+msgstr "Задаване на седмица"
+
+msgid "IDS_WEBVIEW_HEADER_SET_TIME"
+msgstr "Задаване на час"
+
+msgid "IDS_WEBVIEW_HEADER_SET_MONTH"
+msgstr "Задаване на месец"
+
+msgid "IDS_WEBVIEW_HEADER_SET_DATE"
+msgstr "Задаване на дата"
+
+msgid "IDS_WEBVIEW_HEADER_SELECT_COLOUR"
+msgstr "Изберете цвят"
+
+msgid "IDS_WEBVIEW_HEADER_REMEMBER_PASSWORD"
+msgstr "Запомняне на паролата"
+
+msgid "IDS_WEBVIEW_HEADER_MESSAGE_FROM_PS_M_WEBSITE"
+msgstr "Съобщение от %s"
+
+msgid "IDS_WEBVIEW_BUTTON_UPLOAD_MULTIPLE_FILES"
+msgstr "Качване на много файлове"
+
+msgid "IDS_WEBVIEW_BUTTON_UPLOAD_FILE"
+msgstr "Качване на файл"
+
+msgid "IDS_WEBVIEW_BUTTON_SUBMIT"
+msgstr "Подаване"
+
+msgid "IDS_WEBVIEW_BUTTON_STAY"
+msgstr "Оставане"
+
+msgid "IDS_WEBVIEW_BUTTON_PREV_ABB"
+msgstr "Назад"
+
+msgid "IDS_WEBVIEW_BUTTON_OK_ABB4"
+msgstr "OK"
+
+msgid "IDS_WEBVIEW_BUTTON_NOT_NOW_ABB"
+msgstr "Не сега"
+
+msgid "IDS_WEBVIEW_BUTTON_LEAVE"
+msgstr "Напускане"
+
+msgid "IDS_WEBVIEW_BUTTON_CANCEL_ABB4"
+msgstr "Отказ"
+
+msgid "IDS_WEBVIEW_BUTTON2_NEVER"
+msgstr "Никога"
+
+msgid "IDS_WEBVIEW_BODY_YOU_CAN_SEARCH_THIS_INDEX_ENTER_KEYWORDS_C"
+msgstr "Можете да търсите в този индекс. Въведете ключови думи:"
+
+msgid "IDS_WEBVIEW_BODY_VALUE_MUST_BE_NO_HIGHER_THAN_PD"
+msgstr "Стойността трябва да не повече от %d."
+
+msgid "IDS_WEBVIEW_BODY_VALUE_MUST_BE_AT_LEAST_PD"
+msgstr "Стойността трябва да е поне %d."
+
+msgid "IDS_WEBVIEW_BODY_UNABLE_TO_LOAD_THE_PAGE_PS_TOOK_TOO_LONG_TO_RESPOND_THE_WEBSITE_MAY_BE_DOWN_OR_THERE_MAY_HAVE_BEEN_A_NETWORK_CONNECTION_ERROR"
+msgstr "Страницата не може да се зареди. %s отне твърде много време за отговор. Уебсайтът може да не отговаря или да има грешка в мрежовата връзка."
+
+msgid "IDS_WEBVIEW_BODY_UNABLE_TO_LOAD_THE_PAGE_PS_MAY_BE_TEMPORARILY_DOWN_OR_HAVE_MOVED_TO_A_NEW_URL"
+msgstr "Страницата не може да се зареди. %s може да е временно недостъпна или да има нов URL адрес."
+
+msgid "IDS_WEBVIEW_BODY_UNABLE_TO_LOAD_THE_PAGE_A_SECURE_CONNECTION_COULD_NOT_BE_MADE_TO_PS_THE_MOST_LIKELY_CAUSE_IS_THE_DEVICES_CLOCK_CHECK_THAT_THE_TIME_ON_YOUR_DEVICE_IS_CORRECT_AND_REFRESH_THE_PAGE"
+msgstr "Страницата не може да се зареди. Не можа да бъде осъществена защитена връзка до %s. Причината най-вероятно е в часовника на устройството. Проверете дали часът на устройството ви е правилен и опреснете страницата."
+
+msgid "IDS_WEBVIEW_BODY_THE_SERVER_AT_PS_CANT_BE_FOUND_BECAUSE_THE_DNS_LOOK_UP_FAILED_MSG"
+msgstr "Сървърът на адреса %s не може да бъде намерен, тъй като търсенето на DNS е неуспешно. DNS е мрежовата услуга, която превежда името на уебсайт в неговия интернет адрес. Тази грешка най-често е причинена от липса на връзка с интернет или недобре конфигурирана мрежа. Тя може също да бъде причинена от неотговарящ DNS сървър или защитна стена, която предотвратява достъп на интернет до мрежата."
+
+msgid "IDS_WEBVIEW_BODY_SHOWING_PD_ITEMS_TTS"
+msgstr "Показване на %d елемента"
+
+msgid "IDS_WEBVIEW_BODY_PLUG_IN_MISSING"
+msgstr "Липсва добавка"
+
+msgid "IDS_WEBVIEW_BODY_PD_CHARACTERS_TTS"
+msgstr "%d знака."
+
+msgid "IDS_WEBVIEW_BODY_NO_FILES_HAVE_BEEN_SELECTED"
+msgstr "Няма избрани файлове."
+
+msgid "IDS_WEBVIEW_BODY_INVALID_VALUE_ENTERED"
+msgstr "Въвед. невал. ст-т."
+
+msgid "IDS_WEBVIEW_BODY_INVALID_FORMAT_ENTERED"
+msgstr "Въведен е невалиден формат."
+
+msgid "IDS_WEBVIEW_BODY_FIELD_CANNOT_BE_BLANK"
+msgstr "Полето не може да бъде празно."
+
+msgid "IDS_WEBVIEW_BODY_ENTER_A_URL"
+msgstr "Въведете URL."
+
+msgid "IDS_WEBVIEW_BODY_ENTER_A_LIST_OF_EMAIL_ADDRESSES_SEPARATED_BY_COMMAS"
+msgstr "Въведете списък с имейл адреси, отделени със запетаи."
+
+msgid "IDS_WEBVIEW_BODY_ENTER_AN_EMAIL_ADDRESS"
+msgstr "Въведете имейл адрес."
+
+msgid "IDS_WEBVIEW_BODY_EDIT_FIELD__M_NOUN_TTS"
+msgstr "Редактиране на поле"
+
+msgid "IDS_WEBVIEW_BODY_EDITING_TTS"
+msgstr "Редактира се."
+
+msgid "IDS_BR_POP_SAVED"
+msgstr "Записан."
+
+msgid "IDS_BR_POP_FAIL"
+msgstr "Неуспешно."
+
+msgid "IDS_BR_OPT_SEND_EMAIL"
+msgstr "Изпращане на еmail"
+
+msgid "IDS_WEBVIEW_OPT_SELECT_ALL_ABB"
+msgstr "Изб. всички"
+
+msgid "IDS_WEBVIEW_OPT_SELECT_ABB"
+msgstr "Избор"
+
+msgid "IDS_WEBVIEW_OPT_PAUSE"
+msgstr "Пауза"
+
+msgid "IDS_WEBVIEW_OPT_PASTE"
+msgstr "Поставяне"
+
+msgid "IDS_WEBVIEW_OPT_MUTE"
+msgstr "Без звук"
+
+msgid "IDS_WEBVIEW_OPT_COPY"
+msgstr "Копиране"
+
+msgid "IDS_WEBVIEW_HEADER_SET_DATE_AND_TIME"
+msgstr "Настройка на дата и час"
+
+msgid "IDS_WEBVIEW_BUTTON_SET_ABB2"
+msgstr "Зад"
+
+msgid "IDS_WEBVIEW_BUTTON_SAVE"
+msgstr "Запази"
+
+msgid "IDS_WEBVIEW_BUTTON_RESET"
+msgstr "Нyлиране"
+
+msgid "IDS_WEBVIEW_BUTTON_NEXT_ABB3"
+msgstr "Следваща"
+
+msgid "IDS_WEBVIEW_BUTTON_LATER_ABB"
+msgstr "По-късно"
+
+msgid "IDS_WEBVIEW_BUTTON_DONE"
+msgstr "Готово"
+
+msgid "IDS_WEBVIEW_BODY_USERNAME"
+msgstr "Потребителско име"
+
+msgid "IDS_WEBVIEW_BODY_SELECTED_TTS"
+msgstr "Избрани"
+
+msgid "IDS_WEBVIEW_BODY_PASSWORD"
+msgstr "Парола"
+
+msgid "IDS_WEBVIEW_BODY_NOT_SELECTED_TTS"
+msgstr "Не е избрано"
+
+msgid "IDS_WEBVIEW_BODY_DOUBLE_TAB_TO_EDIT_TTS"
+msgstr "Чукнете двукратно, за да редактирате."
+
+msgid "IDS_WEBVIEW_BODY_DETAILS"
+msgstr "Детайли"
+
+msgid "IDS_WEBVIEW_OPT_SHARE"
+msgstr "Споделяне"
+
+msgid "IDS_WEBVIEW_POP_SAVE_YOUR_USERNAME_AND_PASSWORD_FOR_THIS_WEBSITE_Q"
+msgstr "Искате ли да запазите потребителското си име и паролата за този уеб сайт?"
+
+msgid "IDS_WEBVIEW_HEADER_SAVE_SIGN_IN_INFO"
+msgstr "Записване на информация за влизане"
+
+msgid "IDS_WEBVIEW_POP_P1SS_HP2SS_IS_REQUESTING_PERMISSION_TO_USE_YOUR_MICROPHONE"
+msgstr "%1$s (%2$s) иска разрешение за използване на микрофона."
+
+msgid "IDS_WEBVIEW_POP_P1SS_HP2SS_IS_REQUESTING_PERMISSION_TO_USE_YOUR_CAMERA_AND_MICROPHONE"
+msgstr "%1$s (%2$s) иска разрешение за използване на камерата и микрофона."
+
+msgid "IDS_WEBVIEW_BODY_YOUR_DEVICE_IS_NOT_CONNECTED_TO_A_WI_FI_OR_MOBILE_NETWORK_CONNECT_TO_A_NETWORK_AND_TRY_AGAIN"
+msgstr "Това устройство не може да се свърже към Wi-Fi или мобилна мрежа. Свържете се към мрежа и опитайте отново."
+
+msgid "IDS_WEBVIEW_POP_YOU_ARE_OFFLINE"
+msgstr "Вие сте офлайн."
+
+msgid "IDS_BR_BODY_LOG_IN"
+msgstr "Влизане"
+
+msgid "IDS_COM_BODY_SEND_MESSAGE"
+msgstr "Изпращане на съобщение"
+
+msgid "IDS_TPLATFORM_OPT_COPY_LINK_TEXT"
+msgstr "Копиране на текста на връзката"
+
+msgid "IDS_WEBVIEW_OPT_OPEN_LINK_IN_CURRENT_TAB"
+msgstr "Отваряне на връзката в текущия раздел"
+
+msgid "IDS_WEBVIEW_OPT_OPEN_IMAGE_IN_CURRENT_TAB"
+msgstr "Отваряне на изображението в текущия раздел"
+
+msgid "IDS_WEBVIEW_HEADER_QUICK_MEMO"
+msgstr "Бърза записка"
+
+msgid "IDS_WEBVIEW_OPEN"
+msgstr "Отваряне"

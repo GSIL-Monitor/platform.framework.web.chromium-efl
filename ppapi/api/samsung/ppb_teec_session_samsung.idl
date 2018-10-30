@@ -1,0 +1,66 @@
+/* Copyright (c) 2017 Samsung Electronics. All rights reserved.
+ */
+
+label Chrome {
+  M47 = 1.0
+};
+
+interface PPB_TEECSession_Samsung {
+  /**
+   * Creates a new TEEC session resource.
+   *
+   * @param[in] teec_context A <code>PP_Resource</code> identifying
+   * the parent TEEC_Context for the TEE session.
+   *
+   * @return A <code>PP_Resource</code> corresponding to a TEEC Session if
+   * successful or 0 otherwise.
+   */
+  PP_Resource Create(
+      [in] PP_Resource teec_context);
+
+  /**
+   * Determines if the given resource is a TEEC Session.
+   *
+   * @param[in] resource A <code>PP_Resource</code> identifying a resource.
+   *
+   * @return <code>PP_TRUE</code> if the resource is a
+   * <code>PPB_TEECSession_Samsung</code>, <code>PP_FALSE</code>
+   * if the resource is invalid or some other type.
+   */
+  PP_Bool IsTEECSession(
+      [in] PP_Resource resource);
+
+  /**
+   * This function opens a new Session between the Client Application and
+   * the specified Trusted Application.
+   */
+  int32_t Open(
+      [in] PP_Resource resource,
+      [in] PP_TEEC_UUID destination,
+      [in] uint32_t connection_method,
+      [in] uint32_t connection_data_size,
+      [in] mem_t connection_data,
+      [inout] PP_TEEC_Operation operation,
+      [out] PP_TEEC_Result result,
+      [in] PP_CompletionCallback callback);
+
+  /**
+   * This function invokes a Command within the specified Session.
+   */
+  int32_t InvokeCommand(
+      [in] PP_Resource resource,
+      [in] uint32_t command_id,
+      [inout] PP_TEEC_Operation operation,
+      [out] PP_TEEC_Result result,
+      [in] PP_CompletionCallback callback);
+
+  /**
+   * This function requests the cancellation of a pending open Session
+   * operation or a Command invocation operation.
+   */
+  int32_t RequestCancellation(
+      [in] PP_Resource resource,
+      [in] PP_TEEC_Operation operation,
+      [in] PP_CompletionCallback callback);
+
+};

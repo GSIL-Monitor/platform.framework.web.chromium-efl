@@ -1,0 +1,9 @@
+#! /bin/sh
+
+# TODO(b.kelemen): we can get rid of this and just rename gyp_trunk.py to
+# gyp_trunk and make it executable once all bots and the like switched to
+# use gyp_trunk. In the transition period it has to have the .py suffix
+# to make it possible to import it from gyp_chromium.
+# Executable with .py suffix feels lame.
+
+/usr/bin/env python $(readlink -f $(dirname "$0"))/gyp_trunk.py $@

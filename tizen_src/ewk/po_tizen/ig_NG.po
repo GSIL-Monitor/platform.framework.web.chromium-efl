@@ -1,0 +1,9 @@
+msgid "IDS_WEBVIEW_OPT_OPEN_LINK_IN_NEW_TAB_ABB"
+msgstr "Mepee Njikọ na Taabụ Ọhụrụ"
+
+msgid "IDS_WEBVIEW_OPT_OPEN_LINK_ABB"
+msgstr "Mepee n'ihe nchọgharị Weebụ"
+
+msgid "IDS_WEBVIEW_OPEN"
+msgstr "Mepee"
+

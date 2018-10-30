@@ -1,0 +1,136 @@
+# Copyright (c) 2015 Samsung Electronics. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+import("//build/config/locales.gni")
+import("//tizen_src/ewk/po_tizen/chromium_efl_repack_locales.gni")
+
+declare_args() {
+  msgfmt = "/usr/bin/msgfmt"
+}
+
+template("po_translations") {
+  po_target_name = "${target_name}_generate"
+  action_foreach(po_target_name) {
+    script = "//tizen_src/build/cmd_execution.py"
+    sources = invoker.sources
+    outputs = [ "$root_out_dir/locale/{{source_name_part}}/LC_MESSAGES/WebKit.mo" ]
+    args = [
+      "$msgfmt",
+      "-o",
+      rebase_path("$root_out_dir/locale/{{source_name_part}}/LC_MESSAGES/WebKit.mo"),
+      rebase_path("{{source_file_part}}"),
+    ]
+  }
+
+  source_set(target_name) {
+    deps = [ ":$po_target_name" ]
+  }
+}
+
+po_translations("locale_efl") {
+  sources = [
+    "af_ZA.po",
+    "am_ET.po",
+    "ar.po",
+    "az.po",
+    "be_BY.po",
+    "bg.po",
+    "bh_IN.po",
+    "bn.po",
+    "bs_BA.po",
+    "ca.po",
+    "ckb_IQ.po",
+    "cs.po",
+    "da.po",
+    "de_DE.po",
+    "el_GR.po",
+    "en.po",
+    "en_PH.po",
+    "en_US.po",
+    "es_ES.po",
+    "es_MX.po",
+    "et.po",
+    "eu.po",
+    "fa_IR.po",
+    "fi.po",
+    "fr.po",
+    "fr_CA.po",
+    "fr_FR.po",
+    "ga.po",
+    "gl.po",
+    "gu.po",
+    "ha_NG.po",
+    "he_IL.po",
+    "hi.po",
+    "hr.po",
+    "hu.po",
+    "hy.po",
+    "id_ID.po",
+    "is.po",
+    "it_IT.po",
+    "ja_JP.po",
+    "ka.po",
+    "kk.po",
+    "km_KH.po",
+    "kn.po",
+    "ko_KR.po",
+    "kok_IN.po",
+    "ks_IN.po",
+    "ku_TR.po",
+    "lt.po",
+    "lv.po",
+    "mai_IN.po",
+    "mi_NZ.po",
+    "mk.po",
+    "ml.po",
+    "mn_MN.po",
+    "mni_IN.po",
+    "mr_IN.po",
+    "ms_MY.po",
+    "my_MM.po",
+    "nb.po",
+    "ne_NP.po",
+    "nl.po",
+    "nl_NL.po",
+    "nn_NO.po",
+    "or_IN.po",
+    "pa_PK.po",
+    "pl.po",
+    "pt_BR.po",
+    "pt_PT.po",
+    "ro.po",
+    "ru_RU.po",
+    "sa_IN.po",
+    "sat_IN.po",
+    "sd_IN.po",
+    "si.po",
+    "sk.po",
+    "sl.po",
+    "sq_AL.po",
+    "sr.po",
+    "sv.po",
+    "sw_KE.po",
+    "ta.po",
+    "te.po",
+    "th_TH.po",
+    "tr_TR.po",
+    "tu_IN.po",
+    "uk.po",
+    "ur.po",
+    "uz.po",
+    "vi_VN.po",
+    "xh_ZA.po",
+    "yo_NG.po",
+    "zh_CN.po",
+    "zh_HK.po",
+    "zh_SG.po",
+    "zh_TW.po",
+    "zu_ZA.po",
+  ]
+}
+
+chromium_efl_repack_locales("packed_locales_efl") {
+  input_locales = locales
+  output_locales = locales
+}

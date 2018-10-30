@@ -1,0 +1,59 @@
+/* Copyright (c) 2016 Samsung Electronics. All rights reserved.
+ */
+
+/**
+ * This file defines events listeners used with the
+ * <code>PPB_MediaDataSource_Samsung</code> interface
+ * and its descendants.
+ *
+ * Part of Pepper Media Player interfaces (Samsung's extension).
+ * See comments in ppb_media_data_source_samsung.idl.
+ */
+
+[generate_thunk]
+
+label Chrome {
+  M42 = 1.0
+};
+
+/**
+ * Structure containing pointers to functions provided by plugin,
+ * and called when player or playback related event occurs.
+ */
+interface PPP_ElementaryStreamListener_Samsung {
+
+  /**
+   * Event is fired when internal queue is running out of data.
+   * Application should start pushing more data via
+   * <code>PPB_ElementaryStream_Samsung::AppendPacket</code> or
+   * <code>PPB_ElementaryStream_Samsung::AppendEncryptedPacket</code> function.
+   *
+   * @param[in] bytes_max Maximum number of bytes which can stored in
+   * the internal queue.
+   * @param[in] user_data A pointer to user data passed to a listener function.
+   */
+  void OnNeedData(
+      [in] int32_t bytes_max,
+      [inout] mem_t user_data);
+
+  /**
+   * Event is fired when internal queue is full. Application should stop pushing
+   * buffers.
+   *
+   * @param[in] user_data A pointer to user data passed to a listener function.
+   */
+  void OnEnoughData(
+      [inout] mem_t user_data);
+
+  /**
+   * Event is fired to notify application to change position of the stream.
+   * After receiving this event, application should push buffers from the new
+   * position.
+   *
+   * @param[in] new_position The new position in the stream.
+   * @param[in] user_data A pointer to user data passed to a listener function.
+   */
+  void OnSeekData(
+      [in] PP_TimeTicks new_position,
+      [inout] mem_t user_data);
+};

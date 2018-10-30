@@ -1,0 +1,115 @@
+collections {
+    group {
+        name: "authentication_challenge";
+        parts {
+            part {
+                name: "background";
+                type: RECT;
+                scale : 1;
+                description {
+                    state: "default" 0.0;
+                    min: 200 30;
+                    max: 200 30;
+                    visible: 1;
+                }
+            }
+            part {
+                name: "elm.swallow.entry";
+                type: SWALLOW;
+                scale : 1;
+                description {
+                    state: "default" 0.0;
+                    align: 0.0 0.0;
+                    min: 200 30;
+                    max: 200 30;
+                    color: 0 217 217 255;
+                    visible: 1;
+                    rel1{
+                        relative: 0 0;
+                        to: "background";
+                    }
+                    rel2{
+                        relative: 1 1;
+                        to: "background";
+                    }
+                }
+            }
+            part {
+                name: "border_up";
+                type: SWALLOW;
+                scale : 1;
+                description {
+                    state: "default" 0.0;
+                    align: 0 0;
+                    visible: 1;
+                    fixed: 1 1;
+                    rel1{
+                        relative: 0 0;
+                        to: "background";
+                    }
+                    rel2{
+                        relative: 1 0;
+                        to: "background";
+                    }
+                }
+            }
+            part {
+                name: "border_down";
+                type: SWALLOW;
+                scale : 1;
+                description {
+                    state: "default" 0.0;
+                    align: 1 1;
+                    visible: 1;
+                    fixed: 1 1;
+                    rel1{
+                        relative: 0 1;
+                        to: "background";
+                    }
+                    rel2{
+                        relative: 1 1;
+                        to: "background";
+                    }
+                }
+            }
+            part {
+                name: "border_left";
+                type: SWALLOW;
+                scale : 1;
+                description {
+                    state: "default" 0.0;
+                    align: 0 0;
+                    visible: 1;
+                    fixed: 1 1;
+                    rel1{
+                        relative: 0 0;
+                        to: "background";
+                    }
+                    rel2{
+                        relative: 0 1;
+                        to: "background";
+                    }
+                }
+            }
+            part {
+                name: "border_right";
+                type: SWALLOW;
+                scale : 1;
+                description {
+                    state: "default" 0.0;
+                    align: 0 0;
+                    visible: 1;
+                    fixed: 1 1;
+                    rel1{
+                        relative: 1 0;
+                        to: "background";
+                    }
+                    rel2{
+                        relative: 1 1;
+                        to: "background";
+                    }
+                }
+            }
+        }
+    }
+}

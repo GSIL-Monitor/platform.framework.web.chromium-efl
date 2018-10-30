@@ -1,0 +1,152 @@
+/* Copyright (c) 2016 Samsung Electronics. All rights reserved.
+ */
+
+/**
+ * This file defines events listeners used with the
+ * <code>PPB_MediaPlayer_Samsung</code> interface.
+ *
+ * Part of Pepper Media Player interfaces (Samsung's extension).
+ * See comments in ppb_media_player_samsung.idl.
+ */
+
+[generate_thunk]
+
+label Chrome {
+  M42 = 1.0
+};
+
+/**
+ * Structure containing pointers to functions provided by plugin,
+ * and called when player or playback related event occurs.
+ */
+interface PPP_MediaEventsListener_Samsung {
+
+  /**
+   * Event sent periodically during clip playback and indicates playback
+   * progress.
+   *
+   * Event will be sent at least twice per second.
+   *
+   * @param[in] time current media time.
+   * @param[in] user_data A pointer to user data passed to a listener function.
+   */
+  void OnTimeUpdate(
+      [in] PP_TimeTicks time,
+      [inout] mem_t user_data);
+
+  /**
+   * Played clip has ended.
+   *
+   * @param[in] user_data A pointer to user data passed to a listener function.
+   */
+  void OnEnded(
+      [inout] mem_t user_data);
+
+  /**
+   * Error during playback has occurred.
+   *
+   * @param[in] error An error code signalizing type of occurred error.
+   * @param[in] user_data A pointer to user data passed to a listener function.
+   */
+  void OnError(
+      [in] PP_MediaPlayerError error,
+      [inout] mem_t user_data);
+};
+
+/**
+ * Listener for receiving subtitle updates provided by the player's internal
+ * subtitle parser. This listener will be notified every time active and visible
+ * text track contains a subtitle that should be displayed at the current
+ * playback position.
+ */
+interface PPP_SubtitleListener_Samsung {
+
+  /**
+   * Event sent when a subtitle should be displayed.
+   *
+   * @param[in] duration Duration for which the text should be displayed.
+   * @param[in] text The UTF-8 encoded string that contains a subtitle text
+   * that should be displayed. Please note text encoding will be UTF-8
+   * independently from the source subtitle file encoding.
+   * @param[in] user_data A pointer to user data passed to a listener function.
+   */
+  void OnShowSubtitle(
+      [in] PP_TimeDelta duration,
+      [in] str_t text,
+      [inout] mem_t user_data);
+
+};
+
+/**
+ * Listener for receiving initial media buffering related events, sent
+ * before playback can be started.
+ *
+ * Those event can be used by the application to show buffering progress bar
+ * to the user.
+ *
+ * Those events are sent only when media buffering is managed by the player
+ * implementation (see <code>PPB_URLDataSource_Samsung</code>), not by the
+ * user (see <code>PPB_ESDataSource_Samsung</code>).
+ */
+interface PPP_BufferingListener_Samsung {
+  /**
+   * Initial media buffering has been started by the player.
+   *
+   * @param[in] user_data A pointer to user data passed to a listener function.
+   */
+  void OnBufferingStart(
+      [inout] mem_t user_data);
+
+  /**
+   * Initial buffering in progress.
+   *
+   * @param[in] percent Indicates how much of the initial data has been
+   * buffered by the player.
+   * @param[in] user_data A pointer to user data passed to a listener function.
+   */
+  void OnBufferingProgress(
+      [in] uint32_t percent,
+      [inout] mem_t user_data);
+
+  /**
+   * Initial media buffering has been completed by the player, after that
+   * event playback might be started.
+   *
+   * @param[in] user_data A pointer to user data passed to a listener function.
+   */
+  void OnBufferingComplete(
+      [inout] mem_t user_data);
+};
+
+/**
+ * Listener for receiving DRM related events.
+ */
+interface PPP_DRMListener_Samsung {
+  /**
+   * During parsing media container encrypted track was found.
+   *
+   * @param[in] drm_type A type of DRM system
+   * @param[in] init_data_size Size in bytes of |init_data| buffer.
+   * @param[in] init_data A pointer to the buffer containing DRM specific
+   * initialization data
+   * @param[in] user_data A pointer to user data passed to a listener function.
+   */
+  void OnInitdataLoaded(
+      [in] PP_MediaPlayerDRMType drm_type,
+      [in] uint32_t init_data_size,
+      [in] mem_t init_data,
+      [inout] mem_t user_data);
+
+  /**
+   * Decryption license needs to be requested from the server and
+   * provided to the player.
+   *
+   * @param[in] request_size Size in bytes of |request| buffer.
+   * @param[in] request A pointer to the buffer containing DRM specific request.
+   * @param[in] user_data A pointer to user data passed to a listener function.
+   */
+  void OnLicenseRequest(
+      [in] uint32_t request_size,
+      [in] mem_t request,
+      [inout] mem_t user_data);
+};
